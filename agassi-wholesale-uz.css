@@ -1,526 +1,144 @@
-/* AGASSI Wholesale UZ — shared design tokens and reusable primitives.
- * Publish as agassi-wholesale-uz.css in menkeev26/agassi, branch main.
- * BEM aliases preserve the original HTML and script hooks.
- * Shared defaults use :where() so later repeated imports cannot beat local BEM overrides.
- * Typography, unique layout and responsive component rules remain in HTML.
- * No CSS layers or new !important declarations: local editor overrides stay last.
- */
 
-:where(.ags-header-slot),
-:where(.ags-hero),
-:where(.ags-statement),
-:where(.ags-why),
-:where(.ags-numbers),
-:where(.ags-products),
-:where(.ags-support),
-:where(.ags-partners),
-:where(.ags-stories),
-:where(.ags-faq),
-:where(.ags-footer) {
-  --ags-font-text: var(--t-text-font);
-  --ags-font-head: var(--t-headline-font);
-  --ags-fs-14: 14px;
-  --ags-fs-16: 16px;
-  --ags-fs-18: 18px;
-  --ags-fs-22: 22px;
-  --ags-fs-24: 24px;
-  --ags-fs-26: 26px;
-  --ags-fs-28: 28px;
-  --ags-fs-30: 30px;
-  --ags-fs-32: 32px;
-  --ags-fs-34: 34px;
-  --ags-fs-36: 36px;
-  --ags-fs-40: 40px;
-  --ags-fs-44: 44px;
-  --ags-fs-48: 48px;
-  --ags-fs-52: 52px;
-  --ags-fs-56: 56px;
-  --ags-fs-62: 62px;
+/* ========================================
+   AGASSI — NUMBERS
+   ======================================== */
+
+/* Заголовок */
+.ags-numbers__header {
+  position: relative;
 }
 
-/* Design tokens, including original responsive values. */
-:where(.ags-header-slot),
-:where(.ags-hero),
-:where(.ags-statement),
-:where(.ags-why),
-:where(.ags-numbers),
-:where(.ags-products),
-:where(.ags-support),
-:where(.ags-faq) {
-  --ags-ivory: #F4F1EA;
+.ags-numbers__eyebrow {
+  margin: 0 0 var(--ags-eyebrow-gap);
+  padding: 0;
+
+  font-family: var(--ags-font-text);
+  font-size: var(--ags-fs-eyebrow);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-align: center;
 }
 
-:where(.ags-header-slot),
-:where(.ags-hero),
-:where(.ags-why),
-:where(.ags-numbers),
-:where(.ags-products),
-:where(.ags-support),
-:where(.ags-faq),
-:where(.ags-footer) {
-  --ags-white: #FFFFFF;
+.ags-numbers__title {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  color: var(--ags-white);
+
+  font-family: var(--ags-font-head);
+  font-size: var(--ags-fs-h2);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0;
+  text-align: center;
+  text-transform: uppercase;
+
+  text-wrap: balance;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
-:where(.ags-header-slot),
-:where(.ags-hero),
-:where(.ags-statement),
-:where(.ags-why),
-:where(.ags-numbers),
-:where(.ags-products),
-:where(.ags-support),
-:where(.ags-faq),
-:where(.ags-footer) {
-  --ags-crimson: #8C0F14;
-  --ags-gold: #C49743;
-  --ags-frame-max: 1620px;
-  --ags-frame-gap: 96px;
+/* Сетка */
+.ags-numbers__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  border-top: 1px solid var(--ags-line);
 }
 
-:where(.ags-header-slot) {
-  --ags-header-height: 64px;
+.ags-numbers__item {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+  min-height: var(--ags-cell-minh);
+
+  margin: 0;
+  padding: var(--ags-cell-py) var(--ags-cell-px);
+
+  text-align: center;
 }
 
-:where(.ags-header-slot),
-:where(.ags-hero),
-:where(.ags-products),
-:where(.ags-support),
-:where(.ags-faq) {
-  --ags-ease: cubic-bezier(.22, 1, .36, 1);
+.ags-numbers__item:not(:first-child) {
+  border-left: 1px solid var(--ags-line);
 }
 
-:where(.ags-header-slot),
-:where(.ags-hero) {
-  --ags-duration: 450ms;
+/* Показатели */
+.ags-numbers__value {
+  margin: 0;
+  padding: 0;
+
+  font-family: var(--ags-font-text);
+  font-size: var(--ags-fs-stat);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0;
+
+  text-align: center;
+  white-space: nowrap;
 }
 
-:where(.ags-header-slot),
-:where(.ags-hero),
-:where(.ags-statement),
-:where(.ags-why),
-:where(.ags-numbers),
-:where(.ags-products),
-:where(.ags-support),
-:where(.ags-stories),
-:where(.ags-faq),
-:where(.ags-footer) {
-  --ags-gold-gradient: linear-gradient( 90deg, #F0E8A1 0%, #E29642 74%, #C49743 100% );
+/* Подписи */
+.ags-numbers__label {
+  width: 100%;
+  max-width: 230px;
+
+  margin: 16px auto 0;
+  padding: 0;
+
+  color: var(--ags-white);
+  opacity: 0.72;
+
+  font-family: var(--ags-font-text);
+  font-size: var(--ags-fs-label);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-align: center;
 }
 
-:where(.ags-hero),
-:where(.ags-statement),
-:where(.ags-why),
-:where(.ags-products),
-:where(.ags-support),
-:where(.ags-faq) {
-  --ags-garnet: #1E1E1E;
-}
-
-:where(.ags-hero),
-:where(.ags-why),
-:where(.ags-numbers),
-:where(.ags-products),
-:where(.ags-support),
-:where(.ags-faq) {
-  --ags-radius: 28px;
-}
-
-:where(.ags-hero),
-:where(.ags-why),
-:where(.ags-products),
-:where(.ags-faq) {
-  --ags-gap: 16px;
-}
-
-:where(.ags-hero),
-:where(.ags-statement),
-:where(.ags-why),
-:where(.ags-numbers),
-:where(.ags-products),
-:where(.ags-support),
-:where(.ags-partners),
-:where(.ags-stories),
-:where(.ags-faq),
-:where(.ags-footer) {
-  --ags-section-space: 80px;
-}
-
-:where(.ags-products),
-:where(.ags-support) {
-  --ags-dark-red: #8C0F14;
-}
-
-:where(.ags-partners),
-:where(.ags-stories) {
-  --ivory: #F4F1EA;
-  --white: #FFFFFF;
-  --crimson: #8C0F14;
-  --gold: #C49743;
-  --garnet: #1E1E1E;
-  --gap: 16px;
-  --radius: 28px;
-  --frame-gap: 96px;
-  --ease: cubic-bezier(.22,1,.36,1);
-}
-
-@media (max-width: 1440px) {
-  :where(.ags-header-slot),
-  :where(.ags-hero),
-  :where(.ags-statement),
-  :where(.ags-why),
-  :where(.ags-numbers),
-  :where(.ags-products),
-  :where(.ags-support),
-  :where(.ags-faq),
-  :where(.ags-footer) {
-    --ags-frame-gap: 80px;
-  }
-
-  :where(.ags-hero),
-  :where(.ags-statement),
-  :where(.ags-why),
-  :where(.ags-numbers),
-  :where(.ags-products),
-  :where(.ags-support),
-  :where(.ags-partners),
-  :where(.ags-stories),
-  :where(.ags-faq),
-  :where(.ags-footer) {
-    --ags-section-space: 72px;
-  }
-
-  :where(.ags-partners),
-  :where(.ags-stories) {
-    --frame-gap: 80px;
-  }
-}
-
-@media (max-width: 1200px) {
-  :where(.ags-header-slot),
-  :where(.ags-hero),
-  :where(.ags-statement),
-  :where(.ags-why),
-  :where(.ags-numbers),
-  :where(.ags-products),
-  :where(.ags-support),
-  :where(.ags-faq),
-  :where(.ags-footer) {
-    --ags-frame-gap: 32px;
-  }
-
-  :where(.ags-header-slot) {
-    --ags-header-height: 60px;
-  }
-
-  :where(.ags-hero),
-  :where(.ags-why),
-  :where(.ags-products),
-  :where(.ags-faq) {
-    --ags-gap: 14px;
-  }
-
-  :where(.ags-hero),
-  :where(.ags-statement),
-  :where(.ags-why),
-  :where(.ags-numbers),
-  :where(.ags-products),
-  :where(.ags-support),
-  :where(.ags-partners),
-  :where(.ags-stories),
-  :where(.ags-faq),
-  :where(.ags-footer) {
-    --ags-section-space: 64px;
-  }
-
-  :where(.ags-partners),
-  :where(.ags-stories) {
-    --frame-gap: 32px;
-    --gap: 14px;
-  }
-}
+/* ========================================
+   ADAPTIVE
+   ======================================== */
 
 @media (max-width: 960px) {
-  :where(.ags-header-slot),
-  :where(.ags-hero),
-  :where(.ags-statement),
-  :where(.ags-why),
-  :where(.ags-numbers),
-  :where(.ags-products),
-  :where(.ags-support),
-  :where(.ags-faq),
-  :where(.ags-footer) {
-    --ags-frame-gap: 24px;
+  .ags-numbers__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  :where(.ags-hero),
-  :where(.ags-why),
-  :where(.ags-numbers),
-  :where(.ags-products),
-  :where(.ags-support),
-  :where(.ags-faq) {
-    --ags-radius: 24px;
+  .ags-numbers__item:not(:first-child) {
+    border-left: 0;
   }
 
-  :where(.ags-hero) {
-    --ags-gap: 16px;
+  .ags-numbers__item:nth-child(even) {
+    border-left: 1px solid var(--ags-line);
   }
 
-  :where(.ags-hero),
-  :where(.ags-statement),
-  :where(.ags-why),
-  :where(.ags-numbers),
-  :where(.ags-products),
-  :where(.ags-support),
-  :where(.ags-partners),
-  :where(.ags-stories),
-  :where(.ags-faq),
-  :where(.ags-footer) {
-    --ags-section-space: 56px;
-  }
-
-  :where(.ags-partners),
-  :where(.ags-stories) {
-    --frame-gap: 24px;
-    --radius: 24px;
+  .ags-numbers__item:nth-child(n + 3) {
+    border-top: 1px solid var(--ags-line);
   }
 }
 
 @media (max-width: 640px) {
-  :where(.ags-header-slot),
-  :where(.ags-hero),
-  :where(.ags-statement),
-  :where(.ags-why),
-  :where(.ags-numbers),
-  :where(.ags-products),
-  :where(.ags-support),
-  :where(.ags-faq),
-  :where(.ags-footer) {
-    --ags-frame-gap: 16px;
-  }
-
-  :where(.ags-hero),
-  :where(.ags-why),
-  :where(.ags-numbers),
-  :where(.ags-products),
-  :where(.ags-support),
-  :where(.ags-faq) {
-    --ags-radius: 20px;
-  }
-
-  :where(.ags-hero),
-  :where(.ags-why),
-  :where(.ags-products) {
-    --ags-gap: 14px;
-  }
-
-  :where(.ags-hero),
-  :where(.ags-statement),
-  :where(.ags-why),
-  :where(.ags-numbers),
-  :where(.ags-products),
-  :where(.ags-support),
-  :where(.ags-partners),
-  :where(.ags-stories),
-  :where(.ags-faq),
-  :where(.ags-footer) {
-    --ags-section-space: 40px;
-  }
-
-  :where(.ags-partners),
-  :where(.ags-stories) {
-    --frame-gap: 16px;
-    --radius: 20px;
+  .ags-numbers__label {
+    max-width: 160px;
+    margin-top: 12px;
   }
 }
 
 @media (max-width: 480px) {
-  :where(.ags-header-slot),
-  :where(.ags-hero),
-  :where(.ags-statement),
-  :where(.ags-why),
-  :where(.ags-numbers),
-  :where(.ags-products),
-  :where(.ags-support),
-  :where(.ags-faq),
-  :where(.ags-footer) {
-    --ags-frame-gap: 12px;
+  .ags-numbers__item {
+    padding-right: 8px;
+    padding-left: 8px;
   }
-
-  :where(.ags-hero),
-  :where(.ags-statement),
-  :where(.ags-why),
-  :where(.ags-numbers),
-  :where(.ags-products),
-  :where(.ags-support),
-  :where(.ags-partners),
-  :where(.ags-stories),
-  :where(.ags-faq),
-  :where(.ags-footer) {
-    --ags-section-space: 40px;
-  }
-
-  :where(.ags-partners),
-  :where(.ags-stories) {
-    --frame-gap: 12px;
-  }
-}
-
-@media (max-width: 360px) {
-  :where(.ags-header-slot),
-  :where(.ags-hero),
-  :where(.ags-statement),
-  :where(.ags-why),
-  :where(.ags-numbers),
-  :where(.ags-products),
-  :where(.ags-support),
-  :where(.ags-faq),
-  :where(.ags-footer) {
-    --ags-frame-gap: 12px;
-  }
-
-  :where(.ags-hero),
-  :where(.ags-statement),
-  :where(.ags-why),
-  :where(.ags-numbers),
-  :where(.ags-products),
-  :where(.ags-support),
-  :where(.ags-partners),
-  :where(.ags-stories),
-  :where(.ags-faq),
-  :where(.ags-footer) {
-    --ags-section-space: 36px;
-  }
-
-  :where(.ags-partners),
-  :where(.ags-stories) {
-    --frame-gap: 12px;
-  }
-}
-
-/* Reusable reset, section, frame and gold-text rules. */
-:where(.ags-header-slot),
-:where(.ags-header-slot *),
-:where(.ags-header-slot *)::before,
-:where(.ags-header-slot *)::after,
-:where(.ags-hero),
-:where(.ags-hero *),
-:where(.ags-hero *)::before,
-:where(.ags-hero *)::after,
-:where(.ags-statement),
-:where(.ags-statement *),
-:where(.ags-statement *)::before,
-:where(.ags-statement *)::after,
-:where(.ags-why),
-:where(.ags-why *),
-:where(.ags-why *)::before,
-:where(.ags-why *)::after,
-:where(.ags-numbers),
-:where(.ags-numbers *),
-:where(.ags-numbers *)::before,
-:where(.ags-numbers *)::after,
-:where(.ags-products),
-:where(.ags-products *),
-:where(.ags-products *)::before,
-:where(.ags-products *)::after,
-:where(.ags-support),
-:where(.ags-support *),
-:where(.ags-support *)::before,
-:where(.ags-support *)::after,
-:where(.ags-partners),
-:where(.ags-partners *),
-:where(.ags-partners *)::before,
-:where(.ags-partners *)::after,
-:where(.ags-stories),
-:where(.ags-stories *),
-:where(.ags-stories *)::before,
-:where(.ags-stories *)::after,
-:where(.ags-faq),
-:where(.ags-faq *),
-:where(.ags-faq *)::before,
-:where(.ags-faq *)::after,
-:where(.ags-footer),
-:where(.ags-footer *),
-:where(.ags-footer *)::before,
-:where(.ags-footer *)::after {
-  box-sizing: border-box;
-}
-
-:where(.ags-header-slot),
-:where(.ags-hero),
-:where(.ags-statement),
-:where(.ags-why),
-:where(.ags-numbers),
-:where(.ags-products),
-:where(.ags-faq),
-:where(.ags-footer) {
-  position: relative;
-  display: block;
-}
-
-:where(.ags-header-slot),
-:where(.ags-hero),
-:where(.ags-statement),
-:where(.ags-why),
-:where(.ags-numbers),
-:where(.ags-products),
-:where(.ags-support),
-:where(.ags-partners),
-:where(.ags-stories),
-:where(.ags-faq),
-:where(.ags-footer) {
-  width: 100%;
-}
-
-:where(.ags-header-slot),
-:where(.ags-hero),
-:where(.ags-statement),
-:where(.ags-why),
-:where(.ags-numbers),
-:where(.ags-products),
-:where(.ags-support),
-:where(.ags-faq),
-:where(.ags-footer) {
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-:where(.ags-hero__frame),
-:where(.ags-statement__frame),
-:where(.ags-why__frame),
-:where(.ags-numbers__frame),
-:where(.ags-products__frame),
-:where(.ags-support__frame),
-:where(.ags-faq__frame),
-:where(.ags-footer__frame) {
-  width: min( var(--ags-frame-max), calc(100% - 2 * var(--ags-frame-gap)) );
-}
-
-:where(.ags-hero__frame),
-:where(.ags-statement__frame),
-:where(.ags-why__frame),
-:where(.ags-numbers__frame),
-:where(.ags-products__frame),
-:where(.ags-support__frame),
-:where(.ags-partners__frame),
-:where(.ags-stories__frame),
-:where(.ags-faq__frame),
-:where(.ags-footer__frame) {
-  margin: 0 auto;
-}
-
-:where(.ags-hero__eyebrow),
-:where(.ags-why__feature-number),
-:where(.ags-numbers__eyebrow),
-:where(.ags-numbers__value),
-:where(.ags-support__number),
-:where(.ags-footer__label) {
-  background: var(--ags-gold-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-:where(.ags-partners__frame),
-:where(.ags-stories__frame) {
-  width: min(1620px, calc(100% - 2 * var(--frame-gap)));
 }
