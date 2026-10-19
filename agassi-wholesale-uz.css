@@ -1,6 +1,6 @@
 
 /* ========================================
-   AGASSI CORE
+   AGASSI CORE — VARIABLES
    ======================================== */
 
 :root {
@@ -16,7 +16,7 @@
     #C49743 100%
   );
 
-  --ags-line: rgba(255, 255, 255, .18);
+  --ags-line: rgba(255, 255, 255, 0.18);
 
   --ags-font-text: var(--t-text-font, sans-serif);
   --ags-font-head: var(--t-headline-font, serif);
@@ -26,6 +26,7 @@
   --ags-section-space: 80px;
 
   --ags-radius: 28px;
+
   --ags-surface-pt: 72px;
   --ags-surface-px: 64px;
   --ags-surface-pb: 64px;
@@ -44,7 +45,10 @@
   --ags-fs-label: 14px;
 }
 
-/* Общая структура */
+/* ========================================
+   AGASSI CORE — LAYOUT
+   ======================================== */
+
 .ags-section,
 .ags-section *,
 .ags-section *::before,
@@ -76,6 +80,7 @@
 .ags-surface {
   position: relative;
   width: 100%;
+
   padding:
     var(--ags-surface-pt)
     var(--ags-surface-px)
@@ -93,6 +98,7 @@
 
   width: 100%;
   max-width: var(--ags-head-max);
+
   margin: 0 auto var(--ags-head-gap);
 
   text-align: center;
@@ -108,7 +114,7 @@
 }
 
 /* ========================================
-   NUMBERS
+   NUMBERS — HEADER
    ======================================== */
 
 .ags-numbers__header {
@@ -147,6 +153,10 @@
   word-break: normal;
 }
 
+/* ========================================
+   NUMBERS — GRID
+   ======================================== */
+
 .ags-numbers__grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -160,6 +170,7 @@
 
 .ags-numbers__item {
   position: relative;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -178,6 +189,10 @@
   border-left: 1px solid var(--ags-line);
 }
 
+/* ========================================
+   NUMBERS — VALUES
+   ======================================== */
+
 .ags-numbers__value {
   margin: 0;
   padding: 0;
@@ -192,6 +207,10 @@
   white-space: nowrap;
 }
 
+/* ========================================
+   NUMBERS — LABELS
+   ======================================== */
+
 .ags-numbers__label {
   width: 100%;
   max-width: 230px;
@@ -200,7 +219,7 @@
   padding: 0;
 
   color: var(--ags-white);
-  opacity: .72;
+  opacity: 0.72;
 
   font-family: var(--ags-font-text);
   font-size: var(--ags-fs-label);
@@ -211,53 +230,73 @@
 }
 
 /* ========================================
-   ADAPTIVE
+   RESPONSIVE — 1440
    ======================================== */
 
 @media (max-width: 1440px) {
   :root {
     --ags-frame-gap: 64px;
+
     --ags-surface-pt: 64px;
     --ags-surface-px: 56px;
     --ags-surface-pb: 56px;
+
     --ags-head-max: 920px;
     --ags-head-gap: 40px;
+
     --ags-cell-minh: 248px;
     --ags-cell-py: 36px;
+
     --ags-fs-stat: 56px;
   }
 }
+
+/* ========================================
+   RESPONSIVE — 1200
+   ======================================== */
 
 @media (max-width: 1200px) {
   :root {
     --ags-frame-gap: 48px;
     --ags-section-space: 64px;
+
     --ags-surface-pt: 44px;
     --ags-surface-px: 48px;
     --ags-surface-pb: 36px;
+
     --ags-head-max: 820px;
     --ags-head-gap: 28px;
     --ags-eyebrow-gap: 12px;
+
     --ags-cell-minh: 192px;
     --ags-cell-py: 28px;
     --ags-cell-px: 16px;
+
     --ags-fs-h2: 44px;
     --ags-fs-stat: 48px;
   }
 }
 
+/* ========================================
+   RESPONSIVE — 960
+   ======================================== */
+
 @media (max-width: 960px) {
   :root {
     --ags-frame-gap: 32px;
     --ags-section-space: 56px;
+
     --ags-surface-pt: 40px;
     --ags-surface-px: 40px;
     --ags-surface-pb: 32px;
+
     --ags-head-max: 720px;
     --ags-head-gap: 24px;
+
     --ags-cell-minh: 168px;
     --ags-cell-py: 24px;
     --ags-cell-px: 24px;
+
     --ags-fs-stat: 44px;
   }
 
@@ -278,18 +317,26 @@
   }
 }
 
+/* ========================================
+   RESPONSIVE — 640
+   ======================================== */
+
 @media (max-width: 640px) {
   :root {
     --ags-frame-gap: 20px;
     --ags-section-space: 40px;
+
     --ags-surface-pt: 32px;
     --ags-surface-px: 28px;
     --ags-surface-pb: 24px;
+
     --ags-head-max: 520px;
     --ags-eyebrow-gap: 8px;
+
     --ags-cell-minh: 148px;
     --ags-cell-py: 24px;
     --ags-cell-px: 12px;
+
     --ags-fs-h2: 34px;
     --ags-fs-stat: 40px;
   }
@@ -300,17 +347,29 @@
   }
 }
 
+/* ========================================
+   RESPONSIVE — 480
+   ======================================== */
+
 @media (max-width: 480px) {
   :root {
     --ags-frame-gap: 16px;
+
     --ags-surface-px: 24px;
     --ags-surface-pb: 20px;
+
     --ags-head-gap: 20px;
+
     --ags-cell-minh: 140px;
     --ags-cell-px: 8px;
+
     --ags-fs-stat: 36px;
   }
 }
+
+/* ========================================
+   RESPONSIVE — 360
+   ======================================== */
 
 @media (max-width: 360px) {
   :root {
