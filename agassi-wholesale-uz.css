@@ -1,7 +1,5 @@
 
-/* =========================================
-   AGASSI CORE — VARIABLES
-   ========================================= */
+/* AGASSI CORE — переменные */
 
 :root {
   --ags-ivory: #F4F1EA;
@@ -45,9 +43,7 @@
   --ags-fs-label: 14px;
 }
 
-/* =========================================
-   AGASSI CORE — LAYOUT
-   ========================================= */
+/* AGASSI CORE — структура */
 
 .ags-section,
 .ags-section *,
@@ -61,7 +57,7 @@
   display: block;
   width: 100%;
   margin: 0;
-  padding: var(--ags-section-space) 0);
+  padding: var(--ags-section-space) 0;
   background: var(--ags-ivory);
 
   -webkit-font-smoothing: antialiased;
@@ -80,6 +76,7 @@
 .ags-surface {
   position: relative;
   width: 100%;
+
   padding:
     var(--ags-surface-pt)
     var(--ags-surface-px)
@@ -97,7 +94,6 @@
 
   width: 100%;
   max-width: var(--ags-head-max);
-
   margin: 0 auto var(--ags-head-gap);
 
   text-align: center;
@@ -112,9 +108,7 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* =========================================
-   NUMBERS — HEADER
-   ========================================= */
+/* NUMBERS — заголовок */
 
 .ags-numbers__header {
   position: relative;
@@ -152,9 +146,7 @@
   word-break: normal;
 }
 
-/* =========================================
-   NUMBERS — GRID
-   ========================================= */
+/* NUMBERS — сетка */
 
 .ags-numbers__grid {
   display: grid;
@@ -188,9 +180,7 @@
   border-left: 1px solid var(--ags-line);
 }
 
-/* =========================================
-   NUMBERS — VALUES
-   ========================================= */
+/* NUMBERS — показатели */
 
 .ags-numbers__value {
   margin: 0;
@@ -206,9 +196,7 @@
   white-space: nowrap;
 }
 
-/* =========================================
-   NUMBERS — LABELS
-   ========================================= */
+/* NUMBERS — подписи */
 
 .ags-numbers__label {
   width: 100%;
@@ -228,9 +216,7 @@
   text-align: center;
 }
 
-/* =========================================
-   RESPONSIVE — 1440px
-   ========================================= */
+/* Адаптивность — 1440px */
 
 @media (max-width: 1440px) {
   :root {
@@ -250,9 +236,7 @@
   }
 }
 
-/* =========================================
-   RESPONSIVE — 1200px
-   ========================================= */
+/* Адаптивность — 1200px */
 
 @media (max-width: 1200px) {
   :root {
@@ -276,9 +260,7 @@
   }
 }
 
-/* =========================================
-   RESPONSIVE — 960px
-   ========================================= */
+/* Адаптивность — 960px */
 
 @media (max-width: 960px) {
   :root {
@@ -316,9 +298,7 @@
   }
 }
 
-/* =========================================
-   RESPONSIVE — 640px
-   ========================================= */
+/* Адаптивность — 640px */
 
 @media (max-width: 640px) {
   :root {
@@ -346,9 +326,7 @@
   }
 }
 
-/* =========================================
-   RESPONSIVE — 480px
-   ========================================= */
+/* Адаптивность — 480px */
 
 @media (max-width: 480px) {
   :root {
@@ -366,9 +344,7 @@
   }
 }
 
-/* =========================================
-   RESPONSIVE — 360px
-   ========================================= */
+/* Адаптивность — 360px */
 
 @media (max-width: 360px) {
   :root {
