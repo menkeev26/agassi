@@ -5130,3 +5130,5 @@ body.ags-scroll-locked {
   .ags-header__desktop { display: none; }
   .ags-header__mobile { display: contents; }
 }
+
+@media (min-width:1201px) { .ags-header-slot .ags-header__mobile { display:none !important; } }
