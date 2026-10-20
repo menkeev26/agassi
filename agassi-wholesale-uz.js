@@ -85,7 +85,7 @@
       menu.inert = !value;
       menu.setAttribute('aria-hidden', String(!value));
       burger.setAttribute('aria-expanded', String(value));
-      burger.setAttribute('aria-label', value ? 'Мобильная панель — закрыть меню' : 'Мобильная панель — открыть меню');
+      burger.setAttribute('aria-label', value ? 'Закрыть меню' : 'Открыть меню');
       if (theme) theme.content = openMenus.size ? '#8C0F14' : themeBefore;
       if (value) closeButton.focus({ preventScroll: true });
       else if (restoreFocus && focusBefore && focusBefore.isConnected) focusBefore.focus({ preventScroll: true });
