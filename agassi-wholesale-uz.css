@@ -5131,4 +5131,5 @@ body.ags-scroll-locked {
   .ags-header__mobile { display: contents; }
 }
 
-@media (min-width:1201px) { .ags-header-slot .ags-header__mobile { display:none !important; } }
+.ags-header-slot { height:auto; min-height:0; max-height:none; }
+.ags-header-slot .ags-header { position:relative; top:0; left:auto; transform:none; margin:0 auto; }
