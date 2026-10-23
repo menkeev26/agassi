@@ -1,4 +1,3 @@
-
 /* AGASSI Group — Header */
 
 .agg-header,
@@ -20,14 +19,16 @@
   position: relative;
   z-index: 1000;
   width: 100%;
+  margin: 0;
+  padding: 0;
   background: var(--agg-ivory);
   color: var(--agg-text);
   font-family: var(--t-text-font, Arial), Arial, sans-serif;
 }
 
 .agg-header a {
-  color: inherit;
   text-decoration: none;
+  color: inherit;
 }
 
 .agg-header img {
@@ -50,7 +51,7 @@
 .agg-header__logo {
   display: block;
   width: 128px;
-  max-height: 48px;
+  height: 48px;
   object-fit: contain;
 }
 
@@ -88,7 +89,6 @@
   align-items: center;
   min-height: 44px;
   color: var(--agg-text);
-  font-family: var(--t-text-font, Arial), Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -97,7 +97,7 @@
 }
 
 .agg-header__desktop-nav a:hover {
-  color: var(--agg-primary);
+  color: var(--agg-primary-hover);
 }
 
 .agg-header__desktop-action {
@@ -114,10 +114,10 @@
   min-height: 44px;
   padding: 12px 20px;
   border: 1px solid var(--agg-primary);
-  border-radius: 0;
+  border-radius: 999px;
   background-color: var(--agg-primary);
   color: var(--agg-white);
-  font-family: var(--t-text-font, Arial), Arial, sans-serif;
+  font-family: inherit;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -140,8 +140,6 @@
   background-color: var(--agg-primary-hover);
   border-color: var(--agg-primary-hover);
   color: var(--agg-white);
-  outline: 2px solid var(--agg-gold);
-  outline-offset: 4px;
 }
 
 .agg-header a:focus-visible,
@@ -181,8 +179,8 @@
   height: 44px;
   padding: 8px;
   border: 1px solid var(--agg-border);
-  border-radius: 0;
-  background: var(--agg-ivory);
+  border-radius: 999px;
+  background-color: var(--agg-ivory);
   color: var(--agg-text);
   cursor: pointer;
   transition:
@@ -204,19 +202,16 @@
   height: 24px;
 }
 
-.agg-header__icon-close {
-  display: none !important;
-}
-
+.agg-header__icon-close,
 .agg-header__mobile-toggle[aria-expanded="true"] .agg-header__icon-menu {
   display: none;
 }
 
 .agg-header__mobile-toggle[aria-expanded="true"] .agg-header__icon-close {
-  display: block !important;
+  display: block;
 }
 
-/* Выпадающее меню */
+/* Раскрывающееся меню */
 
 .agg-header__mobile-menu {
   position: absolute;
@@ -232,10 +227,6 @@
 
 .agg-header__mobile-menu[hidden] {
   display: none !important;
-}
-
-.agg-header__mobile-menu.is-open {
-  display: block;
 }
 
 .agg-header__mobile-menu-panel {
@@ -255,7 +246,6 @@
   padding: 16px 0;
   border-bottom: 1px solid var(--agg-border);
   color: var(--agg-text);
-  font-family: var(--t-text-font, Arial), Arial, sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 28px;
@@ -263,19 +253,22 @@
 }
 
 .agg-header__mobile-nav a:hover {
-  color: var(--agg-primary);
+  color: var(--agg-primary-hover);
+}
+
+.agg-header__mobile-action {
+  width: 100%;
+  margin-top: 24px;
 }
 
 .agg-header .agg-header__mobile-cta {
   width: 100%;
   min-height: 48px;
-  margin-top: 24px;
 }
 
 /* Планшет */
 
 @media (min-width: 768px) and (max-width: 1023px) {
-
   .agg-header__frame {
     padding-right: 32px;
     padding-left: 32px;
@@ -288,13 +281,11 @@
   .agg-header__mobile {
     display: block;
   }
-
 }
 
 /* Мобильные устройства */
 
 @media (max-width: 767px) {
-
   .agg-header__frame {
     padding-right: 16px;
     padding-left: 16px;
@@ -320,16 +311,13 @@
   .agg-header__mobile-toggle {
     grid-column: 4;
   }
-
 }
 
 /* Уменьшение анимаций */
 
 @media (prefers-reduced-motion: reduce) {
-
   .agg-header a,
   .agg-header button {
     transition: none;
   }
-
 }
