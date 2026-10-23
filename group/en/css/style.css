@@ -1,1 +1,335 @@
 
+/* AGASSI Group — Header */
+
+.agg-header,
+.agg-header *,
+.agg-header *::before,
+.agg-header *::after {
+  box-sizing: border-box;
+}
+
+.agg-header {
+  --agg-primary: #8C0F14;
+  --agg-primary-hover: #5A0A0D;
+  --agg-gold: #C49743;
+  --agg-ivory: #F4F1EA;
+  --agg-white: #FFFFFF;
+  --agg-text: #352D2B;
+  --agg-border: #DCD4CA;
+
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  background: var(--agg-ivory);
+  color: var(--agg-text);
+  font-family: var(--t-text-font, Arial), Arial, sans-serif;
+}
+
+.agg-header a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.agg-header img {
+  display: block;
+  max-width: 100%;
+}
+
+.agg-header button {
+  font: inherit;
+}
+
+.agg-header__frame {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+.agg-header__logo {
+  display: block;
+  width: 128px;
+  max-height: 48px;
+  object-fit: contain;
+}
+
+/* Десктопная версия */
+
+.agg-header__desktop {
+  display: block;
+}
+
+.agg-header__desktop-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 24px;
+  align-items: center;
+  min-height: 80px;
+}
+
+.agg-header__desktop-logo {
+  grid-column: span 2;
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+}
+
+.agg-header__desktop-nav {
+  grid-column: span 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.agg-header__desktop-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--agg-text);
+  font-family: var(--t-text-font, Arial), Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  transition: color 200ms ease;
+}
+
+.agg-header__desktop-nav a:hover {
+  color: var(--agg-primary);
+}
+
+.agg-header__desktop-action {
+  grid-column: span 2;
+  justify-self: end;
+}
+
+/* Кнопки */
+
+.agg-header .agg-header__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 20px;
+  border: 1px solid var(--agg-primary);
+  border-radius: 0;
+  background-color: var(--agg-primary);
+  color: var(--agg-white);
+  font-family: var(--t-text-font, Arial), Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.agg-header .agg-header__button:hover {
+  background-color: var(--agg-primary-hover);
+  border-color: var(--agg-primary-hover);
+  color: var(--agg-white);
+}
+
+.agg-header .agg-header__button:focus-visible {
+  background-color: var(--agg-primary-hover);
+  border-color: var(--agg-primary-hover);
+  color: var(--agg-white);
+  outline: 2px solid var(--agg-gold);
+  outline-offset: 4px;
+}
+
+.agg-header a:focus-visible,
+.agg-header button:focus-visible {
+  outline: 2px solid var(--agg-gold);
+  outline-offset: 4px;
+}
+
+/* Мобильная версия */
+
+.agg-header__mobile {
+  display: none;
+}
+
+.agg-header__mobile-top {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  column-gap: 16px;
+  align-items: center;
+  min-height: 72px;
+}
+
+.agg-header__mobile-logo {
+  grid-column: 1 / span 4;
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+}
+
+.agg-header__mobile-toggle {
+  grid-column: 8;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  width: 44px;
+  height: 44px;
+  padding: 8px;
+  border: 1px solid var(--agg-border);
+  border-radius: 0;
+  background: var(--agg-ivory);
+  color: var(--agg-text);
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.agg-header__mobile-toggle:hover,
+.agg-header__mobile-toggle[aria-expanded="true"] {
+  background-color: var(--agg-primary-hover);
+  border-color: var(--agg-primary-hover);
+  color: var(--agg-white);
+}
+
+.agg-header__mobile-toggle svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.agg-header__icon-close {
+  display: none !important;
+}
+
+.agg-header__mobile-toggle[aria-expanded="true"] .agg-header__icon-menu {
+  display: none;
+}
+
+.agg-header__mobile-toggle[aria-expanded="true"] .agg-header__icon-close {
+  display: block !important;
+}
+
+/* Выпадающее меню */
+
+.agg-header__mobile-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 1001;
+  width: 100%;
+  border-top: 1px solid var(--agg-border);
+  border-bottom: 1px solid var(--agg-border);
+  background: var(--agg-ivory);
+}
+
+.agg-header__mobile-menu[hidden] {
+  display: none !important;
+}
+
+.agg-header__mobile-menu.is-open {
+  display: block;
+}
+
+.agg-header__mobile-menu-panel {
+  padding-top: 16px;
+  padding-bottom: 32px;
+}
+
+.agg-header__mobile-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.agg-header__mobile-nav a {
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--agg-border);
+  color: var(--agg-text);
+  font-family: var(--t-text-font, Arial), Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+  transition: color 200ms ease;
+}
+
+.agg-header__mobile-nav a:hover {
+  color: var(--agg-primary);
+}
+
+.agg-header .agg-header__mobile-cta {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 24px;
+}
+
+/* Планшет */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  .agg-header__frame {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+
+  .agg-header__desktop {
+    display: none;
+  }
+
+  .agg-header__mobile {
+    display: block;
+  }
+
+}
+
+/* Мобильные устройства */
+
+@media (max-width: 767px) {
+
+  .agg-header__frame {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .agg-header__desktop {
+    display: none;
+  }
+
+  .agg-header__mobile {
+    display: block;
+  }
+
+  .agg-header__mobile-top {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 16px;
+  }
+
+  .agg-header__mobile-logo {
+    grid-column: 1 / span 3;
+  }
+
+  .agg-header__mobile-toggle {
+    grid-column: 4;
+  }
+
+}
+
+/* Уменьшение анимаций */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .agg-header a,
+  .agg-header button {
+    transition: none;
+  }
+
+}
