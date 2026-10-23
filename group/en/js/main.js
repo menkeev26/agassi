@@ -1,4 +1,3 @@
-
 /* AGASSI Group — Header */
 
 (() => {
@@ -20,8 +19,8 @@
       const links = menu.querySelectorAll("a");
       const desktopQuery = window.matchMedia("(min-width: 1024px)");
 
+      // Управление меню
       function closeMenu() {
-        menu.classList.remove("is-open");
         menu.hidden = true;
         menu.inert = true;
         menu.setAttribute("aria-hidden", "true");
@@ -31,9 +30,10 @@
       }
 
       function openMenu() {
+        if (desktopQuery.matches) return;
+
         menu.hidden = false;
         menu.inert = false;
-        menu.classList.add("is-open");
         menu.setAttribute("aria-hidden", "false");
 
         toggle.setAttribute("aria-expanded", "true");
@@ -41,7 +41,7 @@
       }
 
       function toggleMenu() {
-        if (menu.classList.contains("is-open")) {
+        if (toggle.getAttribute("aria-expanded") === "true") {
           closeMenu();
         } else {
           openMenu();
@@ -50,27 +50,36 @@
 
       closeMenu();
 
+      // Кнопка меню
       toggle.addEventListener("click", toggleMenu);
 
+      // Переход по ссылке
       links.forEach((link) => {
         link.addEventListener("click", closeMenu);
       });
 
+      // Клик вне Header
       document.addEventListener("click", (event) => {
-        if (!header.contains(event.target)) {
+        if (
+          toggle.getAttribute("aria-expanded") === "true" &&
+          !header.contains(event.target)
+        ) {
           closeMenu();
         }
       });
 
+      // Закрытие через Escape
       document.addEventListener("keydown", (event) => {
-        if (event.key !== "Escape") return;
-
-        if (menu.classList.contains("is-open")) {
+        if (
+          event.key === "Escape" &&
+          toggle.getAttribute("aria-expanded") === "true"
+        ) {
           closeMenu();
           toggle.focus();
         }
       });
 
+      // Переключение на десктоп
       function handleBreakpoint(event) {
         if (event.matches) {
           closeMenu();
