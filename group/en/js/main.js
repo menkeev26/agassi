@@ -1,8 +1,8 @@
 (() => {
   const root = document.documentElement;
 
-  if (root.dataset.aggHeaderEventsBound === "true") return;
-  root.dataset.aggHeaderEventsBound = "true";
+  if (root.dataset.aggHeaderBound === "true") return;
+  root.dataset.aggHeaderBound = "true";
 
   const setMenuOpen = (header, open, restoreFocus = false) => {
     const menu = header.querySelector(".agg-header__mobile-menu");
@@ -16,6 +16,10 @@
     menu.toggleAttribute("inert", !open);
 
     openButton.setAttribute("aria-expanded", String(open));
+    openButton.setAttribute(
+      "aria-label",
+      open ? "Close menu" : "Open menu"
+    );
 
     if (open) {
       closeButton.focus({ preventScroll: true });
@@ -48,7 +52,9 @@
 
     if (target.closest(".agg-header__menu-open")) {
       const menu = header.querySelector(".agg-header__mobile-menu");
-      setMenuOpen(header, !menu?.classList.contains("is-open"));
+      const isOpen = menu?.classList.contains("is-open");
+
+      setMenuOpen(header, !isOpen, isOpen);
       return;
     }
 
@@ -57,13 +63,7 @@
       return;
     }
 
-    if (
-      target.closest(
-        ".agg-header__mobile-nav a, " +
-        ".agg-header__mobile-bottom a, " +
-        ".agg-header__mobile-menu-top a"
-      )
-    ) {
+    if (target.closest(".agg-header__mobile-menu a")) {
       setMenuOpen(header, false);
     }
   });
