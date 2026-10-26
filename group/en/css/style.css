@@ -1,113 +1,431 @@
-<link rel="stylesheet" href="https://raw.githack.com/menkeev26/agassi/main/group/en/css/style.css">
+:root {
+  --agassi-group-burgundy: #8C0F14;
+  --agassi-group-burgundy-hover: #5A0A0D;
+  --agassi-group-gold: #C49743;
+  --agassi-group-cream: #F4F1EA;
+  --agassi-group-white: #FFFFFF;
+  --agassi-group-ink: #352D2B;
+  --agassi-group-border: #DCD4CA;
 
-<div class="agassi-group-header" id="top">
+  --agassi-group-container-width: 1440px;
+  --agassi-group-gutter: 40px;
+  --agassi-group-gap: 24px;
 
-  <!-- Десктопная версия -->
-  <section class="agassi-group-header__desktop" aria-label="Десктопная версия">
+  --agassi-group-header-height: 80px;
+  --agassi-group-mobile-height: 72px;
 
-    <div class="agassi-group-container agassi-group-header__desktop-inner">
+  --agassi-group-duration: 500ms;
+}
 
-      <a class="agassi-group-header__logo" href="#top" aria-label="Логотип">
-        <img
-          src="https://static.tildacdn.one/tild3238-3961-4734-b335-316238666331/agassi.svg"
-          alt="Agassi Group"
-        >
-      </a>
+/* Общие стили */
 
-      <nav class="agassi-group-header__desktop-nav" aria-label="Навигация">
-        <a href="#story">Our Story</a>
-        <a href="#businesses">Businesses</a>
-        <a href="#brands">Brands</a>
-        <a href="#facts">Our Impact</a>
-        <a href="#faq">FAQ</a>
-      </nav>
+.agassi-group-header {
+  --agassi-group-font: var(--t-text-font, inherit);
 
-      <div class="agassi-group-header__desktop-action" role="group" aria-label="Кнопка">
-        <a class="agassi-group-button" href="#contact">Get in Touch</a>
-      </div>
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  min-height: var(--agassi-group-header-height);
+  margin: 0;
+  background: var(--agassi-group-cream);
+  color: var(--agassi-group-ink);
+  font-family: var(--agassi-group-font);
+}
 
-    </div>
+.agassi-group-header,
+.agassi-group-header *,
+.agassi-group-header *::before,
+.agassi-group-header *::after {
+  box-sizing: border-box;
+}
 
-  </section>
+.agassi-group-container {
+  width: 100%;
+  max-width: var(--agassi-group-container-width);
+  margin-inline: auto;
+  padding-inline: var(--agassi-group-gutter);
+}
 
-  <!-- Мобильная версия -->
-  <section class="agassi-group-header__mobile" aria-label="Мобильная версия">
+.agassi-group-header__mobile {
+  display: none;
+}
 
-    <!-- Верхняя панель -->
-    <div class="agassi-group-header__mobile-bar" aria-label="Верхняя панель">
+.agassi-group-header .agassi-group-header__logo {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+}
 
-      <div class="agassi-group-container agassi-group-header__mobile-inner">
+.agassi-group-header__logo img {
+  display: block;
+  width: 128px;
+  max-width: 100%;
+  height: auto;
+  max-height: 48px;
+  object-fit: contain;
+}
 
-        <a class="agassi-group-header__logo" href="#top" aria-label="Логотип">
-          <img
-            src="https://static.tildacdn.one/tild3238-3961-4734-b335-316238666331/agassi.svg"
-            alt="Agassi Group"
-          >
-        </a>
+/* Кнопки */
 
-        <div class="agassi-group-header__controls" role="group" aria-label="Кнопка меню">
+.agassi-group-header .agassi-group-button,
+#allrecords .agassi-group-header .agassi-group-button,
+.t-records .agassi-group-header .agassi-group-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin: 0;
+  padding: 8px 24px;
+  border: 0;
+  border-radius: 40px;
+  background: var(--agassi-group-burgundy);
+  color: var(--agassi-group-white);
+  font-family: var(--agassi-group-font);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
 
-          <button
-            class="agassi-group-header__toggle"
-            type="button"
-            aria-label="Open menu"
-            aria-controls="agassi-group-mobile-menu"
-            aria-expanded="false"
-          >
+.agassi-group-header .agassi-group-button:hover,
+#allrecords .agassi-group-header .agassi-group-button:hover,
+.t-records .agassi-group-header .agassi-group-button:hover {
+  background: var(--agassi-group-burgundy-hover);
+  color: var(--agassi-group-white);
+  text-decoration: none;
+}
 
-            <img
-              class="agassi-group-header__icon agassi-group-header__icon--open"
-              src="https://static.tildacdn.one/tild6431-3031-4666-a637-393639306562/menu.svg"
-              alt=""
-              aria-hidden="true"
-            >
+/* Десктоп */
 
-            <img
-              class="agassi-group-header__icon agassi-group-header__icon--close"
-              src="https://static.tildacdn.one/tild3962-6631-4234-b432-626438313639/close.svg"
-              alt=""
-              aria-hidden="true"
-            >
+.agassi-group-header__desktop-inner {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: center;
+  gap: var(--agassi-group-gap);
+  min-height: var(--agassi-group-header-height);
+}
 
-          </button>
+.agassi-group-header__desktop-inner > .agassi-group-header__logo {
+  grid-column: span 2;
+}
 
-        </div>
+.agassi-group-header__desktop-nav {
+  grid-column: span 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  min-width: 0;
+}
 
-      </div>
+.agassi-group-header .agassi-group-header__desktop-nav a,
+#allrecords .agassi-group-header .agassi-group-header__desktop-nav a,
+.t-records .agassi-group-header .agassi-group-header__desktop-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--agassi-group-ink);
+  font-family: var(--agassi-group-font);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-decoration: none;
+  white-space: nowrap;
+}
 
-    </div>
+.agassi-group-header .agassi-group-header__desktop-nav a:hover,
+#allrecords .agassi-group-header .agassi-group-header__desktop-nav a:hover,
+.t-records .agassi-group-header .agassi-group-header__desktop-nav a:hover {
+  color: var(--agassi-group-burgundy);
+  text-decoration: none;
+}
 
-    <!-- Раскрывающееся меню -->
-    <div
-      class="agassi-group-header__mobile-menu"
-      id="agassi-group-mobile-menu"
-      aria-label="Раскрывающееся меню"
-      aria-hidden="true"
-      inert
-    >
+.agassi-group-header__desktop-action {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-end;
+  min-width: 0;
+}
 
-      <div class="agassi-group-container agassi-group-header__menu-inner">
+/* Мобильная панель */
 
-        <nav class="agassi-group-header__mobile-nav" aria-label="Навигация">
-          <a href="#story">Our Story</a>
-          <a href="#businesses">Businesses</a>
-          <a href="#brands">Brands</a>
-          <a href="#facts">Our Impact</a>
-          <a href="#faq">FAQ</a>
-        </nav>
+.agassi-group-header__mobile-bar {
+  position: relative;
+  z-index: 102;
+  width: 100%;
+  height: var(--agassi-group-mobile-height);
+  background: var(--agassi-group-cream);
+}
 
-        <div class="agassi-group-header__menu-bottom" role="group" aria-label="Кнопка">
-          <a class="agassi-group-button agassi-group-header__mobile-cta" href="#contact">
-            Get in Touch
-          </a>
-        </div>
+.agassi-group-header__mobile-inner {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  align-items: center;
+  gap: 16px;
+  height: 100%;
+}
 
-      </div>
+.agassi-group-header__mobile-inner > .agassi-group-header__logo {
+  grid-column: span 6;
+}
 
-    </div>
+.agassi-group-header__controls {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-end;
+}
 
-  </section>
+.agassi-group-header__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--agassi-group-burgundy);
+  color: var(--agassi-group-white);
+  cursor: pointer;
+  appearance: none;
+}
 
-</div>
+.agassi-group-header__icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
 
-<script src="https://raw.githack.com/menkeev26/agassi/main/group/en/js/main.js" defer></script>
+.agassi-group-header__icon--close {
+  display: none;
+}
+
+.agassi-group-header.is-menu-open .agassi-group-header__icon--open {
+  display: none;
+}
+
+.agassi-group-header.is-menu-open .agassi-group-header__icon--close {
+  display: block;
+}
+
+/* Полноэкранное меню */
+
+.agassi-group-header__mobile-menu {
+  position: fixed;
+  z-index: 101;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  background: var(--agassi-group-cream);
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-100%);
+  transition:
+    transform var(--agassi-group-duration) ease-in-out,
+    visibility 0s linear var(--agassi-group-duration);
+}
+
+.agassi-group-header.is-menu-open .agassi-group-header__mobile-menu {
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition:
+    transform var(--agassi-group-duration) ease-in-out,
+    visibility 0s linear 0s;
+}
+
+.agassi-group-header__menu-inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-top: calc(var(--agassi-group-mobile-height) + 48px);
+  padding-bottom: max(40px, env(safe-area-inset-bottom));
+}
+
+/* Навигация */
+
+.agassi-group-header__mobile-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+.agassi-group-header .agassi-group-header__mobile-nav a,
+#allrecords .agassi-group-header .agassi-group-header__mobile-nav a,
+.t-records .agassi-group-header .agassi-group-header__mobile-nav a {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  margin: 0;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 1px solid var(--agassi-group-border);
+  color: var(--agassi-group-ink);
+  font-family: var(--agassi-group-font);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  text-decoration: none;
+}
+
+/* Плавное появление содержимого */
+
+.agassi-group-header__mobile-nav,
+.agassi-group-header__menu-bottom {
+  opacity: 0;
+  transform: translateY(-16px);
+  transition:
+    opacity 300ms ease,
+    transform 400ms ease;
+}
+
+.agassi-group-header.is-menu-open .agassi-group-header__mobile-nav,
+.agassi-group-header.is-menu-open .agassi-group-header__menu-bottom {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 200ms;
+}
+
+.agassi-group-header .agassi-group-header__mobile-nav a:hover,
+#allrecords .agassi-group-header .agassi-group-header__mobile-nav a:hover,
+.t-records .agassi-group-header .agassi-group-header__mobile-nav a:hover {
+  color: var(--agassi-group-burgundy);
+  text-decoration: none;
+}
+
+/* Нижняя кнопка */
+
+.agassi-group-header__menu-bottom {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 48px;
+}
+
+.agassi-group-header .agassi-group-header__mobile-cta,
+#allrecords .agassi-group-header .agassi-group-header__mobile-cta,
+.t-records .agassi-group-header .agassi-group-header__mobile-cta {
+  display: flex;
+  width: 100%;
+  min-height: 56px;
+  padding: 16px 24px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* Состояния */
+
+.agassi-group-header.is-menu-open .agassi-group-header__mobile-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+body.agassi-group-menu-locked {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+.agassi-group-header a:focus-visible,
+.agassi-group-header button:focus-visible {
+  outline: 2px solid var(--agassi-group-gold);
+  outline-offset: 4px;
+}
+
+/* Планшет */
+
+@media (max-width: 1199px) {
+  :root {
+    --agassi-group-gutter: 32px;
+    --agassi-group-gap: 16px;
+  }
+
+  .agassi-group-header {
+    min-height: var(--agassi-group-mobile-height);
+  }
+
+  .agassi-group-header__desktop {
+    display: none;
+  }
+
+  .agassi-group-header__mobile {
+    display: block;
+  }
+}
+
+/* Смартфон */
+
+@media (max-width: 767px) {
+  :root {
+    --agassi-group-gutter: 16px;
+    --agassi-group-gap: 12px;
+  }
+
+  .agassi-group-header__mobile-inner {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--agassi-group-gap);
+  }
+
+  .agassi-group-header__mobile-inner > .agassi-group-header__logo {
+    grid-column: span 3;
+  }
+
+  .agassi-group-header__controls {
+    grid-column: span 1;
+  }
+
+  .agassi-group-header .agassi-group-header__mobile-nav a {
+    font-size: 22px;
+    line-height: 32px;
+  }
+}
+
+/* Небольшие экраны по высоте */
+
+@media (max-height: 700px) and (max-width: 1199px) {
+  .agassi-group-header__menu-inner {
+    padding-top: calc(var(--agassi-group-mobile-height) + 24px);
+    padding-bottom: 24px;
+  }
+
+  .agassi-group-header .agassi-group-header__mobile-nav a {
+    min-height: 56px;
+    padding-block: 8px;
+  }
+
+  .agassi-group-header__menu-bottom {
+    padding-top: 32px;
+  }
+}
+
+/* Доступность */
+
+@media (prefers-reduced-motion: reduce) {
+  .agassi-group-header__mobile-menu,
+  .agassi-group-header__mobile-nav,
+  .agassi-group-header__menu-bottom {
+    transition: none;
+  }
+}
