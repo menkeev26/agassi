@@ -1,14 +1,14 @@
 (() => {
   "use strict";
 
+  /* Header */
+
   const initHeader = () => {
     const header = document.querySelector(".agassi-group-header");
-
     if (!header || header.dataset.initialized === "true") return;
 
     const toggle = header.querySelector(".agassi-group-header__toggle");
     const navigation = header.querySelector(".agassi-group-header__nav");
-
     if (!toggle || !navigation) return;
 
     header.dataset.initialized = "true";
@@ -17,15 +17,12 @@
       header.classList.toggle("is-menu-open", open);
       toggle.setAttribute("aria-expanded", String(open));
       toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-
       document.body.classList.toggle("agassi-group-menu-locked", open);
 
-      if (open) {
+      if (open || window.innerWidth > 1199) {
         navigation.removeAttribute("inert");
-      } else if (window.innerWidth <= 1199) {
-        navigation.setAttribute("inert", "");
       } else {
-        navigation.removeAttribute("inert");
+        navigation.setAttribute("inert", "");
       }
     };
 
@@ -54,6 +51,8 @@
 
     setMenu(false);
   };
+
+  /* Partners */
 
   const initPartners = () => {
     document.querySelectorAll(".agassi-group-partners").forEach((section) => {
@@ -109,8 +108,6 @@
       let suppressClick = false;
       let resizeFrame = 0;
 
-      const duration = reducedMotion.matches ? 0 : 400;
-
       const getStep = () => {
         const card = track.querySelector(".agassi-group-partners__card");
         if (!card) return 0;
@@ -123,7 +120,7 @@
 
       const render = (animate = true) => {
         track.style.transition = animate && !reducedMotion.matches
-          ? `transform ${duration}ms ease`
+          ? "transform 400ms ease"
           : "none";
 
         position = -index * step;
@@ -221,9 +218,7 @@
           const amount = Math.max(1, cardsMoved);
 
           index += delta < 0 ? amount : -amount;
-
           index = Math.max(0, Math.min(index, count * 3 - 1));
-
           suppressClick = true;
         }
 
@@ -260,9 +255,78 @@
     });
   };
 
+  /* FAQ */
+
+  const initFAQ = () => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    document.querySelectorAll(".agassi-group-faq__entry").forEach((entry) => {
+      if (entry.dataset.initialized === "true") return;
+      if (entry.tagName !== "DETAILS") return;
+
+      const question = entry.querySelector(".agassi-group-faq__question");
+      const answer = entry.querySelector(".agassi-group-faq__answer");
+
+      if (!question || !answer) return;
+
+      entry.dataset.initialized = "true";
+
+      let animation = null;
+      let targetOpen = entry.open;
+
+      question.addEventListener("click", (event) => {
+        event.preventDefault();
+        targetOpen = !targetOpen;
+
+        if (reducedMotion.matches || !entry.animate) {
+          if (animation) animation.cancel();
+          entry.open = targetOpen;
+          entry.style.height = "";
+          return;
+        }
+
+        const startHeight = entry.getBoundingClientRect().height;
+
+        if (animation) animation.cancel();
+
+        entry.open = true;
+
+        const endHeight = targetOpen
+          ? question.getBoundingClientRect().height + answer.getBoundingClientRect().height
+          : question.getBoundingClientRect().height;
+
+        entry.style.height = `${startHeight}px`;
+
+        animation = entry.animate(
+          [
+            { height: `${startHeight}px` },
+            { height: `${endHeight}px` }
+          ],
+          {
+            duration: 320,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)"
+          }
+        );
+
+        const current = animation;
+
+        current.onfinish = () => {
+          if (animation !== current) return;
+
+          entry.open = targetOpen;
+          entry.style.height = "";
+          animation = null;
+        };
+      });
+    });
+  };
+
+  /* Инициализация */
+
   const init = () => {
     initHeader();
     initPartners();
+    initFAQ();
   };
 
   if (document.readyState === "loading") {
