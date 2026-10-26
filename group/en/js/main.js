@@ -109,6 +109,7 @@
       });
 
       let position = 0;
+
       let autoplay = !window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
@@ -306,10 +307,6 @@
     document.querySelectorAll(".agassi-group-faq").forEach((section) => {
       if (section.dataset.initialized === "true") return;
 
-      const list = section.querySelector(
-        ".agassi-group-faq__list"
-      );
-
       const entries = [
         ...section.querySelectorAll(
           "details.agassi-group-faq__entry"
@@ -320,7 +317,7 @@
         ".agassi-group-faq__shared-icon"
       );
 
-      if (!list || !entries.length) return;
+      if (!entries.length) return;
 
       section.dataset.initialized = "true";
 
@@ -379,51 +376,6 @@
             }
           }
         });
-      }
-
-      function syncVisualHeight() {
-        if (window.innerWidth <= 767) {
-          section.style.removeProperty(
-            "--agassi-group-faq-visual-height"
-          );
-
-          return;
-        }
-
-        const gap =
-          parseFloat(getComputedStyle(list).rowGap) || 0;
-
-        const summaries = entries
-          .map((entry) => {
-            return entry.querySelector(
-              ".agassi-group-faq__question"
-            );
-          })
-          .filter(Boolean);
-
-        const height =
-          summaries.reduce((total, item) => {
-            return (
-              total +
-              item.getBoundingClientRect().height
-            );
-          }, 0) +
-          gap * Math.max(0, summaries.length - 1);
-
-        section.style.setProperty(
-          "--agassi-group-faq-visual-height",
-          `${Math.ceil(height)}px`
-        );
-      }
-
-      let resizeFrame = 0;
-
-      function scheduleHeightSync() {
-        cancelAnimationFrame(resizeFrame);
-
-        resizeFrame = requestAnimationFrame(
-          syncVisualHeight
-        );
       }
 
       function setOpen(entry, open) {
@@ -500,8 +452,7 @@
           ],
           {
             duration: 400,
-            easing:
-              "cubic-bezier(0.22, 1, 0.36, 1)"
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)"
           }
         );
 
@@ -557,8 +508,7 @@
         summary.addEventListener("click", (event) => {
           event.preventDefault();
 
-          const shouldOpen =
-            !states.get(entry).open;
+          const shouldOpen = !states.get(entry).open;
 
           entries.forEach((other) => {
             if (other !== entry) {
@@ -571,48 +521,12 @@
       });
 
       syncIcons();
-      scheduleHeightSync();
-
-      window.addEventListener(
-        "resize",
-        scheduleHeightSync,
-        { passive: true }
-      );
-
-      window.addEventListener(
-        "load",
-        scheduleHeightSync
-      );
-
-      if (document.fonts?.ready) {
-        document.fonts.ready.then(
-          scheduleHeightSync
-        );
-      }
-
-      if ("ResizeObserver" in window) {
-        const observer = new ResizeObserver(
-          scheduleHeightSync
-        );
-
-        entries.forEach((entry) => {
-          const summary = entry.querySelector(
-            ".agassi-group-faq__question"
-          );
-
-          if (summary) {
-            observer.observe(summary);
-          }
-        });
-      }
 
       if (
         sharedIcon &&
         "MutationObserver" in window
       ) {
-        new MutationObserver(
-          syncIcons
-        ).observe(sharedIcon, {
+        new MutationObserver(syncIcons).observe(sharedIcon, {
           attributes: true,
           attributeFilter: ["src"]
         });
