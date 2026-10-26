@@ -1,96 +1,867 @@
-:root {
-  --agassi-group-burgundy: #8C0F14;
-  --agassi-group-burgundy-hover: #5A0A0D;
-  --agassi-group-gold: #C49743;
-  --agassi-group-cream: #F4F1EA;
-  --agassi-group-white: #FFFFFF;
-  --agassi-group-ink: #352D2B;
-  --agassi-group-muted: #77716D;
-  --agassi-group-border: #DCD4CA;
-  --agassi-group-container-width: 1440px;
-  --agassi-group-gutter: 40px;
-  --agassi-group-gap: 24px;
-  --agassi-group-radius: 32px;
-  --agassi-group-radius-tablet: 24px;
-  --agassi-group-radius-mobile: 16px;
-  --agassi-group-header-height: 80px;
-  --agassi-group-mobile-height: 72px;
+/* Общая система: исходная палитра и геометрия */
+.agassi-group-preview {
+  margin:0;
+  background:#F4F1EA;
 }
 
-/* Общие стили */
-
-.agassi-group-header,
-.agassi-group-hero,
-.agassi-group-about,
-.agassi-group-partners,
-.agassi-group-faq,
-.agassi-group-facts {
-  width: 100%;
-  margin: 0;
-  background: var(--agassi-group-cream);
-  color: var(--agassi-group-ink);
-  font-family: var(--t-text-font, Arial, sans-serif);
+.agassi-group-block {
+  --agassi-group-burgundy:#8C0F14;
+  --agassi-group-burgundy-hover:#5A0A0D;
+  --agassi-group-gold:#C49743;
+  --agassi-group-cream:#F4F1EA;
+  --agassi-group-white:#FFFFFF;
+  --agassi-group-ink:#352D2B;
+  --agassi-group-muted:#68625E;
+  --agassi-group-border:#DCD4CA;
+  --agassi-group-container-width:1440px;
+  --agassi-group-gutter:40px;
+  --agassi-group-gap:24px;
+  --agassi-group-radius:32px;
+  --agassi-group-columns:12;
+  width:100%;
+  margin:0;
+  background:var(--agassi-group-cream);
+  color:var(--agassi-group-ink);
+  font-family:var(--t-text-font,Arial,sans-serif);
+  font-size:16px;
+  line-height:24px;
+  box-sizing:border-box;
+  scroll-margin-top:24px;
 }
 
-.agassi-group-header,
-.agassi-group-hero,
-.agassi-group-about,
-.agassi-group-partners,
-.agassi-group-faq,
-.agassi-group-facts,
-.agassi-group-header *,
-.agassi-group-hero *,
-.agassi-group-about *,
-.agassi-group-partners *,
-.agassi-group-faq *,
-.agassi-group-facts *,
-.agassi-group-header *::before,
-.agassi-group-header *::after,
-.agassi-group-faq *::before,
-.agassi-group-faq *::after {
-  box-sizing: border-box;
+.agassi-group-block *,.agassi-group-block *::before,.agassi-group-block *::after {
+  box-sizing:border-box;
+}
+
+.agassi-group-block [hidden] {
+  display:none;
+}
+
+.agassi-group-block h1,.agassi-group-block h2,.agassi-group-block h3,.agassi-group-block p {
+  margin:0;
+}
+
+.agassi-group-block img {
+  display:block;
+  max-width:100%;
+  height:auto;
+}
+
+.agassi-group-block a {
+  color:inherit;
+  text-decoration:none;
+}
+
+.agassi-group-block button,.agassi-group-block input,.agassi-group-block select,.agassi-group-block textarea {
+  font:inherit;
+}
+
+.agassi-group-block a:focus-visible,.agassi-group-block button:focus-visible,.agassi-group-block summary:focus-visible,.agassi-group-block [tabindex]:focus-visible {
+  outline:2px solid var(--agassi-group-burgundy);
+  outline-offset:4px;
 }
 
 .agassi-group-container {
-  width: 100%;
-  max-width: var(--agassi-group-container-width);
-  margin-inline: auto;
-  padding-inline: var(--agassi-group-gutter);
+  width:100%;
+  max-width:var(--agassi-group-container-width);
+  margin-inline:auto;
+  padding-inline:var(--agassi-group-gutter);
 }
 
-.agassi-group-button,
-#allrecords .agassi-group-button,
-.t-records .agassi-group-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  margin: 0;
-  padding: 12px 32px;
-  border: 1px solid var(--agassi-group-burgundy);
-  border-radius: 40px;
-  background: var(--agassi-group-burgundy);
-  color: var(--agassi-group-white);
-  font-family: var(--t-text-font, Arial, sans-serif);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+.agassi-group-eyebrow {
+  display:block;
+  font-size:12px;
+  font-weight:700;
+  line-height:20px;
+  letter-spacing:2px;
+  color:var(--agassi-group-burgundy);
 }
 
-.agassi-group-button:hover,
-#allrecords .agassi-group-button:hover,
-.t-records .agassi-group-button:hover {
-  border-color: var(--agassi-group-burgundy-hover);
-  background: var(--agassi-group-burgundy-hover);
-  color: var(--agassi-group-white);
-  text-decoration: none;
+.agassi-group-section-title,.agassi-group-about__title,.agassi-group-facts__title {
+  font-family:var(--t-headline-font,Arial,sans-serif);
+  font-size:48px;
+  line-height:56px;
+  font-weight:500;
+  letter-spacing:-1px;
+  overflow-wrap:break-word;
 }
 
-.agassi-group-button--outline,
-#allrecords .agassi-group-button--outline,
-.t-records .agassi-group-button--outline {
-  background: transparent;
+.agassi-group-section-header {
+  max-width:800px;
+  margin-bottom:40px;
+}
+
+.agassi-group-block .agassi-group-section-title,.agassi-group-facts .agassi-group-facts__title {
+  margin-top:16px;
+}
+
+.agassi-group-block .agassi-group-section-description {
+  margin-top:24px;
+  color:var(--agassi-group-muted);
+  font-size:18px;
+  line-height:28px;
+}
+
+.agassi-group-about,.agassi-group-partners,.agassi-group-facts,.agassi-group-businesses,.agassi-group-our-story,.agassi-group-faq,.agassi-group-contact {
+  padding-block:80px;
+}
+
+/* Кнопки */
+.agassi-group-block .agassi-group-button {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:12px 32px;
+  border:1px solid var(--agassi-group-burgundy);
+  border-radius:40px;
+  background:var(--agassi-group-burgundy);
+  color:var(--agassi-group-white);
+  font-size:16px;
+  font-weight:500;
+  line-height:24px;
+  text-align:center;
+  text-decoration:none;
+  cursor:pointer;
+  transition:background-color 200ms,color 200ms,border-color 200ms;
+}
+
+.agassi-group-block .agassi-group-button:hover {
+  border-color:var(--agassi-group-burgundy-hover);
+  background:var(--agassi-group-burgundy-hover);
+  color:var(--agassi-group-white);
+}
+
+.agassi-group-block .agassi-group-button--outline {
+  background:var(--agassi-group-cream);
+  color:var(--agassi-group-burgundy);
+}
+
+.agassi-group-block .agassi-group-button:disabled {
+  background:#E6E0D7;
+  border-color:#DCD4CA;
+  color:#68625E;
+  cursor:not-allowed;
+}
+
+/* Шапка: меню раскрывается в потоке, без блокировки страницы */
+.agassi-group-header__inner {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding-block:16px;
+  flex-wrap:wrap;
+}
+
+.agassi-group-header__logo {
+  display:block;
+  flex-shrink:0;
+}
+
+.agassi-group-header__logo img {
+  width:160px;
+  height:48px;
+  object-fit:contain;
+}
+
+.agassi-group-header__nav {
+  display:flex;
+  align-items:center;
+  gap:24px;
+  font-size:14px;
+  line-height:24px;
+}
+
+.agassi-group-header__nav>a:not(.agassi-group-button) {
+  padding-block:12px;
+}
+
+.agassi-group-header__nav>a:hover {
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+
+.agassi-group-header .agassi-group-header__mobile-cta {
+  display:none;
+}
+
+.agassi-group-header__toggle {
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:8px;
+  width:48px;
+  height:48px;
+  border:1px solid var(--agassi-group-border);
+  border-radius:50%;
+  background:var(--agassi-group-cream);
+  cursor:pointer;
+}
+
+.agassi-group-header__toggle-line {
+  width:20px;
+  height:2px;
+  background:var(--agassi-group-burgundy);
+}
+
+/* Обложка */
+.agassi-group-hero {
+  padding-block:16px 40px;
+}
+
+.agassi-group-hero__shape {
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  border-radius:var(--agassi-group-radius);
+  background:#EEE2D3;
+}
+
+.agassi-group-hero__background {
+  position:absolute;
+  inset:0;
+  z-index:-1;
+}
+
+.agassi-group-hero__background img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.agassi-group-hero__content {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:40px;
+  padding:80px 24px;
+}
+
+.agassi-group-hero__title {
+  width:min(100%,440px);
+}
+
+.agassi-group-hero__logo {
+  width:100%;
+  height:auto;
+}
+
+.agassi-group-hero__actions {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:16px;
+}
+
+/* О компании */
+.agassi-group-about__grid,.agassi-group-businesses__grid,.agassi-group-faq__layout,.agassi-group-contact__grid {
+  display:grid;
+  grid-template-columns:repeat(var(--agassi-group-columns),minmax(0,1fr));
+  gap:var(--agassi-group-gap);
+  align-items:start;
+}
+
+.agassi-group-about__content,.agassi-group-about__visual {
+  grid-column:span 6;
+  min-width:0;
+}
+
+.agassi-group-about .agassi-group-about__title {
+  margin-top:16px;
+  max-width:640px;
+}
+
+.agassi-group-about .agassi-group-about__description {
+  margin:24px 0 32px;
+  max-width:600px;
+  font-size:18px;
+  line-height:28px;
+  color:var(--agassi-group-muted);
+}
+
+.agassi-group-about__visual {
+  padding:48px;
+  border-radius:var(--agassi-group-radius);
+  background:#E8DFD2;
+}
+
+.agassi-group-about .agassi-group-about__statement {
+  font-family:var(--t-headline-font,Arial,sans-serif);
+  font-size:40px;
+  line-height:48px;
+  font-weight:500;
+  color:var(--agassi-group-burgundy);
+  margin-bottom:48px;
+}
+
+/* Бренды: нативная горизонтальная прокрутка */
+.agassi-group-partners__viewport {
+  overflow-x:auto;
+  overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:thin;
+  scrollbar-color:var(--agassi-group-burgundy) var(--agassi-group-border);
+  border-radius:16px;
+  padding:4px 4px 20px;
+  direction:ltr;
+}
+
+.agassi-group-partners__track {
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:calc((100% - 72px) / 4);
+  gap:24px;
+}
+
+.agassi-group-partners__card {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  min-height:120px;
+  padding:24px;
+  border:1px solid var(--agassi-group-border);
+  border-radius:16px;
+  background:var(--agassi-group-white);
+  scroll-snap-align:start;
+  scroll-margin-inline:4px;
+}
+
+.agassi-group-partners__card img {
+  width:100%;
+  height:64px;
+  object-fit:contain;
+}
+
+.agassi-group-partners__controls {
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+  margin-top:16px;
+}
+
+.agassi-group-partners__arrow {
+  display:grid;
+  place-items:center;
+  width:48px;
+  height:48px;
+  border:1px solid var(--agassi-group-burgundy);
+  border-radius:50%;
+  color:var(--agassi-group-burgundy);
+  background:var(--agassi-group-cream);
+  cursor:pointer;
+}
+
+.agassi-group-partners__arrow svg {
+  width:24px;
+  height:24px;
+}
+
+.agassi-group-partners__arrow:disabled {
+  border-color:var(--agassi-group-border);
+  color:var(--agassi-group-muted);
+  cursor:default;
+}
+
+/* Показатели */
+.agassi-group-facts__surface {
+  padding:48px;
+  border-radius:var(--agassi-group-radius);
+  background:#E7EBE3;
+}
+
+.agassi-group-facts__grid {
+  display:grid;
+  grid-template-columns:repeat(var(--agassi-group-columns),minmax(0,1fr));
+  margin-top:40px;
+  border-top:1px solid #C9D0C5;
+}
+
+.agassi-group-facts__item {
+  grid-column:span 3;
+  min-width:0;
+  padding:32px 24px;
+  border-right:1px solid #C9D0C5;
+}
+
+.agassi-group-facts__item:first-child {
+  padding-left:0;
+}
+
+.agassi-group-facts__item:last-child {
+  border-right:0;
+}
+
+.agassi-group-facts__value {
+  font-size:48px;
+  line-height:56px;
+  font-weight:500;
+  overflow-wrap:anywhere;
+}
+
+.agassi-group-facts .agassi-group-facts__description {
+  margin-top:16px;
+  font-size:14px;
+  line-height:24px;
+}
+
+/* Направления бизнеса */
+.agassi-group-businesses__grid {
+  align-items:stretch;
+}
+
+.agassi-group-businesses__card {
+  grid-column:span 6;
+  display:flex;
+  flex-direction:column;
+  align-items:start;
+  min-width:0;
+  padding:40px;
+  border-radius:var(--agassi-group-radius);
+  background:#E8DFD2;
+}
+
+.agassi-group-businesses__card:nth-child(2) {
+  background:#EEDDD8;
+}
+
+.agassi-group-businesses__card:nth-child(3) {
+  background:#E7EBE3;
+}
+
+.agassi-group-businesses__card:nth-child(4) {
+  background:#E8E1DA;
+}
+
+.agassi-group-businesses__card h3 {
+  font-size:36px;
+  line-height:44px;
+  font-weight:500;
+  margin-top:40px;
+}
+
+.agassi-group-businesses__card>p:not(.agassi-group-eyebrow) {
+  font-size:18px;
+  line-height:28px;
+  margin:24px 0 32px;
+}
+
+.agassi-group-businesses__card .agassi-group-button {
+  margin-top:auto;
+}
+
+/* История */
+.agassi-group-story__intro {
+  max-width:880px;
+}
+
+.agassi-group-our-story .agassi-group-story__quote {
+  font-size:40px;
+  line-height:48px;
+  color:var(--agassi-group-burgundy);
+  margin-bottom:24px;
+}
+
+.agassi-group-story__intro>p:last-child {
+  font-size:20px;
+  line-height:32px;
+}
+
+.agassi-group-story__details {
+  max-width:880px;
+  margin-top:32px;
+  border-top:1px solid var(--agassi-group-border);
+  border-bottom:1px solid var(--agassi-group-border);
+}
+
+.agassi-group-story__details>summary {
+  padding:24px 0;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.agassi-group-story__body {
+  max-width:720px;
+  padding-bottom:24px;
+}
+
+.agassi-group-story__body p {
+  font-size:18px;
+  line-height:32px;
+  margin:0 0 20px;
+}
+
+/* FAQ: нативная высота и состояние details */
+.agassi-group-faq__visual {
+  grid-column:span 4;
+  min-width:0;
+}
+
+.agassi-group-faq__visual img {
+  width:100%;
+  aspect-ratio:4 / 5;
+  object-fit:cover;
+  border-radius:var(--agassi-group-radius);
+}
+
+.agassi-group-faq__list {
+  grid-column:5 / -1;
+  min-width:0;
+}
+
+.agassi-group-faq__entry {
+  border-bottom:1px solid var(--agassi-group-border);
+}
+
+.agassi-group-faq__entry:first-child {
+  border-top:1px solid var(--agassi-group-border);
+}
+
+.agassi-group-faq__question {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding:24px 0;
+  cursor:pointer;
+  list-style:none;
+  font-size:18px;
+  line-height:28px;
+}
+
+.agassi-group-faq__question::-webkit-details-marker {
+  display:none;
+}
+
+.agassi-group-faq__icon {
+  position:relative;
+  flex:0 0 24px;
+  height:24px;
+}
+
+.agassi-group-faq__icon::before,.agassi-group-faq__icon::after {
+  content:"";
+  position:absolute;
+  background:var(--agassi-group-burgundy);
+}
+
+.agassi-group-faq__icon::before {
+  width:16px;
+  height:2px;
+  left:4px;
+  top:12px;
+}
+
+.agassi-group-faq__icon::after {
+  width:2px;
+  height:16px;
+  top:4px;
+  left:12px;
+}
+
+.agassi-group-faq__entry[open] .agassi-group-faq__icon::after {
+  display:none;
+}
+
+.agassi-group-faq__answer {
+  padding:0 48px 24px 0;
+  font-size:16px;
+  line-height:28px;
+  color:var(--agassi-group-muted);
+}
+
+/* Контактная форма */
+.agassi-group-contact {
+  background:#E8DFD2;
+}
+
+.agassi-group-contact__intro {
+  grid-column:span 4;
+  font-size:20px;
+  line-height:32px;
+}
+
+.agassi-group-contact__intro p+p {
+  margin-top:24px;
+  font-size:16px;
+}
+
+.agassi-group-contact__form {
+  grid-column:6 / -1;
+  display:grid;
+  gap:12px;
+  min-width:0;
+}
+
+.agassi-group-contact__form label {
+  margin-top:8px;
+  font-size:14px;
+  font-weight:600;
+}
+
+.agassi-group-contact__form input,.agassi-group-contact__form select,.agassi-group-contact__form textarea {
+  width:100%;
+  min-width:0;
+  min-height:48px;
+  border:1px solid #A99A8D;
+  border-radius:8px;
+  padding:12px 16px;
+  background:#FCFAF7;
+  color:var(--agassi-group-ink);
+  font-size:16px;
+  line-height:24px;
+}
+
+.agassi-group-contact__form textarea {
+  resize:vertical;
+}
+
+.agassi-group-contact__form input:focus,.agassi-group-contact__form select:focus,.agassi-group-contact__form textarea:focus {
+  outline:2px solid var(--agassi-group-burgundy);
+  outline-offset:2px;
+}
+
+.agassi-group-contact .agassi-group-contact__note,.agassi-group-contact .agassi-group-contact__status {
+  font-size:14px;
+  line-height:24px;
+  margin-top:12px;
+}
+
+.agassi-group-contact__status:empty {
+  display:none;
+}
+
+.agassi-group-footer__inner {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding-block:40px;
+  font-size:14px;
+  line-height:24px;
+}
+
+/* Планшеты */
+@media(max-width:1199px) {
+  .agassi-group-block {
+    --agassi-group-columns:8;
+    --agassi-group-gutter:32px;
+    --agassi-group-radius:24px;
+  }
+
+  .agassi-group-header__nav {
+    order:3;
+    width:100%;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .agassi-group-header__toggle:not([hidden]) {
+    display:flex;
+  }
+
+  .agassi-group-header--enhanced .agassi-group-header__nav:not(.agassi-group-header__nav--open) {
+    display:none;
+  }
+
+  .agassi-group-header .agassi-group-header__desktop-cta {
+    margin-left:auto;
+  }
+
+  .agassi-group-about__content,.agassi-group-about__visual,.agassi-group-businesses__card {
+    grid-column:span 4;
+  }
+
+  .agassi-group-faq__visual {
+    grid-column:span 3;
+  }
+
+  .agassi-group-faq__list {
+    grid-column:4 / -1;
+  }
+
+  .agassi-group-contact__intro {
+    grid-column:span 3;
+  }
+
+  .agassi-group-contact__form {
+    grid-column:4 / -1;
+  }
+
+  .agassi-group-facts__item {
+    grid-column:span 2;
+    padding:24px 16px;
+  }
+
+  .agassi-group-partners__track {
+    grid-auto-columns:calc((100% - 48px) / 3);
+  }
+
+  .agassi-group-section-title,.agassi-group-about__title,.agassi-group-facts__title {
+    font-size:40px;
+    line-height:48px;
+  }
+
+  .agassi-group-facts__value {
+    font-size:40px;
+    line-height:48px;
+  }
+
+  .agassi-group-about__visual,.agassi-group-facts__surface,.agassi-group-businesses__card {
+    padding:32px;
+  }
+
+  .agassi-group-about .agassi-group-about__statement {
+    font-size:32px;
+    line-height:40px;
+  }
+
+}
+
+@media(max-width:767px) {
+  .agassi-group-block {
+    --agassi-group-columns:4;
+    --agassi-group-gutter:20px;
+    --agassi-group-radius:16px;
+  }
+
+  .agassi-group-about,.agassi-group-partners,.agassi-group-facts,.agassi-group-businesses,.agassi-group-our-story,.agassi-group-faq,.agassi-group-contact {
+    padding-block:48px;
+  }
+
+  .agassi-group-header__inner {
+    gap:16px;
+  }
+
+  .agassi-group-header__logo img {
+    width:136px;
+    height:40px;
+  }
+
+  .agassi-group-header .agassi-group-header__desktop-cta {
+    display:none;
+  }
+
+  .agassi-group-header__nav {
+    align-items:stretch;
+    flex-direction:column;
+    gap:4px;
+  }
+
+  .agassi-group-header .agassi-group-header__mobile-cta {
+    display:inline-flex;
+    margin-top:12px;
+  }
+
+  .agassi-group-header__toggle {
+    margin-left:auto;
+  }
+
+  .agassi-group-hero__content {
+    padding:48px 20px;
+    gap:32px;
+  }
+
+  .agassi-group-hero__title {
+    width:min(100%,320px);
+  }
+
+  .agassi-group-hero__actions {
+    gap:12px;
+    width:100%;
+  }
+
+  .agassi-group-hero__actions .agassi-group-button {
+    padding-inline:24px;
+  }
+
+  .agassi-group-section-title,.agassi-group-about__title,.agassi-group-facts__title {
+    font-size:32px;
+    line-height:40px;
+  }
+
+  .agassi-group-about__content,.agassi-group-about__visual,.agassi-group-businesses__card,.agassi-group-faq__visual,.agassi-group-faq__list,.agassi-group-contact__intro,.agassi-group-contact__form {
+    grid-column:1 / -1;
+  }
+
+  .agassi-group-about__visual,.agassi-group-businesses__card,.agassi-group-facts__surface {
+    padding:24px;
+  }
+
+  .agassi-group-facts__grid {
+    margin-top:24px;
+  }
+
+  .agassi-group-facts__item {
+    grid-column:span 2;
+    padding:24px 12px;
+    border-bottom:1px solid #C9D0C5;
+  }
+
+  .agassi-group-facts__item:first-child {
+    padding-left:12px;
+  }
+
+  .agassi-group-facts__item:nth-child(2) {
+    border-right:0;
+  }
+
+  .agassi-group-facts__item:nth-child(n+3) {
+    border-bottom:0;
+  }
+
+  .agassi-group-facts__value {
+    font-size:32px;
+    line-height:40px;
+  }
+
+  .agassi-group-partners__track {
+    grid-auto-columns:calc((100% - 24px) / 2);
+  }
+
+  .agassi-group-partners__card {
+    padding:16px;
+    min-height:104px;
+  }
+
+  .agassi-group-businesses__card h3 {
+    font-size:28px;
+    line-height:36px;
+    margin-top:24px;
+  }
+
+  .agassi-group-faq__visual img {
+    aspect-ratio:16 / 9;
+  }
+
+  .agassi-group-faq__question {
+    font-size:16px;
+    line-height:24px;
+    gap:16px;
+  }
+
+  .agassi-group-faq__answer {
+    padding-right:0;
+  }
+
+  .agassi-group-our-story .agassi-group-story__quote {
+    font-size:32px;
+    line-height:40px;
+  }
+
+  .agassi-group-footer__inner {
+    align-items:start;
+    flex-direction:column;
+    gap:16px;
+  }
+
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .agassi-group-block .agassi-group-button {
+    transition:none;
+  }
+
+}
