@@ -461,11 +461,11 @@ body.agassi-group-menu-locked {
   place-items: center;
   width: 100%;
   min-width: 0;
-  min-height: 560px;
+  min-height: 520px;
   height: clamp(
-    560px,
-    calc(100vh - var(--agassi-group-header-height)),
-    900px
+    520px,
+    calc(100vh - var(--agassi-group-header-height) - 48px),
+    820px
   );
   overflow: hidden;
   border-radius: 24px;
@@ -476,9 +476,9 @@ body.agassi-group-menu-locked {
 @supports (height: 100svh) {
   .agassi-group-hero__shape {
     height: clamp(
-      560px,
-      calc(100svh - var(--agassi-group-header-height)),
-      900px
+      520px,
+      calc(100svh - var(--agassi-group-header-height) - 48px),
+      820px
     );
   }
 }
@@ -530,7 +530,7 @@ body.agassi-group-menu-locked {
   width: 100%;
   max-width: 960px;
   min-width: 0;
-  padding: 80px 40px;
+  padding: 64px 40px;
   text-align: center;
 }
 
@@ -539,9 +539,9 @@ body.agassi-group-menu-locked {
 .agassi-group-hero .agassi-group-hero__logo {
   display: block;
   width: 100%;
-  max-width: 420px;
+  max-width: 360px;
   height: auto;
-  max-height: 320px;
+  max-height: 280px;
   margin: 0;
   object-fit: contain;
 }
@@ -629,31 +629,31 @@ body.agassi-group-menu-locked {
   }
 
   .agassi-group-hero__shape {
-    min-height: 480px;
+    min-height: 440px;
     height: clamp(
-      480px,
-      calc(100vh - var(--agassi-group-mobile-height)),
-      800px
+      440px,
+      calc(100vh - var(--agassi-group-mobile-height) - 40px),
+      720px
     );
     border-radius: 20px;
   }
 
   .agassi-group-hero__content {
     max-width: 720px;
-    padding: 64px 32px;
+    padding: 56px 32px;
   }
 
   .agassi-group-hero .agassi-group-hero__logo {
-    max-width: 360px;
-    max-height: 280px;
+    max-width: 300px;
+    max-height: 240px;
   }
 
   @supports (height: 100svh) {
     .agassi-group-hero__shape {
       height: clamp(
-        480px,
-        calc(100svh - var(--agassi-group-mobile-height)),
-        800px
+        440px,
+        calc(100svh - var(--agassi-group-mobile-height) - 40px),
+        720px
       );
     }
   }
@@ -671,10 +671,11 @@ body.agassi-group-menu-locked {
   }
 
   .agassi-group-hero__shape {
-    min-height: 520px;
+    grid-column: 1 / -1;
+    min-height: 480px;
     height: max(
-      520px,
-      calc(100vh - var(--agassi-group-mobile-height))
+      480px,
+      calc(100vh - var(--agassi-group-mobile-height) - 24px)
     );
     border-radius: 16px;
   }
@@ -690,12 +691,12 @@ body.agassi-group-menu-locked {
   .agassi-group-hero__content {
     width: 100%;
     max-width: 100%;
-    padding: 48px 24px;
+    padding: 40px 24px;
   }
 
   .agassi-group-hero .agassi-group-hero__logo {
-    max-width: 240px;
-    max-height: 240px;
+    max-width: 220px;
+    max-height: 220px;
   }
 
   .agassi-group-hero__actions {
@@ -718,8 +719,8 @@ body.agassi-group-menu-locked {
   @supports (height: 100svh) {
     .agassi-group-hero__shape {
       height: max(
-        520px,
-        calc(100svh - var(--agassi-group-mobile-height))
+        480px,
+        calc(100svh - var(--agassi-group-mobile-height) - 24px)
       );
     }
   }
@@ -733,7 +734,7 @@ body.agassi-group-menu-locked {
   }
 
   .agassi-group-hero .agassi-group-hero__logo {
-    max-width: 220px;
+    max-width: 200px;
   }
 }
 
