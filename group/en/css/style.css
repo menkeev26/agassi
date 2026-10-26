@@ -40,7 +40,11 @@
 .agassi-group-partners,
 .agassi-group-partners *,
 .agassi-group-partners *::before,
-.agassi-group-partners *::after {
+.agassi-group-partners *::after,
+.agassi-group-faq,
+.agassi-group-faq *,
+.agassi-group-faq *::before,
+.agassi-group-faq *::after {
   box-sizing: border-box;
 }
 
@@ -54,7 +58,8 @@
 .agassi-group-header,
 .agassi-group-hero,
 .agassi-group-about,
-.agassi-group-partners {
+.agassi-group-partners,
+.agassi-group-faq {
   width: 100%;
   margin: 0;
   background: var(--agassi-group-cream);
@@ -105,8 +110,8 @@
 }
 
 .agassi-group-button--secondary:hover {
-  background: var(--agassi-group-burgundy);
   border-color: var(--agassi-group-burgundy);
+  background: var(--agassi-group-burgundy);
   color: var(--agassi-group-white);
 }
 
@@ -872,6 +877,205 @@ body.agassi-group-menu-locked {
   color: var(--agassi-group-white);
 }
 
+/* FAQ */
+
+.agassi-group-faq {
+  padding: 80px 0 120px;
+}
+
+.agassi-group-faq__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.agassi-group-faq__label {
+  display: block;
+  margin: 0 0 16px;
+  color: var(--agassi-group-burgundy);
+  font-family: var(--t-text-font, inherit);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-transform: uppercase;
+}
+
+.agassi-group-faq .agassi-group-faq__title {
+  display: block;
+  margin: 0;
+  padding: 0;
+  color: var(--agassi-group-burgundy);
+  font-family: var(--t-headline-font, Georgia, serif);
+  font-size: 56px;
+  font-weight: 400;
+  line-height: 64px;
+  text-align: center;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
+}
+
+.agassi-group-faq .agassi-group-faq__description {
+  display: block;
+  max-width: 640px;
+  margin: 24px 0 0;
+  padding: 0;
+  color: var(--agassi-group-muted);
+  font-family: var(--t-text-font, inherit);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: center;
+}
+
+/* FAQ — сетка */
+
+.agassi-group-faq__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: stretch;
+  gap: var(--agassi-group-gap);
+  width: 100%;
+}
+
+/* FAQ — изображение */
+
+.agassi-group-faq__visual {
+  position: relative;
+  grid-column: span 6;
+  min-width: 0;
+  min-height: 640px;
+  overflow: hidden;
+  border-radius: var(--agassi-group-radius);
+  background: var(--agassi-group-burgundy);
+}
+
+.agassi-group-faq .agassi-group-faq__image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* FAQ — список */
+
+.agassi-group-faq__list {
+  grid-column: span 6;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* FAQ — карточки */
+
+.agassi-group-faq__item {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--agassi-group-radius);
+  background: var(--agassi-group-white);
+}
+
+.agassi-group-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 88px;
+  margin: 0;
+  padding: 20px 24px;
+  color: var(--agassi-group-ink);
+  font-family: var(--t-text-font, inherit);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.agassi-group-faq__question::-webkit-details-marker {
+  display: none;
+}
+
+.agassi-group-faq__question::marker {
+  content: "";
+}
+
+.agassi-group-faq__question > span:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+/* FAQ — иконка */
+
+.agassi-group-faq__icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--agassi-group-burgundy);
+  color: var(--agassi-group-white);
+  transition: background-color 200ms ease;
+}
+
+.agassi-group-faq__icon::before,
+.agassi-group-faq__icon::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.agassi-group-faq__icon::after {
+  transform: rotate(90deg);
+  transition: transform 300ms ease;
+}
+
+.agassi-group-faq__item[open] .agassi-group-faq__icon::after {
+  transform: rotate(0);
+}
+
+.agassi-group-faq__question:hover .agassi-group-faq__icon {
+  background: var(--agassi-group-burgundy-hover);
+}
+
+/* FAQ — ответ */
+
+.agassi-group-faq__answer {
+  padding: 0 96px 28px 24px;
+}
+
+.agassi-group-faq .agassi-group-faq__answer p {
+  margin: 0;
+  padding: 0;
+  color: var(--agassi-group-muted);
+  font-family: var(--t-text-font, inherit);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
 /* Планшет */
 
 @media (max-width: 1199px) {
@@ -970,6 +1174,51 @@ body.agassi-group-menu-locked {
   #allrecords .agassi-group-partners .agassi-group-partners__card,
   .t-records .agassi-group-partners .agassi-group-partners__card {
     padding: 20px;
+  }
+
+  /* FAQ */
+
+  .agassi-group-faq {
+    padding: 64px 0 96px;
+  }
+
+  .agassi-group-faq__header {
+    margin-bottom: 40px;
+  }
+
+  .agassi-group-faq .agassi-group-faq__title {
+    font-size: 44px;
+    line-height: 52px;
+  }
+
+  .agassi-group-faq__grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .agassi-group-faq__visual,
+  .agassi-group-faq__list {
+    grid-column: span 4;
+  }
+
+  .agassi-group-faq__visual {
+    min-height: 560px;
+    border-radius: var(--agassi-group-radius-tablet);
+  }
+
+  .agassi-group-faq__item {
+    border-radius: var(--agassi-group-radius-tablet);
+  }
+
+  .agassi-group-faq__question {
+    min-height: 80px;
+    padding: 16px 20px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .agassi-group-faq__answer {
+    padding: 0 80px 24px 20px;
   }
 }
 
@@ -1163,6 +1412,69 @@ body.agassi-group-menu-locked {
     width: 48px;
     height: 48px;
   }
+
+  /* FAQ */
+
+  .agassi-group-faq {
+    padding: 64px 0 80px;
+  }
+
+  .agassi-group-faq__header {
+    margin-bottom: 32px;
+  }
+
+  .agassi-group-faq .agassi-group-faq__title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  .agassi-group-faq .agassi-group-faq__description {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .agassi-group-faq__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .agassi-group-faq__visual,
+  .agassi-group-faq__list {
+    grid-column: 1 / -1;
+  }
+
+  .agassi-group-faq__visual {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--agassi-group-radius-mobile);
+  }
+
+  .agassi-group-faq__item {
+    border-radius: var(--agassi-group-radius-mobile);
+  }
+
+  .agassi-group-faq__question {
+    min-height: 72px;
+    padding: 12px 16px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .agassi-group-faq__icon {
+    flex-basis: 40px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .agassi-group-faq__answer {
+    padding: 0 64px 20px 16px;
+  }
+
+  .agassi-group-faq .agassi-group-faq__answer p {
+    font-size: 14px;
+    line-height: 24px;
+  }
 }
 
 /* Узкие смартфоны */
@@ -1212,7 +1524,8 @@ body.agassi-group-menu-locked {
 .agassi-group-hero a:focus-visible,
 .agassi-group-about a:focus-visible,
 .agassi-group-partners a:focus-visible,
-.agassi-group-partners button:focus-visible {
+.agassi-group-partners button:focus-visible,
+.agassi-group-faq__question:focus-visible {
   outline: 2px solid var(--agassi-group-gold);
   outline-offset: 4px;
 }
@@ -1224,7 +1537,9 @@ body.agassi-group-menu-locked {
   .agassi-group-button,
   .agassi-group-hero__button,
   .agassi-group-about__button,
-  .agassi-group-partners__arrow {
+  .agassi-group-partners__arrow,
+  .agassi-group-faq__icon,
+  .agassi-group-faq__icon::after {
     transition: none;
   }
 
