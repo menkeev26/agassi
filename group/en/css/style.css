@@ -483,7 +483,7 @@ body.agassi-group-menu-locked {
   }
 }
 
-/* Фон */
+/* Изображения */
 
 .agassi-group-hero__background {
   position: absolute;
@@ -496,7 +496,8 @@ body.agassi-group-menu-locked {
   pointer-events: none;
 }
 
-.agassi-group-hero__background img {
+.agassi-group-hero__background img,
+.agassi-group-hero__image-desktop {
   display: block;
   width: 100%;
   height: 100%;
@@ -574,6 +575,7 @@ body.agassi-group-menu-locked {
 #allrecords .agassi-group-hero .agassi-group-hero__button--primary,
 .t-records .agassi-group-hero .agassi-group-hero__button--primary {
   background: var(--agassi-group-burgundy);
+  border-color: var(--agassi-group-burgundy);
   color: var(--agassi-group-white);
 }
 
@@ -592,6 +594,7 @@ body.agassi-group-menu-locked {
 #allrecords .agassi-group-hero .agassi-group-hero__button--secondary,
 .t-records .agassi-group-hero .agassi-group-hero__button--secondary {
   background: transparent;
+  border: 1px solid var(--agassi-group-burgundy);
   color: var(--agassi-group-burgundy);
 }
 
@@ -599,6 +602,7 @@ body.agassi-group-menu-locked {
 #allrecords .agassi-group-hero .agassi-group-hero__button--secondary:hover,
 .t-records .agassi-group-hero .agassi-group-hero__button--secondary:hover {
   background: var(--agassi-group-burgundy);
+  border-color: var(--agassi-group-burgundy);
   color: var(--agassi-group-white);
   text-decoration: none;
 }
@@ -649,9 +653,18 @@ body.agassi-group-menu-locked {
   }
 
   .agassi-group-hero__shape {
+    grid-column: 1 / -1;
     min-height: 520px;
-    height: calc(100vh - var(--agassi-group-mobile-height));
+    height: max(
+      520px,
+      calc(100vh - var(--agassi-group-mobile-height))
+    );
     border-radius: 16px;
+  }
+
+  .agassi-group-hero__background img,
+  .agassi-group-hero__image-desktop {
+    object-position: center;
   }
 
   .agassi-group-hero__content {
@@ -684,7 +697,10 @@ body.agassi-group-menu-locked {
 
   @supports (height: 100svh) {
     .agassi-group-hero__shape {
-      height: calc(100svh - var(--agassi-group-mobile-height));
+      height: max(
+        520px,
+        calc(100svh - var(--agassi-group-mobile-height))
+      );
     }
   }
 }
@@ -715,6 +731,11 @@ body.agassi-group-menu-locked {
 }
 
 /* Доступность */
+
+.agassi-group-hero a:focus-visible {
+  outline: 2px solid var(--agassi-group-gold);
+  outline-offset: 4px;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .agassi-group-hero .agassi-group-hero__button {
