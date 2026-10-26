@@ -1,365 +1,495 @@
 (() => {
-  "use strict";
 
   /* Header */
 
   function initHeader() {
-    document.querySelectorAll(".agassi-group-header").forEach((header) => {
-      if (header.dataset.initialized === "true") return;
+    const header = document.querySelector(".agassi-group-header");
 
-      const toggle = header.querySelector(".agassi-group-header__toggle");
-      const menu = header.querySelector(".agassi-group-header__mobile-menu");
+    if (!header || header.dataset.initialized === "true") return;
 
-      if (!toggle || !menu) return;
+    const toggle = header.querySelector(
+      ".agassi-group-header__toggle"
+    );
 
-      header.dataset.initialized = "true";
+    const menu = header.querySelector(
+      ".agassi-group-header__mobile-menu"
+    );
 
-      const setMenuState = (open) => {
-        header.classList.toggle("is-menu-open", open);
-        document.body.classList.toggle("agassi-group-menu-locked", open);
+    if (!toggle || !menu) return;
 
-        toggle.setAttribute("aria-expanded", String(open));
-        toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    header.dataset.initialized = "true";
 
-        menu.setAttribute("aria-hidden", String(!open));
-        menu.toggleAttribute("inert", !open);
-      };
+    const setMenuState = (open) => {
+      header.classList.toggle("is-menu-open", open);
 
-      setMenuState(false);
+      document.body.classList.toggle(
+        "agassi-group-menu-locked",
+        open
+      );
 
-      toggle.addEventListener("click", () => {
-        setMenuState(!header.classList.contains("is-menu-open"));
-      });
+      toggle.setAttribute("aria-expanded", String(open));
 
-      menu.addEventListener("click", (event) => {
-        if (event.target instanceof Element && event.target.closest("a")) {
-          setMenuState(false);
-        }
-      });
+      toggle.setAttribute(
+        "aria-label",
+        open ? "Close menu" : "Open menu"
+      );
 
-      document.addEventListener("keydown", (event) => {
-        if (
-          event.key === "Escape" &&
-          header.classList.contains("is-menu-open")
-        ) {
-          setMenuState(false);
-          toggle.focus();
-        }
-      });
+      menu.setAttribute("aria-hidden", String(!open));
+      menu.toggleAttribute("inert", !open);
+    };
 
-      const desktop = window.matchMedia("(min-width: 1200px)");
+    setMenuState(false);
 
-      desktop.addEventListener("change", (event) => {
-        if (event.matches && header.classList.contains("is-menu-open")) {
-          setMenuState(false);
-        }
-      });
+    toggle.addEventListener("click", () => {
+      setMenuState(
+        !header.classList.contains("is-menu-open")
+      );
+    });
+
+    menu.addEventListener("click", (event) => {
+      if (
+        event.target instanceof Element &&
+        event.target.closest("a")
+      ) {
+        setMenuState(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (
+        event.key === "Escape" &&
+        header.classList.contains("is-menu-open")
+      ) {
+        setMenuState(false);
+        toggle.focus();
+      }
+    });
+
+    const desktop = window.matchMedia("(min-width: 1200px)");
+
+    desktop.addEventListener("change", (event) => {
+      if (
+        event.matches &&
+        header.classList.contains("is-menu-open")
+      ) {
+        setMenuState(false);
+      }
     });
   }
+
 
   /* Partners */
 
   function initPartners() {
-    document.querySelectorAll(".agassi-group-partners").forEach((section) => {
-      if (section.dataset.initialized === "true") return;
+    document
+      .querySelectorAll(".agassi-group-partners")
+      .forEach((section) => {
 
-      const viewport = section.querySelector(
-        ".agassi-group-partners__viewport"
-      );
+        if (section.dataset.initialized === "true") return;
 
-      const track = section.querySelector(
-        ".agassi-group-partners__track"
-      );
+        const viewport = section.querySelector(
+          ".agassi-group-partners__viewport"
+        );
 
-      const previous = section.querySelector(
-        ".agassi-group-partners__arrow--prev"
-      );
+        const track = section.querySelector(
+          ".agassi-group-partners__track"
+        );
 
-      const next = section.querySelector(
-        ".agassi-group-partners__arrow--next"
-      );
+        const prev = section.querySelector(
+          ".agassi-group-partners__arrow--prev"
+        );
 
-      if (!viewport || !track || !previous || !next) return;
+        const next = section.querySelector(
+          ".agassi-group-partners__arrow--next"
+        );
 
-      const originalCards = Array.from(
-        track.querySelectorAll(".agassi-group-partners__card")
-      ).filter((card) => !card.hasAttribute("data-agassi-group-clone"));
+        if (!viewport || !track || !prev || !next) return;
 
-      if (!originalCards.length) return;
+        const originals = [
+          ...track.querySelectorAll(".agassi-group-partners__card")
+        ];
 
-      section.dataset.initialized = "true";
+        if (!originals.length) return;
 
-      const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      );
+        section.dataset.initialized = "true";
 
-      originalCards.forEach((card) => {
-        const clone = card.cloneNode(true);
+        originals.forEach((card) => {
+          const clone = card.cloneNode(true);
 
-        clone.dataset.agassiGroupClone = "true";
-        clone.setAttribute("aria-hidden", "true");
-        clone.setAttribute("tabindex", "-1");
+          clone.setAttribute("aria-hidden", "true");
+          clone.setAttribute("tabindex", "-1");
 
-        track.appendChild(clone);
-      });
+          clone
+            .querySelectorAll("a, button, input, [tabindex]")
+            .forEach((node) => {
+              node.setAttribute("tabindex", "-1");
+            });
 
-      let position = 0;
-      let autoplay = !reducedMotion.matches;
-      let dragging = false;
-      let pointerId = null;
-      let startX = 0;
-      let startPosition = 0;
-      let dragDistance = 0;
-      let lastTime = 0;
-      let manualAnimation = null;
+          track.appendChild(clone);
+        });
 
-      function getGap() {
-        return parseFloat(window.getComputedStyle(track).gap) || 0;
-      }
+        let position = 0;
+        let autoplay = !window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
 
-      function getStep() {
-        const firstCard = originalCards[0];
+        let dragging = false;
+        let pointerId = null;
+        let startX = 0;
+        let startPosition = 0;
+        let dragDistance = 0;
+        let lastTime = 0;
+        let animation = null;
 
-        return firstCard.getBoundingClientRect().width + getGap();
-      }
+        const gap = () => {
+          return parseFloat(getComputedStyle(track).gap) || 0;
+        };
 
-      function getLoopWidth() {
-        return getStep() * originalCards.length;
-      }
+        const step = () => {
+          return originals[0].getBoundingClientRect().width + gap();
+        };
 
-      function normalize() {
-        const width = getLoopWidth();
+        const loopWidth = () => {
+          return step() * originals.length;
+        };
 
-        if (!width) return;
+        function normalize() {
+          const width = loopWidth();
 
-        position = ((position % width) + width) % width;
-      }
+          if (!width) return;
 
-      function render() {
-        normalize();
-
-        track.style.transform = `translate3d(${-position}px, 0, 0)`;
-      }
-
-      function cancelManualAnimation() {
-        if (manualAnimation !== null) {
-          window.cancelAnimationFrame(manualAnimation);
-          manualAnimation = null;
-        }
-      }
-
-      function move(direction) {
-        autoplay = false;
-        cancelManualAnimation();
-
-        const width = getLoopWidth();
-
-        if (!width) return;
-
-        if (direction < 0 && position < getStep()) {
-          position += width;
+          position = ((position % width) + width) % width;
         }
 
-        const from = position;
-        const to = from + getStep() * direction;
+        function render() {
+          normalize();
 
-        if (reducedMotion.matches) {
-          position = to;
-          render();
-          return;
+          track.style.transform =
+            `translate3d(${-position}px, 0, 0)`;
         }
 
-        const started = performance.now();
-        const duration = 520;
+        function move(direction) {
+          autoplay = false;
 
-        function animate(now) {
-          const progress = Math.min((now - started) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 4);
+          if (animation !== null) {
+            cancelAnimationFrame(animation);
+          }
 
-          position = from + (to - from) * eased;
+          const width = loopWidth();
 
-          const loopWidth = getLoopWidth();
+          if (!width) return;
 
-          if (loopWidth) {
-            const visiblePosition =
-              ((position % loopWidth) + loopWidth) % loopWidth;
+          if (direction < 0 && position < step()) {
+            position += width;
+          }
+
+          const from = position;
+          const to = from + step() * direction;
+          const start = performance.now();
+
+          const duration = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches ? 0 : 520;
+
+          function frame(now) {
+            const progress = duration
+              ? Math.min((now - start) / duration, 1)
+              : 1;
+
+            const eased = 1 - Math.pow(1 - progress, 4);
+
+            const current = from + (to - from) * eased;
+
+            const loop = loopWidth();
+
+            position = loop
+              ? ((current % loop) + loop) % loop
+              : current;
 
             track.style.transform =
-              `translate3d(${-visiblePosition}px, 0, 0)`;
+              `translate3d(${-position}px, 0, 0)`;
+
+            if (progress < 1) {
+              animation = requestAnimationFrame(frame);
+            } else {
+              animation = null;
+              normalize();
+              render();
+            }
           }
 
-          if (progress < 1) {
-            manualAnimation = window.requestAnimationFrame(animate);
-          } else {
-            manualAnimation = null;
-            normalize();
-            render();
+          animation = requestAnimationFrame(frame);
+        }
+
+        prev.addEventListener("click", () => move(-1));
+        next.addEventListener("click", () => move(1));
+
+        viewport.addEventListener("pointerdown", (event) => {
+          if (
+            event.pointerType === "mouse" &&
+            event.button !== 0
+          ) {
+            return;
           }
-        }
 
-        manualAnimation = window.requestAnimationFrame(animate);
-      }
+          autoplay = false;
 
-      previous.addEventListener("click", () => {
-        move(-1);
-      });
+          if (animation !== null) {
+            cancelAnimationFrame(animation);
+          }
 
-      next.addEventListener("click", () => {
-        move(1);
-      });
+          animation = null;
+          dragging = true;
+          pointerId = event.pointerId;
+          startX = event.clientX;
+          startPosition = position;
+          dragDistance = 0;
 
-      viewport.addEventListener("pointerdown", (event) => {
-        if (event.pointerType === "mouse" && event.button !== 0) return;
+          viewport.classList.add("is-dragging");
 
-        autoplay = false;
-        cancelManualAnimation();
+          try {
+            viewport.setPointerCapture(pointerId);
+          } catch (_) {}
+        });
 
-        dragging = true;
-        pointerId = event.pointerId;
-        startX = event.clientX;
-        startPosition = position;
-        dragDistance = 0;
+        viewport.addEventListener("pointermove", (event) => {
+          if (
+            !dragging ||
+            event.pointerId !== pointerId
+          ) {
+            return;
+          }
 
-        viewport.classList.add("is-dragging");
+          dragDistance = Math.abs(event.clientX - startX);
 
-        try {
-          viewport.setPointerCapture(pointerId);
-        } catch (error) {
-          // Захват указателя может быть недоступен.
-        }
-      });
+          position =
+            startPosition -
+            (event.clientX - startX);
 
-      viewport.addEventListener("pointermove", (event) => {
-        if (!dragging || event.pointerId !== pointerId) return;
+          render();
+        });
 
-        const delta = event.clientX - startX;
+        function endDrag(event) {
+          if (
+            !dragging ||
+            event.pointerId !== pointerId
+          ) {
+            return;
+          }
 
-        dragDistance = Math.abs(delta);
-        position = startPosition - delta;
+          dragging = false;
 
-        render();
-      });
+          viewport.classList.remove("is-dragging");
 
-      function endDrag(event) {
-        if (!dragging) return;
-
-        if (
-          event &&
-          pointerId !== null &&
-          event.pointerId !== pointerId
-        ) {
-          return;
-        }
-
-        dragging = false;
-        viewport.classList.remove("is-dragging");
-
-        if (pointerId !== null) {
           try {
             viewport.releasePointerCapture(pointerId);
-          } catch (error) {
-            // Указатель мог быть освобождён браузером.
-          }
+          } catch (_) {}
+
+          pointerId = null;
+
+          render();
         }
 
-        pointerId = null;
+        viewport.addEventListener("pointerup", endDrag);
+        viewport.addEventListener("pointercancel", endDrag);
 
-        normalize();
+        track.addEventListener(
+          "click",
+          (event) => {
+            if (dragDistance > 6) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+
+            dragDistance = 0;
+          },
+          true
+        );
+
+        viewport.addEventListener("dragstart", (event) => {
+          event.preventDefault();
+        });
+
+        function autoFrame(now) {
+          if (!lastTime) {
+            lastTime = now;
+          }
+
+          const delta = Math.min(now - lastTime, 50);
+
+          lastTime = now;
+
+          if (
+            autoplay &&
+            !dragging &&
+            animation === null &&
+            !document.hidden
+          ) {
+            position += 28 * delta / 1000;
+            render();
+          }
+
+          requestAnimationFrame(autoFrame);
+        }
+
+        window.addEventListener(
+          "resize",
+          render,
+          { passive: true }
+        );
+
         render();
-      }
-
-      viewport.addEventListener("pointerup", endDrag);
-      viewport.addEventListener("pointercancel", endDrag);
-      viewport.addEventListener("lostpointercapture", endDrag);
-
-      track.addEventListener(
-        "click",
-        (event) => {
-          if (dragDistance > 6) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          dragDistance = 0;
-        },
-        true
-      );
-
-      viewport.addEventListener("dragstart", (event) => {
-        event.preventDefault();
+        requestAnimationFrame(autoFrame);
       });
-
-      function autoFrame(now) {
-        if (!lastTime) lastTime = now;
-
-        const delta = Math.min(now - lastTime, 50);
-
-        lastTime = now;
-
-        if (
-          autoplay &&
-          !dragging &&
-          manualAnimation === null &&
-          !reducedMotion.matches &&
-          !document.hidden
-        ) {
-          position += (28 * delta) / 1000;
-          render();
-        }
-
-        window.requestAnimationFrame(autoFrame);
-      }
-
-      window.addEventListener(
-        "resize",
-        () => {
-          cancelManualAnimation();
-          normalize();
-          render();
-        },
-        { passive: true }
-      );
-
-      reducedMotion.addEventListener("change", (event) => {
-        if (event.matches) {
-          autoplay = false;
-          cancelManualAnimation();
-          render();
-        }
-      });
-
-      render();
-      window.requestAnimationFrame(autoFrame);
-    });
   }
+
 
   /* FAQ */
 
   function initFAQ() {
-    document.querySelectorAll(".agassi-group-faq").forEach((section) => {
-      if (section.dataset.initialized === "true") return;
+    document
+      .querySelectorAll(".agassi-group-faq")
+      .forEach((section) => {
 
-      const items = Array.from(
-        section.querySelectorAll(".agassi-group-faq__item")
-      );
+        if (section.dataset.initialized === "true") return;
 
-      if (!items.length) return;
+        const visual = section.querySelector(
+          ".agassi-group-faq__visual"
+        );
 
-      section.dataset.initialized = "true";
+        const list = section.querySelector(
+          ".agassi-group-faq__list"
+        );
 
-      items.forEach((item) => {
-        item.addEventListener("toggle", () => {
-          if (!item.open) return;
+        const entries = [
+          ...section.querySelectorAll(
+            ".agassi-group-faq__entry"
+          )
+        ];
 
-          items.forEach((otherItem) => {
-            if (otherItem !== item && otherItem.open) {
-              otherItem.open = false;
+        if (!visual || !list || !entries.length) return;
+
+        section.dataset.initialized = "true";
+
+        function syncVisualHeight() {
+          if (window.innerWidth <= 767) {
+            section.style.removeProperty(
+              "--agassi-group-faq-visual-height"
+            );
+
+            return;
+          }
+
+          const items = entries
+            .map((entry) => {
+              return entry.querySelector(
+                ".agassi-group-faq__item"
+              );
+            })
+            .filter(Boolean);
+
+          const styles = getComputedStyle(list);
+          const gap = parseFloat(styles.rowGap) || 0;
+
+          const itemsHeight = items.reduce(
+            (sum, item) => {
+              return sum + item.getBoundingClientRect().height;
+            },
+            0
+          );
+
+          const totalHeight =
+            itemsHeight +
+            gap * Math.max(items.length - 1, 0);
+
+          section.style.setProperty(
+            "--agassi-group-faq-visual-height",
+            `${Math.ceil(totalHeight)}px`
+          );
+        }
+
+        function setOpen(entry, open) {
+          const button = entry.querySelector(
+            ".agassi-group-faq__question"
+          );
+
+          const answer = entry.querySelector(
+            ".agassi-group-faq__answer"
+          );
+
+          entry.classList.toggle("is-open", open);
+
+          if (button) {
+            button.setAttribute(
+              "aria-expanded",
+              String(open)
+            );
+          }
+
+          if (answer) {
+            answer.toggleAttribute("inert", !open);
+          }
+        }
+
+        entries.forEach((entry) => {
+          const button = entry.querySelector(
+            ".agassi-group-faq__question"
+          );
+
+          if (!button) return;
+
+          setOpen(entry, false);
+
+          button.addEventListener("click", () => {
+            const shouldOpen = !entry.classList.contains(
+              "is-open"
+            );
+
+            entries.forEach((otherEntry) => {
+              setOpen(otherEntry, false);
+            });
+
+            if (shouldOpen) {
+              setOpen(entry, true);
             }
           });
         });
+
+        syncVisualHeight();
+
+        window.addEventListener(
+          "load",
+          syncVisualHeight
+        );
+
+        window.addEventListener(
+          "resize",
+          syncVisualHeight,
+          { passive: true }
+        );
+
+        if ("ResizeObserver" in window) {
+          const observer = new ResizeObserver(
+            syncVisualHeight
+          );
+
+          entries.forEach((entry) => {
+            const item = entry.querySelector(
+              ".agassi-group-faq__item"
+            );
+
+            if (item) {
+              observer.observe(item);
+            }
+          });
+        }
+
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(syncVisualHeight);
+        }
       });
-    });
   }
+
 
   /* Инициализация */
 
@@ -370,8 +500,13 @@
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener(
+      "DOMContentLoaded",
+      init,
+      { once: true }
+    );
   } else {
     init();
   }
+
 })();
