@@ -446,16 +446,10 @@ body.agassi-group-menu-locked {
   box-sizing: border-box;
 }
 
-/* Контейнер */
-
-.agassi-group-hero .agassi-group-hero__container {
+.agassi-group-hero > .agassi-group-container {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 24px;
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 40px;
+  column-gap: var(--agassi-group-gap, 24px);
 }
 
 /* Шейп */
@@ -471,8 +465,8 @@ body.agassi-group-menu-locked {
   min-height: 720px;
   overflow: hidden;
   border-radius: 24px;
-  background: #352D2B;
-  color: #FFFFFF;
+  background: var(--agassi-group-ink, #352D2B);
+  color: var(--agassi-group-white, #FFFFFF);
 }
 
 /* Фоновое изображение */
@@ -530,8 +524,8 @@ body.agassi-group-menu-locked {
   max-width: 800px;
   margin: 0;
   padding: 0;
-  color: #FFFFFF;
-  font-family: var(--t-headline-font, inherit);
+  color: var(--agassi-group-white, #FFFFFF);
+  font-family: inherit;
   font-size: 64px;
   font-weight: 400;
   line-height: 72px;
@@ -544,8 +538,8 @@ body.agassi-group-menu-locked {
   max-width: 640px;
   margin: 24px 0 0;
   padding: 0;
-  color: #FFFFFF;
-  font-family: var(--t-text-font, inherit);
+  color: var(--agassi-group-white, #FFFFFF);
+  font-family: inherit;
   font-size: 18px;
   font-weight: 400;
   line-height: 28px;
@@ -567,8 +561,8 @@ body.agassi-group-menu-locked {
   border: 0;
   border-radius: 40px;
   background: var(--agassi-group-burgundy, #8C0F14);
-  color: #FFFFFF;
-  font-family: var(--t-text-font, inherit);
+  color: var(--agassi-group-white, #FFFFFF);
+  font-family: inherit;
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
@@ -582,17 +576,15 @@ body.agassi-group-menu-locked {
 #allrecords .agassi-group-hero .agassi-group-hero__button:hover,
 .t-records .agassi-group-hero .agassi-group-hero__button:hover {
   background: var(--agassi-group-burgundy-hover, #5A0A0D);
-  color: #FFFFFF;
+  color: var(--agassi-group-white, #FFFFFF);
   text-decoration: none;
 }
 
 /* Планшет */
 
 @media (max-width: 1199px) {
-  .agassi-group-hero .agassi-group-hero__container {
+  .agassi-group-hero > .agassi-group-container {
     grid-template-columns: repeat(8, minmax(0, 1fr));
-    gap: 16px;
-    padding: 0 32px;
   }
 
   .agassi-group-hero__shape {
@@ -614,10 +606,8 @@ body.agassi-group-menu-locked {
 /* Смартфон */
 
 @media (max-width: 767px) {
-  .agassi-group-hero .agassi-group-hero__container {
+  .agassi-group-hero > .agassi-group-container {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-    padding: 0 16px;
   }
 
   .agassi-group-hero__shape {
