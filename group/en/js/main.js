@@ -109,17 +109,11 @@
       });
 
       let position = 0;
-
-      let autoplay = !window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-
       let dragging = false;
       let pointerId = null;
       let startX = 0;
       let startPosition = 0;
       let dragDistance = 0;
-      let lastTime = 0;
       let animation = null;
 
       const gap = () => {
@@ -149,10 +143,9 @@
       }
 
       function move(direction) {
-        autoplay = false;
-
         if (animation !== null) {
           cancelAnimationFrame(animation);
+          animation = null;
         }
 
         const width = loopWidth();
@@ -205,13 +198,11 @@
           return;
         }
 
-        autoplay = false;
-
         if (animation !== null) {
           cancelAnimationFrame(animation);
+          animation = null;
         }
 
-        animation = null;
         dragging = true;
         pointerId = event.pointerId;
         startX = event.clientX;
@@ -270,34 +261,11 @@
         event.preventDefault();
       });
 
-      function autoFrame(now) {
-        if (!lastTime) {
-          lastTime = now;
-        }
-
-        const delta = Math.min(now - lastTime, 50);
-
-        lastTime = now;
-
-        if (
-          autoplay &&
-          !dragging &&
-          animation === null &&
-          !document.hidden
-        ) {
-          position += (28 * delta) / 1000;
-          render();
-        }
-
-        requestAnimationFrame(autoFrame);
-      }
-
       window.addEventListener("resize", render, {
         passive: true
       });
 
       render();
-      requestAnimationFrame(autoFrame);
     });
   }
 
