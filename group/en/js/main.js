@@ -1,93 +1,54 @@
 (() => {
-  const root = document.documentElement;
+  const header = document.querySelector(".agassi-group-header");
 
-  if (root.dataset.agassiGroupHeaderReady === "true") return;
-  root.dataset.agassiGroupHeaderReady = "true";
+  if (!header || header.dataset.initialized === "true") return;
 
-  const selector = ".agassi-group-header";
+  header.dataset.initialized = "true";
 
-  const setMenuOpen = (header, open, restoreFocus = false) => {
-    const menu = header.querySelector(".agassi-group-header__mobile-menu");
-    const openButton = header.querySelector(".agassi-group-header__menu-open");
-    const closeButton = header.querySelector(".agassi-group-header__menu-close");
+  const toggle = header.querySelector(".agassi-group-header__toggle");
+  const menu = header.querySelector(".agassi-group-header__mobile-menu");
+  const mobileNav = header.querySelector(".agassi-group-header__mobile-nav");
 
-    if (!menu || !openButton || !closeButton) return;
+  if (!toggle || !menu || !mobileNav) return;
 
-    menu.classList.toggle("is-open", open);
+  const setMenuState = (open) => {
+    header.classList.toggle("is-menu-open", open);
+    document.body.classList.toggle("agassi-group-menu-locked", open);
+
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+
     menu.setAttribute("aria-hidden", String(!open));
     menu.toggleAttribute("inert", !open);
-
-    openButton.setAttribute("aria-expanded", String(open));
-
-    if (open) {
-      closeButton.focus({ preventScroll: true });
-    } else if (restoreFocus) {
-      openButton.focus({ preventScroll: true });
-    }
   };
 
-  const closeAllMenus = () => {
-    document.querySelectorAll(selector).forEach((header) => {
-      const menu = header.querySelector(".agassi-group-header__mobile-menu");
+  // Переключение меню
+  toggle.addEventListener("click", () => {
+    const open = !header.classList.contains("is-menu-open");
+    setMenuState(open);
+  });
 
-      if (menu?.classList.contains("is-open")) {
-        setMenuOpen(header, false);
-      }
-    });
-  };
-
-  // Мобильное меню
-  document.addEventListener("click", (event) => {
-    if (!(event.target instanceof Element)) return;
-
-    const target = event.target;
-    const header = target.closest(selector);
-
-    if (!header) {
-      closeAllMenus();
-      return;
-    }
-
-    const openButton = target.closest(".agassi-group-header__menu-open");
-    const closeButton = target.closest(".agassi-group-header__menu-close");
-
-    if (openButton) {
-      const menu = header.querySelector(".agassi-group-header__mobile-menu");
-      const isOpen = menu?.classList.contains("is-open");
-
-      setMenuOpen(header, !isOpen, isOpen);
-      return;
-    }
-
-    if (closeButton) {
-      setMenuOpen(header, false, true);
-      return;
-    }
-
-    if (target.closest(".agassi-group-header__mobile-menu a")) {
-      setMenuOpen(header, false);
+  // Закрытие по ссылке
+  menu.addEventListener("click", (event) => {
+    if (event.target.closest("a")) {
+      setMenuState(false);
     }
   });
 
   // Закрытие по Escape
   document.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape") return;
-
-    document.querySelectorAll(selector).forEach((header) => {
-      const menu = header.querySelector(".agassi-group-header__mobile-menu");
-
-      if (menu?.classList.contains("is-open")) {
-        setMenuOpen(header, false, true);
-      }
-    });
+    if (event.key === "Escape" && header.classList.contains("is-menu-open")) {
+      setMenuState(false);
+      toggle.focus();
+    }
   });
 
-  // Сброс при переходе на десктоп
+  // Сброс при изменении ширины
   const desktop = window.matchMedia("(min-width: 1200px)");
 
   desktop.addEventListener("change", (event) => {
     if (event.matches) {
-      closeAllMenus();
+      setMenuState(false);
     }
   });
-})()
+})();
