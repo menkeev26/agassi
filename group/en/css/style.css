@@ -388,29 +388,38 @@ body.agassi-group-menu-locked {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 880px;
+  max-width: 960px;
   padding: 80px 40px;
   text-align: center;
 }
 
 .agassi-group-hero .agassi-group-hero__title {
-  max-width: 800px;
+  max-width: 880px;
   margin: 0;
+  padding: 0;
   color: var(--agassi-group-white);
   font-family: var(--t-headline-font, inherit);
-  font-size: 56px;
-  font-weight: 400;
-  line-height: 64px;
+  font-size: 62px;
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: 0;
   text-align: center;
+  text-wrap: balance;
+  text-transform: uppercase;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .agassi-group-hero .agassi-group-hero__description {
   max-width: 640px;
-  margin: 24px 0 0;
+  margin: 20px 0 0;
+  padding: 0;
   color: var(--agassi-group-white);
-  font-family: inherit;
-  font-size: 18px;
-  line-height: 28px;
+  font-family: var(--t-text-font, inherit);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
   text-align: center;
 }
 
@@ -457,14 +466,11 @@ body.agassi-group-menu-locked {
   }
 
   .agassi-group-hero .agassi-group-hero__title {
-    font-size: 44px;
-    line-height: 52px;
+    font-size: 52px;
   }
 
   .agassi-group-hero .agassi-group-hero__description {
-    margin-top: 20px;
-    font-size: 16px;
-    line-height: 24px;
+    margin-top: 16px;
   }
 }
 
@@ -502,27 +508,39 @@ body.agassi-group-menu-locked {
 
   .agassi-group-hero__content {
     max-width: 100%;
-    padding: 32px 20px;
+    padding: 48px 24px;
   }
 
   .agassi-group-hero .agassi-group-hero__title {
-    font-size: 28px;
-    line-height: 36px;
+    font-size: 36px;
+    line-height: 1.05;
   }
 
   .agassi-group-hero .agassi-group-hero__description {
-    margin-top: 12px;
-    font-size: 14px;
-    line-height: 20px;
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 1.5;
   }
 
   .agassi-group-hero .agassi-group-hero__button {
     width: 100%;
-    min-height: 44px;
-    margin-top: 20px;
+    min-height: 48px;
+    margin-top: 24px;
     padding: 12px 16px;
     font-size: 14px;
     line-height: 20px;
+  }
+}
+
+/* Узкие смартфоны */
+
+@media (max-width: 360px) {
+  .agassi-group-hero__content {
+    padding-inline: 20px;
+  }
+
+  .agassi-group-hero .agassi-group-hero__title {
+    font-size: 32px;
   }
 }
 
