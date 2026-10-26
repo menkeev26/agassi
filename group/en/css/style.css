@@ -496,28 +496,30 @@ body.agassi-group-menu-locked {
 
   .agassi-group-hero__shape {
     min-height: 0;
+    height: auto;
     border-radius: 16px;
   }
 
   .agassi-group-hero__content {
-    padding: 48px 20px;
+    max-width: 100%;
+    padding: 32px 20px;
   }
 
   .agassi-group-hero .agassi-group-hero__title {
-    font-size: 32px;
-    line-height: 40px;
+    font-size: 28px;
+    line-height: 36px;
   }
 
   .agassi-group-hero .agassi-group-hero__description {
-    margin-top: 16px;
+    margin-top: 12px;
     font-size: 14px;
-    line-height: 24px;
+    line-height: 20px;
   }
 
   .agassi-group-hero .agassi-group-hero__button {
     width: 100%;
-    min-height: 48px;
-    margin-top: 24px;
+    min-height: 44px;
+    margin-top: 20px;
     padding: 12px 16px;
     font-size: 14px;
     line-height: 20px;
