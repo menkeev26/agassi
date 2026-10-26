@@ -682,7 +682,9 @@ body.agassi-group-menu-locked {
 /* About Us */
 
 .agassi-group-about {
+  display: block;
   width: 100%;
+  margin: 0;
   padding: 80px 0 120px;
   background: var(--agassi-group-cream);
   color: var(--agassi-group-ink);
@@ -700,6 +702,7 @@ body.agassi-group-menu-locked {
   grid-template-columns: repeat(12, minmax(0, 1fr));
   align-items: center;
   gap: var(--agassi-group-gap);
+  width: 100%;
 }
 
 /* Текст */
@@ -713,9 +716,9 @@ body.agassi-group-menu-locked {
   padding-right: 40px;
 }
 
-.agassi-group-about__label {
+.agassi-group-about .agassi-group-about__label {
   display: block;
-  margin-bottom: 24px;
+  margin: 0 0 24px;
   color: var(--agassi-group-burgundy);
   font-family: var(--t-text-font, inherit);
   font-size: 14px;
@@ -726,8 +729,10 @@ body.agassi-group-menu-locked {
 }
 
 .agassi-group-about .agassi-group-about__title {
+  display: block;
   max-width: 560px;
   margin: 0;
+  padding: 0;
   color: var(--agassi-group-ink);
   font-family: var(--t-headline-font, inherit);
   font-size: 44px;
@@ -738,8 +743,10 @@ body.agassi-group-menu-locked {
 }
 
 .agassi-group-about .agassi-group-about__description {
+  display: block;
   max-width: 480px;
   margin: 24px 0 0;
+  padding: 0;
   color: var(--agassi-group-ink);
   font-family: var(--t-text-font, inherit);
   font-size: 16px;
@@ -755,8 +762,9 @@ body.agassi-group-menu-locked {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-width: 200px;
   min-height: 48px;
-  margin-top: 40px;
+  margin: 40px 0 0;
   padding: 12px 32px;
   border: 1px solid var(--agassi-group-burgundy);
   border-radius: 40px;
@@ -768,6 +776,7 @@ body.agassi-group-menu-locked {
   line-height: 24px;
   text-align: center;
   text-decoration: none;
+  white-space: nowrap;
   cursor: pointer;
   transition:
     background-color 200ms ease,
@@ -786,8 +795,9 @@ body.agassi-group-menu-locked {
 /* Изображение */
 
 .agassi-group-about__visual {
-  grid-column: span 7;
   position: relative;
+  grid-column: span 7;
+  display: block;
   width: 100%;
   min-width: 0;
   aspect-ratio: 5 / 4;
@@ -801,6 +811,9 @@ body.agassi-group-menu-locked {
   width: 100%;
   height: 100%;
   max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
   object-fit: cover;
   object-position: center;
 }
@@ -850,7 +863,7 @@ body.agassi-group-menu-locked {
     padding-right: 0;
   }
 
-  .agassi-group-about__label {
+  .agassi-group-about .agassi-group-about__label {
     margin-bottom: 16px;
   }
 
@@ -865,8 +878,11 @@ body.agassi-group-menu-locked {
     line-height: 24px;
   }
 
-  .agassi-group-about .agassi-group-about__button {
+  .agassi-group-about .agassi-group-about__button,
+  #allrecords .agassi-group-about .agassi-group-about__button,
+  .t-records .agassi-group-about .agassi-group-about__button {
     width: 100%;
+    min-width: 0;
     margin-top: 32px;
     font-size: 14px;
     line-height: 20px;
