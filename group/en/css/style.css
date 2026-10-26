@@ -935,9 +935,8 @@ body.agassi-group-menu-locked {
 .agassi-group-faq__visual {
   position: relative;
   grid-column: span 6;
-  align-self: stretch;
   min-width: 0;
-  min-height: 0;
+  height: var(--agassi-group-faq-visual-height, 448px);
   overflow: hidden;
   border-radius: var(--agassi-group-radius);
   background: var(--agassi-group-burgundy);
@@ -1014,13 +1013,6 @@ body.agassi-group-menu-locked {
   content: "";
 }
 
-.agassi-group-faq .agassi-group-faq__question:hover,
-#allrecords .agassi-group-faq .agassi-group-faq__question:hover,
-.t-records .agassi-group-faq .agassi-group-faq__question:hover {
-  background: var(--agassi-group-white);
-  color: var(--agassi-group-ink);
-}
-
 .agassi-group-faq__question-text {
   min-width: 0;
   font-size: 18px;
@@ -1074,6 +1066,7 @@ body.agassi-group-menu-locked {
 
 .agassi-group-faq__icon-fallback::after {
   transform: rotate(90deg);
+  transition: transform 400ms ease;
 }
 
 .agassi-group-faq__entry[open] .agassi-group-faq__icon-image {
@@ -1084,10 +1077,17 @@ body.agassi-group-menu-locked {
   transform: rotate(0);
 }
 
-/* FAQ — ответы */
+/* FAQ — плавное раскрытие */
 
 .agassi-group-faq__answer {
+  height: 0;
   padding: 0 24px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.agassi-group-faq__entry[open] .agassi-group-faq__answer {
+  opacity: 1;
 }
 
 .agassi-group-faq .agassi-group-faq__answer p {
@@ -1261,14 +1261,14 @@ body.agassi-group-menu-locked {
     line-height: 32px;
   }
 
+  .agassi-group-hero {
+    padding: 16px 0;
+  }
+
   .agassi-group-hero > .agassi-group-container,
   .agassi-group-about__grid,
   .agassi-group-faq__layout {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .agassi-group-hero {
-    padding: 16px 0;
   }
 
   .agassi-group-hero__shape {
@@ -1443,13 +1443,13 @@ body.agassi-group-menu-locked {
     gap: 12px;
   }
 
+  .agassi-group-faq__answer {
+    padding: 0 20px;
+  }
+
   .agassi-group-faq .agassi-group-faq__answer p {
     padding: 12px 0 20px;
     line-height: 24px;
-  }
-
-  .agassi-group-faq__answer {
-    padding: 0 20px;
   }
 }
 
@@ -1514,7 +1514,8 @@ body.agassi-group-menu-locked {
   .agassi-group-hero__button,
   .agassi-group-about__button,
   .agassi-group-partners__arrow,
-  .agassi-group-faq__icon-image {
+  .agassi-group-faq__icon-image,
+  .agassi-group-faq__icon-fallback::after {
     transition: none;
   }
 
