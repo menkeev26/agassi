@@ -3,13 +3,12 @@
 
   if (!header || header.dataset.initialized === "true") return;
 
-  header.dataset.initialized = "true";
-
-  const toggle = header.querySelector(".agassi-group-header__toggle");
+  const toggle = header.querySelector(".agassi-group-header__menu-toggle");
   const menu = header.querySelector(".agassi-group-header__mobile-menu");
-  const mobileNav = header.querySelector(".agassi-group-header__mobile-nav");
 
-  if (!toggle || !menu || !mobileNav) return;
+  if (!toggle || !menu) return;
+
+  header.dataset.initialized = "true";
 
   const setMenuState = (open) => {
     header.classList.toggle("is-menu-open", open);
@@ -22,7 +21,7 @@
     menu.toggleAttribute("inert", !open);
   };
 
-  // Переключение меню
+  // Открытие и закрытие
   toggle.addEventListener("click", () => {
     const open = !header.classList.contains("is-menu-open");
     setMenuState(open);
@@ -37,13 +36,14 @@
 
   // Закрытие по Escape
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && header.classList.contains("is-menu-open")) {
-      setMenuState(false);
-      toggle.focus();
-    }
+    if (event.key !== "Escape") return;
+    if (!header.classList.contains("is-menu-open")) return;
+
+    setMenuState(false);
+    toggle.focus();
   });
 
-  // Сброс при изменении ширины
+  // Сброс при переходе на десктоп
   const desktop = window.matchMedia("(min-width: 1200px)");
 
   desktop.addEventListener("change", (event) => {
