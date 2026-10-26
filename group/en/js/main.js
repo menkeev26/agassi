@@ -361,6 +361,10 @@
           ".agassi-group-faq__list"
         );
 
+        const sharedIcon = section.querySelector(
+          ".agassi-group-faq__shared-icon"
+        );
+
         const entries = [
           ...section.querySelectorAll(
             ".agassi-group-faq__entry"
@@ -370,6 +374,58 @@
         if (!visual || !list || !entries.length) return;
 
         section.dataset.initialized = "true";
+
+        /* Общая иконка */
+
+        function syncIcons() {
+          const source = sharedIcon?.getAttribute("src")?.trim();
+
+          entries.forEach((entry) => {
+            const icon = entry.querySelector(
+              ".agassi-group-faq__icon"
+            );
+
+            if (!icon) return;
+
+            let image = icon.querySelector(
+              ".agassi-group-faq__icon-image"
+            );
+
+            const fallback = icon.querySelector(
+              ".agassi-group-faq__icon-fallback"
+            );
+
+            if (source) {
+              if (!image) {
+                image = document.createElement("img");
+                image.className = "agassi-group-faq__icon-image";
+                image.alt = "";
+                image.setAttribute("aria-hidden", "true");
+                icon.appendChild(image);
+              }
+
+              if (image.getAttribute("src") !== source) {
+                image.src = source;
+              }
+
+              if (fallback) {
+                fallback.hidden = true;
+              }
+            } else {
+              if (image) {
+                image.remove();
+              }
+
+              if (fallback) {
+                fallback.hidden = false;
+              }
+            }
+          });
+        }
+
+        syncIcons();
+
+        /* Высота изображения */
 
         function syncVisualHeight() {
           if (window.innerWidth <= 767) {
@@ -388,25 +444,24 @@
             })
             .filter(Boolean);
 
-          const styles = getComputedStyle(list);
-          const gap = parseFloat(styles.rowGap) || 0;
+          const gap = parseFloat(
+            getComputedStyle(list).rowGap
+          ) || 0;
 
-          const itemsHeight = items.reduce(
+          const totalHeight = items.reduce(
             (sum, item) => {
               return sum + item.getBoundingClientRect().height;
             },
             0
-          );
-
-          const totalHeight =
-            itemsHeight +
-            gap * Math.max(items.length - 1, 0);
+          ) + gap * Math.max(items.length - 1, 0);
 
           section.style.setProperty(
             "--agassi-group-faq-visual-height",
             `${Math.ceil(totalHeight)}px`
           );
         }
+
+        /* Аккордеон */
 
         function setOpen(entry, open) {
           const button = entry.querySelector(
@@ -455,22 +510,37 @@
           });
         });
 
-        syncVisualHeight();
+        /* Пересчёт размеров */
+
+        let resizeFrame = null;
+
+        function scheduleHeightSync() {
+          if (resizeFrame !== null) {
+            cancelAnimationFrame(resizeFrame);
+          }
+
+          resizeFrame = requestAnimationFrame(() => {
+            resizeFrame = null;
+            syncVisualHeight();
+          });
+        }
+
+        scheduleHeightSync();
 
         window.addEventListener(
           "load",
-          syncVisualHeight
+          scheduleHeightSync
         );
 
         window.addEventListener(
           "resize",
-          syncVisualHeight,
+          scheduleHeightSync,
           { passive: true }
         );
 
         if ("ResizeObserver" in window) {
           const observer = new ResizeObserver(
-            syncVisualHeight
+            scheduleHeightSync
           );
 
           entries.forEach((entry) => {
@@ -484,8 +554,19 @@
           });
         }
 
-        if (document.fonts && document.fonts.ready) {
-          document.fonts.ready.then(syncVisualHeight);
+        if (document.fonts?.ready) {
+          document.fonts.ready.then(
+            scheduleHeightSync
+          );
+        }
+
+        if (sharedIcon && "MutationObserver" in window) {
+          const observer = new MutationObserver(syncIcons);
+
+          observer.observe(sharedIcon, {
+            attributes: true,
+            attributeFilter: ["src"]
+          });
         }
       });
   }
