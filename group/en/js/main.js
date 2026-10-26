@@ -93,6 +93,8 @@
 
       section.dataset.initialized = "true";
 
+      const count = originals.length;
+
       originals.forEach((card) => {
         const clone = card.cloneNode(true);
 
@@ -108,87 +110,156 @@
         track.appendChild(clone);
       });
 
+      let index = 0;
       let position = 0;
+
       let dragging = false;
       let pointerId = null;
       let startX = 0;
       let startPosition = 0;
       let dragDistance = 0;
+      let suppressClick = false;
+
       let animation = null;
 
-      const gap = () => {
-        return parseFloat(getComputedStyle(track).gap) || 0;
-      };
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      );
 
-      const step = () => {
-        return originals[0].getBoundingClientRect().width + gap();
-      };
+      function getGap() {
+        return parseFloat(getComputedStyle(track).columnGap) || 0;
+      }
 
-      const loopWidth = () => {
-        return step() * originals.length;
-      };
+      function getStep() {
+        return originals[0].getBoundingClientRect().width + getGap();
+      }
 
-      function normalize() {
-        const width = loopWidth();
-
-        if (!width) return;
-
-        position = ((position % width) + width) % width;
+      function getLoopWidth() {
+        return getStep() * count;
       }
 
       function render() {
-        normalize();
-
         track.style.transform = `translate3d(${-position}px, 0, 0)`;
       }
 
-      function move(direction) {
+      function cancelMove() {
         if (animation !== null) {
           cancelAnimationFrame(animation);
           animation = null;
         }
+      }
 
-        const width = loopWidth();
+      function normalize() {
+        const loopWidth = getLoopWidth();
 
-        if (!width) return;
+        if (!loopWidth) return;
 
-        if (direction < 0 && position < step()) {
-          position += width;
+        while (position < 0) {
+          position += loopWidth;
+          index += count;
         }
 
+        while (position >= loopWidth) {
+          position -= loopWidth;
+          index -= count;
+        }
+
+        index = ((index % count) + count) % count;
+      }
+
+      function animateTo(target, onComplete) {
+        cancelMove();
+
         const from = position;
-        const to = from + step() * direction;
+        const distance = target - from;
+        const duration = reducedMotion.matches ? 0 : 480;
         const start = performance.now();
 
-        const duration = window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        ).matches
-          ? 0
-          : 520;
+        if (duration === 0) {
+          position = target;
+          render();
+
+          if (onComplete) onComplete();
+
+          return;
+        }
 
         function frame(now) {
-          const progress = duration
-            ? Math.min((now - start) / duration, 1)
-            : 1;
+          const progress = Math.min(
+            (now - start) / duration,
+            1
+          );
 
-          position =
-            from +
-            (to - from) * (1 - Math.pow(1 - progress, 4));
+          const eased = 1 - Math.pow(1 - progress, 4);
 
+          position = from + distance * eased;
           render();
 
           if (progress < 1) {
             animation = requestAnimationFrame(frame);
           } else {
             animation = null;
+            position = target;
+
+            if (onComplete) onComplete();
+
+            render();
           }
         }
 
         animation = requestAnimationFrame(frame);
       }
 
-      prev.addEventListener("click", () => move(-1));
-      next.addEventListener("click", () => move(1));
+      function goTo(targetIndex) {
+        if (dragging) return;
+
+        cancelMove();
+
+        const step = getStep();
+        const loopWidth = getLoopWidth();
+
+        if (!step || !loopWidth) return;
+
+        index = targetIndex;
+
+        if (index < 0) {
+          position += loopWidth;
+          index += count;
+        }
+
+        if (index >= count) {
+          position -= loopWidth;
+          index -= count;
+        }
+
+        const target = index * step;
+
+        animateTo(target, () => {
+          normalize();
+          position = index * step;
+          render();
+        });
+      }
+
+      function move(direction) {
+        if (dragging) return;
+
+        const step = getStep();
+
+        if (!step) return;
+
+        const currentIndex = Math.round(position / step);
+
+        goTo(currentIndex + direction);
+      }
+
+      prev.addEventListener("click", () => {
+        move(-1);
+      });
+
+      next.addEventListener("click", () => {
+        move(1);
+      });
 
       viewport.addEventListener("pointerdown", (event) => {
         if (
@@ -198,16 +269,14 @@
           return;
         }
 
-        if (animation !== null) {
-          cancelAnimationFrame(animation);
-          animation = null;
-        }
+        cancelMove();
 
         dragging = true;
         pointerId = event.pointerId;
         startX = event.clientX;
         startPosition = position;
         dragDistance = 0;
+        suppressClick = false;
 
         viewport.classList.add("is-dragging");
 
@@ -219,8 +288,10 @@
       viewport.addEventListener("pointermove", (event) => {
         if (!dragging || event.pointerId !== pointerId) return;
 
-        dragDistance = Math.abs(event.clientX - startX);
-        position = startPosition - (event.clientX - startX);
+        const delta = event.clientX - startX;
+
+        dragDistance = Math.abs(delta);
+        position = startPosition - delta;
 
         render();
       });
@@ -229,16 +300,32 @@
         if (!dragging || event.pointerId !== pointerId) return;
 
         dragging = false;
+        pointerId = null;
 
         viewport.classList.remove("is-dragging");
 
         try {
-          viewport.releasePointerCapture(pointerId);
+          viewport.releasePointerCapture(event.pointerId);
         } catch (_) {}
 
-        pointerId = null;
+        const step = getStep();
 
-        render();
+        if (!step) return;
+
+        const delta = event.clientX - startX;
+        const threshold = Math.min(step / 4, 64);
+
+        let targetIndex = Math.round(startPosition / step);
+
+        if (delta <= -threshold) {
+          targetIndex += 1;
+        } else if (delta >= threshold) {
+          targetIndex -= 1;
+        }
+
+        suppressClick = dragDistance > 6;
+
+        goTo(targetIndex);
       }
 
       viewport.addEventListener("pointerup", endDrag);
@@ -247,12 +334,12 @@
       track.addEventListener(
         "click",
         (event) => {
-          if (dragDistance > 6) {
+          if (suppressClick) {
             event.preventDefault();
             event.stopPropagation();
           }
 
-          dragDistance = 0;
+          suppressClick = false;
         },
         true
       );
@@ -261,9 +348,22 @@
         event.preventDefault();
       });
 
-      window.addEventListener("resize", render, {
-        passive: true
-      });
+      window.addEventListener(
+        "resize",
+        () => {
+          cancelMove();
+
+          const step = getStep();
+
+          if (!step) return;
+
+          normalize();
+
+          position = index * step;
+          render();
+        },
+        { passive: true }
+      );
 
       render();
     });
@@ -368,8 +468,7 @@
           return;
         }
 
-        const from =
-          answer.getBoundingClientRect().height;
+        const from = answer.getBoundingClientRect().height;
 
         if (state.animation) {
           state.animation.cancel();
@@ -382,21 +481,14 @@
           entry.open = true;
         }
 
-        const to = open
-          ? answer.scrollHeight
-          : 0;
+        const to = open ? answer.scrollHeight : 0;
 
         if (
           reducedMotion.matches ||
           Math.abs(to - from) < 1
         ) {
-          answer.style.height = open
-            ? "auto"
-            : "0px";
-
-          answer.style.opacity = open
-            ? "1"
-            : "0";
+          answer.style.height = open ? "auto" : "0px";
+          answer.style.opacity = open ? "1" : "0";
 
           if (!open) {
             entry.open = false;
@@ -433,13 +525,8 @@
 
           state.animation = null;
 
-          answer.style.height = open
-            ? "auto"
-            : "0px";
-
-          answer.style.opacity = open
-            ? "1"
-            : "0";
+          answer.style.height = open ? "auto" : "0px";
+          answer.style.opacity = open ? "1" : "0";
 
           if (!open) {
             entry.open = false;
@@ -465,13 +552,8 @@
           animation: null
         });
 
-        answer.style.height = initialOpen
-          ? "auto"
-          : "0px";
-
-        answer.style.opacity = initialOpen
-          ? "1"
-          : "0";
+        answer.style.height = initialOpen ? "auto" : "0px";
+        answer.style.opacity = initialOpen ? "1" : "0";
 
         summary.addEventListener("click", (event) => {
           event.preventDefault();
