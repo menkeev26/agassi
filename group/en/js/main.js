@@ -353,14 +353,6 @@
 
         if (section.dataset.initialized === "true") return;
 
-        const visual = section.querySelector(
-          ".agassi-group-faq__visual"
-        );
-
-        const list = section.querySelector(
-          ".agassi-group-faq__list"
-        );
-
         const sharedIcon = section.querySelector(
           ".agassi-group-faq__shared-icon"
         );
@@ -371,11 +363,9 @@
           )
         ];
 
-        if (!visual || !list || !entries.length) return;
+        if (!entries.length) return;
 
         section.dataset.initialized = "true";
-
-        /* Общая иконка */
 
         function syncIcons() {
           const source = sharedIcon?.getAttribute("src")?.trim();
@@ -424,141 +414,6 @@
         }
 
         syncIcons();
-
-        /* Высота изображения */
-
-        function syncVisualHeight() {
-          if (window.innerWidth <= 767) {
-            section.style.removeProperty(
-              "--agassi-group-faq-visual-height"
-            );
-
-            return;
-          }
-
-          const items = entries
-            .map((entry) => {
-              return entry.querySelector(
-                ".agassi-group-faq__item"
-              );
-            })
-            .filter(Boolean);
-
-          const gap = parseFloat(
-            getComputedStyle(list).rowGap
-          ) || 0;
-
-          const totalHeight = items.reduce(
-            (sum, item) => {
-              return sum + item.getBoundingClientRect().height;
-            },
-            0
-          ) + gap * Math.max(items.length - 1, 0);
-
-          section.style.setProperty(
-            "--agassi-group-faq-visual-height",
-            `${Math.ceil(totalHeight)}px`
-          );
-        }
-
-        /* Аккордеон */
-
-        function setOpen(entry, open) {
-          const button = entry.querySelector(
-            ".agassi-group-faq__question"
-          );
-
-          const answer = entry.querySelector(
-            ".agassi-group-faq__answer"
-          );
-
-          entry.classList.toggle("is-open", open);
-
-          if (button) {
-            button.setAttribute(
-              "aria-expanded",
-              String(open)
-            );
-          }
-
-          if (answer) {
-            answer.toggleAttribute("inert", !open);
-          }
-        }
-
-        entries.forEach((entry) => {
-          const button = entry.querySelector(
-            ".agassi-group-faq__question"
-          );
-
-          if (!button) return;
-
-          setOpen(entry, false);
-
-          button.addEventListener("click", () => {
-            const shouldOpen = !entry.classList.contains(
-              "is-open"
-            );
-
-            entries.forEach((otherEntry) => {
-              setOpen(otherEntry, false);
-            });
-
-            if (shouldOpen) {
-              setOpen(entry, true);
-            }
-          });
-        });
-
-        /* Пересчёт размеров */
-
-        let resizeFrame = null;
-
-        function scheduleHeightSync() {
-          if (resizeFrame !== null) {
-            cancelAnimationFrame(resizeFrame);
-          }
-
-          resizeFrame = requestAnimationFrame(() => {
-            resizeFrame = null;
-            syncVisualHeight();
-          });
-        }
-
-        scheduleHeightSync();
-
-        window.addEventListener(
-          "load",
-          scheduleHeightSync
-        );
-
-        window.addEventListener(
-          "resize",
-          scheduleHeightSync,
-          { passive: true }
-        );
-
-        if ("ResizeObserver" in window) {
-          const observer = new ResizeObserver(
-            scheduleHeightSync
-          );
-
-          entries.forEach((entry) => {
-            const item = entry.querySelector(
-              ".agassi-group-faq__item"
-            );
-
-            if (item) {
-              observer.observe(item);
-            }
-          });
-        }
-
-        if (document.fonts?.ready) {
-          document.fonts.ready.then(
-            scheduleHeightSync
-          );
-        }
 
         if (sharedIcon && "MutationObserver" in window) {
           const observer = new MutationObserver(syncIcons);
