@@ -429,3 +429,213 @@ body.agassi-group-menu-locked {
     transition: none;
   }
 }
+
+/* Hero */
+
+.agassi-group-hero {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--agassi-group-cream);
+}
+
+.agassi-group-hero,
+.agassi-group-hero *,
+.agassi-group-hero *::before,
+.agassi-group-hero *::after {
+  box-sizing: border-box;
+}
+
+/* Шейп */
+
+.agassi-group-hero__shape {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 720px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--agassi-group-ink);
+  color: var(--agassi-group-white);
+}
+
+/* Фоновое изображение */
+
+.agassi-group-hero__background {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.agassi-group-hero__background img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Затемнение */
+
+.agassi-group-hero__overlay {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.48) 0%,
+    rgba(0, 0, 0, 0.64) 100%
+  );
+  pointer-events: none;
+}
+
+/* Контент */
+
+.agassi-group-hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 880px;
+  padding: 120px 40px;
+  text-align: center;
+}
+
+.agassi-group-hero__title {
+  max-width: 800px;
+  margin: 0;
+  color: var(--agassi-group-white);
+  font-family: var(--t-headline-font, inherit);
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 72px;
+  letter-spacing: 0;
+}
+
+.agassi-group-hero__description {
+  max-width: 640px;
+  margin: 24px 0 0;
+  color: var(--agassi-group-white);
+  font-family: var(--t-text-font, inherit);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+/* Кнопка */
+
+.agassi-group-hero .agassi-group-hero__button,
+#allrecords .agassi-group-hero .agassi-group-hero__button,
+.t-records .agassi-group-hero .agassi-group-hero__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-top: 40px;
+  padding: 12px 32px;
+  border: 0;
+  border-radius: 40px;
+  background: var(--agassi-group-burgundy);
+  color: var(--agassi-group-white);
+  font-family: var(--t-text-font, inherit);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.agassi-group-hero .agassi-group-hero__button:hover,
+#allrecords .agassi-group-hero .agassi-group-hero__button:hover,
+.t-records .agassi-group-hero .agassi-group-hero__button:hover {
+  background: var(--agassi-group-burgundy-hover);
+  color: var(--agassi-group-white);
+  text-decoration: none;
+}
+
+.agassi-group-hero a:focus-visible {
+  outline: 2px solid var(--agassi-group-gold);
+  outline-offset: 4px;
+}
+
+/* Планшет */
+
+@media (max-width: 1199px) {
+  .agassi-group-hero__shape {
+    min-height: 640px;
+    border-radius: 20px;
+  }
+
+  .agassi-group-hero__content {
+    max-width: 720px;
+    padding: 96px 32px;
+  }
+
+  .agassi-group-hero__title {
+    font-size: 48px;
+    line-height: 56px;
+  }
+}
+
+/* Смартфон */
+
+@media (max-width: 767px) {
+  .agassi-group-hero__shape {
+    min-height: 600px;
+    border-radius: 16px;
+  }
+
+  .agassi-group-hero__content {
+    padding: 80px 24px;
+  }
+
+  .agassi-group-hero__title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  .agassi-group-hero__description {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .agassi-group-hero .agassi-group-hero__button,
+  #allrecords .agassi-group-hero .agassi-group-hero__button,
+  .t-records .agassi-group-hero .agassi-group-hero__button {
+    width: 100%;
+    min-height: 52px;
+    margin-top: 32px;
+    padding: 14px 24px;
+  }
+}
+
+/* Небольшие экраны */
+
+@media (max-height: 600px) and (max-width: 1199px) {
+  .agassi-group-hero__shape {
+    min-height: 480px;
+  }
+
+  .agassi-group-hero__content {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+}
+
+/* Доступность */
+
+@media (prefers-reduced-motion: reduce) {
+  .agassi-group-hero__button {
+    transition: none;
+  }
+}
