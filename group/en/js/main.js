@@ -1,337 +1,179 @@
 (() => {
-  "use strict";
-
-  /* Header */
-
-  const initHeader = () => {
-    const header = document.querySelector(".agassi-group-header");
-    if (!header || header.dataset.initialized === "true") return;
-
-    const toggle = header.querySelector(".agassi-group-header__toggle");
-    const navigation = header.querySelector(".agassi-group-header__nav");
-    if (!toggle || !navigation) return;
-
-    header.dataset.initialized = "true";
-
-    const setMenu = (open) => {
-      header.classList.toggle("is-menu-open", open);
-      toggle.setAttribute("aria-expanded", String(open));
-      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-      document.body.classList.toggle("agassi-group-menu-locked", open);
-
-      if (open || window.innerWidth > 1199) {
-        navigation.removeAttribute("inert");
-      } else {
-        navigation.setAttribute("inert", "");
-      }
-    };
-
-    toggle.addEventListener("click", () => {
-      setMenu(!header.classList.contains("is-menu-open"));
-    });
-
-    navigation.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => setMenu(false));
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && header.classList.contains("is-menu-open")) {
-        setMenu(false);
-        toggle.focus();
-      }
-    });
-
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 1199) {
-        setMenu(false);
-      } else if (!header.classList.contains("is-menu-open")) {
-        navigation.setAttribute("inert", "");
-      }
-    });
-
-    setMenu(false);
-  };
-
-  /* Partners */
-
-  const initPartners = () => {
-    document.querySelectorAll(".agassi-group-partners").forEach((section) => {
-      if (section.dataset.initialized === "true") return;
-
-      const viewport = section.querySelector(".agassi-group-partners__viewport");
-      const track = section.querySelector(".agassi-group-partners__track");
-      const prev = section.querySelector(".agassi-group-partners__arrow--prev");
-      const next = section.querySelector(".agassi-group-partners__arrow--next");
-
-      if (!viewport || !track || !prev || !next) return;
-
-      const originalCards = Array.from(track.children);
-      const count = originalCards.length;
-
-      if (count < 2) {
-        prev.disabled = true;
-        next.disabled = true;
-        return;
-      }
-
-      section.dataset.initialized = "true";
-
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-      const createClone = (card) => {
-        const clone = card.cloneNode(true);
-        clone.setAttribute("aria-hidden", "true");
-        clone.setAttribute("inert", "");
-        clone.dataset.clone = "true";
-        return clone;
-      };
-
-      const before = document.createDocumentFragment();
-      const after = document.createDocumentFragment();
-
-      originalCards.forEach((card) => {
-        before.appendChild(createClone(card));
-        after.appendChild(createClone(card));
-      });
-
-      track.prepend(before);
-      track.append(after);
-
-      let index = count;
-      let step = 0;
-      let position = 0;
-      let dragging = false;
-      let pointerId = null;
-      let startX = 0;
-      let startPosition = 0;
-      let moved = false;
-      let suppressClick = false;
-      let resizeFrame = 0;
-
-      const getStep = () => {
-        const card = track.querySelector(".agassi-group-partners__card");
-        if (!card) return 0;
-
-        const styles = getComputedStyle(track);
-        const gap = parseFloat(styles.columnGap) || 0;
-
-        return card.getBoundingClientRect().width + gap;
-      };
-
-      const render = (animate = true) => {
-        track.style.transition = animate && !reducedMotion.matches
-          ? "transform 400ms ease"
-          : "none";
-
-        position = -index * step;
-        track.style.transform = `translate3d(${position}px, 0, 0)`;
-      };
-
-      const normalize = () => {
-        if (index >= count * 2) {
-          index -= count;
-          render(false);
-        } else if (index < count) {
-          index += count;
-          render(false);
-        }
-      };
-
-      const move = (direction) => {
-        if (dragging || !step) return;
-
-        normalize();
-        index += direction;
-        render(true);
-
-        if (reducedMotion.matches) normalize();
-      };
-
-      const updateSize = () => {
-        step = getStep();
-        normalize();
-        render(false);
-      };
-
-      track.addEventListener("transitionend", (event) => {
-        if (event.target !== track || event.propertyName !== "transform") return;
-        normalize();
-      });
-
-      prev.addEventListener("click", () => move(-1));
-      next.addEventListener("click", () => move(1));
-
-      viewport.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowLeft") {
-          event.preventDefault();
-          move(-1);
-        }
-
-        if (event.key === "ArrowRight") {
-          event.preventDefault();
-          move(1);
-        }
-      });
-
-      viewport.addEventListener("pointerdown", (event) => {
-        if (event.pointerType === "mouse" && event.button !== 0) return;
-        if (!step) return;
-
-        dragging = true;
-        moved = false;
-        pointerId = event.pointerId;
-        startX = event.clientX;
-        startPosition = position;
-
-        track.style.transition = "none";
-        viewport.classList.add("is-dragging");
-
-        if (event.pointerType === "mouse") {
-          viewport.setPointerCapture(event.pointerId);
-        }
-      });
-
-      viewport.addEventListener("pointermove", (event) => {
-        if (!dragging || event.pointerId !== pointerId) return;
-
-        const delta = event.clientX - startX;
-
-        if (Math.abs(delta) > 8) moved = true;
-        if (!moved) return;
-
-        position = startPosition + delta;
-        track.style.transform = `translate3d(${position}px, 0, 0)`;
-      });
-
-      const endDrag = (event) => {
-        if (!dragging || event.pointerId !== pointerId) return;
-
-        const delta = event.clientX - startX;
-
-        dragging = false;
-        pointerId = null;
-
-        viewport.classList.remove("is-dragging");
-
-        if (moved) {
-          const cardsMoved = Math.round(Math.abs(delta) / step);
-          const amount = Math.max(1, cardsMoved);
-
-          index += delta < 0 ? amount : -amount;
-          index = Math.max(0, Math.min(index, count * 3 - 1));
-          suppressClick = true;
-        }
-
-        render(true);
-
-        if (reducedMotion.matches) normalize();
-
-        if (viewport.hasPointerCapture?.(event.pointerId)) {
-          viewport.releasePointerCapture(event.pointerId);
-        }
-      };
-
-      viewport.addEventListener("pointerup", endDrag);
-      viewport.addEventListener("pointercancel", endDrag);
-
-      viewport.addEventListener("click", (event) => {
-        if (!suppressClick) return;
-
-        event.preventDefault();
-        event.stopPropagation();
-        suppressClick = false;
-      }, true);
-
-      viewport.addEventListener("dragstart", (event) => {
-        event.preventDefault();
-      });
-
-      window.addEventListener("resize", () => {
-        cancelAnimationFrame(resizeFrame);
-        resizeFrame = requestAnimationFrame(updateSize);
-      });
-
-      updateSize();
-    });
-  };
-
-  /* FAQ */
-
-  const initFAQ = () => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    document.querySelectorAll(".agassi-group-faq__entry").forEach((entry) => {
-      if (entry.dataset.initialized === "true") return;
-      if (entry.tagName !== "DETAILS") return;
-
-      const question = entry.querySelector(".agassi-group-faq__question");
-      const answer = entry.querySelector(".agassi-group-faq__answer");
-
-      if (!question || !answer) return;
-
-      entry.dataset.initialized = "true";
-
-      let animation = null;
-      let targetOpen = entry.open;
-
-      question.addEventListener("click", (event) => {
-        event.preventDefault();
-        targetOpen = !targetOpen;
-
-        if (reducedMotion.matches || !entry.animate) {
-          if (animation) animation.cancel();
-          entry.open = targetOpen;
-          entry.style.height = "";
-          return;
-        }
-
-        const startHeight = entry.getBoundingClientRect().height;
-
-        if (animation) animation.cancel();
-
-        entry.open = true;
-
-        const endHeight = targetOpen
-          ? question.getBoundingClientRect().height + answer.getBoundingClientRect().height
-          : question.getBoundingClientRect().height;
-
-        entry.style.height = `${startHeight}px`;
-
-        animation = entry.animate(
-          [
-            { height: `${startHeight}px` },
-            { height: `${endHeight}px` }
-          ],
-          {
-            duration: 320,
-            easing: "cubic-bezier(0.22, 1, 0.36, 1)"
-          }
-        );
-
-        const current = animation;
-
-        current.onfinish = () => {
-          if (animation !== current) return;
-
-          entry.open = targetOpen;
-          entry.style.height = "";
-          animation = null;
-        };
-      });
-    });
-  };
-
-  /* Инициализация */
-
-  const init = () => {
-    initHeader();
-    initPartners();
-    initFAQ();
-  };
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
+  'use strict';
+
+  // Один жизненный цикл на документ, в том числе при повторном подключении файла.
+  const key = Symbol.for('agassi.group.runtime.v2');
+  if (document[key]) {
+    document[key].refresh();
+    return;
   }
+  const mounted = new Map();
+  const selectors = '.agassi-group-header, .agassi-group-partners, [data-agassi-form]';
+  let frame = 0;
+
+  function initHeader(header, signal) {
+    const toggle = header.querySelector('.agassi-group-header__toggle');
+    const navigation = header.querySelector('.agassi-group-header__nav');
+    if (!toggle || !navigation) return false;
+    const mobile = matchMedia('(max-width: 1199px)');
+    let open = false;
+    function setMenu(next, restoreFocus = false) {
+      open = mobile.matches && next;
+      navigation.classList.toggle('agassi-group-header__nav--open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      toggle.hidden = !mobile.matches;
+      if (restoreFocus && mobile.matches) toggle.focus();
+    }
+    header.classList.add('agassi-group-header--enhanced');
+    toggle.addEventListener('click', () => setMenu(!open), { signal });
+    navigation.addEventListener('click', event => {
+      if (event.target.closest('a')) setMenu(false);
+    }, { signal });
+    header.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && open) {
+        event.preventDefault();
+        setMenu(false, true);
+      }
+    }, { signal });
+    document.addEventListener('click', event => {
+      if (open && !header.contains(event.target)) setMenu(false);
+    }, { signal });
+    mobile.addEventListener('change', () => {
+      const focusedLink = navigation.contains(document.activeElement);
+      setMenu(false, focusedLink);
+    }, { signal });
+    setMenu(false);
+    return () => {
+      header.classList.remove('agassi-group-header--enhanced');
+      navigation.classList.remove('agassi-group-header__nav--open');
+      toggle.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+    };
+  }
+
+  function initPartners(section, signal) {
+    const viewport = section.querySelector('.agassi-group-partners__viewport');
+    const track = section.querySelector('.agassi-group-partners__track');
+    const previous = section.querySelector('.agassi-group-partners__arrow--prev');
+    const next = section.querySelector('.agassi-group-partners__arrow--next');
+    const controls = section.querySelector('.agassi-group-partners__controls');
+    if (!viewport || !track || !previous || !next || !controls) return false;
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    function update() {
+      const maximum = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+      controls.hidden = maximum <= 1;
+      previous.disabled = viewport.scrollLeft <= 1;
+      next.disabled = viewport.scrollLeft >= maximum - 1;
+    }
+    function move(direction) {
+      const card = track.querySelector('.agassi-group-partners__card');
+      if (!card) return;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      viewport.scrollBy({ left: direction * (card.getBoundingClientRect().width + gap), behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+    }
+    previous.addEventListener('click', () => move(-1), { signal });
+    next.addEventListener('click', () => move(1), { signal });
+    viewport.addEventListener('scroll', update, { passive: true, signal });
+    viewport.addEventListener('keydown', event => {
+      if (event.target !== viewport || event.altKey || event.ctrlKey || event.metaKey) return;
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        move(event.key === 'ArrowLeft' ? -1 : 1);
+      }
+    }, { signal });
+    const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(update) : null;
+    observer?.observe(viewport);
+    observer?.observe(track);
+    if (!observer) window.addEventListener('resize', update, { signal });
+    update();
+    return () => { observer?.disconnect(); controls.hidden = true; };
+  }
+
+  function initForm(form, signal) {
+    const submit = form.querySelector('[type="submit"]');
+    const status = form.querySelector('[role="status"]');
+    const note = form.querySelector('.agassi-group-contact__note');
+    if (!submit || !status || !note) return false;
+    let endpoint;
+    try {
+      const value = (form.dataset.agassiEndpoint || '').trim();
+      if (value) {
+        const parsed = new URL(value, location.href);
+        if (parsed.protocol === 'https:') endpoint = parsed.href;
+      }
+    } catch { /* Некорректный адрес не включает отправку. */ }
+    submit.disabled = !endpoint;
+    if (endpoint) note.textContent = 'Use this form for business enquiries. Please do not include sensitive personal information.';
+    let busy = false;
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!endpoint || busy || !form.reportValidity()) return;
+      busy = true;
+      submit.disabled = true;
+      form.setAttribute('aria-busy', 'true');
+      status.textContent = 'Sending your enquiry…';
+      const request = new AbortController();
+      const abortRequest = () => request.abort();
+      signal.addEventListener('abort', abortRequest, { once: true });
+      const timer = setTimeout(abortRequest, 15000);
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'omit',
+          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+          signal: request.signal
+        });
+        const result = await response.json();
+        if (!response.ok || result?.ok !== true) throw new Error('Request not accepted');
+        if (!signal.aborted) {
+          status.textContent = 'Thank you. Your enquiry has been received.';
+          form.reset();
+        }
+      } catch {
+        if (!signal.aborted) status.textContent = 'Delivery could not be confirmed. Your text is still here. Please try again later.';
+      } finally {
+        clearTimeout(timer);
+        signal.removeEventListener('abort', abortRequest);
+        busy = false;
+        form.removeAttribute('aria-busy');
+        submit.disabled = !endpoint;
+      }
+    }, { signal });
+  }
+
+  function refresh() {
+    for (const [element, instance] of mounted) {
+      if (!element.isConnected || instance.children.some(child => !element.contains(child))) {
+        instance.controller.abort();
+        instance.cleanup?.();
+        mounted.delete(element);
+      }
+    }
+    document.querySelectorAll(selectors).forEach(element => {
+      if (mounted.has(element)) return;
+      const controller = new AbortController();
+      const initializer = element.matches('[data-agassi-form]') ? initForm : element.matches('.agassi-group-header') ? initHeader : initPartners;
+      const cleanup = initializer(element, controller.signal);
+      if (cleanup === false) { controller.abort(); return; }
+      mounted.set(element, { controller, cleanup, children: Array.from(element.querySelectorAll('button, nav, form, .agassi-group-partners__viewport, .agassi-group-partners__track')) });
+    });
+  }
+  function scheduleRefresh() {
+    if (frame) return;
+    frame = requestAnimationFrame(() => { frame = 0; refresh(); });
+  }
+  document[key] = { refresh: scheduleRefresh };
+  function start() {
+    refresh();
+    new MutationObserver(scheduleRefresh).observe(document.body, { childList: true, subtree: true });
+    document.addEventListener('click', event => {
+      const link = event.target.closest('[data-agassi-interest]');
+      const select = document.querySelector('[data-agassi-form] select[name="interest"]');
+      if (link && select) select.value = link.dataset.agassiInterest;
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+  else start();
 })();
