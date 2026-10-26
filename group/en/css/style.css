@@ -7,14 +7,14 @@
   --agassi-group-ink: #352D2B;
   --agassi-group-border: #DCD4CA;
 
-  --agassi-group-container-width: 1440px;
+  --agassi-group-container: 1440px;
   --agassi-group-gutter: 40px;
   --agassi-group-gap: 24px;
 
   --agassi-group-header-height: 80px;
   --agassi-group-mobile-height: 72px;
 
-  --agassi-group-duration: 500ms;
+  --agassi-group-menu-duration: 500ms;
 }
 
 /* Общие стили */
@@ -24,9 +24,11 @@
 
   position: relative;
   z-index: 100;
+  display: block;
   width: 100%;
-  min-height: var(--agassi-group-header-height);
+  height: var(--agassi-group-header-height);
   margin: 0;
+  padding: 0;
   background: var(--agassi-group-cream);
   color: var(--agassi-group-ink);
   font-family: var(--agassi-group-font);
@@ -39,24 +41,67 @@
   box-sizing: border-box;
 }
 
-.agassi-group-container {
+.agassi-group-header__container {
   width: 100%;
-  max-width: var(--agassi-group-container-width);
-  margin-inline: auto;
-  padding-inline: var(--agassi-group-gutter);
+  max-width: var(--agassi-group-container);
+  margin: 0 auto;
+  padding: 0 var(--agassi-group-gutter);
 }
 
-.agassi-group-header__mobile {
-  display: none;
+/* Десктопная версия */
+
+.agassi-group-header__desktop {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-.agassi-group-header .agassi-group-header__logo {
+.agassi-group-header__desktop-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--agassi-group-gap);
+  width: 100%;
+  height: var(--agassi-group-header-height);
+}
+
+.agassi-group-header__desktop-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 0 0 20%;
+  min-width: 0;
+}
+
+.agassi-group-header__desktop-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  gap: 24px;
+  min-width: 0;
+}
+
+.agassi-group-header__desktop-action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 0 20%;
+  min-width: 0;
+}
+
+/* Логотип */
+
+.agassi-group-header .agassi-group-header__logo,
+#allrecords .agassi-group-header .agassi-group-header__logo {
   display: inline-flex;
   align-items: center;
   width: fit-content;
   max-width: 100%;
+  margin: 0;
   padding: 0;
   border: 0;
+  background: none;
   text-decoration: none;
 }
 
@@ -67,13 +112,40 @@
   height: auto;
   max-height: 48px;
   object-fit: contain;
+  object-position: left center;
+}
+
+/* Навигация */
+
+.agassi-group-header .agassi-group-header__desktop-nav a,
+#allrecords .agassi-group-header .agassi-group-header__desktop-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--agassi-group-ink);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 200ms ease;
+}
+
+.agassi-group-header .agassi-group-header__desktop-nav a:hover,
+#allrecords .agassi-group-header .agassi-group-header__desktop-nav a:hover {
+  color: var(--agassi-group-burgundy);
+  text-decoration: none;
 }
 
 /* Кнопки */
 
-.agassi-group-header .agassi-group-button,
-#allrecords .agassi-group-header .agassi-group-button,
-.t-records .agassi-group-header .agassi-group-button {
+.agassi-group-header .agassi-group-header__button,
+#allrecords .agassi-group-header .agassi-group-header__button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -84,7 +156,7 @@
   border-radius: 40px;
   background: var(--agassi-group-burgundy);
   color: var(--agassi-group-white);
-  font-family: var(--agassi-group-font);
+  font-family: inherit;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -95,70 +167,20 @@
   transition: background-color 200ms ease;
 }
 
-.agassi-group-header .agassi-group-button:hover,
-#allrecords .agassi-group-header .agassi-group-button:hover,
-.t-records .agassi-group-header .agassi-group-button:hover {
+.agassi-group-header .agassi-group-header__button:hover,
+#allrecords .agassi-group-header .agassi-group-header__button:hover {
   background: var(--agassi-group-burgundy-hover);
   color: var(--agassi-group-white);
   text-decoration: none;
 }
 
-/* Десктоп */
+/* Мобильная версия */
 
-.agassi-group-header__desktop-inner {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  align-items: center;
-  gap: var(--agassi-group-gap);
-  min-height: var(--agassi-group-header-height);
+.agassi-group-header__mobile {
+  display: none;
+  width: 100%;
+  height: 100%;
 }
-
-.agassi-group-header__desktop-inner > .agassi-group-header__logo {
-  grid-column: span 2;
-}
-
-.agassi-group-header__desktop-nav {
-  grid-column: span 8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  min-width: 0;
-}
-
-.agassi-group-header .agassi-group-header__desktop-nav a,
-#allrecords .agassi-group-header .agassi-group-header__desktop-nav a,
-.t-records .agassi-group-header .agassi-group-header__desktop-nav a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  color: var(--agassi-group-ink);
-  font-family: var(--agassi-group-font);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.agassi-group-header .agassi-group-header__desktop-nav a:hover,
-#allrecords .agassi-group-header .agassi-group-header__desktop-nav a:hover,
-.t-records .agassi-group-header .agassi-group-header__desktop-nav a:hover {
-  color: var(--agassi-group-burgundy);
-  text-decoration: none;
-}
-
-.agassi-group-header__desktop-action {
-  grid-column: span 2;
-  display: flex;
-  justify-content: flex-end;
-  min-width: 0;
-}
-
-/* Мобильная панель */
 
 .agassi-group-header__mobile-bar {
   position: relative;
@@ -169,55 +191,73 @@
 }
 
 .agassi-group-header__mobile-inner {
-  display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-  align-items: center;
-  gap: 16px;
-  height: 100%;
-}
-
-.agassi-group-header__mobile-inner > .agassi-group-header__logo {
-  grid-column: span 6;
-}
-
-.agassi-group-header__controls {
-  grid-column: span 2;
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  height: var(--agassi-group-mobile-height);
 }
 
-.agassi-group-header__toggle {
+.agassi-group-header__mobile-logo {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.agassi-group-header__mobile-action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+/* Кнопка меню */
+
+.agassi-group-header__menu-toggle {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 48px;
   height: 48px;
+  margin: 0;
   padding: 0;
   border: 0;
   border-radius: 50%;
   background: var(--agassi-group-burgundy);
-  color: var(--agassi-group-white);
   cursor: pointer;
   appearance: none;
 }
 
-.agassi-group-header__icon {
-  display: block;
+.agassi-group-header__menu-icon {
+  position: absolute;
   width: 24px;
   height: 24px;
   object-fit: contain;
+  transition:
+    transform 300ms ease,
+    opacity 300ms ease;
 }
 
-.agassi-group-header__icon--close {
-  display: none;
+.agassi-group-header__menu-icon--open {
+  opacity: 1;
+  transform: rotate(0);
 }
 
-.agassi-group-header.is-menu-open .agassi-group-header__icon--open {
-  display: none;
+.agassi-group-header__menu-icon--close {
+  opacity: 0;
+  transform: rotate(-90deg);
 }
 
-.agassi-group-header.is-menu-open .agassi-group-header__icon--close {
-  display: block;
+.agassi-group-header.is-menu-open .agassi-group-header__menu-icon--open {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+.agassi-group-header.is-menu-open .agassi-group-header__menu-icon--close {
+  opacity: 1;
+  transform: rotate(0);
 }
 
 /* Полноэкранное меню */
@@ -239,8 +279,8 @@
   pointer-events: none;
   transform: translateY(-100%);
   transition:
-    transform var(--agassi-group-duration) cubic-bezier(0.76, 0, 0.24, 1),
-    visibility 0s linear var(--agassi-group-duration);
+    transform var(--agassi-group-menu-duration) cubic-bezier(0.76, 0, 0.24, 1),
+    visibility 0s linear var(--agassi-group-menu-duration);
 }
 
 .agassi-group-header.is-menu-open .agassi-group-header__mobile-menu {
@@ -248,31 +288,29 @@
   pointer-events: auto;
   transform: translateY(0);
   transition:
-    transform var(--agassi-group-duration) cubic-bezier(0.76, 0, 0.24, 1),
+    transform var(--agassi-group-menu-duration) cubic-bezier(0.76, 0, 0.24, 1),
     visibility 0s linear 0s;
 }
 
-.agassi-group-header__menu-inner {
+.agassi-group-header__menu-container {
   display: flex;
-  flex: 1 0 auto;
   flex-direction: column;
+  flex: 1 0 auto;
   min-height: 100%;
   padding-top: calc(var(--agassi-group-mobile-height) + 24px);
   padding-bottom: max(32px, env(safe-area-inset-bottom));
 }
 
-/* Навигация */
+/* Мобильная навигация */
 
 .agassi-group-header__mobile-nav {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   width: 100%;
 }
 
 .agassi-group-header .agassi-group-header__mobile-nav a,
-#allrecords .agassi-group-header .agassi-group-header__mobile-nav a,
-.t-records .agassi-group-header .agassi-group-header__mobile-nav a {
+#allrecords .agassi-group-header .agassi-group-header__mobile-nav a {
   display: flex;
   align-items: center;
   min-height: 64px;
@@ -281,42 +319,38 @@
   border: 0;
   border-bottom: 1px solid var(--agassi-group-border);
   color: var(--agassi-group-ink);
-  font-family: var(--agassi-group-font);
+  font-family: inherit;
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 32px;
   text-decoration: none;
-  transition:
-    color 200ms ease,
-    transform 300ms ease;
+  transition: color 200ms ease;
 }
 
 .agassi-group-header .agassi-group-header__mobile-nav a:hover,
-#allrecords .agassi-group-header .agassi-group-header__mobile-nav a:hover,
-.t-records .agassi-group-header .agassi-group-header__mobile-nav a:hover {
+#allrecords .agassi-group-header .agassi-group-header__mobile-nav a:hover {
   color: var(--agassi-group-burgundy);
   text-decoration: none;
 }
 
-/* Кнопка меню */
+/* Нижняя кнопка */
 
-.agassi-group-header__menu-bottom {
+.agassi-group-header__mobile-bottom {
   display: flex;
-  align-items: stretch;
+  width: 100%;
   margin-top: auto;
   padding-top: 48px;
 }
 
 .agassi-group-header .agassi-group-header__mobile-cta,
-#allrecords .agassi-group-header .agassi-group-header__mobile-cta,
-.t-records .agassi-group-header .agassi-group-header__mobile-cta {
+#allrecords .agassi-group-header .agassi-group-header__mobile-cta {
   width: 100%;
   min-height: 52px;
   font-size: 16px;
   line-height: 24px;
 }
 
-/* Состояния */
+/* Открытое состояние */
 
 .agassi-group-header.is-menu-open .agassi-group-header__mobile-bar {
   position: fixed;
@@ -329,6 +363,8 @@ body.agassi-group-menu-locked {
   overflow: hidden;
   overscroll-behavior: none;
 }
+
+/* Доступность */
 
 .agassi-group-header a:focus-visible,
 .agassi-group-header button:focus-visible {
@@ -345,7 +381,7 @@ body.agassi-group-menu-locked {
   }
 
   .agassi-group-header {
-    min-height: var(--agassi-group-mobile-height);
+    height: var(--agassi-group-mobile-height);
   }
 
   .agassi-group-header__desktop {
@@ -365,30 +401,18 @@ body.agassi-group-menu-locked {
     --agassi-group-gap: 12px;
   }
 
-  .agassi-group-header__mobile-inner {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--agassi-group-gap);
-  }
-
-  .agassi-group-header__mobile-inner > .agassi-group-header__logo {
-    grid-column: span 3;
-  }
-
-  .agassi-group-header__controls {
-    grid-column: span 1;
-  }
-
   .agassi-group-header .agassi-group-header__mobile-nav a {
     font-size: 22px;
     line-height: 32px;
   }
 }
 
-/* Доступность */
+/* Снижение анимаций */
 
 @media (prefers-reduced-motion: reduce) {
   .agassi-group-header__mobile-menu,
-  .agassi-group-header__mobile-nav a {
+  .agassi-group-header__menu-icon,
+  .agassi-group-header a {
     transition: none;
   }
 }
