@@ -930,13 +930,13 @@ body.agassi-group-menu-locked {
   gap: var(--agassi-group-gap);
 }
 
-/* FAQ — изображение */
+/* FAQ — изображение фиксированной высоты */
 
 .agassi-group-faq__visual {
   position: relative;
   grid-column: span 6;
   min-width: 0;
-  height: var(--agassi-group-faq-visual-height, 448px);
+  height: 448px;
   overflow: hidden;
   border-radius: var(--agassi-group-radius);
   background: var(--agassi-group-burgundy);
@@ -1210,6 +1210,7 @@ body.agassi-group-menu-locked {
   }
 
   .agassi-group-faq__visual {
+    height: 448px;
     border-radius: var(--agassi-group-radius-tablet);
   }
 
