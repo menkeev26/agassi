@@ -417,7 +417,7 @@ body.agassi-group-menu-locked {
 /* Hero */
 
 .agassi-group-hero {
-  padding-bottom: 48px;
+  padding: 24px 0;
 }
 
 .agassi-group-hero > .agassi-group-container {
@@ -431,12 +431,9 @@ body.agassi-group-menu-locked {
   grid-column: 1 / -1;
   display: grid;
   place-items: center;
-  min-height: 520px;
-  height: clamp(
-    520px,
-    calc(100svh - var(--agassi-group-header-height) - 48px),
-    820px
-  );
+  width: 100%;
+  height: 560px;
+  min-height: 0;
   overflow: hidden;
   border-radius: var(--agassi-group-radius);
   background: var(--agassi-group-cream);
@@ -453,8 +450,11 @@ body.agassi-group-menu-locked {
 .agassi-group-hero__background img {
   position: absolute;
   inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
+  max-width: none;
+  max-height: none;
   object-fit: cover;
   object-position: center;
 }
@@ -472,16 +472,16 @@ body.agassi-group-menu-locked {
   justify-content: center;
   width: 100%;
   max-width: 960px;
-  padding: 64px 40px;
+  padding: 48px 40px;
   text-align: center;
 }
 
 .agassi-group-hero__logo {
   display: block;
   width: 100%;
-  max-width: 360px;
+  max-width: 320px;
   height: auto;
-  max-height: 280px;
+  max-height: 240px;
   object-fit: contain;
 }
 
@@ -490,7 +490,7 @@ body.agassi-group-menu-locked {
   justify-content: center;
   flex-wrap: wrap;
   gap: 16px;
-  margin-top: 48px;
+  margin-top: 40px;
 }
 
 .agassi-group-hero .agassi-group-hero__button,
@@ -501,6 +501,7 @@ body.agassi-group-menu-locked {
   justify-content: center;
   min-width: 160px;
   min-height: 48px;
+  margin: 0;
   padding: 12px 32px;
   border: 1px solid var(--agassi-group-burgundy);
   border-radius: var(--agassi-group-button-radius);
@@ -508,6 +509,7 @@ body.agassi-group-menu-locked {
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
+  text-align: center;
   text-decoration: none;
   cursor: pointer;
   transition:
@@ -910,8 +912,6 @@ body.agassi-group-menu-locked {
   text-transform: uppercase;
 }
 
-/* FAQ — описание */
-
 .agassi-group-faq .agassi-group-faq__description {
   max-width: 640px;
   margin: 24px 0 0;
@@ -1128,23 +1128,23 @@ body.agassi-group-menu-locked {
     grid-template-columns: repeat(8, minmax(0, 1fr));
   }
 
+  .agassi-group-hero {
+    padding: 24px 0;
+  }
+
   .agassi-group-hero__shape {
-    min-height: 440px;
-    height: clamp(
-      440px,
-      calc(100svh - var(--agassi-group-mobile-height) - 40px),
-      720px
-    );
+    height: 480px;
+    min-height: 0;
     border-radius: var(--agassi-group-radius-tablet);
   }
 
   .agassi-group-hero__content {
     max-width: 720px;
-    padding: 56px 32px;
+    padding: 40px 32px;
   }
 
   .agassi-group-hero__logo {
-    max-width: 300px;
+    max-width: 280px;
   }
 
   .agassi-group-about {
@@ -1261,22 +1261,19 @@ body.agassi-group-menu-locked {
     line-height: 32px;
   }
 
-  .agassi-group-hero {
-    padding-bottom: 24px;
-  }
-
   .agassi-group-hero > .agassi-group-container,
   .agassi-group-about__grid,
   .agassi-group-faq__layout {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
+  .agassi-group-hero {
+    padding: 16px 0;
+  }
+
   .agassi-group-hero__shape {
-    min-height: 480px;
-    height: max(
-      480px,
-      calc(100svh - var(--agassi-group-mobile-height) - 24px)
-    );
+    height: 520px;
+    min-height: 0;
     border-radius: var(--agassi-group-radius-mobile);
   }
 
@@ -1299,6 +1296,7 @@ body.agassi-group-menu-locked {
 
   .agassi-group-hero__actions {
     flex-direction: column;
+    align-items: center;
     gap: 12px;
     width: 100%;
     margin-top: 40px;
@@ -1446,8 +1444,12 @@ body.agassi-group-menu-locked {
   }
 
   .agassi-group-faq .agassi-group-faq__answer p {
-    padding: 12px 20px 20px;
+    padding: 12px 0 20px;
     line-height: 24px;
+  }
+
+  .agassi-group-faq__answer {
+    padding: 0 20px;
   }
 }
 
