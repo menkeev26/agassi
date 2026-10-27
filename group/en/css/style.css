@@ -605,14 +605,13 @@ a[class*="agassi-group-"],
   grid-column: span 6;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  aspect-ratio: 5 / 4;
-  padding: 48px;
+  align-items: flex-start;
+  aspect-ratio: 4 / 3;
+  padding: 44px;
   overflow: hidden;
   border-radius: var(--agassi-group-radius);
-  background: var(--agassi-group-ink);
+  background: var(--agassi-group-crimson);
   color: var(--agassi-group-white);
-  text-align: center;
 }
 
 /* Затемнение фона: полупрозрачность нужна, чтобы фото оставалось видно */
@@ -620,7 +619,7 @@ a[class*="agassi-group-"],
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(30, 30, 30, .64) 0%, rgba(30, 30, 30, .24) 100%);
+  background: linear-gradient(180deg, rgba(140, 15, 20, .3) 0%, rgba(140, 15, 20, .2) 34%, rgba(140, 15, 20, .96) 100%);
   pointer-events: none;
 }
 
@@ -633,10 +632,19 @@ a[class*="agassi-group-"],
   object-fit: cover;
 }
 
-.agassi-group-directions__body,
-.agassi-group-directions__action {
+.agassi-group-directions__label,
+.agassi-group-directions__content {
   position: relative;
   z-index: 1;
+}
+
+.agassi-group-directions__label {
+  font-size: var(--agassi-group-font-small);
+  line-height: var(--agassi-group-line-small);
+}
+
+.agassi-group-directions__content {
+  margin-top: auto;
 }
 
 .agassi-group-directions__title {
@@ -647,12 +655,12 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-directions__text {
-  max-width: 480px;
-  margin: 8px auto 0;
+  max-width: 520px;
+  margin-top: 8px;
   color: var(--agassi-group-sand);
 }
 
-.agassi-group-directions__action {
+.agassi-group-directions__content .agassi-group-button {
   margin-top: 24px;
 }
 
