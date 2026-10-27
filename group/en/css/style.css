@@ -116,6 +116,12 @@ a[class*="agassi-group-"],
   text-wrap: balance;
 }
 
+.agassi-group-heading__text {
+  max-width: 640px;
+  margin: 24px auto 0;
+  color: var(--agassi-group-muted);
+}
+
 .agassi-group-heading--light .agassi-group-heading__title {
   color: var(--agassi-group-white);
 }
@@ -599,7 +605,8 @@ a[class*="agassi-group-"],
 }
 
 /* Затемнение фона: полупрозрачность нужна, чтобы фото оставалось видно */
-.agassi-group-directions__card::after {
+.agassi-group-directions__card::after,
+.agassi-group-contact__card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -607,7 +614,8 @@ a[class*="agassi-group-"],
   pointer-events: none;
 }
 
-.agassi-group-directions__image {
+.agassi-group-directions__image,
+.agassi-group-contact__image {
   position: absolute;
   inset: 0;
   display: block;
@@ -908,38 +916,29 @@ a[class*="agassi-group-"],
 }
 
 /* Контакты и форма */
-.agassi-group-contact__surface {
-  padding: 80px 64px;
+.agassi-group-contact__card {
+  position: relative;
+  grid-column: span 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  min-height: 480px;
+  padding: 44px;
+  overflow: hidden;
   border-radius: var(--agassi-group-radius);
   background: var(--agassi-group-crimson);
   color: var(--agassi-group-white);
-  row-gap: 48px;
 }
 
-.agassi-group-contact__intro {
-  grid-column: span 5;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.agassi-group-contact__title {
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-group-font-h3);
-  font-weight: 500;
-  line-height: var(--agassi-group-line-h3);
-  text-wrap: balance;
-}
-
-.agassi-group-contact__text {
-  max-width: 420px;
-  margin-top: 24px;
-  color: var(--agassi-group-on-crimson);
+.agassi-group-contact__content {
+  position: relative;
+  z-index: 1;
 }
 
 .agassi-group-contact__email {
   --agassi-group-link-color: var(--agassi-group-white);
-  margin-top: 32px;
+  display: inline-block;
   border-bottom: 1px solid var(--agassi-group-gold);
   font-size: var(--agassi-group-font-lead);
   line-height: var(--agassi-group-line-lead);
@@ -949,7 +948,7 @@ a[class*="agassi-group-"],
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 32px;
+  margin-top: 24px;
 }
 
 .agassi-group-contact__social-link {
@@ -958,7 +957,7 @@ a[class*="agassi-group-"],
   align-items: center;
   min-height: 40px;
   padding: 0 20px;
-  border: 1px solid var(--agassi-group-line-crimson);
+  border: 1px solid var(--agassi-group-white);
   border-radius: 1000px;
   font-size: var(--agassi-group-font-small);
   font-weight: 500;
@@ -970,8 +969,11 @@ a[class*="agassi-group-"],
   border-color: var(--agassi-group-gold);
 }
 
-.agassi-group-form {
-  grid-column: 7 / span 6;
+.agassi-group-contact__form {
+  grid-column: span 6;
+  padding: 48px;
+  border-radius: var(--agassi-group-radius);
+  background: var(--agassi-group-white);
 }
 
 .agassi-group-form .agassi-group-form__fields {
@@ -989,10 +991,10 @@ a[class*="agassi-group-"],
   width: 100%;
   min-height: 56px;
   padding: 16px 20px;
-  border: 1px solid var(--agassi-group-line-crimson);
+  border: 1px solid var(--agassi-group-line);
   border-radius: var(--agassi-group-radius-small);
-  background: var(--agassi-group-crimson-field);
-  color: var(--agassi-group-white);
+  background: var(--agassi-group-ivory);
+  color: var(--agassi-group-ink);
   font-family: var(--t-text-font);
   font-size: var(--agassi-group-font-body);
   font-weight: 400;
@@ -1002,11 +1004,11 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-form .agassi-group-form__input::placeholder {
-  color: var(--agassi-group-on-crimson);
+  color: var(--agassi-group-muted);
 }
 
 .agassi-group-form .agassi-group-form__input:focus {
-  border-color: var(--agassi-group-gold);
+  border-color: var(--agassi-group-crimson);
   outline: 0;
 }
 
@@ -1015,22 +1017,42 @@ a[class*="agassi-group-"],
   resize: vertical;
 }
 
-.agassi-group-form .agassi-group-form__error,
-.agassi-group-form .agassi-group-form__errors {
-  color: var(--agassi-group-gold-light);
+/* Ошибки: текст у полей показываем, общую плашку Tilda дублирует их */
+.agassi-group-form .agassi-group-form__error {
+  margin-top: 8px;
+  color: var(--agassi-group-crimson);
   font-size: var(--agassi-group-font-small);
   line-height: var(--agassi-group-line-small);
 }
 
-.agassi-group-form .agassi-group-form__error {
-  margin-top: 8px;
+.agassi-group-form .agassi-group-form__errors .t-form__errorbox-text {
+  padding: 0;
+  background: transparent;
+  color: var(--agassi-group-crimson);
+  font-size: var(--agassi-group-font-small);
+  line-height: var(--agassi-group-line-small);
+}
+
+.agassi-group-form .agassi-group-form__errors .js-rule-error-req,
+.agassi-group-form .agassi-group-form__errors .js-rule-error-name,
+.agassi-group-form .agassi-group-form__errors .js-rule-error-email,
+.agassi-group-form .agassi-group-form__errors .js-rule-error-phone,
+.agassi-group-form .agassi-group-form__errors .js-rule-error-minlength {
+  display: none !important;
+}
+
+.agassi-group-form .agassi-group-form__success {
+  color: var(--agassi-group-ink);
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-group-font-lead);
+  line-height: var(--agassi-group-line-lead);
 }
 
 .agassi-group-form__consent {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  color: var(--agassi-group-on-crimson);
+  color: var(--agassi-group-muted);
   font-size: var(--agassi-group-font-small);
   line-height: var(--agassi-group-line-small);
 }
@@ -1039,15 +1061,17 @@ a[class*="agassi-group-"],
   flex: 0 0 20px;
   width: 20px;
   height: 20px;
-  accent-color: var(--agassi-group-gold);
+  accent-color: var(--agassi-group-crimson);
 }
 
 .agassi-group-form__consent a {
-  --agassi-group-link-color: var(--agassi-group-white);
+  --agassi-group-link-color: var(--agassi-group-crimson);
   border-bottom: 1px solid var(--agassi-group-gold);
 }
 
-.agassi-group-form .agassi-group-form__submit {
+.agassi-group-form .agassi-group-form__submit,
+#allrecords .agassi-group-form .agassi-group-form__submit,
+.t-records .agassi-group-form .agassi-group-form__submit {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1058,12 +1082,18 @@ a[class*="agassi-group-"],
   border-radius: 1000px;
   background: var(--agassi-group-gold-gradient);
   color: var(--agassi-group-crimson);
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-group-font-small);
+  font-weight: 500;
+  line-height: var(--agassi-group-line-small);
   box-shadow: none;
 }
 
-.agassi-group-form .agassi-group-form__submit:hover {
+.agassi-group-form .agassi-group-form__submit:hover,
+#allrecords .agassi-group-form .agassi-group-form__submit:hover,
+.t-records .agassi-group-form .agassi-group-form__submit:hover {
   border-color: var(--agassi-group-gold);
-  background: var(--agassi-group-white);
+  background: var(--agassi-group-ivory);
   color: var(--agassi-group-crimson);
 }
 
@@ -1238,7 +1268,7 @@ a[class*="agassi-group-"],
 .agassi-group-form__consent a:hover,
 #allrecords .agassi-group-form__consent a:hover,
 .t-records .agassi-group-form__consent a:hover {
-  color: var(--agassi-group-white);
+  color: var(--agassi-group-crimson);
   text-decoration: none;
 }
 
@@ -1276,8 +1306,7 @@ a[class*="agassi-group-"],
     padding: 40px;
   }
 
-  .agassi-group-facts__surface,
-  .agassi-group-contact__surface {
+  .agassi-group-facts__surface {
     padding: 64px 48px;
   }
 
@@ -1372,9 +1401,12 @@ a[class*="agassi-group-"],
     --agassi-group-visible: 2;
   }
 
-  .agassi-group-facts__surface,
-  .agassi-group-contact__surface {
+  .agassi-group-facts__surface {
     padding: 48px 32px;
+  }
+
+  .agassi-group-contact__card {
+    min-height: 400px;
   }
 
   .agassi-group-facts__list {
@@ -1397,8 +1429,8 @@ a[class*="agassi-group-"],
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .agassi-group-contact__intro,
-  .agassi-group-form,
+  .agassi-group-contact__card,
+  .agassi-group-contact__form,
   .agassi-group-story__figure,
   .agassi-group-story__text,
   .agassi-group-footer__brand,
@@ -1468,9 +1500,17 @@ a[class*="agassi-group-"],
     padding: 16px;
   }
 
-  .agassi-group-facts__surface,
-  .agassi-group-contact__surface {
+  .agassi-group-facts__surface {
     padding: 40px 20px;
+  }
+
+  .agassi-group-contact__card {
+    min-height: 360px;
+    padding: 24px;
+  }
+
+  .agassi-group-contact__form {
+    padding: 24px;
   }
 
   .agassi-group-facts__item {
