@@ -526,6 +526,15 @@ a[class*="agassi-group-"],
   justify-content: center;
 }
 
+.agassi-group-hero__figure {
+  width: 100%;
+  height: 100%;
+}
+
+.agassi-group-hero__figure--mobile {
+  display: none;
+}
+
 .agassi-group-hero__background {
   display: block;
   width: 100%;
@@ -1545,6 +1554,15 @@ a[class*="agassi-group-"],
 
   .agassi-group-hero__logo {
     width: min(240px, 100%);
+  }
+
+  /* На телефоне свой фон, десктопный скрыт */
+  .agassi-group-hero__figure--desktop {
+    display: none;
+  }
+
+  .agassi-group-hero__figure--mobile {
+    display: block;
   }
 
   .agassi-group-hero__actions {
