@@ -142,6 +142,20 @@
       if (!claim(section)) return;
 
       const items = section.querySelectorAll('.agassi-group-faq__item');
+      const source = section.querySelector('.agassi-group-faq__icon-image');
+
+      // Одна иконка из «Контента» подставляется во все вопросы
+      if (source) {
+        section.querySelectorAll('.agassi-group-faq__head').forEach(function (head) {
+          const icon = document.createElement('span');
+          const image = document.createElement('img');
+          icon.className = 'agassi-group-faq__icon';
+          image.src = source.src;
+          image.alt = '';
+          icon.appendChild(image);
+          head.insertBefore(icon, head.querySelector('.agassi-group-faq__toggle'));
+        });
+      }
 
       function setOpen(item, open) {
         const button = item.querySelector('.agassi-group-faq__toggle');
