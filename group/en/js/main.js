@@ -1,336 +1,205 @@
-(() => {
-  "use strict";
+(function () {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  /* Header */
+  // Защита от повторной инициализации
+  function claim(element) {
+    if (element.dataset.agassiGroupReady === 'true') return false;
+    element.dataset.agassiGroupReady = 'true';
+    return true;
+  }
 
-  const initHeader = () => {
-    const header = document.querySelector(".agassi-group-header");
-    if (!header || header.dataset.initialized === "true") return;
+  // Шапка и мобильное меню
+  function initHeader() {
+    document.querySelectorAll('.agassi-group-header-slot').forEach(function (slot) {
+      if (!claim(slot)) return;
 
-    const toggle = header.querySelector(".agassi-group-header__toggle");
-    const navigation = header.querySelector(".agassi-group-header__nav");
-    if (!toggle || !navigation) return;
+      const header = slot.querySelector('.agassi-group-header');
+      const menu = slot.querySelector('.agassi-group-header__mobile-menu');
+      const burger = slot.querySelector('.agassi-group-header__burger');
+      const closeButton = slot.querySelector('.agassi-group-header__mobile-close');
+      const root = document.documentElement;
+      if (!header || !menu || !burger || !closeButton) return;
 
-    header.dataset.initialized = "true";
-
-    const setMenu = (open) => {
-      header.classList.toggle("is-menu-open", open);
-      toggle.setAttribute("aria-expanded", String(open));
-      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-      document.body.classList.toggle("agassi-group-menu-locked", open);
-
-      if (open || window.innerWidth > 1199) {
-        navigation.removeAttribute("inert");
-      } else {
-        navigation.setAttribute("inert", "");
+      function setMenu(open) {
+        slot.classList.toggle('is-menu-open', open);
+        root.classList.toggle('agassi-group-scroll-locked', open);
+        menu.setAttribute('aria-hidden', String(!open));
+        burger.setAttribute('aria-expanded', String(open));
       }
-    };
 
-    toggle.addEventListener("click", () => {
-      setMenu(!header.classList.contains("is-menu-open"));
-    });
+      function updateScrollState() {
+        header.classList.toggle('is-scrolled', window.scrollY > 12);
+      }
 
-    navigation.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => setMenu(false));
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && header.classList.contains("is-menu-open")) {
+      burger.addEventListener('click', function () {
+        setMenu(true);
+      });
+      closeButton.addEventListener('click', function () {
         setMenu(false);
-        toggle.focus();
-      }
+      });
+      menu.addEventListener('click', function (event) {
+        if (event.target.closest('a')) setMenu(false);
+      });
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') setMenu(false);
+      });
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 960) setMenu(false);
+      }, { passive: true });
+      window.addEventListener('scroll', updateScrollState, { passive: true });
+
+      updateScrollState();
     });
+  }
 
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 1199) {
-        setMenu(false);
-      } else if (!header.classList.contains("is-menu-open")) {
-        navigation.setAttribute("inert", "");
-      }
-    });
+  // Карусель партнёров: без автоплея, шаг ровно в одну карточку
+  function initPartners() {
+    document.querySelectorAll('.agassi-group-partners').forEach(function (section) {
+      if (!claim(section)) return;
 
-    setMenu(false);
-  };
+      const track = section.querySelector('.agassi-group-partners__track');
+      const prev = section.querySelector('.agassi-group-partners__arrow--prev');
+      const next = section.querySelector('.agassi-group-partners__arrow--next');
+      if (!track || !track.firstElementChild || !prev || !next) return;
 
-  /* Partners */
+      let index = 0;
+      let timer = 0;
 
-  const initPartners = () => {
-    document.querySelectorAll(".agassi-group-partners").forEach((section) => {
-      if (section.dataset.initialized === "true") return;
-
-      const viewport = section.querySelector(".agassi-group-partners__viewport");
-      const track = section.querySelector(".agassi-group-partners__track");
-      const prev = section.querySelector(".agassi-group-partners__arrow--prev");
-      const next = section.querySelector(".agassi-group-partners__arrow--next");
-
-      if (!viewport || !track || !prev || !next) return;
-
-      const originalCards = Array.from(track.children);
-      const count = originalCards.length;
-
-      if (count < 2) {
-        prev.disabled = true;
-        next.disabled = true;
-        return;
+      function step() {
+        const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+        return track.firstElementChild.getBoundingClientRect().width + gap;
       }
 
-      section.dataset.initialized = "true";
+      function maxScroll() {
+        return Math.max(0, track.scrollWidth - track.clientWidth);
+      }
 
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      function lastIndex() {
+        return Math.ceil((maxScroll() - 1) / step());
+      }
 
-      const createClone = (card) => {
-        const clone = card.cloneNode(true);
-        clone.setAttribute("aria-hidden", "true");
-        clone.setAttribute("inert", "");
-        clone.dataset.clone = "true";
-        return clone;
-      };
+      function updateButtons() {
+        prev.disabled = track.scrollLeft <= 1;
+        next.disabled = track.scrollLeft >= maxScroll() - 1;
+      }
 
-      const before = document.createDocumentFragment();
-      const after = document.createDocumentFragment();
+      function goTo(target) {
+        index = Math.max(0, Math.min(lastIndex(), target));
+        track.scrollTo({
+          left: Math.min(index * step(), maxScroll()),
+          behavior: reducedMotion.matches ? 'auto' : 'smooth'
+        });
+      }
 
-      originalCards.forEach((card) => {
-        before.appendChild(createClone(card));
-        after.appendChild(createClone(card));
+      prev.addEventListener('click', function () {
+        goTo(index - 1);
+      });
+      next.addEventListener('click', function () {
+        goTo(index + 1);
       });
 
-      track.prepend(before);
-      track.append(after);
+      // Синхронизация после свайпа или окончания прокрутки
+      track.addEventListener('scroll', function () {
+        window.clearTimeout(timer);
+        timer = window.setTimeout(function () {
+          index = Math.round(track.scrollLeft / step());
+          updateButtons();
+        }, 100);
+      }, { passive: true });
 
-      let index = count;
-      let step = 0;
-      let position = 0;
-      let dragging = false;
-      let pointerId = null;
-      let startX = 0;
-      let startPosition = 0;
-      let moved = false;
-      let suppressClick = false;
-      let resizeFrame = 0;
+      window.addEventListener('resize', function () {
+        index = Math.round(track.scrollLeft / step());
+        updateButtons();
+      }, { passive: true });
 
-      const getStep = () => {
-        const card = track.querySelector(".agassi-group-partners__card");
-        if (!card) return 0;
-
-        const styles = getComputedStyle(track);
-        const gap = parseFloat(styles.columnGap) || 0;
-
-        return card.getBoundingClientRect().width + gap;
-      };
-
-      const render = (animate = true) => {
-        track.style.transition = animate && !reducedMotion.matches
-          ? "transform 400ms ease"
-          : "none";
-
-        position = -index * step;
-        track.style.transform = `translate3d(${position}px, 0, 0)`;
-      };
-
-      const normalize = () => {
-        if (index >= count * 2) {
-          index -= count;
-          render(false);
-        } else if (index < count) {
-          index += count;
-          render(false);
-        }
-      };
-
-      const move = (direction) => {
-        if (dragging || !step) return;
-
-        normalize();
-        index += direction;
-        render(true);
-
-        if (reducedMotion.matches) normalize();
-      };
-
-      const updateSize = () => {
-        step = getStep();
-        normalize();
-        render(false);
-      };
-
-      track.addEventListener("transitionend", (event) => {
-        if (event.target !== track || event.propertyName !== "transform") return;
-        normalize();
-      });
-
-      prev.addEventListener("click", () => move(-1));
-      next.addEventListener("click", () => move(1));
-
-      viewport.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowLeft") {
-          event.preventDefault();
-          move(-1);
-        }
-
-        if (event.key === "ArrowRight") {
-          event.preventDefault();
-          move(1);
-        }
-      });
-
-      viewport.addEventListener("pointerdown", (event) => {
-        if (event.pointerType === "mouse" && event.button !== 0) return;
-        if (!step) return;
-
-        dragging = true;
-        moved = false;
-        pointerId = event.pointerId;
-        startX = event.clientX;
-        startPosition = position;
-
-        track.style.transition = "none";
-        viewport.classList.add("is-dragging");
-
-        if (event.pointerType === "mouse") {
-          viewport.setPointerCapture(event.pointerId);
-        }
-      });
-
-      viewport.addEventListener("pointermove", (event) => {
-        if (!dragging || event.pointerId !== pointerId) return;
-
-        const delta = event.clientX - startX;
-
-        if (Math.abs(delta) > 8) moved = true;
-        if (!moved) return;
-
-        position = startPosition + delta;
-        track.style.transform = `translate3d(${position}px, 0, 0)`;
-      });
-
-      const endDrag = (event) => {
-        if (!dragging || event.pointerId !== pointerId) return;
-
-        const delta = event.clientX - startX;
-
-        dragging = false;
-        pointerId = null;
-
-        viewport.classList.remove("is-dragging");
-
-        if (moved) {
-          const cardsMoved = Math.round(Math.abs(delta) / step);
-          const amount = Math.max(1, cardsMoved);
-
-          index += delta < 0 ? amount : -amount;
-          index = Math.max(0, Math.min(index, count * 3 - 1));
-          suppressClick = true;
-        }
-
-        render(true);
-
-        if (reducedMotion.matches) normalize();
-
-        if (viewport.hasPointerCapture?.(event.pointerId)) {
-          viewport.releasePointerCapture(event.pointerId);
-        }
-      };
-
-      viewport.addEventListener("pointerup", endDrag);
-      viewport.addEventListener("pointercancel", endDrag);
-
-      viewport.addEventListener("click", (event) => {
-        if (!suppressClick) return;
-
-        event.preventDefault();
-        event.stopPropagation();
-        suppressClick = false;
-      }, true);
-
-      viewport.addEventListener("dragstart", (event) => {
-        event.preventDefault();
-      });
-
-      window.addEventListener("resize", () => {
-        cancelAnimationFrame(resizeFrame);
-        resizeFrame = requestAnimationFrame(updateSize);
-      });
-
-      updateSize();
+      updateButtons();
     });
-  };
+  }
 
-  /* FAQ */
+  // Аккордеон вопросов
+  function initFaq() {
+    document.querySelectorAll('.agassi-group-faq').forEach(function (section) {
+      if (!claim(section)) return;
 
-  const initFAQ = () => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const items = section.querySelectorAll('.agassi-group-faq__item');
 
-    document.querySelectorAll(".agassi-group-faq__entry").forEach((entry) => {
-      if (entry.dataset.initialized === "true") return;
-      if (entry.tagName !== "DETAILS") return;
+      function setOpen(item, open) {
+        const button = item.querySelector('.agassi-group-faq__question');
+        item.classList.toggle('is-open', open);
+        if (button) button.setAttribute('aria-expanded', String(open));
+      }
 
-      const question = entry.querySelector(".agassi-group-faq__question");
-      const answer = entry.querySelector(".agassi-group-faq__answer");
+      section.addEventListener('click', function (event) {
+        const button = event.target.closest('.agassi-group-faq__question');
+        if (!button) return;
 
-      if (!question || !answer) return;
+        const item = button.closest('.agassi-group-faq__item');
+        const willOpen = !item.classList.contains('is-open');
 
-      entry.dataset.initialized = "true";
+        items.forEach(function (other) {
+          setOpen(other, false);
+        });
+        if (willOpen) setOpen(item, true);
+      });
+    });
+  }
 
-      let animation = null;
-      let targetOpen = entry.open;
+  // Отправка формы
+  function initForms() {
+    document.querySelectorAll('.agassi-group-form').forEach(function (form) {
+      if (!claim(form)) return;
 
-      question.addEventListener("click", (event) => {
+      const submit = form.querySelector('[type="submit"]');
+      const success = form.querySelector('[data-message="success"]');
+      const failure = form.querySelector('[data-message="error"]');
+
+      function showMessage(type) {
+        if (success) success.hidden = type !== 'success';
+        if (failure) failure.hidden = type !== 'error';
+      }
+
+      form.addEventListener('submit', function (event) {
         event.preventDefault();
-        targetOpen = !targetOpen;
+        if (!form.reportValidity()) return;
 
-        if (reducedMotion.matches || !entry.animate) {
-          if (animation) animation.cancel();
-          entry.open = targetOpen;
-          entry.style.height = "";
+        const endpoint = form.dataset.endpoint;
+        if (!endpoint) {
+          showMessage('error');
           return;
         }
 
-        const startHeight = entry.getBoundingClientRect().height;
+        showMessage('');
+        if (submit) submit.disabled = true;
 
-        if (animation) animation.cancel();
-
-        entry.open = true;
-
-        const endHeight = targetOpen
-          ? question.getBoundingClientRect().height + answer.getBoundingClientRect().height
-          : question.getBoundingClientRect().height;
-
-        entry.style.height = `${startHeight}px`;
-
-        animation = entry.animate(
-          [
-            { height: `${startHeight}px` },
-            { height: `${endHeight}px` }
-          ],
-          {
-            duration: 320,
-            easing: "cubic-bezier(0.22, 1, 0.36, 1)"
-          }
-        );
-
-        const current = animation;
-
-        current.onfinish = () => {
-          if (animation !== current) return;
-
-          entry.open = targetOpen;
-          entry.style.height = "";
-          animation = null;
-        };
+        fetch(endpoint, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        })
+          .then(function (response) {
+            if (!response.ok) throw new Error(response.status);
+            form.reset();
+            showMessage('success');
+          })
+          .catch(function () {
+            showMessage('error');
+          })
+          .finally(function () {
+            if (submit) submit.disabled = false;
+          });
       });
     });
-  };
+  }
 
-  /* Инициализация */
-
-  const init = () => {
+  function init() {
     initHeader();
     initPartners();
-    initFAQ();
-  };
+    initFaq();
+    initForms();
+  }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
