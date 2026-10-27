@@ -748,9 +748,9 @@ a[class*="agassi-group-"],
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 272px;
-  padding: 40px 16px;
+  padding: 64px 16px 40px;
   border-top: 1px solid var(--agassi-group-line-crimson);
   text-align: center;
 }
@@ -771,6 +771,7 @@ a[class*="agassi-group-"],
 .agassi-group-facts__label {
   max-width: 240px;
   margin-top: 16px;
+  text-wrap: balance;
   color: var(--agassi-group-on-crimson);
   font-size: var(--agassi-group-font-small);
   line-height: var(--agassi-group-line-small);
@@ -1475,6 +1476,29 @@ a[class*="agassi-group-"],
     clip-path: inset(0 0 0 0);
   }
 
+  /* Ссылки крупные, язык и кнопка прижаты к низу экрана */
+  .agassi-group-header__mobile-inner {
+    box-sizing: border-box;
+    min-height: 100%;
+    padding: 0;
+  }
+
+  .agassi-group-header__mobile-nav {
+    flex: 1 0 auto;
+    gap: 8px;
+    padding: 8px 0 32px;
+  }
+
+  .agassi-group-header__mobile-nav a {
+    padding: 4px 0;
+    font-size: var(--agassi-group-font-h3);
+    line-height: var(--agassi-group-line-h3);
+  }
+
+  .agassi-group-header__mobile-bottom {
+    margin-top: auto;
+  }
+
   .agassi-group-hero__content {
     align-self: stretch;
     width: 100%;
@@ -1548,6 +1572,8 @@ a[class*="agassi-group-"],
     --agassi-group-line-h2: 40px;
     --agassi-group-font-h3: 28px;
     --agassi-group-line-h3: 36px;
+    --agassi-group-font-h4: 18px;
+    --agassi-group-line-h4: 26px;
     --agassi-group-font-display: 40px;
     --agassi-group-line-display: 48px;
   }
@@ -1614,7 +1640,7 @@ a[class*="agassi-group-"],
 
   .agassi-group-facts__item {
     min-height: 192px;
-    padding: 32px 12px;
+    padding: 40px 12px 32px;
   }
 
   .agassi-group-facts__label {
