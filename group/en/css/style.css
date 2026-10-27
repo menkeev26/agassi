@@ -1213,8 +1213,8 @@ a[class*="agassi-group-"],
   padding: 0 32px;
   border: 1px solid var(--agassi-group-crimson);
   border-radius: 1000px;
-  background: transparent;
-  color: var(--agassi-group-crimson);
+  background: var(--agassi-group-crimson);
+  color: var(--agassi-group-white);
   font-family: var(--t-text-font);
   font-size: var(--agassi-group-font-small);
   font-weight: 500;
@@ -1225,7 +1225,8 @@ a[class*="agassi-group-"],
 .agassi-group-story .agassi-group-story__toggle:hover,
 #allrecords .agassi-group-story .agassi-group-story__toggle:hover,
 .t-records .agassi-group-story .agassi-group-story__toggle:hover {
-  background: var(--agassi-group-crimson);
+  border-color: var(--agassi-group-crimson-dark);
+  background: var(--agassi-group-crimson-dark);
   color: var(--agassi-group-white);
 }
 
