@@ -979,10 +979,11 @@ a[class*="agassi-group-"],
 .agassi-group-form .agassi-group-form__fields {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 28px; /* место под ошибку, чтобы форма не прыгала */
 }
 
 .agassi-group-form .agassi-group-form__field {
+  position: relative;
   margin: 0;
   padding: 0;
 }
@@ -1019,10 +1020,30 @@ a[class*="agassi-group-"],
 
 /* Ошибки: текст у полей показываем, общую плашку Tilda дублирует их */
 .agassi-group-form .agassi-group-form__error {
-  margin-top: 8px;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 20px;
+  right: 0;
+  margin: 0;
+  padding: 0;
   color: var(--agassi-group-crimson);
   font-size: var(--agassi-group-font-small);
   line-height: var(--agassi-group-line-small);
+}
+
+.agassi-group-form {
+  position: relative;
+}
+
+/* Общие плашки Tilda не двигают вёрстку: остаются в потоке доступности, но не видны */
+.agassi-group-form .agassi-group-form__errors {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
 }
 
 .agassi-group-form .agassi-group-form__errors .t-form__errorbox-text {
@@ -1614,12 +1635,12 @@ body .t-form-success-popup_new .t-form-success-popup__button:hover {
   background-color: var(--agassi-group-crimson-dark);
 }
 
-body .t-form-success-popup_new .t-form-success-popup__close-icon svg path {
-  stroke: var(--agassi-group-ink);
+body .t-form-success-popup_new .t-form-success-popup__close-icon {
+  display: none;
 }
 
 /* Окно успеха: по центру экрана и в адаптиве (Tilda прижимает его вниз) */
-body .t-form-success-popup_new.t-popup_show {
+body .t-form-success-popup_new[style*="display: block"] {
   display: flex !important; /* inline display: block у Tilda */
   align-items: center;
   justify-content: center;
