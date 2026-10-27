@@ -196,6 +196,17 @@ a[class*="agassi-group-"],
   background: var(--agassi-group-white);
 }
 
+.agassi-group-button--outline {
+  --agassi-group-link-color: var(--agassi-group-crimson);
+  background: var(--agassi-group-ivory);
+}
+
+.agassi-group-button--outline:hover {
+  --agassi-group-link-color: var(--agassi-group-white);
+  border-color: var(--agassi-group-crimson);
+  background: var(--agassi-group-crimson);
+}
+
 .agassi-group-button:focus-visible {
   outline: 2px solid var(--agassi-group-gold);
   outline-offset: 4px;
@@ -487,23 +498,25 @@ a[class*="agassi-group-"],
 
 /* Первый экран */
 .agassi-group-hero {
-  padding-top: 8px;
+  --agassi-group-hero-gap: 16px;
+  padding: 12px 0 0;
 }
 
 .agassi-group-hero__frame {
   position: relative;
-  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100svh - 72px - 12px - var(--agassi-group-hero-gap));
+  min-height: 480px;
   overflow: hidden;
   border-radius: var(--agassi-group-radius);
-  background: var(--agassi-group-white);
+  background: var(--agassi-group-sand);
 }
 
-.agassi-group-hero__title {
+.agassi-group-hero__background {
   position: absolute;
   inset: 0;
-}
-
-.agassi-group-hero__image {
   display: block;
   width: 100%;
   height: 100%;
@@ -511,13 +524,32 @@ a[class*="agassi-group-"],
   object-position: center;
 }
 
-.agassi-group-hero__action {
-  position: absolute;
-  right: 0;
-  bottom: 40px;
-  left: 0;
+.agassi-group-hero__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.agassi-group-hero__title {
   display: flex;
   justify-content: center;
+}
+
+.agassi-group-hero__logo {
+  display: block;
+  width: min(480px, 100%);
+  height: auto;
+}
+
+.agassi-group-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
 }
 
 /* Направления */
@@ -1137,6 +1169,49 @@ textarea.agassi-group-form__input {
   --agassi-group-link-color: var(--agassi-group-on-crimson);
 }
 
+/* Ссылки без класса: цвет и шрифт заданы явно поверх стилей Tilda */
+.agassi-group-header__nav a,
+#allrecords .agassi-group-header__nav a,
+.t-records .agassi-group-header__nav a,
+.agassi-group-header__nav a:hover,
+#allrecords .agassi-group-header__nav a:hover,
+.t-records .agassi-group-header__nav a:hover {
+  color: var(--agassi-group-ink);
+  font-family: var(--agassi-group-font-text);
+  text-decoration: none;
+}
+
+.agassi-group-header__mobile-nav a,
+#allrecords .agassi-group-header__mobile-nav a,
+.t-records .agassi-group-header__mobile-nav a,
+.agassi-group-header__mobile-nav a:hover,
+#allrecords .agassi-group-header__mobile-nav a:hover,
+.t-records .agassi-group-header__mobile-nav a:hover {
+  color: var(--agassi-group-white);
+  font-family: var(--agassi-group-font-text);
+  text-decoration: none;
+}
+
+.agassi-group-form__consent a,
+#allrecords .agassi-group-form__consent a,
+.t-records .agassi-group-form__consent a,
+.agassi-group-form__consent a:hover,
+#allrecords .agassi-group-form__consent a:hover,
+.t-records .agassi-group-form__consent a:hover {
+  color: var(--agassi-group-white);
+  text-decoration: none;
+}
+
+.agassi-group-footer__bottom a,
+#allrecords .agassi-group-footer__bottom a,
+.t-records .agassi-group-footer__bottom a,
+.agassi-group-footer__bottom a:hover,
+#allrecords .agassi-group-footer__bottom a:hover,
+.t-records .agassi-group-footer__bottom a:hover {
+  color: var(--agassi-group-on-crimson);
+  text-decoration: none;
+}
+
 /* Адаптив */
 @media (max-width: 1440px) {
   :root {
@@ -1201,10 +1276,6 @@ textarea.agassi-group-form__input {
     display: flex;
   }
 
-  .agassi-group-hero__frame {
-    aspect-ratio: 4 / 3;
-  }
-
   .agassi-group-directions__card {
     grid-column: span 4;
     min-height: 360px;
@@ -1261,12 +1332,22 @@ textarea.agassi-group-form__input {
     margin-bottom: 32px;
   }
 
-  .agassi-group-hero__frame {
-    aspect-ratio: 4 / 5;
+  .agassi-group-hero {
+    --agassi-group-hero-gap: 12px;
   }
 
-  .agassi-group-hero__action {
-    bottom: 24px;
+  .agassi-group-hero__content {
+    gap: 32px;
+  }
+
+  .agassi-group-hero__logo {
+    width: min(320px, 100%);
+  }
+
+  .agassi-group-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
   }
 
   .agassi-group-directions__card {
