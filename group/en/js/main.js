@@ -302,6 +302,25 @@
     });
   }
 
+  // Заголовки появляются при прокрутке (в редакторе и при reduced motion не анимируются)
+  function initReveal() {
+    if (window.self !== window.top || reducedMotion.matches || !('IntersectionObserver' in window)) return;
+
+    const selector = '.agassi-group-heading__title, .agassi-group-directions__title, .agassi-group-contact__title, .agassi-group-privacy__title';
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+
+    document.querySelectorAll(selector).forEach(function (node) {
+      node.classList.add('agassi-group-reveal');
+      observer.observe(node);
+    });
+  }
+
   function init() {
     initHeader();
     initPartners();
@@ -309,6 +328,7 @@
     initFacts();
     initStory();
     initTypography();
+    initReveal();
   }
 
   if (document.readyState === 'loading') {
