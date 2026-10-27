@@ -1092,18 +1092,7 @@ a[class*="agassi-group-"],
   color: var(--agassi-group-white);
 }
 
-/* История */
-.agassi-group-story__title {
-  grid-column: 1 / -1;
-  margin-bottom: 32px;
-  color: var(--agassi-group-crimson);
-  font-family: var(--t-headline-font);
-  font-size: var(--agassi-group-font-h2);
-  font-weight: 500;
-  line-height: var(--agassi-group-line-h2);
-  text-transform: uppercase;
-}
-
+/* О компании */
 .agassi-group-story__figure {
   grid-column: span 5;
   align-self: start;
@@ -1122,7 +1111,7 @@ a[class*="agassi-group-"],
   object-fit: cover;
 }
 
-.agassi-group-story__text {
+.agassi-group-story__body {
   grid-column: 7 / span 6;
 }
 
@@ -1147,6 +1136,54 @@ a[class*="agassi-group-"],
 
 .agassi-group-story__text .agassi-group-story__closing {
   color: var(--agassi-group-crimson);
+}
+
+/* Продолжение истории раскрывается по кнопке */
+.agassi-group-story__more {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-rows var(--agassi-group-duration) var(--agassi-group-ease),
+    visibility var(--agassi-group-duration) var(--agassi-group-ease);
+}
+
+.agassi-group-story__more.is-open {
+  grid-template-rows: 1fr;
+  visibility: visible;
+}
+
+.agassi-group-story__more-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.agassi-group-story__action {
+  display: flex;
+  margin-top: 8px;
+}
+
+.agassi-group-story .agassi-group-story__toggle,
+#allrecords .agassi-group-story .agassi-group-story__toggle,
+.t-records .agassi-group-story .agassi-group-story__toggle {
+  min-height: 56px;
+  padding: 0 32px;
+  border: 1px solid var(--agassi-group-crimson);
+  border-radius: 1000px;
+  background: transparent;
+  color: var(--agassi-group-crimson);
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-group-font-small);
+  font-weight: 500;
+  line-height: var(--agassi-group-line-small);
+  box-shadow: none;
+}
+
+.agassi-group-story .agassi-group-story__toggle:hover,
+#allrecords .agassi-group-story .agassi-group-story__toggle:hover,
+.t-records .agassi-group-story .agassi-group-story__toggle:hover {
+  background: var(--agassi-group-crimson);
+  color: var(--agassi-group-white);
 }
 
 /* Подвал */
@@ -1453,7 +1490,7 @@ a[class*="agassi-group-"],
   .agassi-group-contact__card,
   .agassi-group-contact__form,
   .agassi-group-story__figure,
-  .agassi-group-story__text,
+  .agassi-group-story__body,
   .agassi-group-footer__brand,
   .agassi-group-footer__columns {
     grid-column: 1 / -1;
