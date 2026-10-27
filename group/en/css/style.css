@@ -922,13 +922,12 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-contact__title {
-  max-width: 100%;
+  max-width: 480px;
   margin: 0;
-  font-family: var(--t-headline-font);
-  font-size: var(--agassi-group-font-h2);
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-group-font-h3);
   font-weight: 500;
-  line-height: var(--agassi-group-line-h2);
-  text-transform: uppercase;
+  line-height: var(--agassi-group-line-h3);
 }
 
 .agassi-group-contact__content {
