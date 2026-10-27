@@ -178,101 +178,11 @@
     });
   }
 
-  // Отправка формы
-  function initForms() {
-    document.querySelectorAll('.agassi-group-form').forEach(function (form) {
-      if (!claim(form)) return;
-
-      const submit = form.querySelector('[type="submit"]');
-      const success = form.querySelector('[data-message="success"]');
-      const failure = form.querySelector('[data-message="error"]');
-
-      function showMessage(type) {
-        if (success) success.hidden = type !== 'success';
-        if (failure) failure.hidden = type !== 'error';
-      }
-
-      form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        if (!form.reportValidity()) return;
-
-        const endpoint = form.dataset.endpoint;
-        if (!endpoint) {
-          showMessage('error');
-          return;
-        }
-
-        showMessage('');
-        if (submit) submit.disabled = true;
-
-        fetch(endpoint, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { Accept: 'application/json' }
-        })
-          .then(function (response) {
-            if (!response.ok) throw new Error(response.status);
-            form.reset();
-            showMessage('success');
-          })
-          .catch(function () {
-            showMessage('error');
-          })
-          .finally(function () {
-            if (submit) submit.disabled = false;
-          });
-      });
-    });
-  }
-
-  // Счётчик фактов: число набегает при появлении блока
-  function initFacts() {
-    document.querySelectorAll('.agassi-group-facts').forEach(function (section) {
-      if (!claim(section)) return;
-      if (reducedMotion.matches || window.self !== window.top || !('IntersectionObserver' in window)) return;
-
-      const items = [];
-
-      section.querySelectorAll('.agassi-group-facts__value').forEach(function (element) {
-        const match = element.textContent.trim().match(/^(\D*)(\d+)(.*)$/);
-        if (!match) return;
-
-        // Ширина фиксируется по итоговому значению, чтобы блок не прыгал
-        element.style.setProperty('--agassi-group-facts-width', element.offsetWidth + 'px');
-        items.push({ element: element, prefix: match[1], target: Number(match[2]), suffix: match[3] });
-        element.textContent = match[1] + '0' + match[3];
-      });
-
-      function animate(item) {
-        const duration = 1800;
-        const start = performance.now();
-
-        function frame(now) {
-          const progress = Math.min(1, (now - start) / duration);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          item.element.textContent = item.prefix + Math.round(item.target * eased) + item.suffix;
-          if (progress < 1) window.requestAnimationFrame(frame);
-        }
-
-        window.requestAnimationFrame(frame);
-      }
-
-      const observer = new IntersectionObserver(function (entries) {
-        if (!entries.some(function (entry) { return entry.isIntersecting; })) return;
-        observer.disconnect();
-        items.forEach(animate);
-      }, { threshold: 0.4 });
-
-      observer.observe(section.querySelector('.agassi-group-facts__list'));
-    });
-  }
-
   function init() {
     initHeader();
     initPartners();
     initFaq();
     initFacts();
-    initForms();
   }
 
   if (document.readyState === 'loading') {
