@@ -256,8 +256,7 @@
       // Высота фото = высота свёрнутого текста, при раскрытии не меняется
       function syncHeight() {
         if (!layout || !body || !action) return;
-        let height = action.getBoundingClientRect().bottom - body.getBoundingClientRect().top - more.getBoundingClientRect().height;
-        height += parseFloat(getComputedStyle(body).paddingBottom) || 0;
+        const height = action.getBoundingClientRect().bottom - body.getBoundingClientRect().top - more.getBoundingClientRect().height;
         if (height > 0) layout.style.setProperty('--agassi-group-story-height', Math.round(height) + 'px');
       }
 
