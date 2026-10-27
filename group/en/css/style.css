@@ -498,8 +498,7 @@ a[class*="agassi-group-"],
 
 /* Первый экран */
 .agassi-group-hero {
-  --agassi-group-hero-gap: 16px;
-  padding: 12px 0 0;
+  padding: 12px 0 16px;
 }
 
 .agassi-group-hero__frame {
@@ -507,7 +506,7 @@ a[class*="agassi-group-"],
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100svh - 72px - 12px - var(--agassi-group-hero-gap));
+  aspect-ratio: 2 / 1;
   min-height: 480px;
   overflow: hidden;
   border-radius: var(--agassi-group-radius);
@@ -549,7 +548,7 @@ a[class*="agassi-group-"],
 
 .agassi-group-hero__logo {
   display: block;
-  width: min(480px, 100%);
+  width: min(240px, 100%);
   height: auto;
 }
 
@@ -1341,7 +1340,12 @@ textarea.agassi-group-form__input {
   }
 
   .agassi-group-hero {
-    --agassi-group-hero-gap: 12px;
+    padding: 8px 0 12px;
+  }
+
+  .agassi-group-hero__frame {
+    aspect-ratio: auto;
+    min-height: 560px;
   }
 
   .agassi-group-hero__content {
@@ -1349,7 +1353,7 @@ textarea.agassi-group-form__input {
   }
 
   .agassi-group-hero__logo {
-    width: min(320px, 100%);
+    width: min(200px, 100%);
   }
 
   .agassi-group-hero__actions {
