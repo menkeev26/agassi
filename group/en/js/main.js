@@ -18,6 +18,8 @@
       const burger = slot.querySelector('.agassi-group-header__burger');
       const closeButton = slot.querySelector('.agassi-group-header__mobile-close');
       const root = document.documentElement;
+      // В редакторе список языков не раскрываем: он растягивает высоту блока
+      if (window.self !== window.top) slot.classList.add('is-editor');
       if (!header || !menu || !burger || !closeButton) return;
 
       function setMenu(open) {
