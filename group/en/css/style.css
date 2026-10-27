@@ -1138,9 +1138,11 @@ a[class*="agassi-group-"],
   color: var(--agassi-group-crimson);
 }
 
-/* Фото на десктопе равно высоте свёрнутого текста (задаёт скрипт) и не растёт при раскрытии */
+/* Фото на десктопе равно высоте свёрнутого текста (задаёт скрипт), не растёт и закреплено при скролле */
 @media (min-width: 961px) {
   .agassi-group-story__figure {
+    position: sticky;
+    top: 84px; /* под шапкой, зазор 16px */
     height: var(--agassi-group-story-height, 560px);
     aspect-ratio: auto;
   }
