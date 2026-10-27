@@ -144,13 +144,13 @@
       const items = section.querySelectorAll('.agassi-group-faq__item');
 
       function setOpen(item, open) {
-        const button = item.querySelector('.agassi-group-faq__question');
+        const button = item.querySelector('.agassi-group-faq__toggle');
         item.classList.toggle('is-open', open);
         if (button) button.setAttribute('aria-expanded', String(open));
       }
 
       section.addEventListener('click', function (event) {
-        const button = event.target.closest('.agassi-group-faq__question');
+        const button = event.target.closest('.agassi-group-faq__toggle');
         if (!button) return;
 
         const item = button.closest('.agassi-group-faq__item');
