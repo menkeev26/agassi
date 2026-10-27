@@ -946,8 +946,10 @@ a[class*="agassi-group-"],
   --agassi-group-link-color: var(--agassi-group-white);
   display: inline-block;
   border-bottom: 1px solid var(--agassi-group-gold);
-  font-size: var(--agassi-group-font-body);
-  line-height: var(--agassi-group-line-body);
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-group-font-h4);
+  font-weight: 500;
+  line-height: var(--agassi-group-line-h4);
 }
 
 .agassi-group-contact__social {
