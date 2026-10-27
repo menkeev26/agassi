@@ -663,7 +663,7 @@ a[class*="agassi-group-"],
 
 /* Партнёры */
 .agassi-group-partners__track {
-  --agassi-group-visible: 5;
+  --agassi-group-visible: 4;
   display: flex;
   gap: var(--agassi-group-gap);
   overflow-x: auto;
@@ -685,16 +685,10 @@ a[class*="agassi-group-"],
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 16 / 9;
   padding: 24px;
-  border: 1px solid var(--agassi-group-line);
-  border-radius: var(--agassi-group-radius-small);
+  border-radius: var(--agassi-group-radius);
   background: var(--agassi-group-white);
-  transition: border-color var(--agassi-group-duration) var(--agassi-group-ease);
-}
-
-.agassi-group-partners__card:hover {
-  border-color: var(--agassi-group-crimson);
 }
 
 .agassi-group-partners__card:focus-visible {
@@ -712,7 +706,7 @@ a[class*="agassi-group-"],
 .agassi-group-partners__controls {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 8px;
   margin-top: 32px;
 }
 
@@ -720,12 +714,12 @@ a[class*="agassi-group-"],
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
-  border: 1px solid var(--agassi-group-crimson);
+  width: 48px;
+  height: 48px;
+  border: 0;
   border-radius: 50%;
-  background: var(--agassi-group-ivory);
-  color: var(--agassi-group-crimson);
+  background: var(--agassi-group-crimson);
+  color: var(--agassi-group-white);
   cursor: pointer;
   transition:
     background-color var(--agassi-group-duration) var(--agassi-group-ease),
@@ -749,13 +743,11 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-partners__arrow:hover:not(:disabled) {
-  background: var(--agassi-group-crimson);
-  color: var(--agassi-group-white);
+  background: var(--agassi-group-crimson-dark);
 }
 
 .agassi-group-partners__arrow:disabled {
-  border-color: var(--agassi-group-line);
-  color: var(--agassi-group-line);
+  background: var(--agassi-group-line);
   cursor: default;
 }
 
@@ -1286,7 +1278,7 @@ textarea.agassi-group-form__input {
   }
 
   .agassi-group-partners__track {
-    --agassi-group-visible: 4;
+    --agassi-group-visible: 3;
   }
 }
 
@@ -1373,7 +1365,7 @@ textarea.agassi-group-form__input {
   }
 
   .agassi-group-partners__track {
-    --agassi-group-visible: 3;
+    --agassi-group-visible: 2;
   }
 
   .agassi-group-facts__surface,
@@ -1449,7 +1441,7 @@ textarea.agassi-group-form__input {
   }
 
   .agassi-group-partners__track {
-    --agassi-group-visible: 2;
+    --agassi-group-visible: 1;
   }
 
   .agassi-group-partners__card {
