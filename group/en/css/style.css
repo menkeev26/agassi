@@ -862,7 +862,7 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-faq__item.is-open .agassi-group-faq__icon {
-  transform: rotate(180deg);
+  transform: rotate(90deg);
 }
 
 .agassi-group-faq__toggle,
