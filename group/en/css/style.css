@@ -1523,23 +1523,23 @@ a[class*="agassi-group-"],
     overflow-y: auto;
     visibility: hidden;
     background: var(--agassi-group-ivory);
-    clip-path: circle(0 at calc(100% - var(--agassi-group-frame-gap) - 14px) 32px);
+    clip-path: ellipse(100% 0 at 50% 0);
     transition:
-      clip-path 700ms cubic-bezier(.77, 0, .18, 1),
-      visibility 700ms;
+      clip-path 800ms cubic-bezier(.77, 0, .18, 1),
+      visibility 800ms;
   }
 
   .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-menu {
     visibility: visible;
-    clip-path: circle(150vmax at calc(100% - var(--agassi-group-frame-gap) - 14px) 32px);
+    clip-path: ellipse(160% 135% at 50% 0);
   }
 
-  /* Меню раскрывается кругом из бургера, ссылки выходят по очереди с размытием */
+  /* Меню опускается сверху вниз с изогнутым краем, ссылки сходят следом по очереди с размытием */
   .agassi-group-header__mobile-nav a,
   .agassi-group-header__mobile-bottom {
     opacity: 0;
     filter: blur(8px);
-    transform: translateY(24px);
+    transform: translateY(-28px);
     transition:
       opacity 300ms ease-out,
       filter 300ms ease-out,
@@ -1555,12 +1555,12 @@ a[class*="agassi-group-"],
     transition-timing-function: cubic-bezier(.22, 1, .36, 1);
   }
 
-  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a:nth-child(1) { transition-delay: 200ms; }
-  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a:nth-child(2) { transition-delay: 260ms; }
-  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a:nth-child(3) { transition-delay: 320ms; }
-  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a:nth-child(4) { transition-delay: 380ms; }
-  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a:nth-child(5) { transition-delay: 440ms; }
-  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-bottom { transition-delay: 520ms; }
+  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a:nth-child(1) { transition-delay: 260ms; }
+  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a:nth-child(2) { transition-delay: 330ms; }
+  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a:nth-child(3) { transition-delay: 400ms; }
+  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a:nth-child(4) { transition-delay: 470ms; }
+  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a:nth-child(5) { transition-delay: 540ms; }
+  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-bottom { transition-delay: 640ms; }
 
   /* В редакторе закрытое меню не должно растягивать блок */
   .agassi-group-header-slot.is-editor:not(.is-menu-open) .agassi-group-header__mobile-menu {
