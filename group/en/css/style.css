@@ -2037,7 +2037,7 @@ body {
 .agassi-group-footer,
 .agassi-group-header-slot,
 .agassi-group-header {
-  --agassi-group-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='.33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --agassi-group-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1.333 1.333 1.333 0 -1.500 1.333 1.333 1.333 0 -1.500 1.333 1.333 1.333 0 -1.500 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 .agassi-group-section,
@@ -2055,6 +2055,6 @@ body {
   background-image: var(--agassi-group-noise);
   background-size: 200px 200px;
   mix-blend-mode: soft-light;
-  opacity: .5;
+  opacity: 1;
   pointer-events: none;
 }
