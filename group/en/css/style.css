@@ -1673,3 +1673,19 @@ body .t-form-success-popup_new .t-form-success-popup__wrapper {
     gap: 8px;
   }
 }
+
+/* Логотипы в узких карточках крупнее */
+@media (max-width: 960px) {
+  .agassi-group-featured__logo,
+  .agassi-group-partners__card img {
+    width: 52%;
+    height: 36%;
+  }
+}
+
+@media (max-width: 640px) {
+  .agassi-group-featured__logo {
+    width: 68%;
+    height: 48%;
+  }
+}
