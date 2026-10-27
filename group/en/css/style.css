@@ -1078,10 +1078,10 @@ a[class*="agassi-group-"],
   width: 100%;
   min-height: 56px;
   padding: 0 32px;
-  border: 1px solid #E29642;
+  border: 1px solid var(--agassi-group-crimson);
   border-radius: 1000px;
-  background: var(--agassi-group-gold-gradient);
-  color: var(--agassi-group-crimson);
+  background: var(--agassi-group-crimson);
+  color: var(--agassi-group-white);
   font-family: var(--t-text-font);
   font-size: var(--agassi-group-font-small);
   font-weight: 500;
@@ -1092,9 +1092,9 @@ a[class*="agassi-group-"],
 .agassi-group-form .agassi-group-form__submit:hover,
 #allrecords .agassi-group-form .agassi-group-form__submit:hover,
 .t-records .agassi-group-form .agassi-group-form__submit:hover {
-  border-color: var(--agassi-group-gold);
-  background: var(--agassi-group-ivory);
-  color: var(--agassi-group-crimson);
+  border-color: var(--agassi-group-crimson-dark);
+  background: var(--agassi-group-crimson-dark);
+  color: var(--agassi-group-white);
 }
 
 /* История */
@@ -1555,4 +1555,65 @@ a[class*="agassi-group-"],
     transition-duration: 0ms;
     animation-duration: 0ms;
   }
+}
+
+/* Окно успеха Tilda: создаётся в body, оформляем глобально */
+body .t-form-success-popup_new {
+  background-color: rgba(30, 30, 30, .6); /* затемнение фона */
+}
+
+body .t-form-success-popup_new .t-form-success-popup__wrapper {
+  box-sizing: border-box;
+  width: calc(100% - 32px);
+  max-width: 560px;
+  padding: 48px 32px 40px;
+  border-radius: var(--agassi-group-radius);
+  background-color: var(--agassi-group-white);
+  box-shadow: none;
+  text-align: center;
+}
+
+body .t-form-success-popup_new .t-form-success-popup__content-icon {
+  display: none;
+}
+
+body .t-form-success-popup_new .t-form-success-popup__title {
+  margin: 0 0 16px;
+  color: var(--agassi-group-crimson);
+  font-family: var(--t-headline-font);
+  font-size: var(--agassi-group-font-h3);
+  font-weight: 400;
+  line-height: var(--agassi-group-line-h3);
+  text-transform: uppercase;
+}
+
+body .t-form-success-popup_new .t-form-success-popup__text {
+  margin: 0 0 32px;
+  color: var(--agassi-group-muted);
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-group-font-body);
+  line-height: var(--agassi-group-line-body);
+}
+
+body .t-form-success-popup_new .t-form-success-popup__button {
+  min-height: 56px;
+  padding: 0 40px;
+  border: 1px solid var(--agassi-group-crimson);
+  border-radius: 1000px;
+  background-color: var(--agassi-group-crimson);
+  color: var(--agassi-group-white);
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-group-font-small);
+  font-weight: 500;
+  line-height: var(--agassi-group-line-small);
+  transition: background-color var(--agassi-group-duration), border-color var(--agassi-group-duration);
+}
+
+body .t-form-success-popup_new .t-form-success-popup__button:hover {
+  border-color: var(--agassi-group-crimson-dark);
+  background-color: var(--agassi-group-crimson-dark);
+}
+
+body .t-form-success-popup_new .t-form-success-popup__close-icon svg path {
+  stroke: var(--agassi-group-ink);
 }
