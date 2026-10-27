@@ -27,8 +27,6 @@
   --agassi-group-line-body: 24px;
   --agassi-group-font-small: 14px;
   --agassi-group-line-small: 20px;
-  --agassi-group-font-lead: 20px;
-  --agassi-group-line-lead: 28px;
   --agassi-group-font-h2: 56px;
   --agassi-group-line-h2: 60px;
   --agassi-group-font-h3: 36px;
@@ -458,10 +456,10 @@ a[class*="agassi-group-"],
 
 .agassi-group-header__mobile-nav a {
   --agassi-group-link-color: var(--agassi-group-ink);
-  padding: 4px 0;
-  font-size: var(--agassi-group-font-lead);
+  padding: 8px 0;
+  font-size: var(--agassi-group-font-body);
   font-weight: 500;
-  line-height: var(--agassi-group-line-lead);
+  line-height: var(--agassi-group-line-body);
 }
 
 .agassi-group-header__mobile-bottom {
@@ -915,8 +913,8 @@ a[class*="agassi-group-"],
   --agassi-group-link-color: var(--agassi-group-white);
   display: inline-block;
   border-bottom: 1px solid var(--agassi-group-gold);
-  font-size: var(--agassi-group-font-lead);
-  line-height: var(--agassi-group-line-lead);
+  font-size: var(--agassi-group-font-body);
+  line-height: var(--agassi-group-line-body);
 }
 
 .agassi-group-contact__social {
@@ -1040,8 +1038,8 @@ a[class*="agassi-group-"],
 .agassi-group-form .agassi-group-form__success {
   color: var(--agassi-group-ink);
   font-family: var(--t-text-font);
-  font-size: var(--agassi-group-font-lead);
-  line-height: var(--agassi-group-line-lead);
+  font-size: var(--agassi-group-font-body);
+  line-height: var(--agassi-group-line-body);
 }
 
 .agassi-group-form__consent {
@@ -1116,8 +1114,8 @@ a[class*="agassi-group-"],
 
 .agassi-group-story__text p {
   margin-bottom: 16px;
-  font-size: var(--agassi-group-font-lead);
-  line-height: var(--agassi-group-line-lead);
+  font-size: var(--agassi-group-font-body);
+  line-height: var(--agassi-group-line-body);
 }
 
 .agassi-group-story__text strong {
@@ -1513,8 +1511,6 @@ a[class*="agassi-group-"],
     --agassi-group-frame-gap: 16px;
     --agassi-group-section-space: 48px;
     --agassi-group-radius: 20px;
-    --agassi-group-font-lead: 18px;
-    --agassi-group-line-lead: 28px;
     --agassi-group-font-h2: 32px;
     --agassi-group-line-h2: 40px;
     --agassi-group-font-h3: 28px;
@@ -1597,11 +1593,6 @@ a[class*="agassi-group-"],
 
   .agassi-group-faq__answer-text {
     padding: 0 20px 20px;
-  }
-
-  .agassi-group-story__text p {
-    font-size: var(--agassi-group-font-body);
-    line-height: var(--agassi-group-line-body);
   }
 
   .agassi-group-footer__columns {
