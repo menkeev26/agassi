@@ -810,44 +810,55 @@ a[class*="agassi-group-"],
 .agassi-group-faq__list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px var(--agassi-group-gap);
+  gap: 8px var(--agassi-group-gap);
   align-items: start;
+}
+
+.agassi-group-faq__icon-source {
+  display: none;
 }
 
 .agassi-group-faq__item {
   position: relative;
   overflow: hidden;
-  border-radius: 40px;
+  border-radius: 32px;
   background: var(--agassi-group-white);
 }
 
 .agassi-group-faq__head {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 48px;
+  grid-template-columns: minmax(0, 1fr) 40px;
   align-items: center;
   gap: 24px;
-  min-height: 80px;
-  padding: 16px 16px 16px 32px;
+  min-height: 64px;
+  padding: 12px 12px 12px 28px;
 }
 
 .agassi-group-faq__question-text {
   color: var(--agassi-group-ink);
   font-family: var(--t-text-font);
-  font-size: 18px;
+  font-size: var(--agassi-group-font-body);
   font-weight: 500;
-  line-height: 24px;
+  line-height: var(--agassi-group-line-body);
 }
 
 .agassi-group-faq__icon {
-  display: block;
-  width: 48px;
-  height: 48px;
-  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: var(--agassi-group-crimson);
-  object-fit: contain;
   transition: transform var(--agassi-group-duration) var(--agassi-group-ease);
+}
+
+.agassi-group-faq__icon img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .agassi-group-faq__item.is-open .agassi-group-faq__icon {
@@ -892,7 +903,7 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-faq__answer-text {
-  padding: 0 32px 24px;
+  padding: 0 28px 20px;
   color: var(--agassi-group-muted);
 }
 
@@ -1462,11 +1473,11 @@ textarea.agassi-group-form__input {
   }
 
   .agassi-group-faq__head {
-    padding-left: 24px;
+    padding-left: 20px;
   }
 
   .agassi-group-faq__answer-text {
-    padding: 0 24px 24px;
+    padding: 0 20px 20px;
   }
 
   .agassi-group-story__text p {
