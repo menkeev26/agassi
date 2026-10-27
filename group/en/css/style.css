@@ -1461,7 +1461,7 @@ a[class*="agassi-group-"],
     box-sizing: border-box;
     width: 100%;
     height: 100svh;
-    padding: 88px var(--agassi-group-frame-gap) 32px;
+    padding: 88px calc(var(--agassi-group-frame-gap) + 24px) calc(24px + env(safe-area-inset-bottom));
     overflow-y: auto;
     visibility: hidden;
     background: var(--agassi-group-ivory);
