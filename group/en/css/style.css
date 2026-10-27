@@ -15,9 +15,6 @@
   --agassi-group-line-crimson: #A1393E;
   --agassi-group-gold-gradient: linear-gradient(90deg, #F0E8A1 0%, #E29642 74%, #C49743 100%);
 
-  --agassi-group-font-text: var(--t-text-font, "Helvetica Neue", Arial, sans-serif);
-  --agassi-group-font-heading: var(--t-headline-font, Georgia, serif);
-
   --agassi-group-frame-max: 1620px;
   --agassi-group-frame-gap: 96px;
   --agassi-group-section-space: 96px;
@@ -37,7 +34,7 @@
   --agassi-group-font-h3: 36px;
   --agassi-group-line-h3: 48px;
   --agassi-group-font-display: 64px;
-  --agassi-group-line-display: 72px;
+  --agassi-group-line-display: 68px;
 
   --agassi-group-duration: 400ms;
   --agassi-group-ease: ease-out;
@@ -84,7 +81,7 @@ a[class*="agassi-group-"],
   padding: var(--agassi-group-section-space) 0;
   background: var(--agassi-group-ivory);
   color: var(--agassi-group-ink);
-  font-family: var(--agassi-group-font-text);
+  font-family: var(--t-text-font);
   font-size: var(--agassi-group-font-body);
   font-weight: 400;
   line-height: var(--agassi-group-line-body);
@@ -111,7 +108,7 @@ a[class*="agassi-group-"],
 
 .agassi-group-heading__title {
   color: var(--agassi-group-crimson);
-  font-family: var(--agassi-group-font-heading);
+  font-family: var(--t-headline-font);
   text-transform: uppercase;
   font-size: var(--agassi-group-font-h2);
   font-weight: 500;
@@ -130,7 +127,7 @@ a[class*="agassi-group-"],
 
 .agassi-group-heading--compact .agassi-group-heading__title {
   color: var(--agassi-group-muted);
-  font-family: var(--agassi-group-font-text);
+  font-family: var(--t-text-font);
   font-size: var(--agassi-group-font-small);
   line-height: var(--agassi-group-line-small);
   text-transform: uppercase;
@@ -170,7 +167,7 @@ a[class*="agassi-group-"],
   border: 1px solid var(--agassi-group-crimson);
   border-radius: 1000px;
   background: var(--agassi-group-crimson);
-  font-family: var(--agassi-group-font-text);
+  font-family: var(--t-text-font);
   font-size: var(--agassi-group-font-small);
   font-weight: 500;
   line-height: var(--agassi-group-line-small);
@@ -224,7 +221,7 @@ a[class*="agassi-group-"],
   width: 100%;
   height: 68px;
   background: var(--agassi-group-ivory);
-  font-family: var(--agassi-group-font-text);
+  font-family: var(--t-text-font);
   font-size: var(--agassi-group-font-body);
   line-height: var(--agassi-group-line-body);
   -webkit-font-smoothing: antialiased;
@@ -648,7 +645,7 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-directions__title {
-  font-family: var(--agassi-group-font-text);
+  font-family: var(--t-text-font);
   font-size: var(--agassi-group-font-h3);
   font-weight: 500;
   line-height: var(--agassi-group-line-h3);
@@ -845,7 +842,7 @@ a[class*="agassi-group-"],
   border: 0;
   background: transparent;
   color: var(--agassi-group-ink);
-  font-family: var(--agassi-group-font-text);
+  font-family: var(--t-text-font);
   font-size: 18px;
   font-weight: 500;
   line-height: 28px;
@@ -946,7 +943,7 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-contact__title {
-  font-family: var(--agassi-group-font-heading);
+  font-family: var(--t-text-font);
   font-size: var(--agassi-group-font-h3);
   font-weight: 500;
   line-height: var(--agassi-group-line-h3);
@@ -1019,7 +1016,7 @@ a[class*="agassi-group-"],
   border-radius: var(--agassi-group-radius-small);
   background: var(--agassi-group-crimson-field);
   color: var(--agassi-group-white);
-  font-family: var(--agassi-group-font-text);
+  font-family: var(--t-text-font);
   font-size: var(--agassi-group-font-body);
   line-height: var(--agassi-group-line-body);
   transition: border-color var(--agassi-group-duration) var(--agassi-group-ease);
@@ -1078,10 +1075,12 @@ textarea.agassi-group-form__input {
 .agassi-group-story__title {
   grid-column: 1 / -1;
   margin-bottom: 32px;
-  font-family: var(--agassi-group-font-heading);
-  font-size: var(--agassi-group-font-display);
+  color: var(--agassi-group-crimson);
+  font-family: var(--t-headline-font);
+  font-size: var(--agassi-group-font-h2);
   font-weight: 500;
-  line-height: var(--agassi-group-line-display);
+  line-height: var(--agassi-group-line-h2);
+  text-transform: uppercase;
 }
 
 .agassi-group-story__figure {
@@ -1119,7 +1118,7 @@ textarea.agassi-group-form__input {
 
 .agassi-group-story__text .agassi-group-story__lead,
 .agassi-group-story__text .agassi-group-story__closing {
-  font-family: var(--agassi-group-font-heading);
+  font-family: var(--t-text-font);
   font-size: var(--agassi-group-font-h3);
   font-weight: 500;
   line-height: var(--agassi-group-line-h3);
@@ -1134,7 +1133,7 @@ textarea.agassi-group-form__input {
   padding: var(--agassi-group-section-space) 0 32px;
   background: var(--agassi-group-crimson);
   color: var(--agassi-group-white);
-  font-family: var(--agassi-group-font-text);
+  font-family: var(--t-text-font);
   font-size: var(--agassi-group-font-body);
   line-height: var(--agassi-group-line-body);
   -webkit-font-smoothing: antialiased;
@@ -1222,7 +1221,7 @@ textarea.agassi-group-form__input {
 #allrecords .agassi-group-header__nav a:hover,
 .t-records .agassi-group-header__nav a:hover {
   color: var(--agassi-group-ink);
-  font-family: var(--agassi-group-font-text);
+  font-family: var(--t-text-font);
   text-decoration: none;
 }
 
@@ -1233,7 +1232,7 @@ textarea.agassi-group-form__input {
 #allrecords .agassi-group-header__mobile-nav a:hover,
 .t-records .agassi-group-header__mobile-nav a:hover {
   color: var(--agassi-group-white);
-  font-family: var(--agassi-group-font-text);
+  font-family: var(--t-text-font);
   text-decoration: none;
 }
 
