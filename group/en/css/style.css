@@ -836,9 +836,10 @@ a[class*="agassi-group-"],
 .agassi-group-faq__question-text {
   color: var(--agassi-group-ink);
   font-family: var(--t-text-font);
-  font-size: var(--agassi-group-font-body);
+  font-size: var(--agassi-group-font-h3);
   font-weight: 500;
-  line-height: var(--agassi-group-line-body);
+  line-height: var(--agassi-group-line-h3);
+  text-wrap: balance;
 }
 
 .agassi-group-faq__icon {
@@ -901,8 +902,12 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-faq__answer-text {
-  padding: 0 28px 20px;
+  padding: 0 28px 24px;
   color: var(--agassi-group-muted);
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-group-font-body);
+  font-weight: 400;
+  line-height: var(--agassi-group-line-body);
 }
 
 /* Контакты и форма */
@@ -1621,7 +1626,7 @@ a[class*="agassi-group-"],
   }
 
   .agassi-group-faq__head {
-    padding-left: 20px;
+    padding: 16px 12px 16px 20px;
   }
 
   .agassi-group-faq__answer-text {
