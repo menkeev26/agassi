@@ -54,13 +54,25 @@
   }
 
   // Карусель партнёров: автоплей и кнопки двигают ровно на одну карточку
+  // Лента с карточками: партнёры (с автоплеем) и СМИ на мобильных (только стрелки и свайп)
   function initPartners() {
-    document.querySelectorAll('.agassi-group-partners').forEach(function (section) {
+    [
+      { section: '.agassi-group-partners', track: '.agassi-group-partners__track', prev: '.agassi-group-partners__arrow--prev', next: '.agassi-group-partners__arrow--next', autoplay: true },
+      { section: '.agassi-group-featured', track: '.agassi-group-featured__list', prev: '.agassi-group-featured__arrow--prev', next: '.agassi-group-featured__arrow--next', autoplay: false }
+    ].forEach(function (config) {
+      document.querySelectorAll(config.section).forEach(function (section) {
+        initCarousel(section, config);
+      });
+    });
+  }
+
+  function initCarousel(section, config) {
+    {
       if (!claim(section)) return;
 
-      const track = section.querySelector('.agassi-group-partners__track');
-      const prev = section.querySelector('.agassi-group-partners__arrow--prev');
-      const next = section.querySelector('.agassi-group-partners__arrow--next');
+      const track = section.querySelector(config.track);
+      const prev = section.querySelector(config.prev);
+      const next = section.querySelector(config.next);
       if (!track || !track.firstElementChild || !prev || !next) return;
 
       const autoplayDelay = 4000;
@@ -133,8 +145,8 @@
       }, { passive: true });
 
       updateButtons();
-      startAutoplay();
-    });
+      if (config.autoplay) startAutoplay();
+    }
   }
 
   // Аккордеон вопросов
