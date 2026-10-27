@@ -1,7 +1,7 @@
 /* Токены */
 :root {
   --agassi-group-ivory: #F4F1EA;
-  --agassi-group-white: #EAE4D6; /* заменяет белый во всех блоках */
+  --agassi-group-white: #FBF8F2; /* тёплый светлый вместо чистого белого, меняется в одном месте */
   --agassi-group-sand: #EAE4D6;
   --agassi-group-crimson: #8C0F14;
   --agassi-group-crimson-dark: #5A0A0D;
@@ -684,14 +684,16 @@ a[class*="agassi-group-"],
   object-fit: contain;
 }
 
-.agassi-group-partners__controls {
+.agassi-group-partners__controls,
+.agassi-group-featured__controls {
   display: flex;
   justify-content: center;
   gap: 8px;
   margin-top: 32px;
 }
 
-.agassi-group-partners__arrow {
+.agassi-group-partners__arrow,
+.agassi-group-featured__arrow {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -707,7 +709,8 @@ a[class*="agassi-group-"],
     color var(--agassi-group-duration) var(--agassi-group-ease);
 }
 
-.agassi-group-partners__arrow::before {
+.agassi-group-partners__arrow::before,
+.agassi-group-featured__arrow::before {
   content: "";
   width: 12px;
   height: 12px;
@@ -717,17 +720,20 @@ a[class*="agassi-group-"],
   transform: rotate(45deg);
 }
 
-.agassi-group-partners__arrow--prev::before {
+.agassi-group-partners__arrow--prev::before,
+.agassi-group-featured__arrow--prev::before {
   margin-right: 0;
   margin-left: 4px;
   transform: rotate(-135deg);
 }
 
-.agassi-group-partners__arrow:hover:not(:disabled) {
+.agassi-group-partners__arrow:hover:not(:disabled),
+.agassi-group-featured__arrow:hover:not(:disabled) {
   background: var(--agassi-group-crimson-dark);
 }
 
-.agassi-group-partners__arrow:disabled {
+.agassi-group-partners__arrow:disabled,
+.agassi-group-featured__arrow:disabled {
   background: var(--agassi-group-line);
   cursor: default;
 }
@@ -805,6 +811,10 @@ a[class*="agassi-group-"],
   width: 36%;
   height: 26%;
   object-fit: contain;
+}
+
+.agassi-group-featured__controls {
+  display: none;
 }
 
 /* Вопросы и ответы */
@@ -1717,6 +1727,10 @@ a[class*="agassi-group-"],
 
   .agassi-group-featured__list::-webkit-scrollbar {
     display: none;
+  }
+
+  .agassi-group-featured__controls {
+    display: flex;
   }
 
   .agassi-group-featured__item {
