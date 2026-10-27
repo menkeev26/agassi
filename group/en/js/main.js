@@ -52,7 +52,7 @@
     });
   }
 
-  // Карусель партнёров: без автоплея, шаг ровно в одну карточку
+  // Карусель партнёров: автоплей и кнопки двигают ровно на одну карточку
   function initPartners() {
     document.querySelectorAll('.agassi-group-partners').forEach(function (section) {
       if (!claim(section)) return;
@@ -62,8 +62,10 @@
       const next = section.querySelector('.agassi-group-partners__arrow--next');
       if (!track || !track.firstElementChild || !prev || !next) return;
 
+      const autoplayDelay = 4000;
       let index = 0;
       let timer = 0;
+      let autoplay = 0;
 
       function step() {
         const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
@@ -91,10 +93,27 @@
         });
       }
 
+      // Автоплей: шаг на одну карточку, в конце возврат к началу
+      function stopAutoplay() {
+        window.clearInterval(autoplay);
+        autoplay = 0;
+      }
+
+      function startAutoplay() {
+        if (reducedMotion.matches || window.self !== window.top) return;
+        autoplay = window.setInterval(function () {
+          if (document.hidden) return;
+          goTo(index >= lastIndex() ? 0 : index + 1);
+        }, autoplayDelay);
+      }
+
+      // Нажатие на кнопку навсегда останавливает автоплей
       prev.addEventListener('click', function () {
+        stopAutoplay();
         goTo(index - 1);
       });
       next.addEventListener('click', function () {
+        stopAutoplay();
         goTo(index + 1);
       });
 
@@ -113,6 +132,7 @@
       }, { passive: true });
 
       updateButtons();
+      startAutoplay();
     });
   }
 
