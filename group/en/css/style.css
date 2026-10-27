@@ -125,14 +125,6 @@ a[class*="agassi-group-"],
   color: var(--agassi-group-white);
 }
 
-.agassi-group-heading--compact .agassi-group-heading__title {
-  color: var(--agassi-group-muted);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-group-font-small);
-  line-height: var(--agassi-group-line-small);
-  text-transform: uppercase;
-}
-
 /* Золотой градиент */
 .agassi-group-heading--light .agassi-group-heading__eyebrow,
 .agassi-group-facts__value,
