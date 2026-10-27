@@ -1095,7 +1095,7 @@ a[class*="agassi-group-"],
 
 .agassi-group-form__consent a {
   --agassi-group-link-color: var(--agassi-group-crimson);
-  border-bottom: 1px solid var(--agassi-group-gold);
+  border-bottom: 1px solid var(--agassi-group-crimson);
 }
 
 .agassi-group-form .agassi-group-form__submit,
