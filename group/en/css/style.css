@@ -221,7 +221,7 @@ a[class*="agassi-group-"],
   position: relative;
   display: block;
   width: 100%;
-  height: 72px;
+  height: 68px;
   background: var(--agassi-group-ivory);
   font-family: var(--agassi-group-font-text);
   font-size: var(--agassi-group-font-body);
@@ -400,8 +400,17 @@ a[class*="agassi-group-"],
   padding: 0 20px;
 }
 
+.agassi-group-header__mobile,
 .agassi-group-header__burger-wrap {
-  display: none;
+  display: contents;
+}
+
+.agassi-group-header__mobile-cta {
+  display: flex;
+}
+
+.agassi-group-header__mobile-cta .agassi-group-button {
+  flex: 1;
 }
 
 .agassi-group-header__cta-wrap {
@@ -460,7 +469,7 @@ a[class*="agassi-group-"],
 
 .agassi-group-header__mobile-top {
   display: flex;
-  height: 64px;
+  height: 60px;
   align-items: center;
   justify-content: space-between;
 }
@@ -521,7 +530,7 @@ a[class*="agassi-group-"],
 
 /* Первый экран */
 .agassi-group-hero {
-  padding: 12px 0 16px;
+  padding: 4px 0 16px;
 }
 
 .agassi-group-hero__frame {
@@ -1290,9 +1299,17 @@ textarea.agassi-group-form__input {
     --agassi-group-line-display: 56px;
   }
 
+  .agassi-group-header-slot {
+    height: 64px;
+  }
+
+  .agassi-group-header {
+    height: 60px;
+  }
+
   .agassi-group-header__frame {
-    grid-template-columns: minmax(0, 1fr) auto;
-    padding-right: 4px;
+    grid-template-columns: minmax(0, 1fr);
+    padding-right: 64px;
   }
 
   .agassi-group-header__nav,
@@ -1300,15 +1317,21 @@ textarea.agassi-group-form__input {
     display: none;
   }
 
-  .agassi-group-header__burger-wrap,
-  .agassi-group-header__burger,
+  .agassi-group-header__burger {
+    position: fixed;
+    z-index: 1000;
+    top: 8px;
+    right: calc(var(--agassi-group-frame-gap) + 4px);
+    display: flex;
+  }
+
   .agassi-group-header__mobile-close {
     display: flex;
   }
 
   .agassi-group-header__mobile-menu {
     position: fixed;
-    z-index: 1000;
+    z-index: 1001;
     inset: 0;
     display: block;
     overflow-y: auto;
@@ -1391,10 +1414,6 @@ textarea.agassi-group-form__input {
 
   .agassi-group-heading {
     margin-bottom: 32px;
-  }
-
-  .agassi-group-hero {
-    padding: 8px 0 12px;
   }
 
   .agassi-group-hero__frame {
