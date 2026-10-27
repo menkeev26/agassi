@@ -614,7 +614,7 @@ a[class*="agassi-group-"],
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(140, 15, 20, .3) 0%, rgba(140, 15, 20, .2) 34%, rgba(140, 15, 20, .96) 100%);
+  background: linear-gradient(180deg, rgba(140, 15, 20, .64) 0%, rgba(140, 15, 20, .56) 40%, rgba(140, 15, 20, .96) 100%);
   pointer-events: none;
 }
 
