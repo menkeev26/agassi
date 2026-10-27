@@ -236,6 +236,24 @@
       const toggle = section.querySelector('.agassi-group-story__toggle');
       if (!more || !toggle) return;
 
+      const layout = section.querySelector('.agassi-group-story__layout');
+      const body = section.querySelector('.agassi-group-story__body');
+      const action = section.querySelector('.agassi-group-story__action');
+      const firstText = section.querySelector('.agassi-group-story__text');
+
+      // Высота фото = высота свёрнутого текста, при раскрытии не меняется
+      function syncHeight() {
+        if (!layout || !body || !action) return;
+        const height = action.getBoundingClientRect().bottom - body.getBoundingClientRect().top - more.getBoundingClientRect().height;
+        if (height > 0) layout.style.setProperty('--agassi-group-story-height', Math.round(height) + 'px');
+      }
+
+      syncHeight();
+      window.addEventListener('load', syncHeight);
+      window.addEventListener('resize', syncHeight, { passive: true });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncHeight);
+      if ('ResizeObserver' in window && firstText) new ResizeObserver(syncHeight).observe(firstText);
+
       const closedLabel = toggle.textContent.trim();
       const openLabel = toggle.getAttribute('data-label-open') || closedLabel;
 
