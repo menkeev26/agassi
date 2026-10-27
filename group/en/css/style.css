@@ -1146,6 +1146,10 @@ a[class*="agassi-group-"],
 
 .agassi-group-story__body {
   grid-column: span 6;
+  align-self: start;
+  padding: 48px;
+  border-radius: var(--agassi-group-radius);
+  background: var(--agassi-group-white);
 }
 
 .agassi-group-story__text p {
@@ -1564,6 +1568,9 @@ a[class*="agassi-group-"],
     max-width: 480px;
     margin-bottom: 24px;
   }
+  .agassi-group-story__body {
+    padding: 32px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1622,8 +1629,11 @@ a[class*="agassi-group-"],
     padding: 32px 24px;
   }
 
+  /* Партнёры и СМИ: одна карточка и край следующей */
   .agassi-group-partners__track {
-    --agassi-group-visible: 2;
+    --agassi-group-visible: 1.15;
+    margin-right: calc(-1 * var(--agassi-group-frame-gap));
+    padding-right: var(--agassi-group-frame-gap);
   }
 
   .agassi-group-partners__card {
@@ -1653,11 +1663,30 @@ a[class*="agassi-group-"],
   }
 
   .agassi-group-featured__list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    margin-right: calc(-1 * var(--agassi-group-frame-gap));
+    padding-right: var(--agassi-group-frame-gap);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .agassi-group-featured__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .agassi-group-featured__item {
+    flex: 0 0 calc((100% - 0.15 * var(--agassi-group-gap)) / 1.15);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   .agassi-group-featured .agassi-group-featured__link {
     padding: 16px;
+  }
+
+  .agassi-group-story__body {
+    padding: 24px;
   }
 
   .agassi-group-faq__head {
@@ -1788,8 +1817,8 @@ body .t-form-success-popup_new .t-form-success-popup__wrapper {
 @media (max-width: 640px) {
   .agassi-group-featured__logo,
   .agassi-group-partners__card img {
-    width: 68%;
-    height: 48%;
+    width: 40%;
+    height: 28%;
   }
 }
 
