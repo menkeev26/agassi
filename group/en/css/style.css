@@ -176,15 +176,15 @@ a[class*="agassi-group-"],
   background: var(--agassi-group-crimson-dark);
 }
 
-.agassi-group-button--gold {
+.agassi-group-button--light {
   --agassi-group-link-color: var(--agassi-group-crimson);
-  border-color: #E29642;
-  background: var(--agassi-group-gold-gradient);
+  border-color: var(--agassi-group-white);
+  background: var(--agassi-group-white);
 }
 
-.agassi-group-button--gold:hover {
-  border-color: var(--agassi-group-gold);
-  background: var(--agassi-group-white);
+.agassi-group-button--light:hover {
+  border-color: var(--agassi-group-sand);
+  background: var(--agassi-group-sand);
 }
 
 .agassi-group-button--outline {
