@@ -18,6 +18,7 @@
   --agassi-group-frame-max: 1620px;
   --agassi-group-frame-gap: 96px;
   --agassi-group-section-space: 96px;
+  --agassi-group-story-padding: 48px;
   --agassi-group-columns: 12;
   --agassi-group-gap: 16px;
   --agassi-group-radius: 28px;
@@ -1156,7 +1157,7 @@ a[class*="agassi-group-"],
 .agassi-group-story__body {
   grid-column: span 6;
   align-self: start;
-  padding: 48px;
+  padding: var(--agassi-group-story-padding);
   border-radius: var(--agassi-group-radius);
   background: var(--agassi-group-white);
 }
@@ -1186,7 +1187,7 @@ a[class*="agassi-group-"],
   .agassi-group-story__figure {
     position: sticky;
     top: 84px; /* под шапкой, зазор 16px */
-    height: var(--agassi-group-story-height, 560px);
+    height: calc(var(--agassi-group-story-height, 560px) + var(--agassi-group-story-padding));
     aspect-ratio: auto;
   }
 }
@@ -1651,7 +1652,7 @@ a[class*="agassi-group-"],
     margin-bottom: 24px;
   }
   .agassi-group-story__body {
-    padding: 32px;
+    --agassi-group-story-padding: 32px;
   }
 }
 
@@ -1772,7 +1773,7 @@ a[class*="agassi-group-"],
   }
 
   .agassi-group-story__body {
-    padding: 24px;
+    --agassi-group-story-padding: 24px;
   }
 
   .agassi-group-faq__head {
