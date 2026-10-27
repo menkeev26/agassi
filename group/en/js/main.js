@@ -267,12 +267,35 @@
     });
   }
 
+  // Типограф: короткие слова не остаются в конце строки (склеиваются со следующим неразрывным пробелом)
+  function initTypography() {
+    const words = 'a|an|the|to|of|in|on|at|by|for|and|or|but|as|if|so|is|it|we|us|our|my|no|not|with|from|i|в|во|к|ко|с|со|у|о|об|и|а|но|на|по|за|из|от|до|не|ни|для|при|без|над|под|про|или|что|как';
+    const pattern = new RegExp('(^|[\\s\\u00A0(\\[“"\'])(' + words + ')\\s+(?=\\S)', 'giu');
+    const skip = { SCRIPT: 1, STYLE: 1, TEXTAREA: 1, INPUT: 1, CODE: 1 };
+
+    document.querySelectorAll('.agassi-group-section, .agassi-group-footer, .agassi-group-header-slot').forEach(function (root) {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+
+      nodes.forEach(function (node) {
+        if (skip[node.parentNode.nodeName]) return;
+        const text = node.nodeValue;
+        // Повторяем, чтобы обработать подряд идущие короткие слова
+        let result = text.replace(pattern, '$1$2\u00A0');
+        result = result.replace(pattern, '$1$2\u00A0');
+        if (result !== text) node.nodeValue = result;
+      });
+    });
+  }
+
   function init() {
     initHeader();
     initPartners();
     initFaq();
     initFacts();
     initStory();
+    initTypography();
   }
 
   if (document.readyState === 'loading') {
