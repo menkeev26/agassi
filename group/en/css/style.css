@@ -1458,14 +1458,13 @@ textarea.agassi-group-form__input {
     padding: 40px 20px;
   }
 
-  .agassi-group-facts__list {
-    grid-template-columns: minmax(0, 1fr);
+  .agassi-group-facts__item {
+    min-height: 192px;
+    padding: 32px 12px;
   }
 
-  .agassi-group-facts__item,
-  .agassi-group-facts__item:nth-child(even) {
-    min-height: 192px;
-    border-left: 0;
+  .agassi-group-facts__label {
+    margin-top: 12px;
   }
 
   .agassi-group-featured__item {
