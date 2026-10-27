@@ -306,7 +306,7 @@
   function initReveal() {
     if (window.self !== window.top || reducedMotion.matches || !('IntersectionObserver' in window)) return;
 
-    const selector = '.agassi-group-heading__title, .agassi-group-directions__title, .agassi-group-contact__title, .agassi-group-privacy__title';
+    const selector = '.agassi-group-heading__title, .agassi-group-contact__title, .agassi-group-privacy__title';
     const observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
