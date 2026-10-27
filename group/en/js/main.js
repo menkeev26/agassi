@@ -16,11 +16,10 @@
       const header = slot.querySelector('.agassi-group-header');
       const menu = slot.querySelector('.agassi-group-header__mobile-menu');
       const burger = slot.querySelector('.agassi-group-header__burger');
-      const closeButton = slot.querySelector('.agassi-group-header__mobile-close');
       const root = document.documentElement;
       // В редакторе список языков не раскрываем: он растягивает высоту блока
       if (window.self !== window.top) slot.classList.add('is-editor');
-      if (!header || !menu || !burger || !closeButton) return;
+      if (!header || !menu || !burger) return;
 
       function setMenu(open) {
         slot.classList.toggle('is-menu-open', open);
@@ -34,13 +33,13 @@
       }
 
       burger.addEventListener('click', function () {
-        setMenu(true);
-      });
-      closeButton.addEventListener('click', function () {
-        setMenu(false);
+        setMenu(!slot.classList.contains('is-menu-open'));
       });
       menu.addEventListener('click', function (event) {
         if (event.target.closest('a')) setMenu(false);
+      });
+      document.addEventListener('click', function (event) {
+        if (!slot.contains(event.target) && !header.contains(event.target)) setMenu(false);
       });
       document.addEventListener('keydown', function (event) {
         if (event.key === 'Escape') setMenu(false);
