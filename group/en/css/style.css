@@ -69,8 +69,11 @@ ul[class*="agassi-group-"] {
 }
 
 a[class*="agassi-group-"],
+[class*="agassi-group-"] a,
 #allrecords a[class*="agassi-group-"],
-.t-records a[class*="agassi-group-"] {
+#allrecords [class*="agassi-group-"] a,
+.t-records a[class*="agassi-group-"],
+.t-records [class*="agassi-group-"] a {
   color: var(--agassi-group-link-color, inherit);
   text-decoration: none;
 }
