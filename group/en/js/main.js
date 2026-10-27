@@ -179,11 +179,82 @@
     });
   }
 
+  // Факты: счётчик чисел при первом появлении в экране
+  function initFacts() {
+    document.querySelectorAll('.agassi-group-facts').forEach(function (section) {
+      if (!claim(section)) return;
+      if (reducedMotion.matches || window.self !== window.top || !('IntersectionObserver' in window)) return;
+
+      const duration = 1600;
+      const values = [];
+
+      section.querySelectorAll('.agassi-group-facts__value').forEach(function (element) {
+        const text = element.textContent.trim();
+        const match = text.match(/^(\D*)(\d[\d.,]*)(.*)$/);
+        if (!match) return;
+        const target = parseFloat(match[2].replace(/,/g, ''));
+        if (!isFinite(target)) return;
+        // Ширину фиксируем по итоговому числу, чтобы текст не прыгал
+        element.style.setProperty('--agassi-group-facts-width', Math.ceil(element.getBoundingClientRect().width) + 'px');
+        values.push({ element: element, prefix: match[1], target: target, suffix: match[3], grouped: match[2].indexOf(',') !== -1 });
+      });
+      if (!values.length) return;
+
+      function format(item, number) {
+        const rounded = Math.round(number);
+        return item.prefix + (item.grouped ? rounded.toLocaleString('en-US') : String(rounded)) + item.suffix;
+      }
+
+      function run() {
+        const start = performance.now();
+        values.forEach(function (item) { item.element.textContent = format(item, 0); });
+
+        function frame(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          values.forEach(function (item) { item.element.textContent = format(item, item.target * eased); });
+          if (progress < 1) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }
+
+      const observer = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        observer.disconnect();
+        run();
+      }, { threshold: 0.35 });
+      observer.observe(section);
+    });
+  }
+
+  // О компании: показать или скрыть продолжение истории
+  function initStory() {
+    document.querySelectorAll('.agassi-group-story').forEach(function (section) {
+      if (!claim(section)) return;
+
+      const more = section.querySelector('.agassi-group-story__more');
+      const toggle = section.querySelector('.agassi-group-story__toggle');
+      if (!more || !toggle) return;
+
+      const closedLabel = toggle.textContent.trim();
+      const openLabel = toggle.getAttribute('data-label-open') || closedLabel;
+
+      toggle.addEventListener('click', function () {
+        const open = !more.classList.contains('is-open');
+        more.classList.toggle('is-open', open);
+        more.setAttribute('aria-hidden', String(!open));
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.textContent = open ? openLabel : closedLabel;
+      });
+    });
+  }
+
   function init() {
     initHeader();
     initPartners();
     initFaq();
     initFacts();
+    initStory();
   }
 
   if (document.readyState === 'loading') {
