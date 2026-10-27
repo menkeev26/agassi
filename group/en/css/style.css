@@ -514,9 +514,17 @@ a[class*="agassi-group-"],
   background: var(--agassi-group-sand);
 }
 
-.agassi-group-hero__background {
+.agassi-group-hero__media {
   position: absolute;
   inset: 0;
+}
+
+.agassi-group-hero__brand {
+  display: flex;
+  justify-content: center;
+}
+
+.agassi-group-hero__background {
   display: block;
   width: 100%;
   height: 100%;
