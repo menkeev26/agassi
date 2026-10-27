@@ -1476,6 +1476,11 @@ a[class*="agassi-group-"],
     clip-path: inset(0 0 0 0);
   }
 
+  /* В редакторе закрытое меню не должно растягивать блок */
+  .agassi-group-header-slot.is-editor:not(.is-menu-open) .agassi-group-header__mobile-menu {
+    display: none;
+  }
+
   /* Ссылки крупные, язык и кнопка прижаты к низу экрана */
   .agassi-group-header__mobile-inner {
     box-sizing: border-box;
