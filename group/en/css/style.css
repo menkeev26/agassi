@@ -459,8 +459,9 @@ a[class*="agassi-group-"],
 .agassi-group-header__mobile-nav a {
   --agassi-group-link-color: var(--agassi-group-ink);
   padding: 4px 0;
-  font-size: 28px;
-  line-height: 36px;
+  font-size: var(--agassi-group-font-lead);
+  font-weight: 500;
+  line-height: var(--agassi-group-line-lead);
 }
 
 .agassi-group-header__mobile-bottom {
@@ -1094,7 +1095,7 @@ a[class*="agassi-group-"],
 
 /* О компании */
 .agassi-group-story__figure {
-  grid-column: span 5;
+  grid-column: span 6;
   align-self: start;
   aspect-ratio: 4 / 5;
   overflow: hidden;
@@ -1110,26 +1111,23 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-story__body {
-  grid-column: 7 / span 6;
+  grid-column: span 6;
 }
 
 .agassi-group-story__text p {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   font-size: var(--agassi-group-font-lead);
-  line-height: 32px;
+  line-height: var(--agassi-group-line-lead);
 }
 
 .agassi-group-story__text strong {
   color: var(--agassi-group-crimson);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .agassi-group-story__text .agassi-group-story__lead,
 .agassi-group-story__text .agassi-group-story__closing {
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-group-font-h3);
   font-weight: 500;
-  line-height: var(--agassi-group-line-h3);
 }
 
 .agassi-group-story__text .agassi-group-story__closing {
@@ -1603,7 +1601,7 @@ a[class*="agassi-group-"],
 
   .agassi-group-story__text p {
     font-size: var(--agassi-group-font-body);
-    line-height: 28px;
+    line-height: var(--agassi-group-line-body);
   }
 
   .agassi-group-footer__columns {
@@ -1647,11 +1645,10 @@ body .t-form-success-popup_new .t-form-success-popup__content-icon {
 body .t-form-success-popup_new .t-form-success-popup__title {
   margin: 0 0 16px;
   color: var(--agassi-group-crimson);
-  font-family: var(--t-headline-font);
+  font-family: var(--t-text-font);
   font-size: var(--agassi-group-font-h3);
-  font-weight: 400;
+  font-weight: 500;
   line-height: var(--agassi-group-line-h3);
-  text-transform: uppercase;
 }
 
 body .t-form-success-popup_new .t-form-success-popup__text {
