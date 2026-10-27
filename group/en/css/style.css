@@ -1523,16 +1523,44 @@ a[class*="agassi-group-"],
     overflow-y: auto;
     visibility: hidden;
     background: var(--agassi-group-ivory);
-    clip-path: inset(0 0 100% 0);
+    clip-path: circle(0 at calc(100% - var(--agassi-group-frame-gap) - 14px) 32px);
     transition:
-      clip-path var(--agassi-group-duration) var(--agassi-group-ease),
-      visibility var(--agassi-group-duration) var(--agassi-group-ease);
+      clip-path 700ms cubic-bezier(.77, 0, .18, 1),
+      visibility 700ms;
   }
 
   .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-menu {
     visibility: visible;
-    clip-path: inset(0 0 0 0);
+    clip-path: circle(150vmax at calc(100% - var(--agassi-group-frame-gap) - 14px) 32px);
   }
+
+  /* Меню раскрывается кругом из бургера, ссылки выходят по очереди с размытием */
+  .agassi-group-header__mobile-nav a,
+  .agassi-group-header__mobile-bottom {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(24px);
+    transition:
+      opacity 300ms ease-out,
+      filter 300ms ease-out,
+      transform 300ms ease-out;
+  }
+
+  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a,
+  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-bottom {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+    transition-duration: 700ms;
+    transition-timing-function: cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a:nth-child(1) { transition-delay: 200ms; }
+  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a:nth-child(2) { transition-delay: 260ms; }
+  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a:nth-child(3) { transition-delay: 320ms; }
+  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a:nth-child(4) { transition-delay: 380ms; }
+  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-nav a:nth-child(5) { transition-delay: 440ms; }
+  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-bottom { transition-delay: 520ms; }
 
   /* В редакторе закрытое меню не должно растягивать блок */
   .agassi-group-header-slot.is-editor:not(.is-menu-open) .agassi-group-header__mobile-menu {
@@ -2011,5 +2039,33 @@ body .t-form-success-popup_new .t-form-success-popup__wrapper {
 
   .agassi-group-privacy__heading {
     margin-bottom: 20px;
+  }
+}
+
+/* Появление заголовков: размытие и сдвиг (класс ставит скрипт, в редакторе его нет) */
+.agassi-group-reveal {
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(16px);
+  transition:
+    opacity 800ms ease-out,
+    filter 800ms ease-out,
+    transform 800ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.agassi-group-reveal.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agassi-group-reveal,
+  .agassi-group-header__mobile-nav a,
+  .agassi-group-header__mobile-bottom {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
   }
 }
