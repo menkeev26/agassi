@@ -1252,7 +1252,7 @@ a[class*="agassi-group-"],
 .agassi-group-header__mobile-nav a:hover,
 #allrecords .agassi-group-header__mobile-nav a:hover,
 .t-records .agassi-group-header__mobile-nav a:hover {
-  color: var(--agassi-group-white);
+  color: var(--agassi-group-ink);
   font-family: var(--t-text-font);
   text-decoration: none;
 }
