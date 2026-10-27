@@ -1178,7 +1178,6 @@ a[class*="agassi-group-"],
   width: auto;
   max-width: 240px;
   max-height: 80px;
-  filter: brightness(0) invert(1);
 }
 
 .agassi-group-footer__text {
