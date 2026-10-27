@@ -198,7 +198,7 @@ a[class*="agassi-group-"],
 
 .agassi-group-button--outline {
   --agassi-group-link-color: var(--agassi-group-crimson);
-  background: var(--agassi-group-ivory);
+  background: transparent;
 }
 
 .agassi-group-button--outline:hover {
@@ -253,6 +253,10 @@ a[class*="agassi-group-"],
   gap: 16px;
   height: 100%;
   padding: 0 12px 0 24px;
+}
+
+.agassi-group-header__brand {
+  display: flex;
 }
 
 .agassi-group-header__logo {
@@ -350,19 +354,27 @@ a[class*="agassi-group-"],
   z-index: 1001;
   top: calc(100% + 8px);
   left: 50%;
-  display: none;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
   flex-direction: column;
   width: 64px;
   padding: 4px;
   border: 1px solid var(--agassi-group-line);
   border-radius: var(--agassi-group-radius-small);
   background: var(--agassi-group-white);
-  transform: translateX(-50%);
+  transform: translate(-50%, -4px);
+  transition:
+    opacity var(--agassi-group-duration) var(--agassi-group-ease),
+    transform var(--agassi-group-duration) var(--agassi-group-ease),
+    visibility var(--agassi-group-duration) var(--agassi-group-ease);
 }
 
 .agassi-group-header__language:hover .agassi-group-header__language-dropdown,
 .agassi-group-header__language:focus-within .agassi-group-header__language-dropdown {
-  display: flex;
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 .agassi-group-header__language-option {
@@ -388,6 +400,14 @@ a[class*="agassi-group-"],
   padding: 0 20px;
 }
 
+.agassi-group-header__burger-wrap {
+  display: none;
+}
+
+.agassi-group-header__cta-wrap {
+  display: flex;
+}
+
 .agassi-group-header__burger,
 .agassi-group-header__mobile-close {
   display: none;
@@ -400,37 +420,47 @@ a[class*="agassi-group-"],
   cursor: pointer;
 }
 
-.agassi-group-header__burger img,
-.agassi-group-header__mobile-close img {
+.agassi-group-header__burger img {
   display: block;
   width: 28px;
   height: 28px;
   object-fit: contain;
 }
 
-.agassi-group-header__mobile-menu {
-  display: none;
+.agassi-group-header__mobile-close {
+  position: relative;
 }
 
-.agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-menu {
-  position: fixed;
-  z-index: 1000;
-  inset: 0;
-  display: block;
-  padding: 12px 16px 24px;
-  overflow-y: auto;
+.agassi-group-header__mobile-close::before,
+.agassi-group-header__mobile-close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 2px;
   background: var(--agassi-group-crimson);
-  animation: agassi-group-fade var(--agassi-group-duration) var(--agassi-group-ease);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.agassi-group-header__mobile-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.agassi-group-header__mobile-menu {
+  display: none;
 }
 
 .agassi-group-header__mobile-inner {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  padding: 4px calc(var(--agassi-group-frame-gap) + 4px) 24px calc(var(--agassi-group-frame-gap) + 24px);
 }
 
 .agassi-group-header__mobile-top {
   display: flex;
+  height: 64px;
   align-items: center;
   justify-content: space-between;
 }
@@ -438,9 +468,8 @@ a[class*="agassi-group-"],
 .agassi-group-header__mobile-logo img {
   display: block;
   width: auto;
-  max-width: 116px;
-  max-height: 32px;
-  filter: brightness(0) invert(1);
+  max-width: 120px;
+  max-height: 36px;
 }
 
 .agassi-group-header__mobile-nav {
@@ -453,7 +482,7 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-header__mobile-nav a {
-  --agassi-group-link-color: var(--agassi-group-white);
+  --agassi-group-link-color: var(--agassi-group-ink);
   padding: 4px 0;
   font-size: 28px;
   line-height: 36px;
@@ -472,12 +501,12 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-header__mobile-language-button {
-  --agassi-group-link-color: var(--agassi-group-white);
+  --agassi-group-link-color: var(--agassi-group-ink);
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  border: 1px solid var(--agassi-group-line-crimson);
+  border: 1px solid var(--agassi-group-line);
   border-radius: 1000px;
   font-size: var(--agassi-group-font-small);
   font-weight: 500;
@@ -485,15 +514,9 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-header__mobile-language-button.is-active {
-  --agassi-group-link-color: var(--agassi-group-crimson);
-  border-color: var(--agassi-group-white);
-  background: var(--agassi-group-white);
-}
-
-@keyframes agassi-group-fade {
-  from {
-    opacity: 0;
-  }
+  --agassi-group-link-color: var(--agassi-group-white);
+  border-color: var(--agassi-group-crimson);
+  background: var(--agassi-group-crimson);
 }
 
 /* Первый экран */
@@ -548,7 +571,7 @@ a[class*="agassi-group-"],
 
 .agassi-group-hero__logo {
   display: block;
-  width: min(240px, 100%);
+  width: min(300px, 100%);
   height: auto;
 }
 
@@ -1273,14 +1296,45 @@ textarea.agassi-group-form__input {
   }
 
   .agassi-group-header__nav,
-  .agassi-group-header__language,
-  .agassi-group-header__cta {
+  .agassi-group-header__actions {
     display: none;
   }
 
+  .agassi-group-header__burger-wrap,
   .agassi-group-header__burger,
   .agassi-group-header__mobile-close {
     display: flex;
+  }
+
+  .agassi-group-header__mobile-menu {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    display: block;
+    overflow-y: auto;
+    visibility: hidden;
+    background: var(--agassi-group-ivory);
+    transform: translateY(100%);
+    transition:
+      transform var(--agassi-group-duration) var(--agassi-group-ease),
+      visibility var(--agassi-group-duration) var(--agassi-group-ease);
+  }
+
+  .agassi-group-header-slot.is-menu-open .agassi-group-header__mobile-menu {
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .agassi-group-hero__content {
+    align-self: stretch;
+    width: 100%;
+    gap: 24px;
+    padding: 24px;
+  }
+
+  .agassi-group-hero__brand {
+    flex: 1;
+    align-items: center;
   }
 
   .agassi-group-directions__card {
@@ -1349,11 +1403,12 @@ textarea.agassi-group-form__input {
   }
 
   .agassi-group-hero__content {
-    gap: 32px;
+    gap: 24px;
+    padding: 16px;
   }
 
   .agassi-group-hero__logo {
-    width: min(200px, 100%);
+    width: min(240px, 100%);
   }
 
   .agassi-group-hero__actions {
