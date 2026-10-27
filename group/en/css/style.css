@@ -367,6 +367,10 @@ a[class*="agassi-group-"],
   transform: translate(-50%, 0);
 }
 
+.agassi-group-header-slot.is-editor .agassi-group-header__language-dropdown {
+  display: none !important; /* перебивает :hover и :focus-within */
+}
+
 @starting-style {
   .agassi-group-header__language:hover .agassi-group-header__language-dropdown,
   .agassi-group-header__language:focus-within .agassi-group-header__language-dropdown {
