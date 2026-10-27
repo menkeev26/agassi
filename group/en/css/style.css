@@ -31,6 +31,8 @@
   --agassi-group-line-h2: 60px;
   --agassi-group-font-h3: 36px;
   --agassi-group-line-h3: 48px;
+  --agassi-group-font-h4: 20px;
+  --agassi-group-line-h4: 28px;
   --agassi-group-font-display: 64px;
   --agassi-group-line-display: 68px;
 
@@ -836,9 +838,9 @@ a[class*="agassi-group-"],
 .agassi-group-faq__question-text {
   color: var(--agassi-group-ink);
   font-family: var(--t-text-font);
-  font-size: var(--agassi-group-font-h3);
+  font-size: var(--agassi-group-font-h4);
   font-weight: 500;
-  line-height: var(--agassi-group-line-h3);
+  line-height: var(--agassi-group-line-h4);
   text-wrap: balance;
 }
 
