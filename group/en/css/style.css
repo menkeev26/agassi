@@ -1110,11 +1110,31 @@ a[class*="agassi-group-"],
     align-self: start;
   }
 
+  /* Текст начинается сверху, абзацы равномерно распределяются, кнопка внизу карточки */
   .agassi-group-story__body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     min-height: var(--agassi-group-story-figure-width);
+  }
+
+  .agassi-group-story__body > .agassi-group-story__text {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .agassi-group-story__body > .agassi-group-story__text p {
+    margin: 0;
+  }
+
+  .agassi-group-story__body > .agassi-group-story__text .agassi-group-story__lead {
+    margin-bottom: 8px;
+  }
+
+  .agassi-group-story__action {
+    margin-top: 24px;
   }
 }
 
