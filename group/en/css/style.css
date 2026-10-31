@@ -1136,7 +1136,7 @@ a[class*="agassi-group-"],
 
 /* О компании */
 .agassi-group-story__figure {
-  grid-column: span var(--agassi-group-story-figure-cols, 4);
+  grid-column: span var(--agassi-group-story-figure-cols, 5);
   align-self: start;
   aspect-ratio: 4 / 5;
   overflow: hidden;
@@ -1153,11 +1153,15 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-story__body {
-  grid-column: span var(--agassi-group-story-body-cols, 8);
+  grid-column: span var(--agassi-group-story-body-cols, 7);
   align-self: start;
   padding: var(--agassi-group-story-padding);
   border-radius: var(--agassi-group-radius);
   background: var(--agassi-group-white);
+}
+
+.agassi-group-story__text {
+  max-width: 720px;
 }
 
 .agassi-group-story__text p {
@@ -1189,8 +1193,8 @@ a[class*="agassi-group-"],
 
   .agassi-group-story__figure,
   .agassi-group-story__body {
-    --agassi-group-story-figure-width: calc((100cqw - 11 * var(--agassi-group-gap)) / 12 * var(--agassi-group-story-figure-cols, 4) + (var(--agassi-group-story-figure-cols, 4) - 1) * var(--agassi-group-gap));
-    --agassi-group-story-min-height: calc(var(--agassi-group-story-figure-width) * 1.15);
+    --agassi-group-story-figure-width: calc((100cqw - 11 * var(--agassi-group-gap)) / 12 * var(--agassi-group-story-figure-cols, 5) + (var(--agassi-group-story-figure-cols, 5) - 1) * var(--agassi-group-gap));
+    --agassi-group-story-min-height: calc(var(--agassi-group-story-figure-width) * .9);
     --agassi-group-story-fit: max(var(--agassi-group-story-min-height), calc(var(--agassi-group-story-height, 560px) + var(--agassi-group-story-padding)));
   }
 
@@ -1198,19 +1202,12 @@ a[class*="agassi-group-"],
     position: sticky;
     top: 84px; /* под шапкой, зазор 16px */
     height: var(--agassi-group-story-fit);
-    max-height: calc(var(--agassi-group-story-figure-width) * 1.6);
+    max-height: calc(var(--agassi-group-story-figure-width) * 1.75);
     aspect-ratio: auto;
   }
 
   .agassi-group-story__body {
     min-height: var(--agassi-group-story-fit);
-  }
-}
-
-@media (min-width: 961px) and (max-width: 1200px) {
-  .agassi-group-story__layout {
-    --agassi-group-story-figure-cols: 5;
-    --agassi-group-story-body-cols: 7;
   }
 }
 
