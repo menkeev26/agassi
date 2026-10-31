@@ -1255,7 +1255,7 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-footer__brand {
-  grid-column: span 6;
+  grid-column: span 4;
 }
 
 .agassi-group-footer__logo {
@@ -1276,9 +1276,9 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-footer__columns {
-  grid-column: 7 / span 6;
+  grid-column: 5 / span 8;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 40px;
 }
 
@@ -1310,6 +1310,12 @@ a[class*="agassi-group-"],
   display: flex;
   gap: 12px;
   margin-top: 8px;
+}
+
+.agassi-group-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
 }
 
 .agassi-group-footer__bottom {
