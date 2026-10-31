@@ -101,7 +101,7 @@ a[class*="agassi-group-"],
 
 .agassi-group-heading__eyebrow {
   margin: 0 0 16px;
-  color: var(--agassi-group-crimson);
+  color: var(--agassi-group-muted);
   font-size: var(--agassi-group-font-small);
   font-weight: 400;
   line-height: var(--agassi-group-line-small);
@@ -115,7 +115,7 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-heading__title {
-  color: var(--agassi-group-crimson);
+  color: var(--agassi-group-muted);
   font-family: var(--t-headline-font);
   text-transform: uppercase;
   font-size: var(--agassi-group-font-h2);
@@ -1136,7 +1136,7 @@ a[class*="agassi-group-"],
 
 /* О компании */
 .agassi-group-story__figure {
-  grid-column: span var(--agassi-group-story-figure-cols, 5);
+  grid-column: span var(--agassi-group-story-figure-cols, 6);
   align-self: start;
   aspect-ratio: 4 / 5;
   overflow: hidden;
@@ -1153,7 +1153,7 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-story__body {
-  grid-column: span var(--agassi-group-story-body-cols, 7);
+  grid-column: span var(--agassi-group-story-body-cols, 6);
   align-self: start;
   padding: var(--agassi-group-story-padding);
   border-radius: var(--agassi-group-radius);
@@ -1201,8 +1201,8 @@ a[class*="agassi-group-"],
 
   .agassi-group-story__figure,
   .agassi-group-story__body {
-    --agassi-group-story-figure-width: calc((100cqw - 11 * var(--agassi-group-gap)) / 12 * var(--agassi-group-story-figure-cols, 5) + (var(--agassi-group-story-figure-cols, 5) - 1) * var(--agassi-group-gap));
-    --agassi-group-story-min-height: calc(var(--agassi-group-story-figure-width) * var(--agassi-group-story-ratio, .9));
+    --agassi-group-story-figure-width: calc((100cqw - 11 * var(--agassi-group-gap)) / 12 * var(--agassi-group-story-figure-cols, 6) + (var(--agassi-group-story-figure-cols, 6) - 1) * var(--agassi-group-gap));
+    --agassi-group-story-min-height: calc(var(--agassi-group-story-figure-width) * var(--agassi-group-story-ratio, .7));
     --agassi-group-story-fit: max(var(--agassi-group-story-min-height), calc(var(--agassi-group-story-height, 560px) + var(--agassi-group-story-padding)));
   }
 
@@ -1216,14 +1216,6 @@ a[class*="agassi-group-"],
 
   .agassi-group-story__body {
     min-height: var(--agassi-group-story-fit);
-  }
-}
-
-@media (min-width: 1500px) {
-  .agassi-group-story__layout {
-    --agassi-group-story-figure-cols: 6;
-    --agassi-group-story-body-cols: 6;
-    --agassi-group-story-ratio: .7;
   }
 }
 
