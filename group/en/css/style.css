@@ -1058,10 +1058,32 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-story__text p {
-  margin-bottom: 16px;
+  margin: 0;
   text-wrap: pretty;
   font-size: var(--agassi-group-font-body);
   line-height: var(--agassi-group-line-body);
+}
+
+.agassi-group-story__more .agassi-group-story__text {
+  padding-top: 24px;
+}
+
+.agassi-group-story__author {
+  margin-top: 24px;
+}
+
+.agassi-group-story__name {
+  margin: 0;
+  font-size: var(--agassi-group-font-body);
+  font-weight: 500;
+  line-height: var(--agassi-group-line-body);
+}
+
+.agassi-group-story__role {
+  margin: 0;
+  color: var(--agassi-group-muted);
+  font-size: var(--agassi-group-font-small);
+  line-height: var(--agassi-group-line-small);
 }
 
 .agassi-group-story__text strong {
@@ -1075,7 +1097,7 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-story__text .agassi-group-story__lead {
-  margin-bottom: 24px;
+  margin: 0 0 24px;
   color: var(--agassi-group-crimson);
   font-size: var(--agassi-group-font-h3);
   line-height: var(--agassi-group-line-h3);
@@ -1125,17 +1147,9 @@ a[class*="agassi-group-"],
     mask-image: linear-gradient(to bottom, #000 calc(100% - 48px), transparent);
   }
 
-  .agassi-group-story__copy > .agassi-group-story__text:first-child p:last-child {
-    margin-bottom: 0; /* между группами отступ тот же, что между абзацами */
-  }
-
   .agassi-group-story__copy .agassi-group-story__more {
     grid-template-rows: 1fr;
     visibility: visible;
-  }
-
-  .agassi-group-story__action {
-    margin-top: 24px;
   }
 
   /* Раскрыто: показывается весь текст, карточка растёт */
@@ -1145,6 +1159,7 @@ a[class*="agassi-group-"],
   }
 
   .agassi-group-story__body:has(.agassi-group-story__more.is-open) .agassi-group-story__copy {
+    flex: 0 0 auto;
     overflow: visible;
     -webkit-mask-image: none;
     mask-image: none;
@@ -1173,7 +1188,7 @@ a[class*="agassi-group-"],
 
 .agassi-group-story__action {
   display: flex;
-  margin-top: 8px;
+  margin-top: 24px;
 }
 
 .agassi-group-story .agassi-group-story__toggle,
