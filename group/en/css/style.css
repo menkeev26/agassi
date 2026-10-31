@@ -115,7 +115,7 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-heading__title {
-  color: var(--agassi-group-muted);
+  color: var(--agassi-group-crimson);
   font-family: var(--t-headline-font);
   text-transform: uppercase;
   font-size: var(--agassi-group-font-h2);
@@ -1160,12 +1160,9 @@ a[class*="agassi-group-"],
   background: var(--agassi-group-white);
 }
 
-.agassi-group-story__text {
-  max-width: 680px;
-}
-
 .agassi-group-story__text p {
   margin-bottom: 16px;
+  text-wrap: pretty;
   font-size: var(--agassi-group-font-body);
   line-height: var(--agassi-group-line-body);
 }
