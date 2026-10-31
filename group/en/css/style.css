@@ -18,7 +18,7 @@
   --agassi-group-frame-max: 1620px;
   --agassi-group-frame-gap: 96px;
   --agassi-group-section-space: 96px;
-  --agassi-group-story-padding: 48px;
+  --agassi-group-story-padding: 40px;
   --agassi-group-columns: 12;
   --agassi-group-gap: 16px;
   --agassi-group-radius: 28px;
@@ -1161,7 +1161,7 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-story__text {
-  max-width: 720px;
+  max-width: 680px;
 }
 
 .agassi-group-story__text p {
@@ -1178,6 +1178,14 @@ a[class*="agassi-group-"],
 .agassi-group-story__text .agassi-group-story__lead,
 .agassi-group-story__text .agassi-group-story__closing {
   font-weight: 500;
+}
+
+.agassi-group-story__text .agassi-group-story__lead {
+  margin-bottom: 24px;
+  color: var(--agassi-group-crimson);
+  font-size: var(--agassi-group-font-h3);
+  line-height: var(--agassi-group-line-h3);
+  text-wrap: balance;
 }
 
 .agassi-group-story__text .agassi-group-story__closing {
