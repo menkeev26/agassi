@@ -1202,7 +1202,7 @@ a[class*="agassi-group-"],
   .agassi-group-story__figure,
   .agassi-group-story__body {
     --agassi-group-story-figure-width: calc((100cqw - 11 * var(--agassi-group-gap)) / 12 * var(--agassi-group-story-figure-cols, 5) + (var(--agassi-group-story-figure-cols, 5) - 1) * var(--agassi-group-gap));
-    --agassi-group-story-min-height: calc(var(--agassi-group-story-figure-width) * .9);
+    --agassi-group-story-min-height: calc(var(--agassi-group-story-figure-width) * var(--agassi-group-story-ratio, .9));
     --agassi-group-story-fit: max(var(--agassi-group-story-min-height), calc(var(--agassi-group-story-height, 560px) + var(--agassi-group-story-padding)));
   }
 
@@ -1216,6 +1216,14 @@ a[class*="agassi-group-"],
 
   .agassi-group-story__body {
     min-height: var(--agassi-group-story-fit);
+  }
+}
+
+@media (min-width: 1500px) {
+  .agassi-group-story__layout {
+    --agassi-group-story-figure-cols: 6;
+    --agassi-group-story-body-cols: 6;
+    --agassi-group-story-ratio: .7;
   }
 }
 
