@@ -1574,7 +1574,7 @@ a[class*="agassi-group-"],
 
   .agassi-group-hero__content {
     gap: 24px;
-    padding: 16px;
+    padding: 24px;
   }
 
   .agassi-group-hero__logo {
@@ -1593,6 +1593,7 @@ a[class*="agassi-group-"],
   .agassi-group-hero__actions {
     flex-direction: column;
     align-items: stretch;
+    gap: 12px; /* между кнопками меньше, чем от кнопок до края (24px) */
     width: 100%;
   }
 
