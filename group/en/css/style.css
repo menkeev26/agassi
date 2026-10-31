@@ -1146,7 +1146,7 @@ a[class*="agassi-group-"],
 .agassi-group-story__figure {
   grid-column: span var(--agassi-group-story-figure-cols, 6);
   align-self: start;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: var(--agassi-group-radius);
   background: var(--agassi-group-sand);
@@ -1197,8 +1197,8 @@ a[class*="agassi-group-"],
   color: var(--agassi-group-crimson);
 }
 
-/* Десктоп: фото вертикальное 4:5 и не короче этой пропорции; карточка текста не ниже фото.
-   Ширина фото считается от сетки (cqw), высота растёт вместе с текстом (задаёт скрипт), фото закреплено при скролле */
+/* Десктоп: фото и карточка квадратные (1:1). Ширина считается от сетки (cqw);
+   если текст выше квадрата, карточка растёт, фото остаётся квадратным и закреплено при скролле */
 @media (min-width: 961px) {
   .agassi-group-story__layout {
     container-type: inline-size;
@@ -1207,20 +1207,25 @@ a[class*="agassi-group-"],
   .agassi-group-story__figure,
   .agassi-group-story__body {
     --agassi-group-story-figure-width: calc((100cqw - 11 * var(--agassi-group-gap)) / 12 * var(--agassi-group-story-figure-cols, 6) + (var(--agassi-group-story-figure-cols, 6) - 1) * var(--agassi-group-gap));
-    --agassi-group-story-min-height: calc(var(--agassi-group-story-figure-width) * var(--agassi-group-story-ratio, .7));
-    --agassi-group-story-fit: max(var(--agassi-group-story-min-height), calc(var(--agassi-group-story-height, 560px) + var(--agassi-group-story-padding)));
   }
 
   .agassi-group-story__figure {
+    align-self: stretch; /* свёрнутая история: низ фото и карточки на одной линии */
+    aspect-ratio: 1 / 1;
+  }
+
+  /* История раскрыта: фото остаётся квадратным и закреплено при скролле */
+  .agassi-group-story__layout:has(.agassi-group-story__more.is-open) .agassi-group-story__figure {
     position: sticky;
     top: 84px; /* под шапкой, зазор 16px */
-    height: var(--agassi-group-story-fit);
-    max-height: calc(var(--agassi-group-story-figure-width) * 1.75);
-    aspect-ratio: auto;
+    align-self: start;
   }
 
   .agassi-group-story__body {
-    min-height: var(--agassi-group-story-fit);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: var(--agassi-group-story-figure-width);
   }
 }
 
