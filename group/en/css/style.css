@@ -1870,27 +1870,27 @@ body .t-form-success-popup_new .t-form-success-popup__wrapper {
   }
 }
 
-/* Страница Privacy Policy */
-.agassi-group-privacy {
+/* Юридические страницы: Privacy Policy и Terms */
+.agassi-group-legal {
   padding-top: 32px;
 }
 
-.agassi-group-privacy__column {
+.agassi-group-legal__column {
   grid-column: 4 / span 6;
 }
 
-.agassi-group-privacy__header {
+.agassi-group-legal__header {
   padding: 32px 0 48px;
 }
 
-.agassi-group-privacy__back {
+.agassi-group-legal__back {
   gap: 8px;
   min-height: 40px;
   margin-bottom: 48px;
   padding: 0 16px;
 }
 
-.agassi-group-privacy__back::before {
+.agassi-group-legal__back::before {
   content: "";
   width: 6px;
   height: 6px;
@@ -1899,7 +1899,7 @@ body .t-form-success-popup_new .t-form-success-popup__wrapper {
   transform: rotate(45deg);
 }
 
-.agassi-group-privacy__title {
+.agassi-group-legal__title {
   margin: 0;
   color: var(--agassi-group-crimson);
   font-family: var(--t-headline-font);
@@ -1910,27 +1910,27 @@ body .t-form-success-popup_new .t-form-success-popup__wrapper {
   text-wrap: balance;
 }
 
-.agassi-group-privacy__intro {
+.agassi-group-legal__intro {
   margin: 32px 0 0;
 }
 
-.agassi-group-privacy__date {
+.agassi-group-legal__date {
   margin: 16px 0 0;
   color: var(--agassi-group-muted);
   font-size: var(--agassi-group-font-small);
   line-height: var(--agassi-group-line-small);
 }
 
-.agassi-group-privacy__content {
+.agassi-group-legal__content {
   border-top: 1px solid var(--agassi-group-line);
 }
 
-.agassi-group-privacy__section {
+.agassi-group-legal__section {
   padding: 48px 0;
   border-bottom: 1px solid var(--agassi-group-line);
 }
 
-.agassi-group-privacy__number {
+.agassi-group-legal__number {
   margin: 0 0 16px;
   color: var(--agassi-group-crimson);
   font-size: var(--agassi-group-font-small);
@@ -1938,7 +1938,7 @@ body .t-form-success-popup_new .t-form-success-popup__wrapper {
   line-height: var(--agassi-group-line-small);
 }
 
-.agassi-group-privacy__heading {
+.agassi-group-legal__heading {
   margin: 0 0 24px;
   color: var(--agassi-group-ink);
   font-family: var(--t-text-font);
@@ -1948,15 +1948,20 @@ body .t-form-success-popup_new .t-form-success-popup__wrapper {
   text-wrap: balance;
 }
 
-.agassi-group-privacy__text {
+.agassi-group-legal__text {
   margin: 0 0 16px;
 }
 
-.agassi-group-privacy__text:last-child {
+.agassi-group-legal__text:last-child {
   margin-bottom: 0;
 }
 
-.agassi-group-privacy__contact {
+.agassi-group-legal__text a {
+  --agassi-group-link-color: var(--agassi-group-crimson);
+  border-bottom: 1px solid var(--agassi-group-crimson);
+}
+
+.agassi-group-legal__contact {
   --agassi-group-link-color: var(--agassi-group-crimson);
   display: inline-block;
   border-bottom: 1px solid var(--agassi-group-crimson);
@@ -1964,49 +1969,49 @@ body .t-form-success-popup_new .t-form-success-popup__wrapper {
 }
 
 @media (max-width: 960px) {
-  .agassi-group-privacy__column {
+  .agassi-group-legal__column {
     grid-column: 2 / span 6;
   }
 
-  .agassi-group-privacy__header {
+  .agassi-group-legal__header {
     padding: 24px 0 40px;
   }
 
-  .agassi-group-privacy__back {
+  .agassi-group-legal__back {
     margin-bottom: 40px;
   }
 
-  .agassi-group-privacy__section {
+  .agassi-group-legal__section {
     padding: 40px 0;
   }
 }
 
 @media (max-width: 640px) {
-  .agassi-group-privacy__column {
+  .agassi-group-legal__column {
     grid-column: 1 / -1;
   }
 
-  .agassi-group-privacy__header {
+  .agassi-group-legal__header {
     padding: 16px 0 32px;
   }
 
-  .agassi-group-privacy__back {
+  .agassi-group-legal__back {
     margin-bottom: 32px;
   }
 
-  .agassi-group-privacy__intro {
+  .agassi-group-legal__intro {
     margin-top: 24px;
   }
 
-  .agassi-group-privacy__section {
+  .agassi-group-legal__section {
     padding: 32px 0;
   }
 
-  .agassi-group-privacy__number {
+  .agassi-group-legal__number {
     margin-bottom: 12px;
   }
 
-  .agassi-group-privacy__heading {
+  .agassi-group-legal__heading {
     margin-bottom: 20px;
   }
 }
