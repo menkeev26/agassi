@@ -1110,31 +1110,44 @@ a[class*="agassi-group-"],
     align-self: start;
   }
 
-  /* Текст начинается сверху, абзацы равномерно распределяются, кнопка внизу карточки */
+  /* Свёрнуто: карточка равна квадрату фото, текст начинается сверху и обрезается плавным затуханием над кнопкой */
   .agassi-group-story__body {
     display: flex;
     flex-direction: column;
-    min-height: var(--agassi-group-story-figure-width);
+    height: var(--agassi-group-story-figure-width);
   }
 
-  .agassi-group-story__body > .agassi-group-story__text {
-    display: flex;
-    flex: 1 0 auto;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 16px;
+  .agassi-group-story__copy {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 48px), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 48px), transparent);
   }
 
-  .agassi-group-story__body > .agassi-group-story__text p {
-    margin: 0;
+  .agassi-group-story__copy > .agassi-group-story__text:first-child p:last-child {
+    margin-bottom: 0; /* между группами отступ тот же, что между абзацами */
   }
 
-  .agassi-group-story__body > .agassi-group-story__text .agassi-group-story__lead {
-    margin-bottom: 8px;
+  .agassi-group-story__copy .agassi-group-story__more {
+    grid-template-rows: 1fr;
+    visibility: visible;
   }
 
   .agassi-group-story__action {
     margin-top: 24px;
+  }
+
+  /* Раскрыто: показывается весь текст, карточка растёт */
+  .agassi-group-story__body:has(.agassi-group-story__more.is-open) {
+    height: auto;
+    min-height: var(--agassi-group-story-figure-width);
+  }
+
+  .agassi-group-story__body:has(.agassi-group-story__more.is-open) .agassi-group-story__copy {
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 }
 
