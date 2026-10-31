@@ -100,12 +100,20 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-heading__eyebrow {
+  display: inline-block;
   margin: 0 0 16px;
-  color: var(--agassi-group-muted);
+  padding: 5px 16px;
+  border: 1px solid color-mix(in srgb, var(--agassi-group-crimson) 32%, transparent);
+  border-radius: 1000px;
+  color: var(--agassi-group-crimson);
   font-size: var(--agassi-group-font-small);
   font-weight: 400;
   line-height: var(--agassi-group-line-small);
   text-transform: uppercase;
+}
+
+.agassi-group-heading--light .agassi-group-heading__eyebrow {
+  border-color: color-mix(in srgb, var(--agassi-group-gold) 48%, transparent);
 }
 
 .agassi-group-heading__title,
