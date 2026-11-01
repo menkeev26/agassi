@@ -156,11 +156,14 @@
       section.dataset.agassiGroupBlogLoaded = 'true';
 
       const list = section.querySelector('.agassi-group-blog__list');
+      const action = section.querySelector('.agassi-group-blog__action');
+      const more = section.querySelector('.agassi-group-blog__button');
       const feed = section.dataset.agassiGroupFeed;
       if (!list || !feed) return;
 
       const count = parseInt(section.dataset.agassiGroupCount, 10) || 3;
-      const query = new URLSearchParams({ feeduid: feed, size: count, slice: 1, 'sort[date]': 'desc' });
+      let page = 0;
+      let loaded = 0;
 
       function element(tag, className, text) {
         const node = document.createElement(tag);
@@ -211,27 +214,51 @@
         list.parentNode.insertBefore(message, list);
       }
 
-      fetch('https://feeds.tildaapi.com/api/getfeed/?' + query.toString())
-        .then(function (response) {
-          if (!response.ok) throw new Error('Feed ' + response.status);
-          return response.json();
-        })
-        .then(function (data) {
-          const posts = (data && data.posts) || [];
-          if (!posts.length) return showEmpty();
-          posts.forEach(function (post) {
-            list.appendChild(card(post));
+      // Загрузка очередной страницы потока; кнопка «Show more» скрывается, когда записи закончились
+      function load() {
+        const query = new URLSearchParams({ feeduid: feed, size: count, slice: page + 1, 'sort[date]': 'desc' });
+        if (more) more.disabled = true;
+
+        return fetch('https://feeds.tildaapi.com/api/getfeed/?' + query.toString())
+          .then(function (response) {
+            if (!response.ok) throw new Error('Feed ' + response.status);
+            return response.json();
+          })
+          .then(function (data) {
+            const posts = (data && data.posts) || [];
+            if (!posts.length && !loaded) return showEmpty();
+
+            const first = !loaded;
+            page += 1;
+            loaded += posts.length;
+            posts.forEach(function (post) {
+              list.appendChild(card(post));
+            });
+
+            if (first) {
+              initCarousel(section, {
+                track: '.agassi-group-blog__list',
+                prev: '.agassi-group-blog__arrow--prev',
+                next: '.agassi-group-blog__arrow--next',
+                autoplay: false
+              });
+            } else {
+              list.dispatchEvent(new Event('scroll'));
+            }
+
+            const total = parseInt(data.total, 10) || 0;
+            if (action) action.hidden = !posts.length || loaded >= total;
+            if (more) more.disabled = false;
+          })
+          .catch(function (error) {
+            console.warn('Agassi blog: feed failed', error);
+            if (more) more.disabled = false;
+            if (!loaded) showEmpty();
           });
-          initCarousel(section, {
-            track: '.agassi-group-blog__list',
-            prev: '.agassi-group-blog__arrow--prev',
-            next: '.agassi-group-blog__arrow--next',
-            autoplay: false
-          });
-        })
-        .catch(function () {
-          showEmpty();
-        });
+      }
+
+      if (more) more.addEventListener('click', load);
+      load();
     });
   }
 
