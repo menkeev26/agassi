@@ -433,10 +433,28 @@
     });
   }
 
+  // 404: блок по центру высоты окна страницы (iframe блока не знает высоту окна)
+  function initNotFound() {
+    var section = document.querySelector('.agassi-group-notfound');
+    if (!section) return;
+
+    function update() {
+      var height = window.innerHeight;
+      try {
+        height = window.parent.innerHeight || height;
+      } catch (error) {}
+      section.style.setProperty('--agassi-group-viewport', height + 'px');
+    }
+
+    update();
+    window.addEventListener('resize', update);
+  }
+
   function init() {
     initHeader();
     initPartners();
     initBlog();
+    initNotFound();
     initFaq();
     initFacts();
     initStory();
