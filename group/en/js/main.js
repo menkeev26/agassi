@@ -149,6 +149,92 @@
     }
   }
 
+  // Блог: записи потока Tilda загружаются по публичному адресу потока и выводятся карточками
+  function initBlog() {
+    document.querySelectorAll('.agassi-group-blog').forEach(function (section) {
+      if (section.dataset.agassiGroupBlogLoaded === 'true') return;
+      section.dataset.agassiGroupBlogLoaded = 'true';
+
+      const list = section.querySelector('.agassi-group-blog__list');
+      const feed = section.dataset.agassiGroupFeed;
+      if (!list || !feed) return;
+
+      const count = parseInt(section.dataset.agassiGroupCount, 10) || 3;
+      const query = new URLSearchParams({ feeduid: feed, size: count, slice: 1, 'sort[date]': 'desc' });
+
+      function element(tag, className, text) {
+        const node = document.createElement(tag);
+        node.className = 'agassi-group-blog__' + className;
+        if (text) node.textContent = text;
+        return node;
+      }
+
+      function formatDate(value) {
+        const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(value || '');
+        if (!match) return '';
+        const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+        return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      }
+
+      function card(post) {
+        const preview = post['preview-media'] && post['preview-media'].source;
+        const image = post.image || (preview && preview.url) || '';
+        const item = element('div', 'item');
+        const link = element('a', 'card');
+        link.href = /^https:\/\//.test(post.url || '') ? post.url : '#';
+
+        const media = element('div', 'media');
+        if (image) {
+          const picture = element('img', 'image');
+          picture.src = image;
+          picture.alt = '';
+          picture.loading = 'lazy';
+          media.appendChild(picture);
+        }
+
+        const body = element('div', 'body');
+        const date = formatDate(post.date);
+        if (date) body.appendChild(element('p', 'date', date));
+        body.appendChild(element('h3', 'title', post.title));
+        if (post.descr) body.appendChild(element('p', 'text', post.descr));
+        body.appendChild(element('span', 'more', 'Read more'));
+
+        link.appendChild(media);
+        link.appendChild(body);
+        item.appendChild(link);
+        return item;
+      }
+
+      function showEmpty() {
+        list.hidden = true;
+        const message = element('p', 'empty', 'New articles are coming soon.');
+        list.parentNode.insertBefore(message, list);
+      }
+
+      fetch('https://feeds.tildaapi.com/api/getfeed/?' + query.toString())
+        .then(function (response) {
+          if (!response.ok) throw new Error('Feed ' + response.status);
+          return response.json();
+        })
+        .then(function (data) {
+          const posts = (data && data.posts) || [];
+          if (!posts.length) return showEmpty();
+          posts.forEach(function (post) {
+            list.appendChild(card(post));
+          });
+          initCarousel(section, {
+            track: '.agassi-group-blog__list',
+            prev: '.agassi-group-blog__arrow--prev',
+            next: '.agassi-group-blog__arrow--next',
+            autoplay: false
+          });
+        })
+        .catch(function () {
+          showEmpty();
+        });
+    });
+  }
+
   // Аккордеон вопросов
   function initFaq() {
     document.querySelectorAll('.agassi-group-faq').forEach(function (section) {
@@ -323,6 +409,7 @@
   function init() {
     initHeader();
     initPartners();
+    initBlog();
     initFaq();
     initFacts();
     initStory();
