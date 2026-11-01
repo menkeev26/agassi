@@ -169,6 +169,7 @@ a[class*="agassi-group-"],
 .agassi-group-button {
   --agassi-group-link-color: var(--agassi-group-white);
   display: inline-flex;
+  color: var(--agassi-group-link-color);
   align-items: center;
   justify-content: center;
   min-height: 56px;
