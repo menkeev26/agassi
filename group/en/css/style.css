@@ -774,7 +774,7 @@ a[class*="agassi-group-"],
   display: flex;
   align-items: center;
   min-height: var(--agassi-group-viewport, 0);
-  padding: 96px 0;
+  padding: 200px 0;
 }
 
 .agassi-group-notfound .agassi-group-container {
@@ -1721,6 +1721,10 @@ a[class*="agassi-group-"],
 }
 
 @media (max-width: 640px) {
+  .agassi-group-notfound {
+    padding: 120px 0;
+  }
+
   :root {
     --agassi-group-columns: 4;
     --agassi-group-gap: 12px;
