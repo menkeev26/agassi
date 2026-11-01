@@ -745,6 +745,21 @@ a[class*="agassi-group-"],
   margin-top: 32px;
 }
 
+.agassi-group-blog__action {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.agassi-group-blog__action[hidden] {
+  display: none;
+}
+
+.agassi-group-blog__button:disabled {
+  opacity: .6;
+  cursor: default;
+}
+
 @media (hover: hover) {
   .agassi-group-blog__card:hover .agassi-group-blog__image {
     transform: scale(1.04);
@@ -1806,6 +1821,10 @@ a[class*="agassi-group-"],
 
   .agassi-group-blog__body {
     padding: 20px;
+  }
+
+  .agassi-group-blog__action {
+    margin-top: 24px;
   }
 
   .agassi-group-facts__surface {
