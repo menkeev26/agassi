@@ -771,14 +771,7 @@ a[class*="agassi-group-"],
 
 /* Страница 404 */
 .agassi-group-notfound {
-  display: flex;
-  align-items: center;
-  min-height: var(--agassi-group-viewport, 0);
   padding: 200px 0;
-}
-
-.agassi-group-notfound .agassi-group-container {
-  flex: 1;
 }
 
 .agassi-group-notfound .agassi-group-heading {
