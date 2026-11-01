@@ -769,6 +769,22 @@ a[class*="agassi-group-"],
   }
 }
 
+/* Страница 404 */
+.agassi-group-notfound {
+  padding: 160px 0;
+}
+
+.agassi-group-notfound .agassi-group-heading {
+  margin-bottom: 40px;
+}
+
+.agassi-group-notfound__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
 /* Факты */
 .agassi-group-facts__surface {
   padding: 80px 64px 64px;
@@ -1698,6 +1714,10 @@ a[class*="agassi-group-"],
 }
 
 @media (max-width: 640px) {
+  .agassi-group-notfound {
+    padding: 96px 0;
+  }
+
   :root {
     --agassi-group-columns: 4;
     --agassi-group-gap: 12px;
