@@ -125,11 +125,10 @@ a[class*="agassi-group-"],
 .agassi-group-heading__title {
   color: var(--agassi-group-crimson);
   font-family: var(--t-headline-font);
-  text-transform: uppercase;
   font-size: var(--agassi-group-font-h2);
   font-weight: 500;
   line-height: var(--agassi-group-line-h2);
-  text-wrap: balance;
+  text-transform: uppercase;
 }
 
 .agassi-group-heading__text {
@@ -169,11 +168,11 @@ a[class*="agassi-group-"],
 .agassi-group-button {
   --agassi-group-link-color: var(--agassi-group-white);
   display: inline-flex;
-  color: var(--agassi-group-link-color);
   align-items: center;
   justify-content: center;
   min-height: 56px;
   padding: 0 32px;
+  color: var(--agassi-group-link-color);
   border: 1px solid var(--agassi-group-crimson);
   border-radius: 1000px;
   background: var(--agassi-group-crimson);
@@ -427,7 +426,8 @@ a[class*="agassi-group-"],
   inset: 0;
 }
 
-.agassi-group-hero__brand {
+.agassi-group-hero__brand,
+.agassi-group-hero__title {
   display: flex;
   justify-content: center;
 }
@@ -457,11 +457,6 @@ a[class*="agassi-group-"],
   gap: 48px;
   padding: 0 24px;
   text-align: center;
-}
-
-.agassi-group-hero__title {
-  display: flex;
-  justify-content: center;
 }
 
 .agassi-group-hero__logo {
@@ -514,7 +509,8 @@ a[class*="agassi-group-"],
 
 .agassi-group-directions__label,
 .agassi-group-directions__content,
-.agassi-group-contact__title {
+.agassi-group-contact__title,
+.agassi-group-contact__content {
   position: relative;
   z-index: 1;
 }
@@ -650,7 +646,8 @@ a[class*="agassi-group-"],
 }
 
 /* Блог */
-.agassi-group-blog__list {
+.agassi-group-blog__list,
+.agassi-group-featured__list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--agassi-group-gap);
@@ -695,7 +692,8 @@ a[class*="agassi-group-"],
   padding: 24px;
 }
 
-.agassi-group-blog__date {
+.agassi-group-blog__date,
+.agassi-group-story__role {
   margin: 0;
   color: var(--agassi-group-muted);
   font-size: var(--agassi-group-font-small);
@@ -817,12 +815,6 @@ a[class*="agassi-group-"],
 }
 
 /* СМИ */
-.agassi-group-featured__list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--agassi-group-gap);
-}
-
 .agassi-group-featured .agassi-group-featured__link {
   display: flex;
   align-items: center;
@@ -931,7 +923,8 @@ a[class*="agassi-group-"],
   transition: grid-template-rows var(--agassi-group-duration) var(--agassi-group-ease);
 }
 
-.agassi-group-faq__answer-inner {
+.agassi-group-faq__answer-inner,
+.agassi-group-story__more-inner {
   min-height: 0;
   overflow: hidden;
 }
@@ -968,11 +961,6 @@ a[class*="agassi-group-"],
   font-size: var(--agassi-group-font-h3);
   font-weight: 500;
   line-height: var(--agassi-group-line-h3);
-}
-
-.agassi-group-contact__content {
-  position: relative;
-  z-index: 1;
 }
 
 .agassi-group-contact__email {
@@ -1128,7 +1116,8 @@ a[class*="agassi-group-"],
   accent-color: var(--agassi-group-crimson);
 }
 
-.agassi-group-form__consent a {
+.agassi-group-form__consent a,
+.agassi-group-legal__text a {
   --agassi-group-link-color: var(--agassi-group-crimson);
   border-bottom: 1px solid var(--agassi-group-crimson);
 }
@@ -1209,20 +1198,8 @@ a[class*="agassi-group-"],
   line-height: var(--agassi-group-line-body);
 }
 
-.agassi-group-story__role {
-  margin: 0;
-  color: var(--agassi-group-muted);
-  font-size: var(--agassi-group-font-small);
-  line-height: var(--agassi-group-line-small);
-}
-
 .agassi-group-story__text strong {
   color: var(--agassi-group-crimson);
-  font-weight: 500;
-}
-
-.agassi-group-story__text .agassi-group-story__lead,
-.agassi-group-story__text .agassi-group-story__closing {
   font-weight: 500;
 }
 
@@ -1230,12 +1207,9 @@ a[class*="agassi-group-"],
   margin: 0 0 24px;
   color: var(--agassi-group-crimson);
   font-size: var(--agassi-group-font-h3);
+  font-weight: 500;
   line-height: var(--agassi-group-line-h3);
   text-wrap: balance;
-}
-
-.agassi-group-story__text .agassi-group-story__closing {
-  color: var(--agassi-group-crimson);
 }
 
 /* Десктоп: фото и карточка квадратные (1:1). Ширина считается от сетки (cqw);
@@ -1309,11 +1283,6 @@ a[class*="agassi-group-"],
 .agassi-group-story__more.is-open {
   grid-template-rows: 1fr;
   visibility: visible;
-}
-
-.agassi-group-story__more-inner {
-  min-height: 0;
-  overflow: hidden;
 }
 
 .agassi-group-story__action {
@@ -2098,11 +2067,6 @@ body .t-form-success-popup_new .t-form-success-popup__wrapper {
 
 .agassi-group-legal__text:last-child {
   margin-bottom: 0;
-}
-
-.agassi-group-legal__text a {
-  --agassi-group-link-color: var(--agassi-group-crimson);
-  border-bottom: 1px solid var(--agassi-group-crimson);
 }
 
 .agassi-group-legal__contact {
