@@ -202,17 +202,6 @@ a[class*="agassi-group-"],
   background: var(--agassi-group-ivory);
 }
 
-.agassi-group-button--outline {
-  --agassi-group-link-color: var(--agassi-group-crimson);
-  background: transparent;
-}
-
-.agassi-group-button--outline:hover {
-  --agassi-group-link-color: var(--agassi-group-white);
-  border-color: var(--agassi-group-crimson);
-  background: var(--agassi-group-crimson);
-}
-
 .agassi-group-button:focus-visible {
   outline: 2px solid var(--agassi-group-gold);
   outline-offset: 4px;
@@ -405,7 +394,7 @@ a[class*="agassi-group-"],
 
 /* Первый экран */
 .agassi-group-hero {
-  padding: 4px 0 16px;
+  padding: 68px 0 0;
 }
 
 .agassi-group-hero__frame {
@@ -416,7 +405,6 @@ a[class*="agassi-group-"],
   aspect-ratio: 2 / 1;
   min-height: 480px;
   overflow: hidden;
-  border-radius: var(--agassi-group-radius);
   background: var(--agassi-group-sand);
 }
 
@@ -1518,6 +1506,10 @@ a[class*="agassi-group-"],
 
   .agassi-group-header {
     height: 64px;
+  }
+
+  .agassi-group-hero {
+    padding-top: 64px;
   }
 
   .agassi-group-header__frame {
