@@ -1690,7 +1690,7 @@ a[class*="agassi-group-"],
     flex-direction: column;
     box-sizing: border-box;
     width: 100%;
-    height: auto;
+    height: var(--agassi-group-menu-height, 100dvh);
     padding: 72px var(--agassi-group-frame-gap) calc(24px + env(safe-area-inset-bottom));
     overflow-y: auto;
     overscroll-behavior: contain;
