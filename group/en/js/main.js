@@ -459,6 +459,23 @@
     window.addEventListener('resize', update);
   }
 
+  // Страны для телефона: код, маска (# означает цифру) и флаг
+  const phoneCountries = [
+    { name: 'Uzbekistan', flag: '🇺🇿', code: '+998', mask: '## ### ## ##' },
+    { name: 'Kazakhstan', flag: '🇰🇿', code: '+7', mask: '### ### ## ##' },
+    { name: 'Kyrgyzstan', flag: '🇰🇬', code: '+996', mask: '### ### ###' },
+    { name: 'Tajikistan', flag: '🇹🇯', code: '+992', mask: '## ### ####' },
+    { name: 'Turkmenistan', flag: '🇹🇲', code: '+993', mask: '## ######' },
+    { name: 'Azerbaijan', flag: '🇦🇿', code: '+994', mask: '## ### ## ##' },
+    { name: 'Georgia', flag: '🇬🇪', code: '+995', mask: '### ## ## ##' },
+    { name: 'Russia', flag: '🇷🇺', code: '+7', mask: '### ### ## ##' },
+    { name: 'Turkey', flag: '🇹🇷', code: '+90', mask: '### ### ## ##' },
+    { name: 'South Korea', flag: '🇰🇷', code: '+82', mask: '## #### ####' },
+    { name: 'China', flag: '🇨🇳', code: '+86', mask: '### #### ####' },
+    { name: 'United Arab Emirates', flag: '🇦🇪', code: '+971', mask: '## ### ####' },
+    { name: 'United States', flag: '🇺🇸', code: '+1', mask: '### ### ####' }
+  ];
+
   // Форма: проверяет поля и отправляет заявку через служебную форму Tilda (она подключает почту и CRM)
   function initContactForm() {
     document.querySelectorAll('.agassi-group-form').forEach(function (form) {
@@ -498,11 +515,94 @@
         input.setAttribute('aria-invalid', text ? 'true' : 'false');
       }
 
+      // Телефон: страна выбирается списком, номер форматируется по маске страны (# означает цифру)
+      const phoneBox = form.querySelector('.agassi-group-form__phone');
+      const phoneInput = phoneBox && phoneBox.querySelector('input');
+      const countryButton = phoneBox && phoneBox.querySelector('.agassi-group-form__country');
+      const countryList = phoneBox && phoneBox.querySelector('.agassi-group-form__countries');
+      let country = phoneCountries[0];
+
+      function formatPhone(value) {
+        const code = country.code.replace(/\D/g, '');
+        const size = (country.mask.match(/#/g) || []).length;
+        const text = value.trim();
+        let digits = text.replace(/\D/g, '');
+        if (text.indexOf(country.code) === 0) digits = digits.slice(code.length);
+        else if (digits.length > size && digits.indexOf(code) === 0) digits = digits.slice(code.length);
+        let out = '';
+        let pending = '';
+        let index = 0;
+        for (let i = 0; i < country.mask.length; i += 1) {
+          if (country.mask[i] !== '#') {
+            pending += country.mask[i];
+          } else {
+            if (index >= digits.length) break;
+            out += pending + digits[index];
+            pending = '';
+            index += 1;
+          }
+        }
+        return out;
+      }
+
+      function fullPhone() {
+        return phoneInput.value ? country.code + ' ' + phoneInput.value : '';
+      }
+
+      function setCountry(next) {
+        country = next;
+        countryButton.querySelector('.agassi-group-form__flag').textContent = country.flag;
+        countryButton.querySelector('.agassi-group-form__code').textContent = country.code;
+        phoneInput.placeholder = country.mask.replace(/#/g, '0');
+        phoneInput.value = formatPhone(phoneInput.value);
+        countryList.querySelectorAll('[role="option"]').forEach(function (item) {
+          item.setAttribute('aria-selected', item.dataset.name === country.name ? 'true' : 'false');
+        });
+      }
+
+      function toggleCountries(open) {
+        countryList.hidden = !open;
+        countryButton.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+
+      if (phoneInput && countryButton && countryList) {
+        phoneCountries.forEach(function (item) {
+          const option = document.createElement('li');
+          option.setAttribute('role', 'option');
+          option.dataset.name = item.name;
+          option.tabIndex = 0;
+          option.textContent = item.flag + ' ' + item.name + ' ' + item.code;
+          countryList.appendChild(option);
+        });
+        phoneInput.addEventListener('input', function () { phoneInput.value = formatPhone(phoneInput.value); });
+        countryButton.addEventListener('click', function () { toggleCountries(countryList.hidden); });
+        countryList.addEventListener('click', function (event) {
+          const option = event.target.closest('[role="option"]');
+          if (!option) return;
+          setCountry(phoneCountries.filter(function (item) { return item.name === option.dataset.name; })[0]);
+          toggleCountries(false);
+          phoneInput.focus();
+        });
+        countryList.addEventListener('keydown', function (event) {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            event.target.click();
+          }
+        });
+        document.addEventListener('click', function (event) {
+          if (!phoneBox.contains(event.target)) toggleCountries(false);
+        });
+        form.addEventListener('keydown', function (event) {
+          if (event.key === 'Escape') toggleCountries(false);
+        });
+        setCountry(country);
+      }
+
       function isValid(input) {
         if (input.type === 'checkbox') return input.checked;
         const value = input.value.trim();
+        if (input === phoneInput) return value.replace(/\D/g, '').length === (country.mask.match(/#/g) || []).length;
         if (input.name === 'email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-        if (input.name === 'phone') return value.replace(/\D/g, '').length >= 7;
         return value !== '';
       }
 
@@ -512,21 +612,20 @@
         button.textContent = state ? 'Sending…' : label;
       }
 
-      // Значения переносятся в служебную форму; у телефона Tilda хранит ещё и номер без кода страны
+      // Значения переносятся в служебную форму; телефон уходит целиком, вместе с кодом страны
       function fill(native, input) {
         const target = native.querySelector('[name="' + input.name + '"]');
+        const value = input === phoneInput ? fullPhone() : input.value.trim();
         if (target) {
           if (input.type === 'checkbox') target.checked = input.checked;
-          else target.value = input.value.trim();
+          else target.value = value;
           fire(target);
         }
-        if (input.name !== 'phone') return;
+        if (input !== phoneInput) return;
+        // Если в служебной форме у телефона маска страны, номер без кода передаётся и ей
         const mask = native.querySelector('.t-input-phonemask[name="tildaspec-phone-part[]"]');
-        if (!mask) return;
-        const code = mask.getAttribute('data-phonemask-code') || '';
-        let digits = input.value.trim();
-        if (code && digits.indexOf(code) === 0) digits = digits.slice(code.length);
-        mask.value = digits.replace(/\D/g, '');
+        if (!mask || mask.getAttribute('data-phonemask-code') !== country.code) return;
+        mask.value = phoneInput.value.replace(/\D/g, '');
         fire(mask);
       }
 
