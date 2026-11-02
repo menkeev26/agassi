@@ -59,8 +59,16 @@ html {
   scroll-behavior: smooth;
 }
 
-html.agassi-group-scroll-locked,
+html.agassi-group-scroll-locked {
+  overflow: hidden;
+}
+
 html.agassi-group-scroll-locked body {
+  position: fixed;
+  top: calc(-1 * var(--agassi-group-scroll-top, 0px));
+  right: 0;
+  left: 0;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -1678,13 +1686,14 @@ a[class*="agassi-group-"],
     position: fixed;
     z-index: 998;
     inset: 0;
-    display: block;
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     width: 100%;
     height: auto;
-    min-height: 100%;
     padding: 72px var(--agassi-group-frame-gap) calc(24px + env(safe-area-inset-bottom));
     overflow-y: auto;
+    overscroll-behavior: contain;
     visibility: hidden;
     background: var(--agassi-group-ivory);
     clip-path: ellipse(100% 0 at 50% 0);
@@ -1734,7 +1743,7 @@ a[class*="agassi-group-"],
   /* Ссылки крупные, язык и кнопка прижаты к низу экрана */
   .agassi-group-header__mobile-inner {
     box-sizing: border-box;
-    min-height: 100%;
+    flex: 1 0 auto;
     padding: 0;
   }
 
