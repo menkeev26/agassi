@@ -1950,12 +1950,6 @@ body .t-form-success-popup_new .t-form-success-popup__wrapper {
   transform: none;
 }
 
-/* Служебная форма Tilda (подключение отправки) скрыта, наша форма работает через неё */
-#rec5204211603,
-.t-rec:has(form.t-form:not(.agassi-group-form)) {
-  display: none;
-}
-
 @media (max-width: 640px) {
   .agassi-group-footer .agassi-group-container {
     width: calc(100% - 48px);
