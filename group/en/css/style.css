@@ -1360,7 +1360,7 @@ a[class*="agassi-group-"],
 .agassi-group-footer__text {
   max-width: 420px;
   margin-top: 24px;
-  color: var(--agassi-group-on-crimson);
+  color: var(--agassi-group-white);
 }
 
 .agassi-group-footer__columns {
@@ -1414,13 +1414,13 @@ a[class*="agassi-group-"],
   gap: 16px;
   padding-top: 24px;
   border-top: 1px solid var(--agassi-group-line-crimson);
-  color: var(--agassi-group-on-crimson);
+  color: var(--agassi-group-white);
   font-size: var(--agassi-group-font-small);
   line-height: var(--agassi-group-line-small);
 }
 
 .agassi-group-footer__bottom a {
-  --agassi-group-link-color: var(--agassi-group-on-crimson);
+  --agassi-group-link-color: var(--agassi-group-white);
 }
 
 /* Ссылки без класса: цвет и шрифт заданы явно поверх стилей Tilda */
@@ -1461,7 +1461,7 @@ a[class*="agassi-group-"],
 .agassi-group-footer__bottom a:hover,
 #allrecords .agassi-group-footer__bottom a:hover,
 .t-records .agassi-group-footer__bottom a:hover {
-  color: var(--agassi-group-on-crimson);
+  color: var(--agassi-group-white);
   text-decoration: none;
 }
 
