@@ -491,12 +491,11 @@
       }
 
       function findNative() {
-        const id = form.dataset.nativeForm;
         const documents = [document];
         try { documents.push(window.parent.document); } catch (error) {}
         for (let i = 0; i < documents.length; i += 1) {
-          const found = documents[i].getElementById(id) || documents[i].querySelector('form.t-form');
-          if (found && found !== form) return found;
+          const found = documents[i].querySelector('#' + form.dataset.nativeBlock + ' form');
+          if (found) return found;
         }
         return null;
       }
