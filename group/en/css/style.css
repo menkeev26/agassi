@@ -402,8 +402,8 @@ a[class*="agassi-group-"],
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 2 / 1;
-  min-height: 480px;
+  box-sizing: border-box;
+  min-height: max(480px, calc(var(--agassi-group-viewport, 100vh) - 68px));
   overflow: hidden;
   background: var(--agassi-group-sand);
 }
@@ -1731,8 +1731,7 @@ a[class*="agassi-group-"],
   }
 
   .agassi-group-hero__frame {
-    aspect-ratio: auto;
-    min-height: 560px;
+    min-height: max(560px, calc(var(--agassi-group-viewport, 100vh) - 64px));
   }
 
   .agassi-group-hero__content {
