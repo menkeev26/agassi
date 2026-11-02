@@ -1165,7 +1165,24 @@ a[class*="agassi-group-"],
   display: none;
 }
 
+.agassi-group-form__flag {
+  display: inline-flex;
+  align-items: center;
+}
+
+.agassi-group-form__flag-image {
+  display: block;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 15px;
+  border-radius: 2px;
+  object-fit: cover;
+}
+
 .agassi-group-form__countries li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 8px 12px;
   border-radius: 8px;
   color: var(--agassi-group-ink);
