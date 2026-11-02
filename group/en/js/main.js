@@ -59,13 +59,16 @@
           lockedAt = window.scrollY;
           root.style.setProperty('--agassi-group-scroll-top', lockedAt + 'px');
         }
+        // Плавная прокрутка страницы отключается на время фиксации, иначе страница «уезжает» к hero и возвращается обратно
+        root.style.scrollBehavior = 'auto';
         slot.classList.toggle('is-menu-open', open);
         root.classList.toggle('agassi-group-scroll-locked', open);
         if (open) watchMenuHeight();
         if (!open) {
           root.style.removeProperty('--agassi-group-scroll-top');
-          window.scrollTo({ top: lockedAt, left: 0, behavior: 'instant' });
+          window.scrollTo(0, lockedAt);
         }
+        window.setTimeout(function () { root.style.removeProperty('scroll-behavior'); }, 60);
         menu.setAttribute('aria-hidden', String(!open));
         burger.setAttribute('aria-expanded', String(open));
       }
