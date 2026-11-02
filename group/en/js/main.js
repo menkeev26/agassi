@@ -21,14 +21,57 @@
       if (window.self !== window.top) slot.classList.add('is-editor');
       if (!header || !menu || !burger) return;
 
+      let lockedAt = 0;
+      let syncFrame = 0;
+
+      // Safari на iPhone меняет высоту экрана с задержкой, когда сворачивается адресная строка: высота меню замеряется заново, пока оно открыто
+      function syncMenuHeight() {
+        const viewport = window.visualViewport;
+        const height = Math.max(window.innerHeight, viewport ? viewport.height : 0);
+        root.style.setProperty('--agassi-group-menu-height', height + 'px');
+      }
+
+      function watchMenuHeight() {
+        window.cancelAnimationFrame(syncFrame);
+        const started = Date.now();
+        (function tick() {
+          syncMenuHeight();
+          if (slot.classList.contains('is-menu-open') && Date.now() - started < 1500) {
+            syncFrame = window.requestAnimationFrame(tick);
+          }
+        })();
+      }
+
+      window.addEventListener('resize', function () {
+        if (slot.classList.contains('is-menu-open')) syncMenuHeight();
+      });
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', function () {
+          if (slot.classList.contains('is-menu-open')) syncMenuHeight();
+        });
+      }
+
+      // Safari на iPhone игнорирует overflow: hidden, поэтому страница фиксируется на месте, а при закрытии возвращается к прежней позиции
       function setMenu(open) {
+        const wasOpen = slot.classList.contains('is-menu-open');
+        if (open === wasOpen) return;
+        if (open) {
+          lockedAt = window.scrollY;
+          root.style.setProperty('--agassi-group-scroll-top', lockedAt + 'px');
+        }
         slot.classList.toggle('is-menu-open', open);
         root.classList.toggle('agassi-group-scroll-locked', open);
+        if (open) watchMenuHeight();
+        if (!open) {
+          root.style.removeProperty('--agassi-group-scroll-top');
+          window.scrollTo({ top: lockedAt, left: 0, behavior: 'instant' });
+        }
         menu.setAttribute('aria-hidden', String(!open));
         burger.setAttribute('aria-expanded', String(open));
       }
 
       function updateScrollState() {
+        if (slot.classList.contains('is-menu-open')) return;
         header.classList.toggle('is-scrolled', window.scrollY > 12);
       }
 
