@@ -501,8 +501,13 @@
       section.style.setProperty('--agassi-group-viewport', height + 'px');
     }
 
+    // На опубликованной странице высота задаётся в CSS через svh, скрипт нужен только внутри iframe редактора
+    var framed = false;
+    try { framed = window.parent !== window; } catch (error) { framed = true; }
+    if (!framed) return;
+
+    // Высота фиксируется один раз: в редакторе блок живёт в iframe, и пересчёт при изменении размера давал бы «прыжки»
     update();
-    window.addEventListener('resize', update);
   }
 
   // Страны для телефона: [ISO, название, код, маска]; # означает цифру, без маски номер вводится цифрами
