@@ -535,8 +535,7 @@
         status.textContent = '';
       });
 
-      form.addEventListener('submit', function (event) {
-        event.preventDefault();
+      function submit() {
         if (submitting) return;
 
         let valid = true;
@@ -561,7 +560,10 @@
         native.addEventListener('tildaform:aftersuccess', function () {
           if (!submitting) return;
           setSubmitting(false);
-          form.reset();
+          form.querySelectorAll('[name]').forEach(function (input) {
+            if (input.type === 'checkbox') input.checked = false;
+            else input.value = '';
+          });
           form.classList.add('is-success');
         });
         native.addEventListener('tildaform:aftererror', function () {
@@ -572,6 +574,13 @@
 
         setSubmitting(true);
         nativeButton.click();
+      }
+
+      button.addEventListener('click', submit);
+      form.addEventListener('keydown', function (event) {
+        if (event.key !== 'Enter' || event.target.tagName !== 'INPUT' || event.target.type === 'checkbox') return;
+        event.preventDefault();
+        submit();
       });
     });
   }
