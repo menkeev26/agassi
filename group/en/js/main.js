@@ -712,6 +712,13 @@
           if (!submitting) return;
           setSubmitting(false);
           status.textContent = 'We could not send your request. Please try again or write to us at team@agassi.group';
+          // Для диагностики: причина отказа служебной формы и значения её полей
+          const reason = native.querySelector('.js-errorbox-all, .t-form__errorbox-wrapper');
+          const values = {};
+          native.querySelectorAll('[name]').forEach(function (field) {
+            values[field.name] = field.type === 'checkbox' ? field.checked : field.value;
+          });
+          console.warn('[agassi-group] native form error:', reason ? reason.textContent.trim() : '(no message)', values);
         });
 
         setSubmitting(true);
