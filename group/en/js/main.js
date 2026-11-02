@@ -459,11 +459,103 @@
     window.addEventListener('resize', update);
   }
 
+  // Форма: проверяет поля и отправляет заявку через служебную форму Tilda (она подключает почту и CRM)
+  function initContactForm() {
+    document.querySelectorAll('.agassi-group-form').forEach(function (form) {
+      if (!claim(form)) return;
+
+      const button = form.querySelector('.agassi-group-form__submit');
+      const status = form.querySelector('.agassi-group-form__status');
+      const label = button.textContent;
+      const messages = {
+        name: 'Enter your name',
+        phone: 'Enter a valid phone number',
+        email: 'Enter a valid email address',
+        consent: 'Please confirm to continue',
+        terms: 'Please confirm to continue'
+      };
+
+      function setError(input, text) {
+        const field = input.closest('.agassi-group-form__field');
+        const error = field && field.querySelector('.agassi-group-form__error');
+        if (error) error.textContent = text;
+        input.setAttribute('aria-invalid', text ? 'true' : 'false');
+      }
+
+      function isValid(input) {
+        if (input.type === 'checkbox') return input.checked;
+        const value = input.value.trim();
+        if (input.name === 'email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        if (input.name === 'phone') return value.replace(/\D/g, '').length >= 7;
+        return value !== '';
+      }
+
+      function findNative() {
+        const id = form.dataset.nativeForm;
+        const documents = [document];
+        try { documents.push(window.parent.document); } catch (error) {}
+        for (let i = 0; i < documents.length; i += 1) {
+          const found = documents[i].getElementById(id) || documents[i].querySelector('form.t-form');
+          if (found && found !== form) return found;
+        }
+        return null;
+      }
+
+      function fire(element, type) {
+        element.dispatchEvent(new Event(type, { bubbles: true }));
+      }
+
+      form.addEventListener('input', function (event) {
+        setError(event.target, '');
+        status.textContent = '';
+      });
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        let valid = true;
+
+        form.querySelectorAll('[required]').forEach(function (input) {
+          const ok = isValid(input);
+          setError(input, ok ? '' : messages[input.name] || 'Required field');
+          if (!ok) valid = false;
+        });
+        if (!valid) return;
+
+        const native = findNative();
+        const nativeButton = native && native.querySelector('button[type="submit"], .t-submit');
+        if (!nativeButton) {
+          status.textContent = 'Something went wrong. Please write to us at team@agassi.group';
+          return;
+        }
+
+        form.querySelectorAll('[name]').forEach(function (input) {
+          const target = native.querySelector('[name="' + input.name + '"]');
+          if (!target) return;
+          if (input.type === 'checkbox') target.checked = input.checked;
+          else target.value = input.value.trim();
+          fire(target, 'input');
+          fire(target, 'change');
+        });
+
+        button.disabled = true;
+        button.textContent = 'Sending…';
+        nativeButton.click();
+
+        window.setTimeout(function () {
+          form.reset();
+          button.disabled = false;
+          button.textContent = label;
+        }, 3000);
+      });
+    });
+  }
+
   function init() {
     initHeader();
     initPartners();
     initBlog();
     initViewport();
+    initContactForm();
     initFaq();
     initFacts();
     initStory();
