@@ -5,7 +5,6 @@
   --agassi-group-sand: #EAE4D6;
   --agassi-group-crimson: #8C0F14;
   --agassi-group-crimson-dark: #5A0A0D;
-  --agassi-group-garnet: #4A0E1A;
   --agassi-group-crimson-field: #7A0C11;
   --agassi-group-gold: #C6A15B;
   --agassi-group-ink: #1E1E1E;
@@ -793,10 +792,8 @@ a[class*="agassi-group-"],
 }
 
 /* Факты */
-.agassi-group-facts__surface {
-  padding: 80px 64px 64px;
-  border-radius: var(--agassi-group-radius);
-  background: var(--agassi-group-garnet);
+.agassi-group-facts {
+  background: var(--agassi-group-crimson);
 }
 
 .agassi-group-facts__list {
@@ -1340,7 +1337,7 @@ a[class*="agassi-group-"],
 /* Подвал */
 .agassi-group-footer {
   padding: var(--agassi-group-section-space) 0 32px;
-  background: var(--agassi-group-garnet);
+  background: var(--agassi-group-crimson);
   color: var(--agassi-group-white);
   font-family: var(--t-text-font);
   font-size: var(--agassi-group-font-body);
@@ -1494,10 +1491,6 @@ a[class*="agassi-group-"],
 
   .agassi-group-directions__card {
     padding: 40px;
-  }
-
-  .agassi-group-facts__surface {
-    padding: 64px 48px;
   }
 
   .agassi-group-partners__track {
@@ -1678,10 +1671,6 @@ a[class*="agassi-group-"],
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .agassi-group-facts__surface {
-    padding: 48px 32px;
-  }
-
   .agassi-group-contact__card {
     min-height: 400px;
   }
@@ -1818,10 +1807,6 @@ a[class*="agassi-group-"],
 
   .agassi-group-blog__action {
     margin-top: 24px;
-  }
-
-  .agassi-group-facts__surface {
-    padding: 40px 20px;
   }
 
   .agassi-group-contact__card {
