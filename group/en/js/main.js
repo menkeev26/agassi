@@ -657,7 +657,10 @@
 
       // Значения переносятся в служебную форму; телефон уходит целиком, вместе с кодом страны
       function fill(native, input) {
-        const target = native.querySelector('[name="' + input.name + '"]');
+        // Имя переменной в Tilda может быть написано с заглавной буквы, поэтому регистр не учитывается
+        const target = Array.prototype.find.call(native.querySelectorAll('[name]'), function (field) {
+          return field.name.toLowerCase() === input.name.toLowerCase();
+        });
         const value = input === phoneInput ? fullPhone() : input.value.trim();
         if (target) {
           if (input.type === 'checkbox') target.checked = input.checked;
