@@ -1,3 +1,17 @@
+/* Выделение текста в цветах сайта */
+::selection {
+  background: var(--agassi-group-crimson);
+  color: var(--agassi-group-white);
+}
+
+.agassi-group-facts ::selection,
+.agassi-group-footer ::selection,
+.agassi-group-contact__card ::selection,
+.agassi-group-directions__card ::selection {
+  background: var(--agassi-group-white);
+  color: var(--agassi-group-crimson);
+}
+
 /* Токены */
 :root {
   --agassi-group-ivory: #F4F1EA;
@@ -1011,6 +1025,8 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-contact__form {
+  display: flex;
+  flex-direction: column;
   grid-column: span 6;
   padding: 48px;
   border-radius: var(--agassi-group-radius);
@@ -1083,8 +1099,15 @@ a[class*="agassi-group-"],
   display: none;
 }
 
+.agassi-group-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .agassi-group-form .agassi-group-form__success {
   display: none;
+  flex: 1;
   min-height: 320px;
   flex-direction: column;
   align-items: center;
