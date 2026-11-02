@@ -433,9 +433,9 @@
     });
   }
 
-  // 404: блок по центру высоты окна страницы (iframe блока сам её не знает)
-  function initNotFound() {
-    var section = document.querySelector('.agassi-group-notfound');
+  // 404 и первый экран: высота окна страницы (iframe блока сама её не знает)
+  function initViewport() {
+    var section = document.querySelector('.agassi-group-notfound, .agassi-group-hero');
     if (!section) return;
 
     function update() {
@@ -454,7 +454,7 @@
     initHeader();
     initPartners();
     initBlog();
-    initNotFound();
+    initViewport();
     initFaq();
     initFacts();
     initStory();
