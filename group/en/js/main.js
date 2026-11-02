@@ -438,11 +438,20 @@
     var section = document.querySelector('.agassi-group-notfound, .agassi-group-hero');
     if (!section) return;
 
+    var lastWidth = 0;
+    var lastHeight = 0;
+
     function update() {
+      var width = window.innerWidth;
       var height = window.innerHeight;
       try {
         height = window.parent.innerHeight || height;
+        width = window.parent.innerWidth || width;
       } catch (error) {}
+      // Адресная строка телефона меняет высоту при прокрутке: мелкие изменения высоты игнорируем
+      if (lastHeight && width === lastWidth && Math.abs(height - lastHeight) < 160) return;
+      lastWidth = width;
+      lastHeight = height;
       section.style.setProperty('--agassi-group-viewport', height + 'px');
     }
 
