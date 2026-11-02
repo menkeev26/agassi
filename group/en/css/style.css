@@ -472,7 +472,7 @@ a[class*="agassi-group-"],
 
 .agassi-group-hero__logo {
   display: block;
-  width: min(260px, 100%);
+  width: min(300px, 100%);
   height: auto;
 }
 
@@ -1859,7 +1859,7 @@ a[class*="agassi-group-"],
   }
 
   .agassi-group-hero__logo {
-    width: min(208px, 100%);
+    width: min(176px, 100%);
   }
 
   /* На телефоне свой фон, десктопный скрыт */
