@@ -474,6 +474,22 @@
         consent: 'Please confirm to continue',
         terms: 'Please confirm to continue'
       };
+      let submitting = false;
+
+      function findNative() {
+        const documents = [document];
+        try { documents.push(window.parent.document); } catch (error) {}
+        for (let i = 0; i < documents.length; i += 1) {
+          const found = documents[i].querySelector('#' + form.dataset.nativeBlock + ' form');
+          if (found) return found;
+        }
+        return null;
+      }
+
+      function fire(element) {
+        element.dispatchEvent(new Event('input', { bubbles: true }));
+        element.dispatchEvent(new Event('change', { bubbles: true }));
+      }
 
       function setError(input, text) {
         const field = input.closest('.agassi-group-form__field');
@@ -490,18 +506,28 @@
         return value !== '';
       }
 
-      function findNative() {
-        const documents = [document];
-        try { documents.push(window.parent.document); } catch (error) {}
-        for (let i = 0; i < documents.length; i += 1) {
-          const found = documents[i].querySelector('#' + form.dataset.nativeBlock + ' form');
-          if (found) return found;
-        }
-        return null;
+      function setSubmitting(state) {
+        submitting = state;
+        button.disabled = state;
+        button.textContent = state ? 'Sending…' : label;
       }
 
-      function fire(element, type) {
-        element.dispatchEvent(new Event(type, { bubbles: true }));
+      // Значения переносятся в служебную форму; у телефона Tilda хранит ещё и номер без кода страны
+      function fill(native, input) {
+        const target = native.querySelector('[name="' + input.name + '"]');
+        if (target) {
+          if (input.type === 'checkbox') target.checked = input.checked;
+          else target.value = input.value.trim();
+          fire(target);
+        }
+        if (input.name !== 'phone') return;
+        const mask = native.querySelector('.t-input-phonemask[name="tildaspec-phone-part[]"]');
+        if (!mask) return;
+        const code = mask.getAttribute('data-phonemask-code') || '';
+        let digits = input.value.trim();
+        if (code && digits.indexOf(code) === 0) digits = digits.slice(code.length);
+        mask.value = digits.replace(/\D/g, '');
+        fire(mask);
       }
 
       form.addEventListener('input', function (event) {
@@ -511,8 +537,9 @@
 
       form.addEventListener('submit', function (event) {
         event.preventDefault();
-        let valid = true;
+        if (submitting) return;
 
+        let valid = true;
         form.querySelectorAll('[required]').forEach(function (input) {
           const ok = isValid(input);
           setError(input, ok ? '' : messages[input.name] || 'Required field');
@@ -521,30 +548,30 @@
         if (!valid) return;
 
         const native = findNative();
-        const nativeButton = native && native.querySelector('button[type="submit"], .t-submit');
+        const nativeButton = native && native.querySelector('button[type="submit"], input[type="submit"]');
         if (!nativeButton) {
           status.textContent = 'Something went wrong. Please write to us at team@agassi.group';
           return;
         }
 
-        form.querySelectorAll('[name]').forEach(function (input) {
-          const target = native.querySelector('[name="' + input.name + '"]');
-          if (!target) return;
-          if (input.type === 'checkbox') target.checked = input.checked;
-          else target.value = input.value.trim();
-          fire(target, 'input');
-          fire(target, 'change');
+        form.querySelectorAll('[name]').forEach(function (input) { fill(native, input); });
+
+        // Окно успеха Tilda не нужно: результат показывает наша форма
+        native.setAttribute('data-success-popup', 'n');
+        native.addEventListener('tildaform:aftersuccess', function () {
+          if (!submitting) return;
+          setSubmitting(false);
+          form.reset();
+          form.classList.add('is-success');
+        });
+        native.addEventListener('tildaform:aftererror', function () {
+          if (!submitting) return;
+          setSubmitting(false);
+          status.textContent = 'We could not send your request. Please try again or write to us at team@agassi.group';
         });
 
-        button.disabled = true;
-        button.textContent = 'Sending…';
+        setSubmitting(true);
         nativeButton.click();
-
-        window.setTimeout(function () {
-          form.reset();
-          button.disabled = false;
-          button.textContent = label;
-        }, 3000);
       });
     });
   }
