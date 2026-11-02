@@ -552,11 +552,21 @@
     ['TH', 'Thailand', '+66'], ['TN', 'Tunisia', '+216'], ['GB', 'United Kingdom', '+44'],
     ['VN', 'Vietnam', '+84']
   ].map(function (item) {
-    const flag = item[0].replace(/./g, function (letter) {
-      return String.fromCodePoint(127397 + letter.charCodeAt(0));
-    });
-    return { name: item[1], flag: flag, code: item[2], mask: item[3] || '' };
+    return { iso: item[0].toLowerCase(), name: item[1], code: item[2], mask: item[3] || '' };
   });
+
+  // Флаги картинками: в Windows эмодзи-флаги не отображаются и показываются буквами
+  function createFlag(iso) {
+    const image = document.createElement('img');
+    image.className = 'agassi-group-form__flag-image';
+    image.src = 'https://flagcdn.com/24x18/' + iso + '.png';
+    image.srcset = 'https://flagcdn.com/48x36/' + iso + '.png 2x';
+    image.width = 20;
+    image.height = 15;
+    image.alt = '';
+    image.loading = 'lazy';
+    return image;
+  }
 
   // Форма: проверяет поля и отправляет заявку через служебную форму Tilda (она подключает почту и CRM)
   function initContactForm() {
@@ -639,7 +649,9 @@
 
       function setCountry(next) {
         country = next;
-        countryButton.querySelector('.agassi-group-form__flag').textContent = country.flag;
+        const flagBox = countryButton.querySelector('.agassi-group-form__flag');
+        flagBox.textContent = '';
+        flagBox.appendChild(createFlag(country.iso));
         countryButton.querySelector('.agassi-group-form__code').textContent = country.code;
         phoneInput.placeholder = country.mask ? country.mask.replace(/#/g, '0') : '000 000 000';
         phoneInput.value = formatPhone(phoneInput.value);
@@ -659,7 +671,8 @@
           option.setAttribute('role', 'option');
           option.dataset.name = item.name;
           option.tabIndex = 0;
-          option.textContent = item.flag + ' ' + item.name + ' ' + item.code;
+          option.appendChild(createFlag(item.iso));
+          option.appendChild(document.createTextNode(item.name + ' ' + item.code));
           countryList.appendChild(option);
         });
         phoneInput.addEventListener('input', function () { phoneInput.value = formatPhone(phoneInput.value); });
