@@ -1088,6 +1088,92 @@ a[class*="agassi-group-"],
   line-height: var(--agassi-group-line-small);
 }
 
+.agassi-group-form__phone {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--agassi-group-line);
+  border-radius: var(--agassi-group-radius-small);
+  background: var(--agassi-group-ivory);
+  transition: border-color var(--agassi-group-duration) var(--agassi-group-ease);
+}
+
+.agassi-group-form__phone:focus-within {
+  border-color: var(--agassi-group-crimson);
+}
+
+.agassi-group-form .agassi-group-form__phone .agassi-group-form__input {
+  min-height: 54px;
+  padding-left: 0;
+  border: 0;
+  background: transparent;
+}
+
+.agassi-group-form__country {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+  height: 54px;
+  padding: 0 12px 0 20px;
+  border: 0;
+  background: transparent;
+  color: var(--agassi-group-ink);
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-group-font-body);
+  line-height: var(--agassi-group-line-body);
+  cursor: pointer;
+}
+
+.agassi-group-form__country::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 2px;
+  border-right: 1.5px solid var(--agassi-group-muted);
+  border-bottom: 1.5px solid var(--agassi-group-muted);
+  transform: rotate(45deg);
+}
+
+.agassi-group-form__countries {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 4px);
+  left: 0;
+  width: min(320px, 100%);
+  max-height: 264px;
+  margin: 0;
+  padding: 8px;
+  overflow-y: auto;
+  list-style: none;
+  border: 1px solid var(--agassi-group-line);
+  border-radius: var(--agassi-group-radius-small);
+  background: var(--agassi-group-white);
+}
+
+.agassi-group-form__countries[hidden] {
+  display: none;
+}
+
+.agassi-group-form__countries li {
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: var(--agassi-group-ink);
+  font-size: var(--agassi-group-font-small);
+  line-height: var(--agassi-group-line-small);
+  cursor: pointer;
+}
+
+.agassi-group-form__countries li[aria-selected="true"] {
+  color: var(--agassi-group-crimson);
+}
+
+@media (hover: hover) {
+  .agassi-group-form__countries li:hover {
+    background: var(--agassi-group-ivory);
+  }
+}
+
 .agassi-group-form .agassi-group-form__status {
   margin: 0;
   color: var(--agassi-group-crimson);
