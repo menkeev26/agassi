@@ -286,7 +286,7 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-header__nav a {
-  --agassi-group-link-color: var(--agassi-group-ink);
+  --agassi-group-link-color: var(--agassi-group-crimson);
 }
 
 .agassi-group-header__nav a::after,
@@ -379,7 +379,7 @@ a[class*="agassi-group-"],
 }
 
 .agassi-group-header__mobile-nav a {
-  --agassi-group-link-color: var(--agassi-group-ink);
+  --agassi-group-link-color: var(--agassi-group-crimson);
   padding: 8px 0;
   font-size: var(--agassi-group-font-body);
   font-weight: 500;
@@ -1127,7 +1127,11 @@ a[class*="agassi-group-"],
 .agassi-group-form__consent a,
 .agassi-group-legal__text a {
   --agassi-group-link-color: var(--agassi-group-crimson);
-  border-bottom: 1px solid var(--agassi-group-crimson);
+  border-bottom: 1px solid currentColor;
+}
+
+.agassi-group-legal__text a:hover {
+  --agassi-group-link-color: var(--agassi-group-crimson-dark);
 }
 
 .agassi-group-form .agassi-group-form__submit,
@@ -1423,26 +1427,30 @@ a[class*="agassi-group-"],
 .agassi-group-header__nav a,
 #allrecords .agassi-group-header__nav a,
 .t-records .agassi-group-header__nav a,
+.agassi-group-header__mobile-nav a,
+#allrecords .agassi-group-header__mobile-nav a,
+.t-records .agassi-group-header__mobile-nav a {
+  color: var(--agassi-group-crimson);
+  font-family: var(--t-text-font);
+  text-decoration: none;
+  transition: color var(--agassi-group-duration) var(--agassi-group-ease);
+}
+
 .agassi-group-header__nav a:hover,
 #allrecords .agassi-group-header__nav a:hover,
 .t-records .agassi-group-header__nav a:hover,
-.agassi-group-header__mobile-nav a,
-#allrecords .agassi-group-header__mobile-nav a,
-.t-records .agassi-group-header__mobile-nav a,
 .agassi-group-header__mobile-nav a:hover,
 #allrecords .agassi-group-header__mobile-nav a:hover,
-.t-records .agassi-group-header__mobile-nav a:hover {
-  color: var(--agassi-group-ink);
-  font-family: var(--t-text-font);
-  text-decoration: none;
+.t-records .agassi-group-header__mobile-nav a:hover,
+.agassi-group-form__consent a:hover,
+#allrecords .agassi-group-form__consent a:hover,
+.t-records .agassi-group-form__consent a:hover {
+  color: var(--agassi-group-crimson-dark);
 }
 
 .agassi-group-form__consent a,
 #allrecords .agassi-group-form__consent a,
-.t-records .agassi-group-form__consent a,
-.agassi-group-form__consent a:hover,
-#allrecords .agassi-group-form__consent a:hover,
-.t-records .agassi-group-form__consent a:hover {
+.t-records .agassi-group-form__consent a {
   color: var(--agassi-group-crimson);
   text-decoration: none;
 }
