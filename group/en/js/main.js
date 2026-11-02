@@ -484,30 +484,27 @@
     var section = document.querySelector('.agassi-group-notfound, .agassi-group-hero');
     if (!section) return;
 
-    var lastWidth = 0;
-    var lastHeight = 0;
-
-    function update() {
-      var width = window.innerWidth;
-      var height = window.innerHeight;
-      try {
-        height = window.parent.innerHeight || height;
-        width = window.parent.innerWidth || width;
-      } catch (error) {}
-      // Адресная строка телефона меняет высоту при прокрутке: мелкие изменения высоты игнорируем
-      if (lastHeight && width === lastWidth && Math.abs(height - lastHeight) < 160) return;
-      lastWidth = width;
-      lastHeight = height;
-      section.style.setProperty('--agassi-group-viewport', height + 'px');
-    }
-
     // На опубликованной странице высота задаётся в CSS через svh, скрипт нужен только внутри iframe редактора
     var framed = false;
     try { framed = window.parent !== window; } catch (error) { framed = true; }
     if (!framed) return;
 
-    // Высота фиксируется один раз: в редакторе блок живёт в iframe, и пересчёт при изменении размера давал бы «прыжки»
-    update();
+    // В редакторе высота окна читается несколько раз и только растёт: так блок не «прыгает» и не остаётся короче экрана
+    var height = 0;
+
+    function grow() {
+      var value = window.innerHeight;
+      try { value = window.parent.innerHeight || value; } catch (error) {}
+      if (value <= height) return;
+      height = value;
+      section.style.setProperty('--agassi-group-viewport', height + 'px');
+    }
+
+    grow();
+    window.addEventListener('load', grow);
+    window.setTimeout(grow, 400);
+    window.setTimeout(grow, 1200);
+    try { window.parent.addEventListener('resize', grow); } catch (error) {}
   }
 
   // Страны для телефона: [ISO, название, код, маска]; # означает цифру, без маски номер вводится цифрами
