@@ -459,22 +459,56 @@
     window.addEventListener('resize', update);
   }
 
-  // Страны для телефона: код, маска (# означает цифру) и флаг
+  // Страны для телефона: [ISO, название, код, маска]; # означает цифру, без маски номер вводится цифрами
   const phoneCountries = [
-    { name: 'Uzbekistan', flag: '🇺🇿', code: '+998', mask: '## ### ## ##' },
-    { name: 'Kazakhstan', flag: '🇰🇿', code: '+7', mask: '### ### ## ##' },
-    { name: 'Kyrgyzstan', flag: '🇰🇬', code: '+996', mask: '### ### ###' },
-    { name: 'Tajikistan', flag: '🇹🇯', code: '+992', mask: '## ### ####' },
-    { name: 'Turkmenistan', flag: '🇹🇲', code: '+993', mask: '## ######' },
-    { name: 'Azerbaijan', flag: '🇦🇿', code: '+994', mask: '## ### ## ##' },
-    { name: 'Georgia', flag: '🇬🇪', code: '+995', mask: '### ## ## ##' },
-    { name: 'Russia', flag: '🇷🇺', code: '+7', mask: '### ### ## ##' },
-    { name: 'Turkey', flag: '🇹🇷', code: '+90', mask: '### ### ## ##' },
-    { name: 'South Korea', flag: '🇰🇷', code: '+82', mask: '## #### ####' },
-    { name: 'China', flag: '🇨🇳', code: '+86', mask: '### #### ####' },
-    { name: 'United Arab Emirates', flag: '🇦🇪', code: '+971', mask: '## ### ####' },
-    { name: 'United States', flag: '🇺🇸', code: '+1', mask: '### ### ####' }
-  ];
+    ['UZ', 'Uzbekistan', '+998', '## ### ## ##'],
+    ['KZ', 'Kazakhstan', '+7', '### ### ## ##'],
+    ['KG', 'Kyrgyzstan', '+996', '### ### ###'],
+    ['TJ', 'Tajikistan', '+992', '## ### ####'],
+    ['TM', 'Turkmenistan', '+993', '## ######'],
+    ['AZ', 'Azerbaijan', '+994', '## ### ## ##'],
+    ['GE', 'Georgia', '+995', '### ## ## ##'],
+    ['AM', 'Armenia', '+374', '## ### ###'],
+    ['BY', 'Belarus', '+375', '## ### ## ##'],
+    ['RU', 'Russia', '+7', '### ### ## ##'],
+    ['UA', 'Ukraine', '+380', '## ### ## ##'],
+    ['MD', 'Moldova', '+373', '## ### ###'],
+    ['TR', 'Turkey', '+90', '### ### ## ##'],
+    ['KR', 'South Korea', '+82', '## #### ####'],
+    ['CN', 'China', '+86', '### #### ####'],
+    ['AE', 'United Arab Emirates', '+971', '## ### ####'],
+    ['US', 'United States', '+1', '### ### ####'],
+    ['CA', 'Canada', '+1', '### ### ####'],
+    ['AF', 'Afghanistan', '+93'], ['AL', 'Albania', '+355'], ['DZ', 'Algeria', '+213'],
+    ['AR', 'Argentina', '+54'], ['AU', 'Australia', '+61'], ['AT', 'Austria', '+43'],
+    ['BH', 'Bahrain', '+973'], ['BD', 'Bangladesh', '+880'], ['BE', 'Belgium', '+32'],
+    ['BR', 'Brazil', '+55'], ['BG', 'Bulgaria', '+359'], ['KH', 'Cambodia', '+855'],
+    ['CL', 'Chile', '+56'], ['CO', 'Colombia', '+57'], ['HR', 'Croatia', '+385'],
+    ['CY', 'Cyprus', '+357'], ['CZ', 'Czechia', '+420'], ['DK', 'Denmark', '+45'],
+    ['EG', 'Egypt', '+20'], ['EE', 'Estonia', '+372'], ['FI', 'Finland', '+358'],
+    ['FR', 'France', '+33'], ['DE', 'Germany', '+49'], ['GR', 'Greece', '+30'],
+    ['HK', 'Hong Kong', '+852'], ['HU', 'Hungary', '+36'], ['IN', 'India', '+91'],
+    ['ID', 'Indonesia', '+62'], ['IR', 'Iran', '+98'], ['IQ', 'Iraq', '+964'],
+    ['IE', 'Ireland', '+353'], ['IL', 'Israel', '+972'], ['IT', 'Italy', '+39'],
+    ['JP', 'Japan', '+81'], ['JO', 'Jordan', '+962'], ['KW', 'Kuwait', '+965'],
+    ['LV', 'Latvia', '+371'], ['LB', 'Lebanon', '+961'], ['LT', 'Lithuania', '+370'],
+    ['MY', 'Malaysia', '+60'], ['MX', 'Mexico', '+52'], ['MN', 'Mongolia', '+976'],
+    ['MA', 'Morocco', '+212'], ['NP', 'Nepal', '+977'], ['NL', 'Netherlands', '+31'],
+    ['NZ', 'New Zealand', '+64'], ['NG', 'Nigeria', '+234'], ['NO', 'Norway', '+47'],
+    ['OM', 'Oman', '+968'], ['PK', 'Pakistan', '+92'], ['PL', 'Poland', '+48'],
+    ['PT', 'Portugal', '+351'], ['QA', 'Qatar', '+974'], ['RO', 'Romania', '+40'],
+    ['SA', 'Saudi Arabia', '+966'], ['RS', 'Serbia', '+381'], ['SG', 'Singapore', '+65'],
+    ['SK', 'Slovakia', '+421'], ['SI', 'Slovenia', '+386'], ['ZA', 'South Africa', '+27'],
+    ['ES', 'Spain', '+34'], ['LK', 'Sri Lanka', '+94'], ['SE', 'Sweden', '+46'],
+    ['CH', 'Switzerland', '+41'], ['SY', 'Syria', '+963'], ['TW', 'Taiwan', '+886'],
+    ['TH', 'Thailand', '+66'], ['TN', 'Tunisia', '+216'], ['GB', 'United Kingdom', '+44'],
+    ['VN', 'Vietnam', '+84']
+  ].map(function (item) {
+    const flag = item[0].replace(/./g, function (letter) {
+      return String.fromCodePoint(127397 + letter.charCodeAt(0));
+    });
+    return { name: item[1], flag: flag, code: item[2], mask: item[3] || '' };
+  });
 
   // Форма: проверяет поля и отправляет заявку через служебную форму Tilda (она подключает почту и CRM)
   function initContactForm() {
@@ -522,13 +556,19 @@
       const countryList = phoneBox && phoneBox.querySelector('.agassi-group-form__countries');
       let country = phoneCountries[0];
 
+      // Длина номера без кода: по маске, а для стран без маски до 12 цифр
+      function phoneSize() {
+        return country.mask ? (country.mask.match(/#/g) || []).length : 12;
+      }
+
       function formatPhone(value) {
         const code = country.code.replace(/\D/g, '');
-        const size = (country.mask.match(/#/g) || []).length;
+        const size = phoneSize();
         const text = value.trim();
         let digits = text.replace(/\D/g, '');
         if (text.indexOf(country.code) === 0) digits = digits.slice(code.length);
         else if (digits.length > size && digits.indexOf(code) === 0) digits = digits.slice(code.length);
+        if (!country.mask) return digits.slice(0, size);
         let out = '';
         let pending = '';
         let index = 0;
@@ -553,7 +593,7 @@
         country = next;
         countryButton.querySelector('.agassi-group-form__flag').textContent = country.flag;
         countryButton.querySelector('.agassi-group-form__code').textContent = country.code;
-        phoneInput.placeholder = country.mask.replace(/#/g, '0');
+        phoneInput.placeholder = country.mask ? country.mask.replace(/#/g, '0') : '000 000 000';
         phoneInput.value = formatPhone(phoneInput.value);
         countryList.querySelectorAll('[role="option"]').forEach(function (item) {
           item.setAttribute('aria-selected', item.dataset.name === country.name ? 'true' : 'false');
@@ -601,7 +641,10 @@
       function isValid(input) {
         if (input.type === 'checkbox') return input.checked;
         const value = input.value.trim();
-        if (input === phoneInput) return value.replace(/\D/g, '').length === (country.mask.match(/#/g) || []).length;
+        if (input === phoneInput) {
+          const length = value.replace(/\D/g, '').length;
+          return country.mask ? length === phoneSize() : length >= 6;
+        }
         if (input.name === 'email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
         return value !== '';
       }
