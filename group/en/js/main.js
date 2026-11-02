@@ -726,6 +726,23 @@
 
         setSubmitting(true);
         nativeButton.click();
+
+        // Если Tilda не прислала ни успех, ни ошибку (например, показала свою ошибку поля), кнопка не должна зависать
+        let checks = 0;
+        const watchdog = setInterval(function () {
+          checks += 1;
+          if (!submitting) { clearInterval(watchdog); return; }
+          const visible = Array.prototype.filter.call(
+            native.querySelectorAll('.t-form__errorbox-item, .t-input-error'),
+            function (item) { return item.offsetParent !== null && item.textContent.trim() !== ''; }
+          );
+          if (visible.length || checks >= 20) {
+            clearInterval(watchdog);
+            setSubmitting(false);
+            status.textContent = 'We could not send your request. Please try again or write to us at team@agassi.group';
+            console.warn('[agassi-group] native form did not respond:', visible.map(function (item) { return item.textContent.trim(); }));
+          }
+        }, 750);
       }
 
       button.addEventListener('click', submit);
