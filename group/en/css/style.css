@@ -427,7 +427,7 @@ a[class*="agassi-group-"],
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  min-height: max(480px, calc(var(--agassi-group-viewport, 100vh) - 68px));
+  min-height: max(480px, calc(var(--agassi-group-viewport, 100svh) - 68px));
   overflow: hidden;
   background: var(--agassi-group-sand);
 }
@@ -1850,7 +1850,7 @@ a[class*="agassi-group-"],
   }
 
   .agassi-group-hero__frame {
-    min-height: max(560px, calc(var(--agassi-group-viewport, 100vh) - 64px));
+    min-height: max(560px, calc(var(--agassi-group-viewport, 100svh) - 64px));
   }
 
   .agassi-group-hero__content {
