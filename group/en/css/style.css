@@ -5,15 +5,15 @@
   --agassi-group-sand: #EAE4D6;
   --agassi-group-crimson: #8C0F14;
   --agassi-group-crimson-dark: #5A0A0D;
+  --agassi-group-garnet: #4A0E1A;
   --agassi-group-crimson-field: #7A0C11;
-  --agassi-group-gold: #C49743;
-  --agassi-group-gold-light: #F0E8A1;
+  --agassi-group-gold: #C6A15B;
   --agassi-group-ink: #1E1E1E;
   --agassi-group-muted: #5E5A52;
   --agassi-group-line: #D9D2C3;
   --agassi-group-on-crimson: #DFBCBD;
   --agassi-group-line-crimson: #A1393E;
-  --agassi-group-gold-gradient: linear-gradient(90deg, #F0E8A1 0%, #E29642 74%, #C49743 100%);
+  --agassi-group-gold-gradient: linear-gradient(90deg, #E8C375 0%, #C6A15B 55%, #E7C274 100%);
 
   --agassi-group-frame-max: 1620px;
   --agassi-group-frame-gap: 96px;
@@ -796,7 +796,7 @@ a[class*="agassi-group-"],
 .agassi-group-facts__surface {
   padding: 80px 64px 64px;
   border-radius: var(--agassi-group-radius);
-  background: var(--agassi-group-crimson);
+  background: var(--agassi-group-garnet);
 }
 
 .agassi-group-facts__list {
@@ -1340,7 +1340,7 @@ a[class*="agassi-group-"],
 /* Подвал */
 .agassi-group-footer {
   padding: var(--agassi-group-section-space) 0 32px;
-  background: var(--agassi-group-crimson);
+  background: var(--agassi-group-garnet);
   color: var(--agassi-group-white);
   font-family: var(--t-text-font);
   font-size: var(--agassi-group-font-body);
