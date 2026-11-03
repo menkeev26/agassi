@@ -3500,10 +3500,6 @@ body.agassi-wholesale-scroll-locked {
   display: none;
 }
 
-.agassi-wholesale-faq__entry {
-  width: 100%;
-}
-
 .agassi-wholesale-faq__item {
   position: relative;
   width: 100%;
@@ -3523,6 +3519,8 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-faq__question-text {
+  margin: 0;
+  padding: 0;
   color: var(--agassi-wholesale-ink);
   font-family: var(--t-text-font);
   font-size: var(--agassi-wholesale-font-h4);
@@ -3549,7 +3547,7 @@ body.agassi-wholesale-scroll-locked {
   object-fit: contain;
 }
 
-.agassi-wholesale-faq__entry.is-open .agassi-wholesale-faq__icon {
+.agassi-wholesale-faq__item.is-open .agassi-wholesale-faq__icon {
   transform: rotate(90deg);
 }
 
@@ -3579,7 +3577,7 @@ body.agassi-wholesale-scroll-locked {
   transition: grid-template-rows var(--agassi-wholesale-duration) var(--agassi-wholesale-ease), visibility 0ms linear var(--agassi-wholesale-duration);
 }
 
-.agassi-wholesale-faq__entry.is-open .agassi-wholesale-faq__answer {
+.agassi-wholesale-faq__item.is-open .agassi-wholesale-faq__answer {
   grid-template-rows: 1fr;
   visibility: visible;
   transition: grid-template-rows var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
