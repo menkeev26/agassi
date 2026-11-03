@@ -1271,6 +1271,13 @@ body.agassi-wholesale-scroll-locked {
   transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
 }
 
+.agassi-wholesale-statement__flower--6 {
+  top: 80%;
+  right: 16%;
+  width: 40px;
+  transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
+}
+
 
 
 
@@ -1329,6 +1336,13 @@ body.agassi-wholesale-scroll-locked {
     transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
   }
 
+  .agassi-wholesale-statement__flower--6 {
+    top: 80%;
+    right: 16%;
+    width: 36px;
+    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
+  }
+
 }
 
 @media (max-width: 1200px) {
@@ -1385,6 +1399,13 @@ body.agassi-wholesale-scroll-locked {
     transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
   }
 
+  .agassi-wholesale-statement__flower--6 {
+    top: 80%;
+    right: 15%;
+    width: 32px;
+    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
+  }
+
 }
 
 @media (max-width: 1100px) {
@@ -1421,6 +1442,13 @@ body.agassi-wholesale-scroll-locked {
     left: 2%;
     width: 46px;
     transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
+  }
+
+  .agassi-wholesale-statement__flower--6 {
+    top: 87%;
+    right: 14%;
+    width: 30px;
+    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
   }
 }
 
@@ -1478,6 +1506,13 @@ body.agassi-wholesale-scroll-locked {
     transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
   }
 
+  .agassi-wholesale-statement__flower--6 {
+    top: 89%;
+    right: 45%;
+    width: 26px;
+    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
+  }
+
 }
 
 @media (max-width: 640px) {
@@ -1531,6 +1566,13 @@ body.agassi-wholesale-scroll-locked {
     transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
   }
 
+  .agassi-wholesale-statement__flower--6 {
+    top: 89%;
+    right: 45%;
+    width: 22px;
+    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
+  }
+
 }
 
 @media (max-width: 480px) {
@@ -1579,6 +1621,13 @@ body.agassi-wholesale-scroll-locked {
     transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
   }
 
+  .agassi-wholesale-statement__flower--6 {
+    top: 89%;
+    right: 45%;
+    width: 20px;
+    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
+  }
+
 }
 
 @media (max-width: 360px) {
@@ -1621,6 +1670,13 @@ body.agassi-wholesale-scroll-locked {
     right: 20%;
     width: 24px;
     transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
+  }
+
+  .agassi-wholesale-statement__flower--6 {
+    top: 89%;
+    right: 45%;
+    width: 18px;
+    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
   }
 
 }
