@@ -160,6 +160,15 @@ body.agassi-wholesale-scroll-locked {
   gap: 16px;
 }
 
+.agassi-wholesale-header__brand,
+.agassi-wholesale-header__cta-wrap,
+.agassi-wholesale-header__burger-wrap,
+.agassi-wholesale-header__mobile-brand,
+.agassi-wholesale-header__mobile-close-wrap,
+.agassi-wholesale-header__mobile-cta-wrap {
+  display: contents;
+}
+
 .agassi-wholesale-header__logo,
 #allrecords .agassi-wholesale-header__logo,
 .t-records .agassi-wholesale-header__logo {
