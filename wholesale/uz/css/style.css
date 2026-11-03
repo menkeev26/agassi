@@ -2297,16 +2297,18 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-support__surface {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  --agassi-wholesale-support-card-height: 304px;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   gap: var(--agassi-wholesale-gap);
 }
 
 .agassi-wholesale-support__visual {
   position: relative;
+  order: 2;
   min-width: 0;
-  min-height: 720px;
+  height: var(--agassi-wholesale-support-card-height);
   overflow: hidden;
   border-radius: var(--agassi-wholesale-radius);
 }
@@ -2322,72 +2324,122 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-support__content {
+  order: 1;
   min-width: 0;
 }
 
 .agassi-wholesale-support__items {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: 1fr;
-  height: 100%;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: var(--agassi-wholesale-support-card-height);
   gap: var(--agassi-wholesale-gap);
 }
 
 .agassi-wholesale-support__item {
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 24px;
   min-width: 0;
-  padding: 32px;
+  padding: 28px;
+  overflow: hidden;
   border-radius: var(--agassi-wholesale-radius);
   background: var(--agassi-wholesale-white);
   color: var(--agassi-wholesale-ink);
-}
-
-.agassi-wholesale-support__number {
-  display: block;
-  margin: 0 0 16px;
-  padding: 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-small);
-  letter-spacing: 0;
-  color: var(--agassi-wholesale-crimson);
+  transition:
+    background-color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
+    color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
+    opacity 600ms var(--agassi-wholesale-ease),
+    transform 600ms var(--agassi-wholesale-ease);
 }
 
 .agassi-wholesale-support__item-title {
+  display: contents;
   margin: 0;
   padding: 0;
+  color: inherit;
   font-family: var(--t-text-font);
   font-weight: 500;
   letter-spacing: 0;
-  color: var(--agassi-wholesale-ink);
   font-size: var(--agassi-wholesale-font-h4);
   line-height: var(--agassi-wholesale-line-h4);
 }
 
+.agassi-wholesale-support__number {
+  display: block;
+  margin: 0 0 auto;
+  padding: 0 0 28px;
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-wholesale-font-small);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: var(--agassi-wholesale-crimson);
+  transition: color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
+}
+
 .agassi-wholesale-support__item-text {
-  max-width: 520px;
-  margin: 0;
+  max-width: 330px;
+  margin: 8px 0 0;
   padding: 0;
   font-family: var(--t-text-font);
   font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
-  line-height: var(--agassi-wholesale-line-body);
+  line-height: 1.5;
   letter-spacing: 0;
   color: var(--agassi-wholesale-muted);
+  transition: color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
+}
+
+/* Динамика: карточки и фото появляются при прокрутке, карточки меняют цвет при наведении */
+.agassi-wholesale-support.is-motion .agassi-wholesale-support__item,
+.agassi-wholesale-support.is-motion .agassi-wholesale-support__visual {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    background-color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
+    color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
+    opacity 700ms var(--agassi-wholesale-ease),
+    transform 700ms var(--agassi-wholesale-ease);
+}
+
+.agassi-wholesale-support.is-motion.is-visible .agassi-wholesale-support__item,
+.agassi-wholesale-support.is-motion.is-visible .agassi-wholesale-support__visual {
+  opacity: 1;
+  transform: none;
+}
+
+.agassi-wholesale-support.is-motion.is-visible .agassi-wholesale-support__item:nth-child(2) {
+  transition-delay: 0ms, 0ms, 120ms, 120ms;
+}
+
+.agassi-wholesale-support.is-motion.is-visible .agassi-wholesale-support__item:nth-child(3) {
+  transition-delay: 0ms, 0ms, 240ms, 240ms;
+}
+
+.agassi-wholesale-support.is-motion.is-visible .agassi-wholesale-support__item:nth-child(4) {
+  transition-delay: 0ms, 0ms, 360ms, 360ms;
+}
+
+.agassi-wholesale-support.is-motion.is-visible .agassi-wholesale-support__visual {
+  transition-delay: 0ms, 0ms, 480ms, 480ms;
+}
+
+@media (hover: hover) {
+  .agassi-wholesale-support__item:hover {
+    background: var(--agassi-wholesale-crimson);
+    color: var(--agassi-wholesale-white);
+  }
+
+  .agassi-wholesale-support__item:hover .agassi-wholesale-support__number,
+  .agassi-wholesale-support__item:hover .agassi-wholesale-support__item-text {
+    color: var(--agassi-wholesale-on-crimson);
+  }
 }
 
 @media (max-width: 1440px) {
   .agassi-wholesale-support__header {
     max-width: 900px;
     margin-bottom: 40px;
-  }
-
-  .agassi-wholesale-support__visual {
-    min-height: 600px;
   }
 }
 
@@ -2401,6 +2453,10 @@ body.agassi-wholesale-scroll-locked {
     margin-top: 16px;
   }
 
+  .agassi-wholesale-support__surface {
+    --agassi-wholesale-support-card-height: 280px;
+  }
+
   .agassi-wholesale-support__item {
     padding: 24px;
   }
@@ -2412,17 +2468,13 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 32px;
   }
 
-  .agassi-wholesale-support__surface {
-    grid-template-columns: 1fr;
+  .agassi-wholesale-support__items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .agassi-wholesale-support__visual {
-    min-height: 0;
-    aspect-ratio: 16 / 10;
-  }
-
-  .agassi-wholesale-support__item {
-    padding: 32px;
+    height: auto;
+    aspect-ratio: 16 / 9;
   }
 }
 
@@ -2432,23 +2484,25 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 24px;
   }
 
-  .agassi-wholesale-support__visual {
-    aspect-ratio: 4 / 3;
+  .agassi-wholesale-support__surface {
+    --agassi-wholesale-support-card-height: 240px;
   }
 
   .agassi-wholesale-support__items {
     grid-template-columns: 1fr;
-    grid-auto-rows: auto;
   }
 
-  .agassi-wholesale-support__item {
-    padding: 24px;
+  .agassi-wholesale-support__visual {
+    aspect-ratio: 4 / 3;
   }
 }
 
-@media (max-width: 480px) {
-  .agassi-wholesale-support__visual {
-    aspect-ratio: 1 / 1;
+@media (prefers-reduced-motion: reduce) {
+  .agassi-wholesale-support.is-motion .agassi-wholesale-support__item,
+  .agassi-wholesale-support.is-motion .agassi-wholesale-support__visual {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
