@@ -4132,6 +4132,32 @@ body.agassi-wholesale-scroll-locked {
   transform: scaleX(1);
 }
 
+.agassi-wholesale-footer__social {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.agassi-wholesale-footer__social-link,
+#allrecords .agassi-wholesale-footer__social-link,
+.t-records .agassi-wholesale-footer__social-link {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  transition: opacity var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
+}
+
+.agassi-wholesale-footer__social-link:hover {
+  opacity: .72;
+}
+
+.agassi-wholesale-footer__social-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .agassi-wholesale-footer__bottom {
   display: flex;
   flex-wrap: wrap;
@@ -4205,6 +4231,10 @@ body.agassi-wholesale-scroll-locked {
 
   .agassi-wholesale-footer__links {
     gap: 8px;
+  }
+
+  .agassi-wholesale-footer__social {
+    margin-top: 16px;
   }
 
   .agassi-wholesale-footer__bottom {
