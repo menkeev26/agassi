@@ -335,7 +335,7 @@ body.agassi-wholesale-scroll-locked {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(20px, 1.7vw, 32px);
+  gap: clamp(20px, 2vw, 32px);
   min-width: 0;
   height: 100%;
 }
@@ -359,7 +359,7 @@ body.agassi-wholesale-scroll-locked {
   font-family: var(--t-text-font);
   font-size: var(--agassi-wholesale-font-small);
   font-weight: 500;
-  line-height: 1.5;
+  line-height: var(--agassi-wholesale-line-small);
   letter-spacing: 0;
 }
 
@@ -520,7 +520,7 @@ body.agassi-wholesale-scroll-locked {
 #allrecords .agassi-wholesale-header__cta,
 .t-records .agassi-wholesale-header__cta {
   min-height: 40px;
-  padding: 0 16px;
+  padding: 0 20px;
 }
 
 .agassi-wholesale-header__burger-wrap {
@@ -795,9 +795,6 @@ body.agassi-wholesale-scroll-locked {
     gap: 16px;
   }
 
-  .agassi-wholesale-header__nav {
-    gap: 20px;
-  }
 }
 
 @media (max-width: 1200px) {
@@ -2846,13 +2843,13 @@ body.agassi-wholesale-scroll-locked {
 
 .agassi-wholesale-partners__viewport {
   width: 100%;
-  overflow: hidden;
-  cursor: grab;
-  touch-action: pan-y;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
 }
 
-.agassi-wholesale-partners__viewport.is-dragging {
-  cursor: grabbing;
+.agassi-wholesale-partners__viewport::-webkit-scrollbar {
+  display: none;
 }
 
 .agassi-wholesale-partners__track {
@@ -2861,8 +2858,6 @@ body.agassi-wholesale-scroll-locked {
   gap: var(--agassi-wholesale-gap);
   width: max-content;
   min-width: 100%;
-  transform: translate3d(0,0,0);
-  will-change: transform;
 }
 
 .agassi-wholesale-partners__card,
@@ -2876,6 +2871,8 @@ body.agassi-wholesale-scroll-locked {
       - (var(--agassi-wholesale-columns) - 1) * var(--agassi-wholesale-gap)
     ) / var(--agassi-wholesale-columns)
   );
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   align-items: center;
   justify-content: center;
   min-width: 0;
@@ -3029,6 +3026,7 @@ body.agassi-wholesale-scroll-locked {
 
   .agassi-wholesale-partners__viewport {
     margin-right: calc(-1 * var(--agassi-wholesale-frame-gap));
+    padding-right: var(--agassi-wholesale-frame-gap);
     width: auto;
   }
 
