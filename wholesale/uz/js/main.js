@@ -240,259 +240,84 @@
       if (section.dataset.agassiWholesalePartnersReady) return;
       section.dataset.agassiWholesalePartnersReady = 'true';
 
-      var viewport = section.querySelector('.agassi-wholesale-partners__viewport');
-      var track = section.querySelector('.agassi-wholesale-partners__track');
+      var track = section.querySelector('.agassi-wholesale-partners__viewport');
+      var inner = section.querySelector('.agassi-wholesale-partners__track');
       var prev = section.querySelector('.agassi-wholesale-partners__arrow--prev');
       var next = section.querySelector('.agassi-wholesale-partners__arrow--next');
 
-      if (!viewport || !track || !prev || !next) return;
+      if (!track || !inner || !inner.firstElementChild || !prev || !next) return;
 
-      var originalCards = Array.prototype.slice.call(track.children);
-
-      if (!originalCards.length) return;
-
-      originalCards.forEach(function (card) {
-        var clone = card.cloneNode(true);
-        clone.setAttribute('aria-hidden', 'true');
-        clone.setAttribute('tabindex', '-1');
-        track.appendChild(clone);
-      });
-
-      var position = 0;
-      var autoplay = true;
-      var dragging = false;
-      var pointerId = null;
-      var startX = 0;
-      var startPosition = 0;
-      var lastTime = 0;
-      var manualAnimation = null;
-      var dragDistance = 0;
-
-      var reducedMotion = window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
-      ).matches;
-
-      function gap() {
-        return parseFloat(getComputedStyle(track).gap) || 0;
-      }
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      var autoplayDelay = 4000;
+      var index = 0;
+      var timer = 0;
+      var autoplay = 0;
 
       function step() {
-        return originalCards[0].getBoundingClientRect().width + gap();
+        var gap = parseFloat(getComputedStyle(inner).columnGap) || 0;
+        return inner.firstElementChild.getBoundingClientRect().width + gap;
       }
 
-      function loopWidth() {
-        return step() * originalCards.length;
+      function maxScroll() {
+        return Math.max(0, track.scrollWidth - track.clientWidth);
       }
 
-      function normalize() {
-        var width = loopWidth();
-
-        if (!width) return;
-
-        while (position >= width) {
-          position -= width;
-        }
-
-        while (position < 0) {
-          position += width;
-        }
+      function lastIndex() {
+        return Math.ceil((maxScroll() - 1) / step());
       }
 
-      function render() {
-        normalize();
+      function updateButtons() {
+        prev.disabled = track.scrollLeft <= 1;
+        next.disabled = track.scrollLeft >= maxScroll() - 1;
+      }
 
-        track.style.transform =
-          'translate3d(' + (-position) + 'px,0,0)';
+      function goTo(target) {
+        index = Math.max(0, Math.min(lastIndex(), target));
+        track.scrollTo({
+          left: Math.min(index * step(), maxScroll()),
+          behavior: reducedMotion.matches ? 'auto' : 'smooth'
+        });
       }
 
       function stopAutoplay() {
-        autoplay = false;
+        window.clearInterval(autoplay);
+        autoplay = 0;
       }
 
-      function cancelManualAnimation() {
-        if (manualAnimation !== null) {
-          cancelAnimationFrame(manualAnimation);
-          manualAnimation = null;
-        }
-      }
+      function startAutoplay() {
+        if (reducedMotion.matches || window.self !== window.top) return;
 
-      function move(direction) {
-        stopAutoplay();
-        cancelManualAnimation();
-
-        var width = loopWidth();
-
-        if (!width) return;
-
-        var from = position;
-        var to = position + step() * direction;
-
-        if (direction < 0 && to < 0) {
-          position += width;
-          from = position;
-          to = position + step() * direction;
-        }
-
-        var started = performance.now();
-        var duration = 520;
-
-        function frame(now) {
-          var progress = Math.min(
-            (now - started) / duration,
-            1
-          );
-
-          var eased =
-            1 - Math.pow(1 - progress, 4);
-
-          position =
-            from +
-            (to - from) * eased;
-
-          render();
-
-          if (progress < 1) {
-            manualAnimation =
-              requestAnimationFrame(frame);
-          } else {
-            manualAnimation = null;
-            normalize();
-            render();
-          }
-        }
-
-        manualAnimation =
-          requestAnimationFrame(frame);
+        autoplay = window.setInterval(function () {
+          if (document.hidden) return;
+          goTo(index >= lastIndex() ? 0 : index + 1);
+        }, autoplayDelay);
       }
 
       prev.addEventListener('click', function () {
-        move(-1);
+        stopAutoplay();
+        goTo(index - 1);
       });
 
       next.addEventListener('click', function () {
-        move(1);
-      });
-
-      viewport.addEventListener('pointerdown', function (event) {
-        if (
-          event.pointerType === 'mouse' &&
-          event.button !== 0
-        ) {
-          return;
-        }
-
         stopAutoplay();
-        cancelManualAnimation();
-
-        dragging = true;
-        pointerId = event.pointerId;
-        startX = event.clientX;
-        startPosition = position;
-        dragDistance = 0;
-
-        viewport.classList.add('is-dragging');
-
-        try {
-          viewport.setPointerCapture(pointerId);
-        } catch (error) {}
+        goTo(index + 1);
       });
 
-      viewport.addEventListener('pointermove', function (event) {
-        if (
-          !dragging ||
-          event.pointerId !== pointerId
-        ) {
-          return;
-        }
+      track.addEventListener('scroll', function () {
+        window.clearTimeout(timer);
+        timer = window.setTimeout(function () {
+          index = Math.round(track.scrollLeft / step());
+          updateButtons();
+        }, 100);
+      }, { passive: true });
 
-        dragDistance = Math.abs(event.clientX - startX);
+      window.addEventListener('resize', function () {
+        index = Math.round(track.scrollLeft / step());
+        updateButtons();
+      }, { passive: true });
 
-        position =
-          startPosition -
-          (event.clientX - startX);
-
-        render();
-      });
-
-      function endDrag(event) {
-        if (!dragging) return;
-
-        if (
-          event &&
-          pointerId !== null &&
-          event.pointerId !== pointerId
-        ) {
-          return;
-        }
-
-        dragging = false;
-
-        viewport.classList.remove('is-dragging');
-
-        if (pointerId !== null) {
-          try {
-            viewport.releasePointerCapture(pointerId);
-          } catch (error) {}
-        }
-
-        pointerId = null;
-
-        normalize();
-        render();
-      }
-
-      viewport.addEventListener('pointerup', endDrag);
-      viewport.addEventListener('pointercancel', endDrag);
-
-      track.addEventListener('click', function (event) {
-        if (dragDistance > 6) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-
-        dragDistance = 0;
-      });
-
-      viewport.addEventListener('dragstart', function (event) {
-        event.preventDefault();
-      });
-
-      function autoFrame(now) {
-        if (!lastTime) {
-          lastTime = now;
-        }
-
-        var delta = Math.min(
-          now - lastTime,
-          50
-        );
-
-        lastTime = now;
-
-        if (
-          autoplay &&
-          !dragging &&
-          manualAnimation === null &&
-          !reducedMotion
-        ) {
-          position += 28 * delta / 1000;
-          render();
-        }
-
-        requestAnimationFrame(autoFrame);
-      }
-
-      window.addEventListener(
-        'resize',
-        function () {
-          normalize();
-          render();
-        },
-        { passive: true }
-      );
-
-      render();
-      requestAnimationFrame(autoFrame);
+      updateButtons();
+      startAutoplay();
     });
   })();
 
