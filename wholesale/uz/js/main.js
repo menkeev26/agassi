@@ -645,6 +645,20 @@
 
       faq.dataset.agassiWholesaleFaqReady = 'true';
 
+      var iconSource = faq.querySelector('.agassi-wholesale-faq__icon-source .agassi-wholesale-faq__icon-image');
+
+      if (iconSource) {
+        faq.querySelectorAll('.agassi-wholesale-faq__icon').forEach(function (icon) {
+          if (icon.querySelector('img')) return;
+
+          var image = iconSource.cloneNode(false);
+
+          image.removeAttribute('aria-label');
+          image.setAttribute('alt', '');
+          icon.appendChild(image);
+        });
+      }
+
       var entries = faq.querySelectorAll('.agassi-wholesale-faq__entry');
       var items = faq.querySelectorAll('.agassi-wholesale-faq__item');
       var list = faq.querySelector('.agassi-wholesale-faq__list');
