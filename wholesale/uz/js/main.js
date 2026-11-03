@@ -41,12 +41,12 @@
 
     slot.dataset.agassiWholesaleReady = 'true';
 
-    const header = slot.querySelector('.agassi-wholesale-header');
+    const headers = slot.querySelectorAll('.agassi-wholesale-header');
     const burger = slot.querySelector('.agassi-wholesale-header__burger');
     const menu = slot.querySelector('.agassi-wholesale-header__mobile-menu');
     const closeButton = slot.querySelector('.agassi-wholesale-header__mobile-close');
     const mobileLogo = slot.querySelector('.agassi-wholesale-header__mobile-logo');
-    const desktopLogo = slot.querySelector('.agassi-wholesale-header__logo');
+    const desktopLogos = slot.querySelectorAll('.agassi-wholesale-header__logo');
     const mobileLinks = slot.querySelectorAll('.agassi-wholesale-header__mobile-nav a[href^="#"]');
     const themeColor = document.querySelector('meta[name="theme-color"]');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -114,9 +114,11 @@
       scrollToTop();
     });
 
-    desktopLogo?.addEventListener('click', function (event) {
-      event.preventDefault();
-      scrollToTop();
+    desktopLogos.forEach(function (logo) {
+      logo.addEventListener('click', function (event) {
+        event.preventDefault();
+        scrollToTop();
+      });
     });
 
     mobileLinks.forEach(function (link) {
@@ -132,7 +134,9 @@
     });
 
     function updateHeaderState() {
-      header?.classList.toggle('is-scrolled', window.scrollY > 12);
+      headers.forEach(function (header) {
+        header.classList.toggle('is-scrolled', window.scrollY > 12);
+      });
     }
 
     updateHeaderState();
