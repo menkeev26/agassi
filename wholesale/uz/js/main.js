@@ -236,6 +236,36 @@
 
 
   (function () {
+    document.querySelectorAll('.agassi-wholesale-support').forEach(function (section) {
+      if (section.dataset.agassiWholesaleSupportReady) return;
+      section.dataset.agassiWholesaleSupportReady = 'true';
+
+      if (
+        window.self !== window.top ||
+        !('IntersectionObserver' in window) ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ) {
+        return;
+      }
+
+      section.classList.add('is-motion');
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+
+          section.classList.add('is-visible');
+          observer.disconnect();
+        });
+      }, { threshold: 0.2 });
+
+      observer.observe(section.querySelector('.agassi-wholesale-support__surface') || section);
+    });
+  })();
+
+
+
+  (function () {
     document.querySelectorAll('.agassi-wholesale-partners').forEach(function (section) {
       if (section.dataset.agassiWholesalePartnersReady) return;
       section.dataset.agassiWholesalePartnersReady = 'true';
