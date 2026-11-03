@@ -2659,7 +2659,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-products__count {
-  color: var(--agassi-wholesale-on-crimson);
+  color: var(--agassi-wholesale-white);
   font-family: var(--t-text-font);
   font-size: var(--agassi-wholesale-font-small);
   font-weight: 400;
@@ -2698,7 +2698,7 @@ body.agassi-wholesale-scroll-locked {
   max-width: 520px;
   margin: 8px 0 0;
   padding: 0;
-  color: var(--agassi-wholesale-on-crimson);
+  color: var(--agassi-wholesale-white);
   font-family: var(--t-text-font);
   font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
