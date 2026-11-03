@@ -17,32 +17,80 @@
 
   --agassi-wholesale-frame-max: 1620px;
   --agassi-wholesale-frame-gap: 96px;
-  --agassi-wholesale-section-space: 80px;
+  --agassi-wholesale-section-space: 96px;
+  --agassi-wholesale-columns: 12;
   --agassi-wholesale-gap: 16px;
   --agassi-wholesale-radius: 28px;
+  --agassi-wholesale-radius-small: 16px;
 
-  --agassi-wholesale-duration: 450ms;
-  --agassi-wholesale-ease: cubic-bezier(.22, 1, .36, 1);
+  --agassi-wholesale-font-body: 16px;
+  --agassi-wholesale-line-body: 24px;
+  --agassi-wholesale-font-small: 14px;
+  --agassi-wholesale-line-small: 20px;
+  --agassi-wholesale-font-h2: 56px;
+  --agassi-wholesale-line-h2: 60px;
+  --agassi-wholesale-font-h3: 36px;
+  --agassi-wholesale-line-h3: 48px;
+  --agassi-wholesale-font-h4: 20px;
+  --agassi-wholesale-line-h4: 28px;
+  --agassi-wholesale-font-display: 64px;
+  --agassi-wholesale-line-display: 68px;
+
+  --agassi-wholesale-duration: 400ms;
+  --agassi-wholesale-ease: ease-out;
 }
 
 @media (max-width: 1440px) {
-  :root { --agassi-wholesale-frame-gap: 80px; --agassi-wholesale-section-space: 72px; }
+  :root {
+    --agassi-wholesale-frame-gap: 64px;
+    --agassi-wholesale-section-space: 80px;
+  }
 }
 
 @media (max-width: 1200px) {
-  :root { --agassi-wholesale-frame-gap: 32px; --agassi-wholesale-section-space: 64px; --agassi-wholesale-gap: 14px; }
+  :root {
+    --agassi-wholesale-frame-gap: 40px;
+    --agassi-wholesale-section-space: 72px;
+    --agassi-wholesale-font-h2: 48px;
+    --agassi-wholesale-line-h2: 56px;
+    --agassi-wholesale-font-h3: 36px;
+    --agassi-wholesale-line-h3: 44px;
+    --agassi-wholesale-font-display: 56px;
+    --agassi-wholesale-line-display: 64px;
+  }
 }
 
 @media (max-width: 960px) {
-  :root { --agassi-wholesale-frame-gap: 24px; --agassi-wholesale-section-space: 56px; --agassi-wholesale-radius: 24px; }
+  :root {
+    --agassi-wholesale-columns: 8;
+    --agassi-wholesale-frame-gap: 24px;
+    --agassi-wholesale-section-space: 64px;
+    --agassi-wholesale-radius: 24px;
+    --agassi-wholesale-font-h2: 40px;
+    --agassi-wholesale-line-h2: 48px;
+    --agassi-wholesale-font-h3: 32px;
+    --agassi-wholesale-line-h3: 40px;
+    --agassi-wholesale-font-display: 48px;
+    --agassi-wholesale-line-display: 56px;
+  }
 }
 
 @media (max-width: 640px) {
-  :root { --agassi-wholesale-frame-gap: 16px; --agassi-wholesale-section-space: 40px; --agassi-wholesale-radius: 20px; }
-}
-
-@media (max-width: 480px) {
-  :root { --agassi-wholesale-frame-gap: 12px; }
+  :root {
+    --agassi-wholesale-columns: 4;
+    --agassi-wholesale-gap: 12px;
+    --agassi-wholesale-frame-gap: 16px;
+    --agassi-wholesale-section-space: 48px;
+    --agassi-wholesale-radius: 20px;
+    --agassi-wholesale-font-h2: 32px;
+    --agassi-wholesale-line-h2: 40px;
+    --agassi-wholesale-font-h3: 28px;
+    --agassi-wholesale-line-h3: 36px;
+    --agassi-wholesale-font-h4: 18px;
+    --agassi-wholesale-line-h4: 26px;
+    --agassi-wholesale-font-display: 40px;
+    --agassi-wholesale-line-display: 48px;
+  }
 }
 
 /* Выделение текста в цветах сайта */
@@ -74,6 +122,100 @@ html {
 [class*="agassi-wholesale-"] {
   margin: 0;
   padding: 0;
+}
+
+/* Общая кнопка (как agassi-group-button) */
+.agassi-wholesale-button,
+#allrecords .agassi-wholesale-button,
+.t-records .agassi-wholesale-button {
+  --agassi-wholesale-link-color: var(--agassi-wholesale-white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  margin: 0;
+  padding: 0 32px;
+  border: 1px solid var(--agassi-wholesale-crimson);
+  border-radius: 1000px;
+  background: var(--agassi-wholesale-crimson);
+  color: var(--agassi-wholesale-link-color);
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-wholesale-font-small);
+  font-weight: 500;
+  line-height: var(--agassi-wholesale-line-small);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
+    background-color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
+    border-color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
+}
+
+.agassi-wholesale-button:hover,
+#allrecords .agassi-wholesale-button:hover,
+.t-records .agassi-wholesale-button:hover {
+  border-color: var(--agassi-wholesale-crimson-dark);
+  background: var(--agassi-wholesale-crimson-dark);
+  color: var(--agassi-wholesale-link-color);
+}
+
+.agassi-wholesale-button--light,
+#allrecords .agassi-wholesale-button--light,
+.t-records .agassi-wholesale-button--light {
+  --agassi-wholesale-link-color: var(--agassi-wholesale-crimson);
+  border-color: var(--agassi-wholesale-white);
+  background: var(--agassi-wholesale-white);
+}
+
+.agassi-wholesale-button--light:hover,
+#allrecords .agassi-wholesale-button--light:hover,
+.t-records .agassi-wholesale-button--light:hover {
+  --agassi-wholesale-link-color: var(--agassi-wholesale-white);
+  border-color: var(--agassi-wholesale-crimson-dark);
+  background: var(--agassi-wholesale-crimson-dark);
+}
+
+.agassi-wholesale-button:focus-visible {
+  outline: 2px solid var(--agassi-wholesale-gold);
+  outline-offset: 4px;
+}
+
+/* Надзаголовок (как agassi-group-heading__eyebrow) */
+.agassi-wholesale-hero__eyebrow,
+.agassi-wholesale-statement__eyebrow,
+.agassi-wholesale-numbers__eyebrow,
+.agassi-wholesale-why__eyebrow,
+.agassi-wholesale-support__eyebrow,
+.agassi-wholesale-products__eyebrow,
+.agassi-wholesale-partners__eyebrow,
+.agassi-wholesale-stories__eyebrow,
+.agassi-wholesale-faq__eyebrow,
+.agassi-wholesale-contact__eyebrow {
+  display: inline-block;
+  margin: 0 0 16px;
+  padding: 5px 16px;
+  border: 1px solid color-mix(in srgb, var(--agassi-wholesale-crimson) 32%, transparent);
+  border-radius: 1000px;
+  color: var(--agassi-wholesale-crimson);
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-wholesale-font-small);
+  font-weight: 400;
+  line-height: var(--agassi-wholesale-line-small);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.agassi-wholesale-hero__eyebrow,
+.agassi-wholesale-numbers__eyebrow,
+.agassi-wholesale-support__eyebrow,
+.agassi-wholesale-contact__eyebrow {
+  border-color: color-mix(in srgb, var(--agassi-wholesale-gold) 48%, transparent);
+  background: var(--agassi-wholesale-gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: var(--agassi-wholesale-gold);
+  -webkit-text-fill-color: transparent;
 }
 
 /* Шапка */
@@ -120,7 +262,7 @@ body.agassi-wholesale-scroll-locked {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -214,7 +356,7 @@ body.agassi-wholesale-scroll-locked {
     opacity var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
     color var(--agassi-wholesale-duration) var(--agassi-wholesale-duration);
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0;
@@ -293,7 +435,7 @@ body.agassi-wholesale-scroll-locked {
   text-decoration: none !important;
   cursor: pointer;
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0;
@@ -356,7 +498,7 @@ body.agassi-wholesale-scroll-locked {
   color: #1E1E1E;
   text-decoration: none;
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0;
@@ -376,34 +518,8 @@ body.agassi-wholesale-scroll-locked {
 .agassi-wholesale-header__cta,
 #allrecords .agassi-wholesale-header__cta,
 .t-records .agassi-wholesale-header__cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   min-height: 40px;
-  margin: 0;
   padding: 0 16px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--agassi-wholesale-crimson);
-  color: var(--agassi-wholesale-white);
-  text-decoration: none;
-  white-space: nowrap;
-  transition:
-    background var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
-    color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
-  font-family: var(--t-text-font);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-header__cta:hover,
-#allrecords .agassi-wholesale-header__cta:hover,
-.t-records .agassi-wholesale-header__cta:hover {
-  border: 0;
-  background: var(--agassi-wholesale-crimson-dark);
-  color: var(--agassi-wholesale-white);
 }
 
 .agassi-wholesale-header__burger-wrap {
@@ -607,7 +723,7 @@ body.agassi-wholesale-scroll-locked {
     background var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
     color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0;
@@ -641,36 +757,7 @@ body.agassi-wholesale-scroll-locked {
 .agassi-wholesale-header__mobile-cta,
 #allrecords .agassi-wholesale-header__mobile-cta,
 .t-records .agassi-wholesale-header__mobile-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-  min-height: 60px;
-  margin: 0;
-  padding: 0 24px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--agassi-wholesale-gold-gradient);
-  color: var(--agassi-wholesale-crimson);
-  text-align: center;
-  text-decoration: none;
-  white-space: nowrap;
-  transition:
-    background var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
-    color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
-  font-family: var(--t-text-font);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-header__mobile-cta:hover,
-#allrecords .agassi-wholesale-header__mobile-cta:hover,
-.t-records .agassi-wholesale-header__mobile-cta:hover {
-  border: 0;
-  background: var(--agassi-wholesale-gold-gradient);
-  color: var(--agassi-wholesale-crimson);
 }
 
 .agassi-wholesale-header a:focus-visible,
@@ -878,15 +965,6 @@ body.agassi-wholesale-scroll-locked {
     color: var(--agassi-wholesale-crimson);
   }
 
-  .agassi-wholesale-header__mobile-cta,
-  #allrecords .agassi-wholesale-header__mobile-cta,
-  .t-records .agassi-wholesale-header__mobile-cta {
-    min-height: 48px;
-    padding: 0 24px;
-    font-size: 16px;
-    background: var(--agassi-wholesale-gold-gradient);
-    color: var(--agassi-wholesale-crimson);
-  }
 }
 
 @media (max-width: 480px) {
@@ -971,7 +1049,7 @@ body.agassi-wholesale-scroll-locked {
   background: var(--agassi-wholesale-crimson);
   color: var(--agassi-wholesale-white);
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -995,28 +1073,17 @@ body.agassi-wholesale-scroll-locked {
   text-align: center;
 }
 
-.agassi-wholesale-hero__eyebrow {
-  margin: 0 0 16px;
-  background: var(--agassi-wholesale-gold-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: var(--agassi-wholesale-gold);
-  font-size: 14px;
-  line-height: 1.5;
-  text-transform: uppercase;
-}
 
 .agassi-wholesale-hero__title {
   max-width: 540px;
   margin: 0;
   color: var(--agassi-wholesale-white);
   font-family: var(--t-headline-font);
-  font-size: 62px;
   font-weight: 500;
-  line-height: 1.05;
   text-transform: uppercase;
   text-wrap: balance;
+  font-size: var(--agassi-wholesale-font-display);
+  line-height: var(--agassi-wholesale-line-display);
 }
 
 .agassi-wholesale-hero__lead {
@@ -1028,34 +1095,7 @@ body.agassi-wholesale-scroll-locked {
 .agassi-wholesale-hero__button,
 #allrecords .agassi-wholesale-hero__button,
 .t-records .agassi-wholesale-hero__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 60px;
-  margin: 32px 0 0;
-  padding: 0 32px;
-  border: 1px solid var(--agassi-wholesale-gold);
-  border-radius: 999px;
-  background: var(--agassi-wholesale-gold-gradient);
-  color: var(--agassi-wholesale-crimson);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.5;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: filter var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
-}
-
-.agassi-wholesale-hero__button:hover,
-#allrecords .agassi-wholesale-hero__button:hover,
-.t-records .agassi-wholesale-hero__button:hover {
-  color: var(--agassi-wholesale-crimson);
-  filter: brightness(.88);
-}
-
-.agassi-wholesale-hero__button:focus-visible {
-  outline: 2px solid var(--agassi-wholesale-white);
-  outline-offset: 4px;
+  margin-top: 32px;
 }
 
 .agassi-wholesale-hero__visual {
@@ -1083,12 +1123,8 @@ body.agassi-wholesale-scroll-locked {
 @media (max-width: 1200px) {
   .agassi-wholesale-hero { min-height: max(560px, calc(var(--agassi-wholesale-viewport, 100svh) - 68px)); }
   .agassi-wholesale-hero__copy { max-width: 480px; padding: 36px; }
-  .agassi-wholesale-hero__eyebrow { margin-bottom: 12px; }
-  .agassi-wholesale-hero__title { max-width: 450px; font-size: 52px; }
+  .agassi-wholesale-hero__title { max-width: 450px; }
   .agassi-wholesale-hero__lead { max-width: 380px; margin-top: 16px; }
-  .agassi-wholesale-hero__button,
-  #allrecords .agassi-wholesale-hero__button,
-  .t-records .agassi-wholesale-hero__button { margin-top: 28px; }
 }
 
 @media (max-width: 960px) {
@@ -1103,12 +1139,8 @@ body.agassi-wholesale-scroll-locked {
 @media (max-width: 640px) {
   .agassi-wholesale-hero__content { padding: 56px 0 48px; }
   .agassi-wholesale-hero__copy { max-width: none; padding: 0 16px; }
-  .agassi-wholesale-hero__eyebrow { margin-bottom: 8px; }
-  .agassi-wholesale-hero__title { max-width: 470px; font-size: 40px; }
+  .agassi-wholesale-hero__title { max-width: 470px; }
   .agassi-wholesale-hero__lead { max-width: 380px; margin-top: 16px; }
-  .agassi-wholesale-hero__button,
-  #allrecords .agassi-wholesale-hero__button,
-  .t-records .agassi-wholesale-hero__button { min-height: 48px; margin-top: 24px; padding: 0 24px; }
 }
 
 
@@ -1125,7 +1157,7 @@ body.agassi-wholesale-scroll-locked {
   -moz-osx-font-smoothing: grayscale;
   padding: var(--agassi-wholesale-section-space) 0;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -1150,17 +1182,6 @@ body.agassi-wholesale-scroll-locked {
   text-align: center;
 }
 
-.agassi-wholesale-statement__eyebrow {
-  margin: 0 0 16px;
-  padding: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-transform: uppercase;
-  font-family: var(--t-text-font);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
 
 .agassi-wholesale-statement__title {
   position: relative;
@@ -1174,10 +1195,10 @@ body.agassi-wholesale-scroll-locked {
   overflow-wrap: normal;
   word-break: normal;
   font-family: var(--t-headline-font);
-  font-size: 56px;
   font-weight: 500;
-  line-height: 1.1;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-h2);
+  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-statement__text {
@@ -1187,7 +1208,7 @@ body.agassi-wholesale-scroll-locked {
   color: var(--agassi-wholesale-muted);
   text-align: center;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -1292,13 +1313,9 @@ body.agassi-wholesale-scroll-locked {
     max-width: 900px;
   }
 
-  .agassi-wholesale-statement__eyebrow {
-    margin-bottom: 12px;
-  }
 
   .agassi-wholesale-statement__title {
     max-width: 760px;
-    font-size: 44px;
   }
 
   .agassi-wholesale-statement__text {
@@ -1342,9 +1359,6 @@ body.agassi-wholesale-scroll-locked {
     max-width: 760px;
   }
 
-  .agassi-wholesale-statement__eyebrow {
-    margin-bottom: 12px;
-  }
 
   .agassi-wholesale-statement__title {
     max-width: 720px;
@@ -1392,13 +1406,9 @@ body.agassi-wholesale-scroll-locked {
 }
 
 @media (max-width: 640px) {
-.agassi-wholesale-statement__eyebrow {
-    margin-bottom: 8px;
-  }
 
   .agassi-wholesale-statement__title {
     max-width: 520px;
-    font-size: 34px;
   }
 
   .agassi-wholesale-statement__text {
@@ -1537,7 +1547,7 @@ body.agassi-wholesale-scroll-locked {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -1562,21 +1572,6 @@ body.agassi-wholesale-scroll-locked {
   text-align: center;
 }
 
-.agassi-wholesale-numbers__eyebrow {
-  margin: 0 0 16px;
-  padding: 0;
-  color: var(--agassi-wholesale-gold);
-  background: var(--agassi-wholesale-gold-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-align: center;
-  font-family: var(--t-text-font);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
 
 .agassi-wholesale-numbers__title {
   width: 100%;
@@ -1590,10 +1585,10 @@ body.agassi-wholesale-scroll-locked {
   overflow-wrap: normal;
   word-break: normal;
   font-family: var(--t-headline-font);
-  font-size: 56px;
   font-weight: 500;
-  line-height: 1.1;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-h2);
+  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-numbers__grid {
@@ -1632,10 +1627,10 @@ body.agassi-wholesale-scroll-locked {
   -webkit-text-fill-color: transparent;
   white-space: nowrap;
   font-family: var(--t-text-font);
-  font-size: 62px;
   font-weight: 500;
-  line-height: 1.1;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-display);
+  line-height: var(--agassi-wholesale-line-display);
 }
 
 .agassi-wholesale-numbers__label {
@@ -1646,7 +1641,7 @@ body.agassi-wholesale-scroll-locked {
   color: var(--agassi-wholesale-on-crimson);
   text-align: center;
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -1667,9 +1662,6 @@ body.agassi-wholesale-scroll-locked {
     padding: 36px 12px;
   }
 
-  .agassi-wholesale-numbers__value {
-    font-size: 56px;
-  }
 }
 
 @media (max-width: 1200px) {
@@ -1678,13 +1670,9 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 28px;
   }
 
-  .agassi-wholesale-numbers__eyebrow {
-    margin-bottom: 12px;
-  }
 
   .agassi-wholesale-numbers__title {
     max-width: 820px;
-    font-size: 44px;
   }
 
   .agassi-wholesale-numbers__item {
@@ -1692,9 +1680,6 @@ body.agassi-wholesale-scroll-locked {
     padding: 28px 16px;
   }
 
-  .agassi-wholesale-numbers__value {
-    font-size: 48px;
-  }
 
   .agassi-wholesale-numbers__label {
     margin-top: 16px;
@@ -1707,9 +1692,6 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 24px;
   }
 
-  .agassi-wholesale-numbers__eyebrow {
-    margin-bottom: 12px;
-  }
 
   .agassi-wholesale-numbers__title {
     max-width: 720px;
@@ -1736,9 +1718,6 @@ body.agassi-wholesale-scroll-locked {
     border-top: 1px solid var(--agassi-wholesale-line-crimson);
   }
 
-  .agassi-wholesale-numbers__value {
-    font-size: 44px;
-  }
 
   .agassi-wholesale-numbers__label {
     margin-top: 16px;
@@ -1750,13 +1729,9 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 24px;
   }
 
-  .agassi-wholesale-numbers__eyebrow {
-    margin-bottom: 8px;
-  }
 
   .agassi-wholesale-numbers__title {
     max-width: 520px;
-    font-size: 34px;
   }
 
   .agassi-wholesale-numbers__item {
@@ -1764,9 +1739,6 @@ body.agassi-wholesale-scroll-locked {
     padding: 24px 12px;
   }
 
-  .agassi-wholesale-numbers__value {
-    font-size: 40px;
-  }
 
   .agassi-wholesale-numbers__label {
     max-width: 160px;
@@ -1784,17 +1756,12 @@ body.agassi-wholesale-scroll-locked {
     padding: 24px 8px;
   }
 
-  .agassi-wholesale-numbers__value {
-    font-size: 36px;
-  }
 
   .agassi-wholesale-numbers__label {
     margin-top: 12px;
   }
 }
 
-@media (max-width: 360px) {
-}
 
 .agassi-wholesale-numbers__surface {
   position: relative;
@@ -1815,7 +1782,7 @@ body.agassi-wholesale-scroll-locked {
   -moz-osx-font-smoothing: grayscale;
   padding: var(--agassi-wholesale-section-space) 0;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -1835,17 +1802,6 @@ body.agassi-wholesale-scroll-locked {
   text-align: center;
 }
 
-.agassi-wholesale-why__eyebrow {
-  margin: 0 0 16px;
-  padding: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-align: center;
-  font-family: var(--t-text-font);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
 
 .agassi-wholesale-why__title {
   max-width: 980px;
@@ -1858,10 +1814,10 @@ body.agassi-wholesale-scroll-locked {
   overflow-wrap: normal;
   word-break: normal;
   font-family: var(--t-headline-font);
-  font-size: 56px;
   font-weight: 500;
-  line-height: 1.1;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-h2);
+  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-why__layout {
@@ -1907,10 +1863,10 @@ body.agassi-wholesale-scroll-locked {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: var(--t-text-font);
-  font-size: 62px;
   font-weight: 500;
-  line-height: 1.1;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-display);
+  line-height: var(--agassi-wholesale-line-display);
 }
 
 .agassi-wholesale-why__feature-title {
@@ -1919,10 +1875,10 @@ body.agassi-wholesale-scroll-locked {
   padding: 0;
   color: var(--agassi-wholesale-white);
   font-family: var(--t-text-font);
-  font-size: 36px;
   font-weight: 500;
-  line-height: 1.3;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-h3);
+  line-height: var(--agassi-wholesale-line-h3);
 }
 
 .agassi-wholesale-why__feature-text {
@@ -1931,7 +1887,7 @@ body.agassi-wholesale-scroll-locked {
   padding: 0;
   color: var(--agassi-wholesale-on-crimson);
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -1961,7 +1917,7 @@ body.agassi-wholesale-scroll-locked {
   padding: 0 0 28px;
   color: var(--agassi-wholesale-crimson);
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -1973,10 +1929,10 @@ body.agassi-wholesale-scroll-locked {
   padding: 0;
   color: #1E1E1E;
   font-family: var(--t-text-font);
-  font-size: 18px;
   font-weight: 500;
-  line-height: 1.3;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-h4);
+  line-height: var(--agassi-wholesale-line-h4);
 }
 
 .agassi-wholesale-why__benefit-text {
@@ -1985,7 +1941,7 @@ body.agassi-wholesale-scroll-locked {
   padding: 0;
   color: var(--agassi-wholesale-muted);
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -2005,13 +1961,7 @@ body.agassi-wholesale-scroll-locked {
     padding: 40px;
   }
 
-  .agassi-wholesale-why__feature-number {
-    font-size: 56px;
-  }
 
-  .agassi-wholesale-why__feature-title {
-    font-size: 34px;
-  }
 
   .agassi-wholesale-why__benefit {
     padding: 24px;
@@ -2023,13 +1973,9 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 36px;
   }
 
-  .agassi-wholesale-why__eyebrow {
-    margin-bottom: 12px;
-  }
 
   .agassi-wholesale-why__title {
     max-width: 760px;
-    font-size: 44px;
   }
 
   .agassi-wholesale-why__layout {
@@ -2048,12 +1994,10 @@ body.agassi-wholesale-scroll-locked {
 
   .agassi-wholesale-why__feature-number {
     margin-bottom: 16px;
-    font-size: 48px;
   }
 
   .agassi-wholesale-why__feature-title {
     max-width: 500px;
-    font-size: 32px;
   }
 
   .agassi-wholesale-why__feature-text {
@@ -2083,9 +2027,6 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 32px;
   }
 
-  .agassi-wholesale-why__eyebrow {
-    margin-bottom: 12px;
-  }
 
   .agassi-wholesale-why__title {
     max-width: 720px;
@@ -2099,12 +2040,8 @@ body.agassi-wholesale-scroll-locked {
 
   .agassi-wholesale-why__feature-number {
     margin-bottom: 16px;
-    font-size: 44px;
   }
 
-  .agassi-wholesale-why__feature-title {
-    font-size: 30px;
-  }
 }
 
 @media (max-width: 640px) {
@@ -2112,13 +2049,9 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 24px;
   }
 
-  .agassi-wholesale-why__eyebrow {
-    margin-bottom: 8px;
-  }
 
   .agassi-wholesale-why__title {
     max-width: 520px;
-    font-size: 34px;
   }
 
   .agassi-wholesale-why__feature {
@@ -2129,12 +2062,10 @@ body.agassi-wholesale-scroll-locked {
 
   .agassi-wholesale-why__feature-number {
     margin-bottom: 16px;
-    font-size: 40px;
   }
 
   .agassi-wholesale-why__feature-title {
     max-width: 400px;
-    font-size: 28px;
   }
 
   .agassi-wholesale-why__feature-text {
@@ -2171,13 +2102,7 @@ body.agassi-wholesale-scroll-locked {
     padding: 24px;
   }
 
-  .agassi-wholesale-why__feature-number {
-    font-size: 36px;
-  }
 
-  .agassi-wholesale-why__feature-title {
-    font-size: 26px;
-  }
 
   .agassi-wholesale-why__benefit {
     min-height: 232px;
@@ -2213,7 +2138,7 @@ body.agassi-wholesale-scroll-locked {
   -moz-osx-font-smoothing: grayscale;
   padding: var(--agassi-wholesale-section-space) 0;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -2236,19 +2161,6 @@ body.agassi-wholesale-scroll-locked {
   text-align: center;
 }
 
-.agassi-wholesale-support__eyebrow {
-  margin: 0 0 16px;
-  font-family: var(--t-text-font);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-  background: var(--agassi-wholesale-gold-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: var(--agassi-wholesale-gold);
-}
 
 .agassi-wholesale-support__title {
   max-width: 1000px;
@@ -2260,11 +2172,11 @@ body.agassi-wholesale-scroll-locked {
   overflow-wrap: normal;
   word-break: normal;
   font-family: var(--t-headline-font);
-  font-size: 56px;
   font-weight: 500;
-  line-height: 1.1;
   letter-spacing: 0;
   color: var(--agassi-wholesale-white);
+  font-size: var(--agassi-wholesale-font-h2);
+  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-support__lead {
@@ -2272,7 +2184,7 @@ body.agassi-wholesale-scroll-locked {
   margin: 20px auto 0;
   text-align: center;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -2338,7 +2250,7 @@ body.agassi-wholesale-scroll-locked {
   margin: 0 0 16px;
   padding: 0;
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -2353,11 +2265,11 @@ body.agassi-wholesale-scroll-locked {
   margin: 0;
   padding: 0;
   font-family: var(--t-text-font);
-  font-size: 18px;
   font-weight: 500;
-  line-height: 1.3;
   letter-spacing: 0;
   color: var(--agassi-wholesale-ink);
+  font-size: var(--agassi-wholesale-font-h4);
+  line-height: var(--agassi-wholesale-line-h4);
 }
 
 .agassi-wholesale-support__item-text {
@@ -2365,7 +2277,7 @@ body.agassi-wholesale-scroll-locked {
   margin: 8px 0 0;
   padding: 0;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -2397,9 +2309,6 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 36px;
   }
 
-  .agassi-wholesale-support__eyebrow {
-    margin-bottom: 12px;
-  }
 
   .agassi-wholesale-support__lead {
     margin-top: 16px;
@@ -2425,9 +2334,6 @@ body.agassi-wholesale-scroll-locked {
     margin-top: 8px;
   }
 
-  .agassi-wholesale-support__title {
-    font-size: 44px;
-  }
 }
 
 @media (max-width: 960px) {
@@ -2436,9 +2342,6 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 32px;
   }
 
-  .agassi-wholesale-support__eyebrow {
-    margin-bottom: 12px;
-  }
 
   .agassi-wholesale-support__lead {
     margin-top: 16px;
@@ -2479,13 +2382,7 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 24px;
   }
 
-  .agassi-wholesale-support__eyebrow {
-    margin-bottom: 8px;
-  }
 
-  .agassi-wholesale-support__title {
-    font-size: 34px;
-  }
 
   .agassi-wholesale-support__lead {
     margin-top: 16px;
@@ -2551,7 +2448,7 @@ body.agassi-wholesale-scroll-locked {
   -moz-osx-font-smoothing: grayscale;
   padding: var(--agassi-wholesale-section-space) 0;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -2572,16 +2469,6 @@ body.agassi-wholesale-scroll-locked {
   text-align: center;
 }
 
-.agassi-wholesale-products__eyebrow {
-  margin: 0 0 16px;
-  padding: 0;
-  color: var(--agassi-wholesale-crimson);
-  font-family: var(--t-text-font);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
 
 .agassi-wholesale-products__title {
   max-width: 980px;
@@ -2594,10 +2481,10 @@ body.agassi-wholesale-scroll-locked {
   overflow-wrap: normal;
   word-break: normal;
   font-family: var(--t-headline-font);
-  font-size: 56px;
   font-weight: 500;
-  line-height: 1.1;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-h2);
+  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-products__lead {
@@ -2607,7 +2494,7 @@ body.agassi-wholesale-scroll-locked {
   color: var(--agassi-wholesale-muted);
   text-align: center;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -2670,7 +2557,7 @@ body.agassi-wholesale-scroll-locked {
 .agassi-wholesale-products__count {
   color: var(--agassi-wholesale-on-crimson);
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -2686,10 +2573,10 @@ body.agassi-wholesale-scroll-locked {
   padding: 0;
   color: var(--agassi-wholesale-white);
   font-family: var(--t-text-font);
-  font-size: 36px;
   font-weight: 500;
-  line-height: 1.1;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-h3);
+  line-height: var(--agassi-wholesale-line-h3);
 }
 
 .agassi-wholesale-products__category {
@@ -2697,7 +2584,7 @@ body.agassi-wholesale-scroll-locked {
   padding: 0;
   color: var(--agassi-wholesale-white);
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -2709,7 +2596,7 @@ body.agassi-wholesale-scroll-locked {
   padding: 0;
   color: var(--agassi-wholesale-on-crimson);
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -2728,9 +2615,6 @@ body.agassi-wholesale-scroll-locked {
     padding: 28px;
   }
 
-  .agassi-wholesale-products__brand {
-    font-size: 34px;
-  }
 }
 
 @media (max-width: 1200px) {
@@ -2738,13 +2622,9 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 36px;
   }
 
-  .agassi-wholesale-products__eyebrow {
-    margin-bottom: 12px;
-  }
 
   .agassi-wholesale-products__title {
     max-width: 760px;
-    font-size: 44px;
   }
 
   .agassi-wholesale-products__lead {
@@ -2759,9 +2639,6 @@ body.agassi-wholesale-scroll-locked {
     margin-top: 8px;
   }
 
-  .agassi-wholesale-products__brand {
-    font-size: 32px;
-  }
 }
 
 @media (max-width: 960px) {
@@ -2769,9 +2646,6 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 32px;
   }
 
-  .agassi-wholesale-products__eyebrow {
-    margin-bottom: 12px;
-  }
 
   .agassi-wholesale-products__title {
     max-width: 720px;
@@ -2785,9 +2659,6 @@ body.agassi-wholesale-scroll-locked {
     aspect-ratio: 1 / 1;
   }
 
-  .agassi-wholesale-products__brand {
-    font-size: 30px;
-  }
 }
 
 @media (max-width: 640px) {
@@ -2795,13 +2666,9 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 24px;
   }
 
-  .agassi-wholesale-products__eyebrow {
-    margin-bottom: 8px;
-  }
 
   .agassi-wholesale-products__title {
     max-width: 520px;
-    font-size: 34px;
   }
 
   .agassi-wholesale-products__lead {
@@ -2829,9 +2696,6 @@ body.agassi-wholesale-scroll-locked {
     margin-top: 8px;
   }
 
-  .agassi-wholesale-products__brand {
-    font-size: 28px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -2847,9 +2711,6 @@ body.agassi-wholesale-scroll-locked {
     padding: 24px;
   }
 
-  .agassi-wholesale-products__brand {
-    font-size: 26px;
-  }
 }
 
 @media (max-width: 360px) {
@@ -2877,7 +2738,7 @@ body.agassi-wholesale-scroll-locked {
   color: var(--agassi-wholesale-ink);
   padding: var(--agassi-wholesale-section-space) 0;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -2894,15 +2755,6 @@ body.agassi-wholesale-scroll-locked {
   text-align: center;
 }
 
-.agassi-wholesale-partners__eyebrow {
-  margin-bottom: 16px;
-  color: var(--agassi-wholesale-crimson);
-  font-family: var(--t-text-font);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
 
 .agassi-wholesale-partners__title {
   margin: 0;
@@ -2912,10 +2764,10 @@ body.agassi-wholesale-scroll-locked {
   overflow-wrap: normal;
   word-break: normal;
   font-family: var(--t-headline-font);
-  font-size: 56px;
   font-weight: 500;
-  line-height: 1.1;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-h2);
+  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-partners__viewport {
@@ -3075,13 +2927,7 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 36px;
   }
 
-  .agassi-wholesale-partners__eyebrow {
-    margin-bottom: 12px;
-  }
 
-  .agassi-wholesale-partners__title {
-    font-size: 44px;
-  }
 
   .agassi-wholesale-partners__card,
   #allrecords .agassi-wholesale-partners__card,
@@ -3102,9 +2948,6 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 32px;
   }
 
-  .agassi-wholesale-partners__eyebrow {
-    margin-bottom: 12px;
-  }
 
   .agassi-wholesale-partners__controls {
     margin-top: 24px;
@@ -3123,13 +2966,7 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 24px;
   }
 
-  .agassi-wholesale-partners__eyebrow {
-    margin-bottom: 8px;
-  }
 
-  .agassi-wholesale-partners__title {
-    font-size: 34px;
-  }
 
   .agassi-wholesale-partners__card,
   #allrecords .agassi-wholesale-partners__card,
@@ -3206,7 +3043,7 @@ body.agassi-wholesale-scroll-locked {
   color: var(--agassi-wholesale-ink);
   padding: var(--agassi-wholesale-section-space) 0;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -3225,15 +3062,6 @@ body.agassi-wholesale-scroll-locked {
   text-align: center;
 }
 
-.agassi-wholesale-stories__eyebrow {
-  margin-bottom: 16px;
-  color: var(--agassi-wholesale-crimson);
-  font-family: var(--t-text-font);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
 
 .agassi-wholesale-stories__title {
   margin: 0;
@@ -3243,10 +3071,10 @@ body.agassi-wholesale-scroll-locked {
   overflow-wrap: normal;
   word-break: normal;
   font-family: var(--t-headline-font);
-  font-size: 56px;
   font-weight: 500;
-  line-height: 1.1;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-h2);
+  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-stories__lead {
@@ -3254,7 +3082,7 @@ body.agassi-wholesale-scroll-locked {
   margin: 20px auto 0;
   color: var(--agassi-wholesale-muted);
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -3299,7 +3127,7 @@ body.agassi-wholesale-scroll-locked {
   gap: 24px;
   color: var(--agassi-wholesale-crimson);
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -3310,16 +3138,16 @@ body.agassi-wholesale-scroll-locked {
   padding: 48px 0;
   color: #1E1E1E;
   font-family: var(--t-text-font);
-  font-size: 18px;
   font-weight: 400;
-  line-height: 1.4;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-h4);
+  line-height: var(--agassi-wholesale-line-h4);
 }
 
 .agassi-wholesale-stories__name {
   color: #1E1E1E;
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -3329,7 +3157,7 @@ body.agassi-wholesale-scroll-locked {
   margin-top: 8px;
   color: var(--agassi-wholesale-muted);
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -3421,9 +3249,6 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 36px;
   }
 
-  .agassi-wholesale-stories__eyebrow {
-    margin-bottom: 12px;
-  }
 
   .agassi-wholesale-stories__lead {
     margin-top: 16px;
@@ -3435,12 +3260,8 @@ body.agassi-wholesale-scroll-locked {
 
   .agassi-wholesale-stories__quote {
     padding: 44px 0;
-    font-size: 18px;
   }
 
-  .agassi-wholesale-stories__title {
-    font-size: 44px;
-  }
 }
 
 @media (max-width: 960px) {
@@ -3454,9 +3275,6 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 32px;
   }
 
-  .agassi-wholesale-stories__eyebrow {
-    margin-bottom: 12px;
-  }
 
   .agassi-wholesale-stories__lead {
     margin-top: 16px;
@@ -3479,13 +3297,7 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 24px;
   }
 
-  .agassi-wholesale-stories__eyebrow {
-    margin-bottom: 8px;
-  }
 
-  .agassi-wholesale-stories__title {
-    font-size: 34px;
-  }
 
   .agassi-wholesale-stories__lead {
     margin-top: 16px;
@@ -3497,7 +3309,6 @@ body.agassi-wholesale-scroll-locked {
 
   .agassi-wholesale-stories__quote {
     padding: 40px 0;
-    font-size: 18px;
   }
 
   .agassi-wholesale-stories__role {
@@ -3568,7 +3379,7 @@ body.agassi-wholesale-scroll-locked {
   -moz-osx-font-smoothing: grayscale;
   padding: var(--agassi-wholesale-section-space) 0;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -3589,17 +3400,6 @@ body.agassi-wholesale-scroll-locked {
   text-align: center;
 }
 
-.agassi-wholesale-faq__eyebrow {
-  margin: 0 0 16px;
-  padding: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-align: center;
-  font-family: var(--t-text-font);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
 
 .agassi-wholesale-faq__title {
   max-width: 980px;
@@ -3612,10 +3412,10 @@ body.agassi-wholesale-scroll-locked {
   overflow-wrap: normal;
   word-break: normal;
   font-family: var(--t-headline-font);
-  font-size: 56px;
   font-weight: 500;
-  line-height: 1.1;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-h2);
+  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-faq__lead {
@@ -3625,7 +3425,7 @@ body.agassi-wholesale-scroll-locked {
   color: var(--agassi-wholesale-muted);
   text-align: center;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -3721,10 +3521,10 @@ body.agassi-wholesale-scroll-locked {
 .agassi-wholesale-faq__question-text {
   color: inherit;
   font-family: var(--t-text-font);
-  font-size: 18px;
   font-weight: 500;
-  line-height: 1.3;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-h4);
+  line-height: var(--agassi-wholesale-line-h4);
 }
 
 .agassi-wholesale-faq__icon {
@@ -3777,7 +3577,7 @@ body.agassi-wholesale-scroll-locked {
   padding: 16px 32px 24px;
   color: var(--agassi-wholesale-muted);
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -3811,13 +3611,9 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 40px;
   }
 
-  .agassi-wholesale-faq__eyebrow {
-    margin-bottom: 12px;
-  }
 
   .agassi-wholesale-faq__title {
     max-width: 760px;
-    font-size: 44px;
   }
 
   .agassi-wholesale-faq__lead {
@@ -3849,9 +3645,6 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 36px;
   }
 
-  .agassi-wholesale-faq__eyebrow {
-    margin-bottom: 12px;
-  }
 
   .agassi-wholesale-faq__title {
     max-width: 720px;
@@ -3895,13 +3688,9 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 32px;
   }
 
-  .agassi-wholesale-faq__eyebrow {
-    margin-bottom: 8px;
-  }
 
   .agassi-wholesale-faq__title {
     max-width: 520px;
-    font-size: 34px;
   }
 
   .agassi-wholesale-faq__lead {
@@ -3970,7 +3759,7 @@ body.agassi-wholesale-scroll-locked {
   -moz-osx-font-smoothing: grayscale;
   padding: var(--agassi-wholesale-section-space) 0;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -3993,20 +3782,6 @@ body.agassi-wholesale-scroll-locked {
   text-align: center;
 }
 
-.agassi-wholesale-contact__eyebrow {
-  padding: 0;
-  color: var(--agassi-wholesale-gold);
-  background: var(--agassi-wholesale-gold-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 0 0 16px;
-  font-family: var(--t-text-font);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
 
 .agassi-wholesale-contact__title {
   max-width: 1000px;
@@ -4019,10 +3794,10 @@ body.agassi-wholesale-scroll-locked {
   overflow-wrap: normal;
   word-break: normal;
   font-family: var(--t-headline-font);
-  font-size: 56px;
   font-weight: 500;
-  line-height: 1.1;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-h2);
+  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-contact__lead {
@@ -4032,7 +3807,7 @@ body.agassi-wholesale-scroll-locked {
   text-align: center;
   margin: 20px auto 0;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -4072,7 +3847,7 @@ body.agassi-wholesale-scroll-locked {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -4086,7 +3861,7 @@ body.agassi-wholesale-scroll-locked {
   margin: 0 0 8px;
   color: var(--agassi-wholesale-on-crimson);
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -4098,10 +3873,10 @@ body.agassi-wholesale-scroll-locked {
   color: var(--agassi-wholesale-white);
   overflow-wrap: anywhere;
   font-family: var(--t-text-font);
-  font-size: 18px;
   font-weight: 500;
-  line-height: 1.3;
   letter-spacing: 0;
+  font-size: var(--agassi-wholesale-font-h4);
+  line-height: var(--agassi-wholesale-line-h4);
 }
 
 .agassi-wholesale-contact__action {
@@ -4109,45 +3884,6 @@ body.agassi-wholesale-scroll-locked {
   justify-content: center;
   width: 100%;
   margin-top: 40px;
-}
-
-.agassi-wholesale-contact__button,
-#allrecords .agassi-wholesale-contact__button,
-.t-records .agassi-wholesale-contact__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 28px;
-  border: 1px solid var(--agassi-wholesale-gold);
-  border-radius: 999px;
-  background: var(--agassi-wholesale-gold-gradient);
-  text-decoration: none;
-  cursor: pointer;
-  transition: color 360ms var(--agassi-wholesale-ease), filter 360ms var(--agassi-wholesale-ease), border-color 360ms var(--agassi-wholesale-ease);
-  font-family: var(--t-text-font);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: 0;
-  color: #8C0F14;
-  min-height: 56px;
-}
-
-.agassi-wholesale-contact__button:hover,
-#allrecords .agassi-wholesale-contact__button:hover,
-.t-records .agassi-wholesale-contact__button:hover {
-  border-color: var(--agassi-wholesale-gold);
-  filter: brightness(.88);
-  color: #8C0F14;
-}
-
-.agassi-wholesale-contact__button:focus {
-  outline: none;
-}
-
-.agassi-wholesale-contact__button:focus-visible {
-  outline: 2px solid var(--agassi-wholesale-gold);
-  outline-offset: 4px;
 }
 
 @media (max-width: 1440px) {
@@ -4172,9 +3908,6 @@ body.agassi-wholesale-scroll-locked {
     max-width: 760px;
   }
 
-  .agassi-wholesale-contact__eyebrow {
-    margin: 0 0 12px;
-  }
 
   .agassi-wholesale-contact__lead {
     margin: 16px auto 0;
@@ -4199,9 +3932,6 @@ body.agassi-wholesale-scroll-locked {
     margin-top: 36px;
   }
 
-  .agassi-wholesale-contact__title {
-    font-size: 44px;
-  }
 }
 
 @media (max-width: 960px) {
@@ -4209,9 +3939,6 @@ body.agassi-wholesale-scroll-locked {
     max-width: 720px;
   }
 
-  .agassi-wholesale-contact__eyebrow {
-    margin: 0 0 12px;
-  }
 
   .agassi-wholesale-contact__lead {
     margin: 16px auto 0;
@@ -4244,13 +3971,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 @media (max-width: 640px) {
-.agassi-wholesale-contact__eyebrow {
-    margin: 0 0 8px;
-  }
 
-  .agassi-wholesale-contact__title {
-    font-size: 34px;
-  }
 
   .agassi-wholesale-contact__lead {
     margin: 16px auto 0;
@@ -4303,8 +4024,6 @@ body.agassi-wholesale-scroll-locked {
   }
 }
 
-@media (max-width: 360px) {
-}
 
 @media (prefers-reduced-motion: reduce) {
   .agassi-wholesale-contact__button {
@@ -4330,7 +4049,7 @@ body.agassi-wholesale-scroll-locked {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -4395,7 +4114,7 @@ body.agassi-wholesale-scroll-locked {
   padding: 0;
   color: var(--agassi-wholesale-on-crimson);
   font-family: var(--t-text-font);
-  font-size: 16px;
+  font-size: var(--agassi-wholesale-font-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -4424,7 +4143,7 @@ body.agassi-wholesale-scroll-locked {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -4451,7 +4170,7 @@ body.agassi-wholesale-scroll-locked {
   transition:
     opacity 320ms cubic-bezier(.22,1,.36,1);
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0;
@@ -4494,7 +4213,7 @@ body.agassi-wholesale-scroll-locked {
 .agassi-wholesale-footer__copyright {
   color: var(--agassi-wholesale-on-crimson);
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -4513,7 +4232,7 @@ body.agassi-wholesale-scroll-locked {
   transition:
     opacity 320ms cubic-bezier(.22,1,.36,1);
   font-family: var(--t-text-font);
-  font-size: 14px;
+  font-size: var(--agassi-wholesale-font-small);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
