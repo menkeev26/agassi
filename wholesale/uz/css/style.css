@@ -1783,7 +1783,7 @@ body.agassi-wholesale-scroll-locked {
 
 .agassi-wholesale-numbers__label {
   width: 100%;
-  max-width: 230px;
+  max-width: none;
   margin: 16px auto 0;
   padding: 0;
   color: var(--agassi-wholesale-on-crimson);
@@ -1883,7 +1883,7 @@ body.agassi-wholesale-scroll-locked {
   }
 
   .agassi-wholesale-numbers__label {
-    max-width: 160px;
+    max-width: none;
     margin-top: 12px;
   }
 }
