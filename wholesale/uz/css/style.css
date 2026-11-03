@@ -1314,52 +1314,50 @@ body.agassi-wholesale-scroll-locked {
   }
 }
 
-/* Лепестки живут в боковых полях, за контейнером текста: ширина зависит от свободного места */
+/* Лепестки живут в боковых полях за контейнером текста и падают вниз при прокрутке */
 .agassi-wholesale-statement {
   --agassi-wholesale-statement-text: 980px;
-}
-
-.agassi-wholesale-statement__flower--1,
-.agassi-wholesale-statement__flower--2,
-.agassi-wholesale-statement__flower--3,
-.agassi-wholesale-statement__flower--4,
-.agassi-wholesale-statement__flower--5 {
-  --agassi-wholesale-flower-space: calc((100% - var(--agassi-wholesale-statement-text)) / 2 - 40px);
+  --agassi-wholesale-flower-space: max(0px, calc((100% - var(--agassi-wholesale-statement-text)) / 2 - 56px));
 }
 
 .agassi-wholesale-statement__flower--1 {
-  top: 6%;
-  left: 16px;
-  width: clamp(0px, var(--agassi-wholesale-flower-space), 116px);
-  transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
+  --agassi-wholesale-flower-width: min(var(--agassi-wholesale-flower-space), 96px);
+  top: 7%;
+  left: calc(16px + (var(--agassi-wholesale-flower-space) - var(--agassi-wholesale-flower-width)) * .05);
+  width: var(--agassi-wholesale-flower-width);
+  transform: translate3d(var(--agassi-wholesale-sway-1, 0px), var(--agassi-wholesale-fall-1, 0px), 0) rotate(calc(-28deg + var(--agassi-wholesale-turn-1, 0deg)));
 }
 
 .agassi-wholesale-statement__flower--2 {
-  top: 62%;
-  left: 16px;
-  width: clamp(0px, var(--agassi-wholesale-flower-space), 66px);
-  transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
+  --agassi-wholesale-flower-width: min(var(--agassi-wholesale-flower-space), 66px);
+  top: 42%;
+  left: calc(16px + (var(--agassi-wholesale-flower-space) - var(--agassi-wholesale-flower-width)) * .85);
+  width: var(--agassi-wholesale-flower-width);
+  transform: translate3d(var(--agassi-wholesale-sway-2, 0px), var(--agassi-wholesale-fall-2, 0px), 0) rotate(calc(34deg + var(--agassi-wholesale-turn-2, 0deg)));
 }
 
 .agassi-wholesale-statement__flower--3 {
-  top: 12%;
-  right: 16px;
-  width: clamp(0px, var(--agassi-wholesale-flower-space), 98px);
-  transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
+  --agassi-wholesale-flower-width: min(var(--agassi-wholesale-flower-space), 98px);
+  top: 7%;
+  right: calc(16px + (var(--agassi-wholesale-flower-space) - var(--agassi-wholesale-flower-width)) * .35);
+  width: var(--agassi-wholesale-flower-width);
+  transform: translate3d(var(--agassi-wholesale-sway-3, 0px), var(--agassi-wholesale-fall-3, 0px), 0) rotate(calc(17deg + var(--agassi-wholesale-turn-3, 0deg)));
 }
 
 .agassi-wholesale-statement__flower--4 {
-  top: 68%;
-  right: 16px;
-  width: clamp(0px, var(--agassi-wholesale-flower-space), 82px);
-  transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
+  --agassi-wholesale-flower-width: min(var(--agassi-wholesale-flower-space), 82px);
+  top: 48%;
+  right: calc(16px + (var(--agassi-wholesale-flower-space) - var(--agassi-wholesale-flower-width)) * .95);
+  width: var(--agassi-wholesale-flower-width);
+  transform: translate3d(var(--agassi-wholesale-sway-4, 0px), var(--agassi-wholesale-fall-4, 0px), 0) rotate(calc(-32deg + var(--agassi-wholesale-turn-4, 0deg)));
 }
 
 .agassi-wholesale-statement__flower--5 {
-  top: 38%;
-  right: 16px;
-  width: clamp(0px, var(--agassi-wholesale-flower-space), 56px);
-  transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
+  --agassi-wholesale-flower-width: min(var(--agassi-wholesale-flower-space), 56px);
+  top: 66%;
+  left: calc(16px + (var(--agassi-wholesale-flower-space) - var(--agassi-wholesale-flower-width)) * .45);
+  width: var(--agassi-wholesale-flower-width);
+  transform: translate3d(var(--agassi-wholesale-sway-5, 0px), var(--agassi-wholesale-fall-5, 0px), 0) rotate(calc(42deg + var(--agassi-wholesale-turn-5, 0deg)));
 }
 
 @media (max-width: 1440px) {
