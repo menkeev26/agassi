@@ -165,16 +165,16 @@
       var flowers = Array.prototype.slice.call(section.querySelectorAll('.agassi-wholesale-statement__flower'));
       if (!layer || !flowers.length) return;
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      var distances = [105, 145, 120, 175, 150];
+      var distances = [105, 145, 120, 175, 150, 130];
       var bounds = [];
       var frame = 0;
       var measureNeeded = true;
       function limits() {
         var width = window.innerWidth;
-        if (width <= 360) return [6, 6, 6, 22, 18];
-        if (width <= 480) return [8, 8, 8, 26, 20];
-        if (width <= 640) return [8, 8, 8, 34, 28];
-        if (width <= 960) return [10, 10, 10, 54, 42];
+        if (width <= 360) return [6, 6, 6, 22, 18, 18];
+        if (width <= 480) return [8, 8, 8, 26, 20, 20];
+        if (width <= 640) return [8, 8, 8, 34, 28, 28];
+        if (width <= 960) return [10, 10, 10, 54, 42, 40];
         return distances;
       }
       function measure() {
