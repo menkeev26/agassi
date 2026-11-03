@@ -165,7 +165,7 @@
       var flowers = Array.prototype.slice.call(section.querySelectorAll('.agassi-wholesale-statement__flower'));
       if (!layer || !flowers.length) return;
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      var distances = [105, 145, 120, 175, 150];
+      var distances = null;
       var bounds = [];
       var frame = 0;
       var measureNeeded = true;
@@ -175,7 +175,7 @@
         if (width <= 480) return [34, 40, 30, 26, 20];
         if (width <= 640) return [42, 50, 38, 34, 28];
         if (width <= 960) return [58, 70, 54, 54, 42];
-        return distances;
+        return null;
       }
       function measure() {
         flowers.forEach(function (flower, i) {
@@ -185,9 +185,9 @@
         var caps = limits();
         bounds = flowers.map(function (flower, i) {
           var rect = flower.getBoundingClientRect();
-          var minimum = Math.max(0, area.top + 6 - rect.top);
-          var maximum = Math.max(minimum, area.bottom - 6 - rect.bottom);
-          return { min: minimum, max: Math.max(minimum, Math.min(caps[i], maximum)) };
+          var maximum = Math.max(0, area.bottom - 6 - rect.bottom);
+          var travel = caps ? caps[i] : area.height * 0.2;
+          return { min: 0, max: Math.min(travel, maximum) };
         });
         measureNeeded = false;
       }
@@ -207,6 +207,8 @@
           var limit = bounds[i];
           var fall = limit.min + progress * (limit.max - limit.min);
           section.style.setProperty('--agassi-wholesale-fall-' + (i + 1), fall + 'px');
+          section.style.setProperty('--agassi-wholesale-sway-' + (i + 1), (Math.sin(progress * Math.PI * 2 + i * 1.3) * 14) + 'px');
+          section.style.setProperty('--agassi-wholesale-turn-' + (i + 1), (progress * (i % 2 ? 50 : -50)) + 'deg');
         });
       }
       function schedule() {
