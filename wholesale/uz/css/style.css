@@ -147,6 +147,7 @@ html {
   white-space: nowrap;
   cursor: pointer;
   transition:
+    filter var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
     color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
     background-color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
     border-color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
@@ -160,20 +161,20 @@ html {
   color: var(--agassi-wholesale-link-color);
 }
 
-.agassi-wholesale-button--light,
-#allrecords .agassi-wholesale-button--light,
-.t-records .agassi-wholesale-button--light {
+.agassi-wholesale-button--gold,
+#allrecords .agassi-wholesale-button--gold,
+.t-records .agassi-wholesale-button--gold {
   --agassi-wholesale-link-color: var(--agassi-wholesale-crimson);
-  border-color: var(--agassi-wholesale-white);
-  background: var(--agassi-wholesale-white);
+  border-color: var(--agassi-wholesale-gold);
+  background: var(--agassi-wholesale-gold-gradient);
 }
 
-.agassi-wholesale-button--light:hover,
-#allrecords .agassi-wholesale-button--light:hover,
-.t-records .agassi-wholesale-button--light:hover {
-  --agassi-wholesale-link-color: var(--agassi-wholesale-white);
-  border-color: var(--agassi-wholesale-crimson-dark);
-  background: var(--agassi-wholesale-crimson-dark);
+.agassi-wholesale-button--gold:hover,
+#allrecords .agassi-wholesale-button--gold:hover,
+.t-records .agassi-wholesale-button--gold:hover {
+  border-color: var(--agassi-wholesale-gold);
+  background: var(--agassi-wholesale-gold-gradient);
+  filter: brightness(.88);
 }
 
 .agassi-wholesale-button:focus-visible {
