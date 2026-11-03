@@ -1961,7 +1961,7 @@ body.agassi-wholesale-scroll-locked {
   position: absolute;
   z-index: 1;
   inset: 0;
-  background: linear-gradient( 180deg, rgba(140, 15, 20, .30) 0%, rgba(140, 15, 20, .18) 34%, rgba(140, 15, 20, .96) 100% );
+  background: linear-gradient( 180deg, rgba(140, 15, 20, .64) 0%, rgba(140, 15, 20, .56) 40%, rgba(140, 15, 20, .96) 100% );
   pointer-events: none;
 }
 
@@ -2636,7 +2636,7 @@ body.agassi-wholesale-scroll-locked {
   position: absolute;
   z-index: 1;
   inset: 0;
-  background: linear-gradient( 180deg, rgba(140, 15, 20, .30) 0%, rgba(140, 15, 20, .18) 34%, rgba(140, 15, 20, .96) 100% );
+  background: linear-gradient( 180deg, rgba(140, 15, 20, .64) 0%, rgba(140, 15, 20, .56) 40%, rgba(140, 15, 20, .96) 100% );
   pointer-events: none;
 }
 
@@ -2648,7 +2648,7 @@ body.agassi-wholesale-scroll-locked {
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  padding: 32px;
+  padding: 44px;
 }
 
 .agassi-wholesale-products__card-top {
@@ -2715,9 +2715,6 @@ body.agassi-wholesale-scroll-locked {
     max-width: 900px;
   }
 
-  .agassi-wholesale-products__card-content {
-    padding: 28px;
-  }
 
 }
 
@@ -2735,7 +2732,7 @@ body.agassi-wholesale-scroll-locked {
   }
 
   .agassi-wholesale-products__card-content {
-    padding: 24px;
+    padding: 40px;
   }
 
   .agassi-wholesale-products__category {
@@ -2758,7 +2755,12 @@ body.agassi-wholesale-scroll-locked {
   }
 
   .agassi-wholesale-products__card {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: auto;
+    min-height: 400px;
+  }
+
+  .agassi-wholesale-products__card-content {
+    padding: 32px;
   }
 
 }
@@ -2781,12 +2783,8 @@ body.agassi-wholesale-scroll-locked {
     grid-template-columns: 1fr;
   }
 
-  .agassi-wholesale-products__card {
-    aspect-ratio: 4 / 3;
-  }
-
   .agassi-wholesale-products__card-content {
-    padding: 24px;
+    padding: 32px 24px;
   }
 
   .agassi-wholesale-products__category {
@@ -2804,20 +2802,6 @@ body.agassi-wholesale-scroll-locked {
     margin-bottom: 24px;
   }
 
-  .agassi-wholesale-products__card {
-    aspect-ratio: 1 / 1;
-  }
-
-  .agassi-wholesale-products__card-content {
-    padding: 24px;
-  }
-
-}
-
-@media (max-width: 360px) {
-.agassi-wholesale-products__card-content {
-    padding: 20px;
-  }
 }
 
 /* Партнёры */
