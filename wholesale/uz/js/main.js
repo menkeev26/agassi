@@ -1,4231 +1,738 @@
-/* Agassi Wholesale (UZ): общие стили всех блоков сайта. Все классы начинаются с agassi-wholesale- */
-
-/* Токены */
-:root {
-  --agassi-wholesale-ivory: #F4F1EA;
-  --agassi-wholesale-white: #FFFFFF;
-  --agassi-wholesale-sand: #EAE4D6;
-  --agassi-wholesale-crimson: #8C0F14;
-  --agassi-wholesale-crimson-dark: #5A0A0D;
-  --agassi-wholesale-gold: #C6A15B;
-  --agassi-wholesale-ink: #1E1E1E;
-  --agassi-wholesale-muted: #5E5A52;
-  --agassi-wholesale-line: #D9D2C3;
-  --agassi-wholesale-on-crimson: #DFBCBD;
-  --agassi-wholesale-line-crimson: #A1393E;
-  --agassi-wholesale-gold-gradient: linear-gradient(90deg, #E8C375 0%, #C6A15B 55%, #E7C274 100%);
-
-  --agassi-wholesale-frame-max: 1620px;
-  --agassi-wholesale-frame-gap: 96px;
-  --agassi-wholesale-section-space: 96px;
-  --agassi-wholesale-columns: 12;
-  --agassi-wholesale-gap: 16px;
-  --agassi-wholesale-radius: 28px;
-  --agassi-wholesale-radius-small: 16px;
-
-  --agassi-wholesale-font-body: 16px;
-  --agassi-wholesale-line-body: 24px;
-  --agassi-wholesale-font-small: 14px;
-  --agassi-wholesale-line-small: 20px;
-  --agassi-wholesale-font-h2: 56px;
-  --agassi-wholesale-line-h2: 60px;
-  --agassi-wholesale-font-h3: 36px;
-  --agassi-wholesale-line-h3: 48px;
-  --agassi-wholesale-font-h4: 20px;
-  --agassi-wholesale-line-h4: 28px;
-  --agassi-wholesale-font-display: 64px;
-  --agassi-wholesale-line-display: 68px;
-
-  --agassi-wholesale-duration: 400ms;
-  --agassi-wholesale-ease: ease-out;
-}
-
-@media (max-width: 1440px) {
-  :root {
-    --agassi-wholesale-frame-gap: 64px;
-    --agassi-wholesale-section-space: 80px;
-  }
-}
-
-@media (max-width: 1200px) {
-  :root {
-    --agassi-wholesale-frame-gap: 40px;
-    --agassi-wholesale-section-space: 72px;
-    --agassi-wholesale-font-h2: 48px;
-    --agassi-wholesale-line-h2: 56px;
-    --agassi-wholesale-font-h3: 36px;
-    --agassi-wholesale-line-h3: 44px;
-    --agassi-wholesale-font-display: 56px;
-    --agassi-wholesale-line-display: 64px;
-  }
-}
-
-@media (max-width: 960px) {
-  :root {
-    --agassi-wholesale-columns: 8;
-    --agassi-wholesale-frame-gap: 24px;
-    --agassi-wholesale-section-space: 64px;
-    --agassi-wholesale-radius: 24px;
-    --agassi-wholesale-font-h2: 40px;
-    --agassi-wholesale-line-h2: 48px;
-    --agassi-wholesale-font-h3: 32px;
-    --agassi-wholesale-line-h3: 40px;
-    --agassi-wholesale-font-display: 48px;
-    --agassi-wholesale-line-display: 56px;
-  }
-}
-
-@media (max-width: 640px) {
-  :root {
-    --agassi-wholesale-columns: 4;
-    --agassi-wholesale-gap: 12px;
-    --agassi-wholesale-frame-gap: 16px;
-    --agassi-wholesale-section-space: 48px;
-    --agassi-wholesale-radius: 20px;
-    --agassi-wholesale-font-h2: 32px;
-    --agassi-wholesale-line-h2: 40px;
-    --agassi-wholesale-font-h3: 28px;
-    --agassi-wholesale-line-h3: 36px;
-    --agassi-wholesale-font-h4: 18px;
-    --agassi-wholesale-line-h4: 26px;
-    --agassi-wholesale-font-display: 40px;
-    --agassi-wholesale-line-display: 48px;
-  }
-}
-
-/* Выделение текста в цветах сайта */
-::selection {
-  background: var(--agassi-wholesale-crimson);
-  color: var(--agassi-wholesale-white);
-}
-
-.agassi-wholesale-numbers ::selection,
-.agassi-wholesale-support ::selection,
-.agassi-wholesale-contact ::selection,
-.agassi-wholesale-hero ::selection,
-.agassi-wholesale-footer ::selection {
-  background: var(--agassi-wholesale-white);
-  color: var(--agassi-wholesale-crimson);
-}
-
-/* Базовые стили */
-html {
-  scroll-behavior: smooth;
-}
-
-[class*="agassi-wholesale-"],
-[class*="agassi-wholesale-"]::before,
-[class*="agassi-wholesale-"]::after {
-  box-sizing: border-box;
-}
-
-[class*="agassi-wholesale-"] {
-  margin: 0;
-  padding: 0;
-}
-
-/* Общая кнопка (как agassi-group-button) */
-.agassi-wholesale-button,
-#allrecords .agassi-wholesale-button,
-.t-records .agassi-wholesale-button {
-  --agassi-wholesale-link-color: var(--agassi-wholesale-white);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 56px;
-  margin: 0;
-  padding: 0 32px;
-  border: 1px solid var(--agassi-wholesale-crimson);
-  border-radius: 1000px;
-  background: var(--agassi-wholesale-crimson);
-  color: var(--agassi-wholesale-link-color);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 500;
-  line-height: var(--agassi-wholesale-line-small);
-  text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
-  transition:
-    filter var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
-    color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
-    background-color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
-    border-color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
-}
-
-.agassi-wholesale-button:hover,
-#allrecords .agassi-wholesale-button:hover,
-.t-records .agassi-wholesale-button:hover {
-  border-color: var(--agassi-wholesale-crimson-dark);
-  background: var(--agassi-wholesale-crimson-dark);
-  color: var(--agassi-wholesale-link-color);
-}
-
-.agassi-wholesale-button--gold,
-#allrecords .agassi-wholesale-button--gold,
-.t-records .agassi-wholesale-button--gold {
-  --agassi-wholesale-link-color: var(--agassi-wholesale-crimson);
-  border-color: var(--agassi-wholesale-gold);
-  background: var(--agassi-wholesale-gold-gradient);
-}
-
-.agassi-wholesale-button--gold:hover,
-#allrecords .agassi-wholesale-button--gold:hover,
-.t-records .agassi-wholesale-button--gold:hover {
-  border-color: var(--agassi-wholesale-gold);
-  background: var(--agassi-wholesale-gold-gradient);
-  filter: brightness(.88);
-}
-
-.agassi-wholesale-button:focus-visible {
-  outline: 2px solid var(--agassi-wholesale-gold);
-  outline-offset: 4px;
-}
-
-/* Надзаголовок (как agassi-group-heading__eyebrow) */
-.agassi-wholesale-hero__eyebrow,
-.agassi-wholesale-statement__eyebrow,
-.agassi-wholesale-numbers__eyebrow,
-.agassi-wholesale-why__eyebrow,
-.agassi-wholesale-support__eyebrow,
-.agassi-wholesale-products__eyebrow,
-.agassi-wholesale-partners__eyebrow,
-.agassi-wholesale-stories__eyebrow,
-.agassi-wholesale-faq__eyebrow,
-.agassi-wholesale-contact__eyebrow {
-  display: inline-block;
-  margin: 0 0 16px;
-  padding: 5px 16px;
-  border: 1px solid color-mix(in srgb, var(--agassi-wholesale-crimson) 32%, transparent);
-  border-radius: 1000px;
-  color: var(--agassi-wholesale-crimson);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-small);
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-.agassi-wholesale-hero__eyebrow,
-.agassi-wholesale-numbers__eyebrow,
-.agassi-wholesale-support__eyebrow,
-.agassi-wholesale-contact__eyebrow {
-  border-color: color-mix(in srgb, var(--agassi-wholesale-gold) 48%, transparent);
-  background: var(--agassi-wholesale-gold-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: var(--agassi-wholesale-gold);
-  -webkit-text-fill-color: transparent;
-}
-
-/* Шапка */
-html {
-  scroll-behavior: smooth;
-}
-
-html.agassi-wholesale-scroll-locked,
-body.agassi-wholesale-scroll-locked {
-  overflow: hidden;
-  overscroll-behavior: none;
-}
-
-#why,
-#why-agassi,
-#products,
-#support,
-#stories,
-#faq,
-#contacts {
-  scroll-margin-top: 72px;
-}
-
-.agassi-wholesale-header-slot,
-.agassi-wholesale-header-slot *,
-.agassi-wholesale-header-slot *::before,
-.agassi-wholesale-header-slot *::after {
-  box-sizing: border-box;
-}
-
-.agassi-wholesale-header-slot {
-  --agassi-wholesale-header-height: 64px;
-
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 72px;
-  min-height: 72px;
-  max-height: 72px;
-  margin: 0;
-  padding: 0;
-  overflow: visible;
-  background: var(--agassi-wholesale-ivory);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-header {
-  position: fixed;
-  z-index: 999;
-  top: 4px;
-  left: 50%;
-  width: min(
-    var(--agassi-wholesale-frame-max),
-    calc(100% - 2 * var(--agassi-wholesale-frame-gap))
-  );
-  height: var(--agassi-wholesale-header-height);
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: var(--agassi-wholesale-ivory);
-  color: var(--agassi-wholesale-crimson);
-  transition:
-    box-shadow var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
-    background-color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
-}
-
-.agassi-wholesale-header.is-scrolled {
-  box-shadow: 0 10px 30px rgba(140, 15, 20, .08);
-}
-
-.agassi-wholesale-header__frame {
-  position: relative;
-  display: grid;
-  grid-template-columns: 160px minmax(0, 1fr) auto;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 0 16px 0 24px;
-  gap: 16px;
-}
-
-.agassi-wholesale-header__brand,
-.agassi-wholesale-header__cta-wrap,
-.agassi-wholesale-header__mobile-brand,
-.agassi-wholesale-header__mobile-close-wrap,
-.agassi-wholesale-header__mobile-cta-wrap {
-  display: contents;
-}
-
-.agassi-wholesale-header__logo,
-#allrecords .agassi-wholesale-header__logo,
-.t-records .agassi-wholesale-header__logo {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: fit-content;
-  max-width: 120px;
-  color: inherit;
-  text-decoration: none;
-}
-
-.agassi-wholesale-header__logo img {
-  display: block;
-  width: auto;
-  max-width: 120px;
-  height: auto;
-  max-height: 36px;
-}
-
-.agassi-wholesale-header__nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(20px, 1.7vw, 32px);
-  min-width: 0;
-  height: 100%;
-}
-
-.agassi-wholesale-header__nav a,
-#allrecords .agassi-wholesale-header__nav a,
-.t-records .agassi-wholesale-header__nav a {
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0 0 4px;
-  border: 0;
-  color: #1E1E1E;
-  text-decoration: none;
-  white-space: nowrap;
-  opacity: 1;
-  transition:
-    opacity var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
-    color var(--agassi-wholesale-duration) var(--agassi-wholesale-duration);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-header__nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 1px;
-  border-radius: 999px;
-  background: #1E1E1E;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 480ms linear;
-}
-
-.agassi-wholesale-header__nav a:hover,
-#allrecords .agassi-wholesale-header__nav a:hover,
-.t-records .agassi-wholesale-header__nav a:hover {
-  border-color: transparent;
-  color: #1E1E1E;
-  opacity: 1;
-}
-
-.agassi-wholesale-header__nav a:hover::after {
-  transform: scaleX(1);
-}
-
-.agassi-wholesale-header__actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 16px;
-}
-
-.agassi-wholesale-header__language {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  flex: 0 0 40px;
-}
-
-.agassi-wholesale-header__language::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  height: 8px;
-}
-
-.agassi-wholesale-header__language-current,
-#allrecords .agassi-wholesale-header__language-current,
-.t-records .agassi-wholesale-header__language-current {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px !important;
-  min-width: 40px !important;
-  max-width: 40px !important;
-  height: 40px !important;
-  min-height: 40px !important;
-  max-height: 40px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  border-radius: 50% !important;
-  background: var(--agassi-wholesale-crimson) !important;
-  color: var(--agassi-wholesale-white) !important;
-  text-decoration: none !important;
-  cursor: pointer;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-header__language-current:hover,
-#allrecords .agassi-wholesale-header__language-current:hover,
-.t-records .agassi-wholesale-header__language-current:hover {
-  border: 0 !important;
-  background: var(--agassi-wholesale-crimson) !important;
-  color: var(--agassi-wholesale-white) !important;
-  text-decoration: none !important;
-}
-
-.agassi-wholesale-header__language-dropdown {
-  position: absolute;
-  z-index: 1001;
-  top: calc(100% + 8px);
-  left: 50%;
-  display: flex;
-  flex-direction: column;
-  width: 64px;
-  padding: 6px;
-  border-radius: 18px;
-  background: var(--agassi-wholesale-white);
-  box-shadow: 0 12px 32px rgba(30, 30, 30, .10);
-  display: none;
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(-50%, -6px);
-}
-
-@keyframes agassi-wholesale-dropdown-in {
-  from { opacity: 0; transform: translate(-50%, -6px); }
-  to { opacity: 1; transform: translate(-50%, 0); }
-}
-
-.agassi-wholesale-header__language:hover .agassi-wholesale-header__language-dropdown,
-.agassi-wholesale-header__language:focus-within .agassi-wholesale-header__language-dropdown {
-  display: block;
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, 0);
-  animation: agassi-wholesale-dropdown-in 240ms var(--agassi-wholesale-ease);
-}
-
-.agassi-wholesale-header__language-option,
-#allrecords .agassi-wholesale-header__language-option,
-.t-records .agassi-wholesale-header__language-option {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 36px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 12px;
-  background: transparent;
-  color: #1E1E1E;
-  text-decoration: none;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: 0;
-  transition:
-    background-color 240ms var(--agassi-wholesale-ease),
-    color 240ms var(--agassi-wholesale-ease);
-}
-
-.agassi-wholesale-header__language-option:hover,
-#allrecords .agassi-wholesale-header__language-option:hover,
-.t-records .agassi-wholesale-header__language-option:hover {
-  border: 0;
-  background: var(--agassi-wholesale-sand);
-  color: var(--agassi-wholesale-crimson);
-}
-
-.agassi-wholesale-header__cta,
-#allrecords .agassi-wholesale-header__cta,
-.t-records .agassi-wholesale-header__cta {
-  min-height: 40px;
-  padding: 0 16px;
-}
-
-.agassi-wholesale-header__burger-wrap {
-  display: none;
-}
-
-.agassi-wholesale-header--mobile {
-  display: none;
-}
-
-.agassi-wholesale-header__burger {
-  position: relative;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 52px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
-.agassi-wholesale-header__burger-icon {
-  display: block;
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-}
-
-.agassi-wholesale-header__burger-icon[src=""] {
-  visibility: hidden;
-}
-
-.agassi-wholesale-header__mobile-menu {
-  display: none;
-}
-
-.agassi-wholesale-header__mobile-inner {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: 100%;
-  opacity: 0;
-  transition: opacity 280ms var(--agassi-wholesale-ease);
-}
-
-.agassi-wholesale-header-slot.is-menu-open .agassi-wholesale-header__mobile-inner {
-  opacity: 1;
-  transition: opacity 420ms var(--agassi-wholesale-ease) 180ms;
-}
-
-.agassi-wholesale-header__mobile-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  flex: 0 0 auto;
-}
-
-.agassi-wholesale-header__mobile-logo,
-#allrecords .agassi-wholesale-header__mobile-logo,
-.t-records .agassi-wholesale-header__mobile-logo {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  color: var(--agassi-wholesale-white);
-  text-decoration: none;
-}
-
-.agassi-wholesale-header__mobile-logo img {
-  display: block;
-  width: auto;
-  max-width: 116px;
-  height: auto;
-  max-height: 34px;
-  filter: none;
-}
-
-.agassi-wholesale-header__mobile-close {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 52px;
-  flex: 0 0 52px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
-.agassi-wholesale-header__close-icon {
-  display: block;
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-}
-
-.agassi-wholesale-header__close-icon[src=""] {
-  visibility: hidden;
-}
-
-.agassi-wholesale-header__mobile-nav {
-  display: flex;
-  flex: 1 0 auto;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 8px;
-  width: 100%;
-  padding: 72px 0 32px;
-}
-
-.agassi-wholesale-header__mobile-nav a,
-#allrecords .agassi-wholesale-header__mobile-nav a,
-.t-records .agassi-wholesale-header__mobile-nav a {
-  position: relative;
-  display: inline-block;
-  margin: 0;
-  padding: 4px 0;
-  border: 0;
-  color: var(--agassi-wholesale-white);
-  text-decoration: none;
-  font-family: var(--t-text-font);
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-header__mobile-nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 1px;
-  border-radius: 999px;
-  background: var(--agassi-wholesale-white);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 480ms linear;
-}
-
-.agassi-wholesale-header__mobile-nav a:hover,
-#allrecords .agassi-wholesale-header__mobile-nav a:hover,
-.t-records .agassi-wholesale-header__mobile-nav a:hover {
-  border-color: transparent;
-  color: var(--agassi-wholesale-white);
-}
-
-.agassi-wholesale-header__mobile-nav a:hover::after {
-  transform: scaleX(1);
-}
-
-.agassi-wholesale-header__mobile-bottom {
-  display: flex;
-  flex: 0 0 auto;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 16px;
-  width: 100%;
-}
-
-.agassi-wholesale-header__mobile-language {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-  width: 100%;
-}
-
-.agassi-wholesale-header__mobile-language-button,
-#allrecords .agassi-wholesale-header__mobile-language-button,
-.t-records .agassi-wholesale-header__mobile-language-button {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 56px;
-  margin: 0;
-  padding: 0 24px;
-  border: 1px solid var(--agassi-wholesale-on-crimson);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--agassi-wholesale-white);
-  text-align: center;
-  text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
-  transition:
-    border-color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
-    background var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
-    color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-header__mobile-language-button::after {
-  display: none;
-}
-
-.agassi-wholesale-header__mobile-language-button.is-active,
-#allrecords .agassi-wholesale-header__mobile-language-button.is-active,
-.t-records .agassi-wholesale-header__mobile-language-button.is-active {
-  border: 1px solid var(--agassi-wholesale-white);
-  background: var(--agassi-wholesale-white);
-  color: var(--agassi-wholesale-crimson);
-}
-
-.agassi-wholesale-header__mobile-language-button:hover,
-#allrecords .agassi-wholesale-header__mobile-language-button:hover,
-.t-records .agassi-wholesale-header__mobile-language-button:hover {
-  border: 1px solid var(--agassi-wholesale-white);
-}
-
-.agassi-wholesale-header__mobile-language-button.is-active:hover,
-#allrecords .agassi-wholesale-header__mobile-language-button.is-active:hover,
-.t-records .agassi-wholesale-header__mobile-language-button.is-active:hover {
-  background: var(--agassi-wholesale-white);
-  color: var(--agassi-wholesale-crimson);
-}
-
-.agassi-wholesale-header__mobile-cta,
-#allrecords .agassi-wholesale-header__mobile-cta,
-.t-records .agassi-wholesale-header__mobile-cta {
-  width: 100%;
-}
-
-.agassi-wholesale-header a:focus-visible,
-.agassi-wholesale-header button:focus-visible,
-.agassi-wholesale-header__mobile-menu a:focus-visible,
-.agassi-wholesale-header__mobile-menu button:focus-visible {
-  outline: 2px solid var(--agassi-wholesale-gold);
-  outline-offset: 4px;
-}
-
-@supports ((-webkit-mask-image: url("x")) or (mask-image: url("x"))) {
-  .agassi-wholesale-header__mobile-logo img {
-    visibility: hidden;
-  }
-
-  .agassi-wholesale-header__mobile-logo::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    display: block;
-    background: var(--agassi-wholesale-gold-gradient);
-    -webkit-mask:
-      url("https://static.tildacdn.one/tild3238-3961-4734-b335-316238666331/agassi.svg")
-      left center / contain no-repeat;
-    mask:
-      url("https://static.tildacdn.one/tild3238-3961-4734-b335-316238666331/agassi.svg")
-      left center / contain no-repeat;
-  }
-}
-
-@media (max-width: 1440px) {
-.agassi-wholesale-header__frame {
-    grid-template-columns: 140px minmax(0, 1fr) auto;
-    gap: 16px;
-  }
-
-  .agassi-wholesale-header__nav {
-    gap: 20px;
-  }
-}
-
-@media (max-width: 1200px) {
-  #why,
-  #why-agassi,
-  #products,
-  #support,
-  #stories,
-  #faq,
-  #contacts {
-    scroll-margin-top: 68px;
-  }
-
-  .agassi-wholesale-header-slot {
-    --agassi-wholesale-header-height: 60px;
-    height: 68px;
-    min-height: 68px;
-    max-height: 68px;
-  }
-
-  .agassi-wholesale-header {
-    top: 4px;
-  }
-
-  .agassi-wholesale-header__frame {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 8px 0 20px;
-    gap: 16px;
-  }
-
-  .agassi-wholesale-header__nav,
-  .agassi-wholesale-header__language,
-  .agassi-wholesale-header__cta,
-  #allrecords .agassi-wholesale-header__cta,
-  .t-records .agassi-wholesale-header__cta {
-    display: none;
-  }
-
-  .agassi-wholesale-header__actions {
-    gap: 12px;
-    margin-left: auto;
-  }
-
-  .agassi-wholesale-header--desktop {
-    display: none;
-  }
-
-  .agassi-wholesale-header--mobile {
-    display: block;
-  }
-
-  .agassi-wholesale-header__burger-wrap {
-    display: flex;
-    margin-left: auto;
-  }
-
-  .agassi-wholesale-header__burger {
-    display: flex;
-    width: 52px;
-    height: 52px;
-  }
-
-  .agassi-wholesale-header__logo,
-  #allrecords .agassi-wholesale-header__logo,
-  .t-records .agassi-wholesale-header__logo,
-  .agassi-wholesale-header__logo img {
-    max-width: 116px;
-  }
-
-  .agassi-wholesale-header__logo img {
-    max-height: 34px;
-  }
-
-  .agassi-wholesale-header__mobile-menu {
-    position: fixed;
-    z-index: 10000;
-    inset: 0;
-    display: block;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: var(--agassi-wholesale-crimson);
-    transform: translate3d(0, -100%, 0);
-    visibility: hidden;
-    pointer-events: none;
-    overflow-x: hidden;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-    transition:
-      transform 700ms var(--agassi-wholesale-ease),
-      visibility 0s linear 700ms;
-    will-change: transform;
-  }
-
-  .agassi-wholesale-header-slot.is-menu-open .agassi-wholesale-header__mobile-menu {
-    transform: translate3d(0, 0, 0);
-    visibility: visible;
-    pointer-events: auto;
-    transition:
-      transform 700ms var(--agassi-wholesale-ease),
-      visibility 0s linear 0s;
-  }
-
-  .agassi-wholesale-header__mobile-inner {
-    min-height: 100vh;
-    min-height: 100dvh;
-    padding-top: env(safe-area-inset-top);
-    padding-right: calc(var(--agassi-wholesale-frame-gap) + 20px);
-    padding-bottom: max(40px, env(safe-area-inset-bottom));
-    padding-left: calc(var(--agassi-wholesale-frame-gap) + 20px);
-  }
-
-  .agassi-wholesale-header__mobile-top {
-    width: calc(100% + 12px);
-    margin: 0 -12px 0 0;
-    padding: 4px 0 0;
-  }
-}
-
-@media (max-width: 640px) {
-.agassi-wholesale-header__mobile-inner {
-    padding-top: env(safe-area-inset-top);
-    padding-right: calc(var(--agassi-wholesale-frame-gap) + 20px);
-    padding-bottom: max(28px, env(safe-area-inset-bottom));
-    padding-left: calc(var(--agassi-wholesale-frame-gap) + 20px);
-  }
-
-  .agassi-wholesale-header__mobile-top {
-    width: calc(100% + 12px);
-    margin: 0 -12px 0 0;
-    padding-top: 4px;
-  }
-
-  .agassi-wholesale-header__mobile-nav {
-    gap: 8px;
-    padding: 56px 0 28px;
-  }
-
-  .agassi-wholesale-header__mobile-nav a,
-  #allrecords .agassi-wholesale-header__mobile-nav a,
-  .t-records .agassi-wholesale-header__mobile-nav a {
-    padding: 4px 0;
-    font-size: 24px;
-    line-height: 1.3;
-  }
-
-  .agassi-wholesale-header__mobile-language-button,
-  #allrecords .agassi-wholesale-header__mobile-language-button,
-  .t-records .agassi-wholesale-header__mobile-language-button {
-    min-height: 48px;
-    padding: 0 24px;
-    border-radius: 999px;
-  }
-
-  .agassi-wholesale-header__mobile-language-button.is-active,
-  #allrecords .agassi-wholesale-header__mobile-language-button.is-active,
-  .t-records .agassi-wholesale-header__mobile-language-button.is-active {
-    border: 1px solid var(--agassi-wholesale-white);
-    background: var(--agassi-wholesale-white);
-    color: var(--agassi-wholesale-crimson);
-  }
-
-}
-
-@media (max-width: 480px) {
-.agassi-wholesale-header__mobile-inner {
-    padding-top: env(safe-area-inset-top);
-    padding-right: calc(var(--agassi-wholesale-frame-gap) + 20px);
-    padding-bottom: max(24px, env(safe-area-inset-bottom));
-    padding-left: calc(var(--agassi-wholesale-frame-gap) + 20px);
-  }
-
-  .agassi-wholesale-header__mobile-top {
-    width: calc(100% + 12px);
-    margin: 0 -12px 0 0;
-  }
-
-  .agassi-wholesale-header__mobile-nav {
-    gap: 8px;
-    padding: 48px 0 24px;
-  }
-
-  .agassi-wholesale-header__mobile-nav a,
-  #allrecords .agassi-wholesale-header__mobile-nav a,
-  .t-records .agassi-wholesale-header__mobile-nav a {
-    padding: 4px 0;
-    font-size: 24px;
-    line-height: 1.3;
-  }
-
-  .agassi-wholesale-header__mobile-language {
-    gap: 8px;
-  }
-}
-
-@media (max-width: 360px) {
-.agassi-wholesale-header__mobile-inner {
-    padding-top: env(safe-area-inset-top);
-    padding-right: calc(var(--agassi-wholesale-frame-gap) + 20px);
-    padding-bottom: max(20px, env(safe-area-inset-bottom));
-    padding-left: calc(var(--agassi-wholesale-frame-gap) + 20px);
-  }
-
-  .agassi-wholesale-header__mobile-top {
-    width: calc(100% + 12px);
-    margin: 0 -12px 0 0;
-  }
-
-  .agassi-wholesale-header__mobile-nav {
-    gap: 6px;
-    padding: 40px 0 24px;
-  }
-
-  .agassi-wholesale-header__mobile-nav a,
-  #allrecords .agassi-wholesale-header__mobile-nav a,
-  .t-records .agassi-wholesale-header__mobile-nav a {
-    font-size: 22px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .agassi-wholesale-header-slot *,
-  .agassi-wholesale-header-slot *::before,
-  .agassi-wholesale-header-slot *::after {
-    transition-duration: .01ms !important;
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-  }
-}
-
-/* Hero */
-/* Hero: две половины на всю ширину и высоту экрана */
-.agassi-wholesale-hero {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  width: 100%;
-  min-height: max(560px, calc(var(--agassi-wholesale-viewport, 100svh) - 72px));
-  margin: 0;
-  background: var(--agassi-wholesale-crimson);
-  color: var(--agassi-wholesale-white);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.agassi-wholesale-hero__content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 0;
-}
-
-.agassi-wholesale-hero__copy {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 590px;
-  padding: 48px;
-  text-align: center;
-}
-
-.agassi-wholesale-hero__title {
-  max-width: 540px;
-  margin: 0;
-  color: var(--agassi-wholesale-white);
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  text-transform: uppercase;
-  text-wrap: balance;
-  font-size: var(--agassi-wholesale-font-display);
-  line-height: var(--agassi-wholesale-line-display);
-}
-
-.agassi-wholesale-hero__lead {
-  max-width: 430px;
-  margin: 20px 0 0;
-  color: var(--agassi-wholesale-on-crimson);
-}
-
-.agassi-wholesale-hero__button,
-#allrecords .agassi-wholesale-hero__button,
-.t-records .agassi-wholesale-hero__button {
-  margin-top: 32px;
-}
-
-.agassi-wholesale-hero__visual {
-  position: relative;
-  min-width: 0;
-  overflow: hidden;
-}
-
-.agassi-wholesale-hero__image {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-@media (max-width: 1440px) {
-  .agassi-wholesale-hero__copy { max-width: 540px; padding: 40px; }
-  .agassi-wholesale-hero__title { max-width: 500px; }
-  .agassi-wholesale-hero__lead { max-width: 410px; }
-}
-
-@media (max-width: 1200px) {
-  .agassi-wholesale-hero { min-height: max(560px, calc(var(--agassi-wholesale-viewport, 100svh) - 68px)); }
-  .agassi-wholesale-hero__copy { max-width: 480px; padding: 36px; }
-  .agassi-wholesale-hero__title { max-width: 450px; }
-  .agassi-wholesale-hero__lead { max-width: 380px; margin-top: 16px; }
-}
-
-@media (max-width: 960px) {
-  .agassi-wholesale-hero { grid-template-columns: 1fr; min-height: 0; }
-  .agassi-wholesale-hero__content { padding: 72px 0 64px; }
-  .agassi-wholesale-hero__copy { max-width: 620px; padding: 0 24px; }
-  .agassi-wholesale-hero__title { max-width: 560px; }
-  .agassi-wholesale-hero__lead { max-width: 440px; margin-top: 20px; }
-  .agassi-wholesale-hero__visual { aspect-ratio: 4 / 3; }
-}
-
-@media (max-width: 640px) {
-  .agassi-wholesale-hero__content { padding: 56px 0 48px; }
-  .agassi-wholesale-hero__copy { max-width: none; padding: 0 16px; }
-  .agassi-wholesale-hero__title { max-width: 470px; }
-  .agassi-wholesale-hero__lead { max-width: 380px; margin-top: 16px; }
-}
-
-/* Заявление */
-.agassi-wholesale-statement {
-  position: relative;
-  display: block;
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
-  background: var(--agassi-wholesale-ivory);
-  color: var(--agassi-wholesale-ink);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-statement__frame {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: min( var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)) );
-  margin: 0 auto;
-}
-
-.agassi-wholesale-statement__content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 1180px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.agassi-wholesale-statement__title {
-  position: relative;
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-align: center;
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
-}
-
-.agassi-wholesale-statement__text {
-  max-width: 650px;
-  margin: 24px auto 0;
-  padding: 0;
-  color: var(--agassi-wholesale-muted);
-  text-align: center;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-statement__flowers {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: min( var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)) );
-  transform: translateX(-50%);
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.agassi-wholesale-statement__flower {
-  position: absolute;
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  object-fit: contain;
-  pointer-events: none;
-  user-select: none;
-  -webkit-user-drag: none;
-  will-change: transform;
-}
-
-.agassi-wholesale-statement__flower--1 {
-  top: 10%;
-  left: 2%;
-  width: 116px;
-  transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
-}
-
-.agassi-wholesale-statement__flower--2 {
-  top: 1%;
-  left: 15%;
-  width: 66px;
-  transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
-}
-
-.agassi-wholesale-statement__flower--3 {
-  top: 12%;
-  right: 9%;
-  width: 98px;
-  transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
-}
-
-.agassi-wholesale-statement__flower--4 {
-  top: 44%;
-  right: 1%;
-  width: 82px;
-  transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
-}
-
-.agassi-wholesale-statement__flower--5 {
-  top: 57%;
-  left: 1%;
-  width: 56px;
-  transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
-}
-
-.agassi-wholesale-statement__flower--6 {
-  top: 80%;
-  right: 16%;
-  width: 40px;
-  transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
-}
-
-
-
-
-
-
-@media (max-width: 1440px) {
-.agassi-wholesale-statement__content {
-    max-width: 1050px;
-  }
-
-  .agassi-wholesale-statement__title {
-    max-width: 900px;
-  }
-
-  .agassi-wholesale-statement__text {
-    max-width: 620px;
-  }
-
-
-
-
-
-
-  .agassi-wholesale-statement__flower--1 {
-    top: 10%;
-    left: 2%;
-    width: 104px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
-  }
-
-  .agassi-wholesale-statement__flower--2 {
-    top: 1%;
-    left: 15%;
-    width: 60px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
-  }
-
-  .agassi-wholesale-statement__flower--3 {
-    top: 12%;
-    right: 9%;
-    width: 88px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
-  }
-
-  .agassi-wholesale-statement__flower--4 {
-    top: 44%;
-    right: 1%;
-    width: 76px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
-  }
-
-  .agassi-wholesale-statement__flower--5 {
-    top: 57%;
-    left: 1%;
-    width: 50px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
-  }
-
-  .agassi-wholesale-statement__flower--6 {
-    top: 80%;
-    right: 16%;
-    width: 36px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
-  }
-
-}
-
-@media (max-width: 1200px) {
-.agassi-wholesale-statement__content {
-    max-width: 900px;
-  }
-
-  .agassi-wholesale-statement__title {
-    max-width: 760px;
-  }
-
-  .agassi-wholesale-statement__text {
-    max-width: 580px;
-    margin-top: 24px;
-  }
-
-
-
-
-
-
-  .agassi-wholesale-statement__flower--1 {
-    top: 10%;
-    left: 3%;
-    width: 92px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
-  }
-
-  .agassi-wholesale-statement__flower--2 {
-    top: 1%;
-    left: 15%;
-    width: 54px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
-  }
-
-  .agassi-wholesale-statement__flower--3 {
-    top: 14%;
-    right: 8%;
-    width: 78px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
-  }
-
-  .agassi-wholesale-statement__flower--4 {
-    top: 45%;
-    right: 1%;
-    width: 70px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
-  }
-
-  .agassi-wholesale-statement__flower--5 {
-    top: 58%;
-    left: 0.5%;
-    width: 46px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
-  }
-
-  .agassi-wholesale-statement__flower--6 {
-    top: 80%;
-    right: 15%;
-    width: 32px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
-  }
-
-}
-
-@media (max-width: 1100px) {
-  .agassi-wholesale-statement__flower--1 {
-    top: 10%;
-    left: 1%;
-    width: 92px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
-  }
-
-  .agassi-wholesale-statement__flower--2 {
-    top: 82%;
-    left: 40%;
-    width: 54px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
-  }
-
-  .agassi-wholesale-statement__flower--3 {
-    top: 14%;
-    right: 3%;
-    width: 78px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
-  }
-
-  .agassi-wholesale-statement__flower--4 {
-    top: 86%;
-    right: 30%;
-    width: 56px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
-  }
-
-  .agassi-wholesale-statement__flower--5 {
-    top: 58%;
-    left: 2%;
-    width: 46px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
-  }
-
-  .agassi-wholesale-statement__flower--6 {
-    top: 87%;
-    right: 14%;
-    width: 30px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
-  }
-}
-
-@media (max-width: 960px) {
-.agassi-wholesale-statement__content {
-    max-width: 760px;
-  }
-
-  .agassi-wholesale-statement__title {
-    max-width: 720px;
-  }
-
-  .agassi-wholesale-statement__text {
-    max-width: 540px;
-    margin-top: 24px;
-  }
-
-
-
-
-
-
-  .agassi-wholesale-statement__flower--1 {
-    top: 1%;
-    left: 4%;
-    width: 56px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
-  }
-
-  .agassi-wholesale-statement__flower--2 {
-    top: 1%;
-    left: 42%;
-    width: 40px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
-  }
-
-  .agassi-wholesale-statement__flower--3 {
-    top: 1%;
-    right: 5%;
-    width: 50px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
-  }
-
-  .agassi-wholesale-statement__flower--4 {
-    top: 88%;
-    left: 18%;
-    width: 46px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
-  }
-
-  .agassi-wholesale-statement__flower--5 {
-    top: 89%;
-    right: 20%;
-    width: 38px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
-  }
-
-  .agassi-wholesale-statement__flower--6 {
-    top: 89%;
-    right: 45%;
-    width: 26px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
-  }
-
-}
-
-@media (max-width: 640px) {
-
-  .agassi-wholesale-statement__title {
-    max-width: 520px;
-  }
-
-  .agassi-wholesale-statement__text {
-    max-width: 440px;
-    margin-top: 16px;
-  }
-
-
-
-
-
-
-  .agassi-wholesale-statement__flower--1 {
-    top: 1%;
-    left: 4%;
-    width: 44px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
-  }
-
-  .agassi-wholesale-statement__flower--2 {
-    top: 1%;
-    left: 42%;
-    width: 32px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
-  }
-
-  .agassi-wholesale-statement__flower--3 {
-    top: 1%;
-    right: 5%;
-    width: 40px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
-  }
-
-  .agassi-wholesale-statement__flower--4 {
-    top: 88%;
-    left: 18%;
-    width: 38px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
-  }
-
-  .agassi-wholesale-statement__flower--5 {
-    top: 89%;
-    right: 20%;
-    width: 30px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
-  }
-
-  .agassi-wholesale-statement__flower--6 {
-    top: 89%;
-    right: 45%;
-    width: 22px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
-  }
-
-}
-
-@media (max-width: 480px) {
-.agassi-wholesale-statement__text {
-    max-width: 370px;
-    margin-top: 16px;
-  }
-
-
-
-
-
-
-  .agassi-wholesale-statement__flower--1 {
-    top: 1%;
-    left: 4%;
-    width: 40px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
-  }
-
-  .agassi-wholesale-statement__flower--2 {
-    top: 1%;
-    left: 42%;
-    width: 30px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
-  }
-
-  .agassi-wholesale-statement__flower--3 {
-    top: 1%;
-    right: 5%;
-    width: 36px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
-  }
-
-  .agassi-wholesale-statement__flower--4 {
-    top: 88%;
-    left: 18%;
-    width: 34px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
-  }
-
-  .agassi-wholesale-statement__flower--5 {
-    top: 89%;
-    right: 20%;
-    width: 28px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
-  }
-
-  .agassi-wholesale-statement__flower--6 {
-    top: 89%;
-    right: 45%;
-    width: 20px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
-  }
-
-}
-
-@media (max-width: 360px) {
-
-
-
-
-
-
-  .agassi-wholesale-statement__flower--1 {
-    top: 1%;
-    left: 4%;
-    width: 36px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
-  }
-
-  .agassi-wholesale-statement__flower--2 {
-    top: 1%;
-    left: 42%;
-    width: 26px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
-  }
-
-  .agassi-wholesale-statement__flower--3 {
-    top: 1%;
-    right: 5%;
-    width: 32px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
-  }
-
-  .agassi-wholesale-statement__flower--4 {
-    top: 88%;
-    left: 18%;
-    width: 30px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
-  }
-
-  .agassi-wholesale-statement__flower--5 {
-    top: 89%;
-    right: 20%;
-    width: 24px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
-  }
-
-  .agassi-wholesale-statement__flower--6 {
-    top: 89%;
-    right: 45%;
-    width: 18px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
-  }
-
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .agassi-wholesale-statement__flower {
-    transform: none !important;
-  }
-}
-
-/* Цифры */
-.agassi-wholesale-numbers {
-  position: relative;
-  display: block;
-  width: 100%;
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-  background: var(--agassi-wholesale-crimson);
-  color: var(--agassi-wholesale-white);
-  padding: var(--agassi-wholesale-section-space) 0;
-}
-
-.agassi-wholesale-numbers__frame {
-  position: relative;
-  width: min(var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)));
-  margin: 0 auto;
-}
-
-.agassi-wholesale-numbers__header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto 48px;
-  text-align: center;
-}
-
-.agassi-wholesale-numbers__title {
-  width: 100%;
-  max-width: 1000px;
-  margin: 0;
-  padding: 0;
-  color: var(--agassi-wholesale-white);
-  text-align: center;
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
-}
-
-.agassi-wholesale-numbers__grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--agassi-wholesale-line-crimson);
-}
-
-.agassi-wholesale-numbers__item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-width: 0;
-  min-height: 272px;
-  margin: 0;
-  padding: 64px 16px 40px;
-  text-align: center;
-}
-
-.agassi-wholesale-numbers__item:not(:first-child) {
-  border-left: 1px solid var(--agassi-wholesale-line-crimson);
-}
-
-.agassi-wholesale-numbers__value {
-  margin: 0;
-  padding: 0;
-  color: var(--agassi-wholesale-gold);
-  background: var(--agassi-wholesale-gold-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-  font-family: var(--t-text-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-display);
-  line-height: var(--agassi-wholesale-line-display);
-}
-
-.agassi-wholesale-numbers__label {
-  width: 100%;
-  max-width: none;
-  margin: 16px auto 0;
-  padding: 0;
-  color: var(--agassi-wholesale-on-crimson);
-  text-align: center;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-small);
-  letter-spacing: 0;
-}
-
-@media (max-width: 1440px) {
-.agassi-wholesale-numbers__header {
-    max-width: 920px;
-    margin-bottom: 40px;
-  }
-
-  .agassi-wholesale-numbers__title {
-    max-width: 920px;
-  }
-
-
-}
-
-@media (max-width: 1200px) {
-.agassi-wholesale-numbers__header {
-    max-width: 820px;
-    margin-bottom: 28px;
-  }
-
-  .agassi-wholesale-numbers__title {
-    max-width: 820px;
-  }
-
-
-}
-
-@media (max-width: 960px) {
-.agassi-wholesale-numbers__header {
-    max-width: 720px;
-    margin-bottom: 24px;
-  }
-
-  .agassi-wholesale-numbers__title {
-    max-width: 720px;
-  }
-
-  .agassi-wholesale-numbers__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-
-  .agassi-wholesale-numbers__item:not(:first-child) {
-    border-left: 0;
-  }
-
-  .agassi-wholesale-numbers__item:nth-child(even) {
-    border-left: 1px solid var(--agassi-wholesale-line-crimson);
-  }
-
-  .agassi-wholesale-numbers__item:nth-child(n+3) {
-    border-top: 1px solid var(--agassi-wholesale-line-crimson);
-  }
-
-}
-
-@media (max-width: 640px) {
-.agassi-wholesale-numbers__header {
-    margin-bottom: 24px;
-  }
-
-  .agassi-wholesale-numbers__item {
-    min-height: 192px;
-    padding: 40px 12px 32px;
-  }
-
-  .agassi-wholesale-numbers__title {
-    max-width: 520px;
-  }
-
-
-  .agassi-wholesale-numbers__label {
-    max-width: none;
-    margin-top: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-.agassi-wholesale-numbers__header {
-    margin-bottom: 20px;
-  }
-
-
-  .agassi-wholesale-numbers__label {
-    margin-top: 12px;
-  }
-}
-
-.agassi-wholesale-numbers__surface {
-  position: relative;
-  width: 100%;
-}
-
-/* Почему Agassi */
-.agassi-wholesale-why {
-  position: relative;
-  display: block;
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
-  background: var(--agassi-wholesale-ivory);
-  color: var(--agassi-wholesale-ink);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-why__frame {
-  width: min( var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)) );
-  margin: 0 auto;
-}
-
-.agassi-wholesale-why__header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin: 0 0 48px;
-  text-align: center;
-}
-
-.agassi-wholesale-why__title {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-align: center;
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
-}
-
-.agassi-wholesale-why__layout {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--agassi-wholesale-gap);
-  align-items: stretch;
-}
-
-.agassi-wholesale-why__feature {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  min-width: 0;
-  min-height: 720px;
-  padding: 44px;
-  overflow: hidden;
-  border-radius: var(--agassi-wholesale-radius);
-  color: var(--agassi-wholesale-white);
-}
-
-.agassi-wholesale-why__feature-overlay {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  background: linear-gradient( 180deg, rgba(140, 15, 20, .64) 0%, rgba(140, 15, 20, .56) 40%, rgba(140, 15, 20, .96) 100% );
-  pointer-events: none;
-}
-
-.agassi-wholesale-why__feature-content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 560px;
-}
-
-.agassi-wholesale-why__feature-number {
-  margin: 0 0 20px;
-  padding: 0;
-  color: var(--agassi-wholesale-gold);
-  background: var(--agassi-wholesale-gold-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: var(--t-text-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-display);
-  line-height: var(--agassi-wholesale-line-display);
-}
-
-.agassi-wholesale-why__feature-title {
-  max-width: 500px;
-  margin: 0;
-  padding: 0;
-  color: var(--agassi-wholesale-white);
-  font-family: var(--t-text-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h3);
-  line-height: var(--agassi-wholesale-line-h3);
-}
-
-.agassi-wholesale-why__feature-text {
-  max-width: 520px;
-  margin: 8px 0 0;
-  padding: 0;
-  color: var(--agassi-wholesale-on-crimson);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-why__benefits {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--agassi-wholesale-gap);
-}
-
-.agassi-wholesale-why__benefit {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  min-height: 0;
-  padding: 28px;
-  overflow: hidden;
-  border-radius: var(--agassi-wholesale-radius);
-  background: var(--agassi-wholesale-white);
-  color: #1E1E1E;
-}
-
-.agassi-wholesale-why__benefit-number {
-  margin: 0 0 auto;
-  padding: 0 0 28px;
-  color: var(--agassi-wholesale-crimson);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-why__benefit-title {
-  max-width: 300px;
-  margin: 0;
-  padding: 0;
-  color: #1E1E1E;
-  font-family: var(--t-text-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h4);
-  line-height: var(--agassi-wholesale-line-h4);
-}
-
-.agassi-wholesale-why__benefit-text {
-  max-width: 330px;
-  margin: 8px 0 0;
-  padding: 0;
-  color: var(--agassi-wholesale-muted);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-@media (max-width: 1440px) {
-.agassi-wholesale-why__header {
-    margin-bottom: 40px;
-  }
-
-  .agassi-wholesale-why__title {
-    max-width: 900px;
-  }
-
-  .agassi-wholesale-why__feature {
-    min-height: 660px;
-    padding: 40px;
-  }
-
-  .agassi-wholesale-why__benefit {
-    padding: 24px;
-  }
-}
-
-@media (max-width: 1200px) {
-.agassi-wholesale-why__header {
-    margin-bottom: 36px;
-  }
-
-  .agassi-wholesale-why__title {
-    max-width: 760px;
-  }
-
-  .agassi-wholesale-why__layout {
-    grid-template-columns: 1fr;
-  }
-
-  .agassi-wholesale-why__feature {
-    aspect-ratio: 1 / 1;
-    min-height: 0;
-    padding: 36px;
-  }
-
-  .agassi-wholesale-why__feature-content {
-    max-width: 620px;
-  }
-
-  .agassi-wholesale-why__feature-number {
-    margin-bottom: 16px;
-  }
-
-  .agassi-wholesale-why__feature-title {
-    max-width: 500px;
-  }
-
-  .agassi-wholesale-why__feature-text {
-    max-width: 520px;
-  }
-
-  .agassi-wholesale-why__benefit {
-    min-height: 280px;
-    padding: 28px;
-  }
-
-  .agassi-wholesale-why__benefit-number {
-    padding-bottom: 24px;
-  }
-
-  .agassi-wholesale-why__benefit-title {
-    max-width: 360px;
-  }
-
-  .agassi-wholesale-why__benefit-text {
-    max-width: 420px;
-  }
-}
-
-@media (max-width: 960px) {
-.agassi-wholesale-why__header {
-    margin-bottom: 32px;
-  }
-
-  .agassi-wholesale-why__title {
-    max-width: 720px;
-  }
-
-  .agassi-wholesale-why__feature {
-    aspect-ratio: 1 / 1;
-    min-height: 0;
-    padding: 36px;
-  }
-
-  .agassi-wholesale-why__feature-number {
-    margin-bottom: 16px;
-  }
-
-}
-
-@media (max-width: 640px) {
-.agassi-wholesale-why__header {
-    margin-bottom: 24px;
-  }
-
-  .agassi-wholesale-why__title {
-    max-width: 520px;
-  }
-
-  .agassi-wholesale-why__feature {
-    aspect-ratio: 1 / 1;
-    min-height: 0;
-    padding: 28px;
-  }
-
-  .agassi-wholesale-why__feature-number {
-    margin-bottom: 16px;
-  }
-
-  .agassi-wholesale-why__feature-title {
-    max-width: 400px;
-  }
-
-  .agassi-wholesale-why__feature-text {
-    max-width: 400px;
-    margin-top: 8px;
-  }
-
-  .agassi-wholesale-why__benefits {
-    grid-template-columns: 1fr;
-  }
-
-  .agassi-wholesale-why__benefit {
-    min-height: 248px;
-    padding: 24px;
-  }
-
-  .agassi-wholesale-why__benefit-number {
-    padding-bottom: 32px;
-  }
-
-  .agassi-wholesale-why__benefit-text {
-    margin-top: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-.agassi-wholesale-why__header {
-    margin-bottom: 24px;
-  }
-
-  .agassi-wholesale-why__feature {
-    aspect-ratio: 1 / 1;
-    min-height: 0;
-    padding: 24px;
-  }
-
-  .agassi-wholesale-why__benefit {
-    min-height: 232px;
-    padding: 24px;
-  }
-}
-
-@media (max-width: 360px) {
-.agassi-wholesale-why__feature,
-  .agassi-wholesale-why__benefit {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-}
-
-.agassi-wholesale-why__feature-image {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Обучение */
-.agassi-wholesale-support {
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-  background: var(--agassi-wholesale-crimson);
-  color: var(--agassi-wholesale-white);
-}
-
-.agassi-wholesale-support__frame {
-  width: min( var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)) );
-  margin: 0 auto;
-}
-
-.agassi-wholesale-support__header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto 48px;
-  text-align: center;
-}
-
-.agassi-wholesale-support__title {
-  max-width: 1000px;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  color: var(--agassi-wholesale-white);
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
-}
-
-.agassi-wholesale-support__lead {
-  max-width: 720px;
-  margin: 20px auto 0;
-  text-align: center;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-  color: var(--agassi-wholesale-on-crimson);
-}
-
-.agassi-wholesale-support__surface {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  width: 100%;
-  gap: var(--agassi-wholesale-gap);
-}
-
-.agassi-wholesale-support__visual {
-  position: relative;
-  min-width: 0;
-  min-height: 720px;
-  overflow: hidden;
-  border-radius: var(--agassi-wholesale-radius);
-}
-
-.agassi-wholesale-support__image {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.agassi-wholesale-support__content {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  padding: 56px 64px;
-  overflow: hidden;
-  border-radius: var(--agassi-wholesale-radius);
-  background: var(--agassi-wholesale-white);
-  color: var(--agassi-wholesale-ink);
-}
-
-.agassi-wholesale-support__items {
-  width: 100%;
-}
-
-.agassi-wholesale-support__item {
-  display: block;
-  padding: 28px 0;
-  border-bottom: 1px solid var(--agassi-wholesale-line);
-}
-
-.agassi-wholesale-support__item:last-child {
-  padding-bottom: 0;
-  border-bottom: 0;
-}
-
-.agassi-wholesale-support__item:first-child {
-  padding-top: 0;
-}
-
-.agassi-wholesale-support__number {
-  display: block;
-  margin: 0 0 16px;
-  padding: 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-  color: var(--agassi-wholesale-crimson);
-}
-
-.agassi-wholesale-support__item-content {
-  min-width: 0;
-}
-
-.agassi-wholesale-support__item-title {
-  margin: 0;
-  padding: 0;
-  font-family: var(--t-text-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  color: var(--agassi-wholesale-ink);
-  font-size: var(--agassi-wholesale-font-h4);
-  line-height: var(--agassi-wholesale-line-h4);
-}
-
-.agassi-wholesale-support__item-text {
-  max-width: 520px;
-  margin: 8px 0 0;
-  padding: 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-  color: var(--agassi-wholesale-muted);
-}
-
-@media (max-width: 1440px) {
-.agassi-wholesale-support__header {
-    max-width: 900px;
-    margin-bottom: 40px;
-  }
-
-  .agassi-wholesale-support__visual {
-    min-height: 680px;
-  }
-
-  .agassi-wholesale-support__content {
-    padding: 48px 52px;
-  }
-
-  .agassi-wholesale-support__item {
-    padding: 24px 0;
-  }
-}
-
-@media (max-width: 1200px) {
-.agassi-wholesale-support__header {
-    max-width: 760px;
-    margin-bottom: 36px;
-  }
-
-  .agassi-wholesale-support__lead {
-    margin-top: 16px;
-  }
-
-  .agassi-wholesale-support__visual {
-    min-height: 640px;
-  }
-
-  .agassi-wholesale-support__content {
-    padding: 40px 40px;
-  }
-
-  .agassi-wholesale-support__item {
-    padding: 24px 0;
-  }
-
-  .agassi-wholesale-support__number {
-    margin-bottom: 16px;
-  }
-
-  .agassi-wholesale-support__item-text {
-    margin-top: 8px;
-  }
-
-}
-
-@media (max-width: 960px) {
-.agassi-wholesale-support__header {
-    max-width: 720px;
-    margin-bottom: 32px;
-  }
-
-  .agassi-wholesale-support__lead {
-    margin-top: 16px;
-  }
-
-  .agassi-wholesale-support__surface {
-    grid-template-columns: 1fr;
-  }
-
-  .agassi-wholesale-support__visual {
-    min-height: 0;
-    aspect-ratio: 16 / 10;
-  }
-
-  .agassi-wholesale-support__content {
-    padding: 44px;
-  }
-
-  .agassi-wholesale-support__item {
-    display: block;
-    padding: 24px 0;
-  }
-
-  .agassi-wholesale-support__number {
-    padding-top: 0;
-    margin: 0 0 16px;
-  }
-
-  .agassi-wholesale-support__item-text {
-    max-width: 620px;
-    margin-top: 8px;
-  }
-}
-
-@media (max-width: 640px) {
-.agassi-wholesale-support__header {
-    max-width: 520px;
-    margin-bottom: 24px;
-  }
-
-  .agassi-wholesale-support__lead {
-    margin-top: 16px;
-  }
-
-  .agassi-wholesale-support__visual {
-    aspect-ratio: 4 / 3;
-  }
-
-  .agassi-wholesale-support__content {
-    padding: 32px 28px;
-  }
-
-  .agassi-wholesale-support__item {
-    padding: 24px 0;
-  }
-
-  .agassi-wholesale-support__number {
-    padding-top: 0;
-    margin-bottom: 12px;
-  }
-
-  .agassi-wholesale-support__item-text {
-    margin-top: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-.agassi-wholesale-support__header {
-    margin-bottom: 24px;
-  }
-
-  .agassi-wholesale-support__visual {
-    aspect-ratio: 1 / 1;
-  }
-
-  .agassi-wholesale-support__content {
-    padding: 28px 24px;
-  }
-
-  .agassi-wholesale-support__item {
-    padding: 20px 0;
-  }
-}
-
-@media (max-width: 360px) {
-.agassi-wholesale-support__content {
-    padding: 24px 20px;
-  }
-}
-
-/* Бренды и продукты */
-.agassi-wholesale-products {
-  position: relative;
-  display: block;
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
-  background: var(--agassi-wholesale-ivory);
-  color: var(--agassi-wholesale-ink);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-products__frame {
-  width: min( var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)) );
-  margin: 0 auto;
-}
-
-.agassi-wholesale-products__header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto 48px;
-  text-align: center;
-}
-
-.agassi-wholesale-products__title {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-align: center;
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
-}
-
-.agassi-wholesale-products__lead {
-  max-width: 680px;
-  margin: 20px auto 0;
-  padding: 0;
-  color: var(--agassi-wholesale-muted);
-  text-align: center;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-products__grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--agassi-wholesale-gap);
-  width: 100%;
-}
-
-.agassi-wholesale-products__card {
-  position: relative;
-  min-width: 0;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  border-radius: var(--agassi-wholesale-radius);
-  background: var(--agassi-wholesale-crimson);
-  color: var(--agassi-wholesale-white);
-}
-
-.agassi-wholesale-products__card-image {
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.agassi-wholesale-products__card-overlay {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  background: linear-gradient( 180deg, rgba(140, 15, 20, .64) 0%, rgba(140, 15, 20, .56) 40%, rgba(140, 15, 20, .96) 100% );
-  pointer-events: none;
-}
-
-.agassi-wholesale-products__card-content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  padding: 44px;
-}
-
-.agassi-wholesale-products__card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-}
-
-.agassi-wholesale-products__count {
-  color: var(--agassi-wholesale-white);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-products__card-bottom {
-  width: 100%;
-  max-width: 560px;
-}
-
-.agassi-wholesale-products__brand {
-  margin: 0;
-  padding: 0;
-  color: var(--agassi-wholesale-white);
-  font-family: var(--t-text-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h3);
-  line-height: var(--agassi-wholesale-line-h3);
-}
-
-.agassi-wholesale-products__category {
-  margin: 12px 0 0;
-  padding: 0;
-  color: var(--agassi-wholesale-sand);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-products__types {
-  max-width: 520px;
-  margin: 8px 0 0;
-  padding: 0;
-  color: var(--agassi-wholesale-sand);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-@media (max-width: 1440px) {
-.agassi-wholesale-products__header {
-    margin-bottom: 40px;
-  }
-
-  .agassi-wholesale-products__title {
-    max-width: 900px;
-  }
-
-
-}
-
-@media (max-width: 1200px) {
-.agassi-wholesale-products__header {
-    margin-bottom: 36px;
-  }
-
-  .agassi-wholesale-products__title {
-    max-width: 760px;
-  }
-
-  .agassi-wholesale-products__lead {
-    margin-top: 16px;
-  }
-
-  .agassi-wholesale-products__card-content {
-    padding: 40px;
-  }
-
-  .agassi-wholesale-products__category {
-    margin-top: 8px;
-  }
-
-}
-
-@media (max-width: 960px) {
-.agassi-wholesale-products__header {
-    margin-bottom: 32px;
-  }
-
-  .agassi-wholesale-products__title {
-    max-width: 720px;
-  }
-
-  .agassi-wholesale-products__lead {
-    margin-top: 16px;
-  }
-
-  .agassi-wholesale-products__card {
-    aspect-ratio: auto;
-    min-height: 400px;
-  }
-
-  .agassi-wholesale-products__card-content {
-    padding: 32px;
-  }
-
-}
-
-@media (max-width: 640px) {
-.agassi-wholesale-products__header {
-    margin-bottom: 24px;
-  }
-
-  .agassi-wholesale-products__title {
-    max-width: 520px;
-  }
-
-  .agassi-wholesale-products__lead {
-    max-width: 480px;
-    margin-top: 16px;
-  }
-
-  .agassi-wholesale-products__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .agassi-wholesale-products__card-content {
-    padding: 32px 24px;
-  }
-
-  .agassi-wholesale-products__category {
-    margin-top: 8px;
-  }
-
-  .agassi-wholesale-products__types {
-    margin-top: 8px;
-  }
-
-}
-
-@media (max-width: 480px) {
-.agassi-wholesale-products__header {
-    margin-bottom: 24px;
-  }
-
-}
-
-/* Партнёры */
-.agassi-wholesale-partners {
-  --agassi-wholesale-columns: 4;
-  width: 100%;
-  overflow: hidden;
-  background: var(--agassi-wholesale-ivory);
-  color: var(--agassi-wholesale-ink);
-  padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-partners__frame {
-  width: min(1620px, calc(100% - 2 * var(--agassi-wholesale-frame-gap)));
-  margin: 0 auto;
-}
-
-.agassi-wholesale-partners__header {
-  max-width: 980px;
-  margin: 0 auto 48px;
-  text-align: center;
-}
-
-.agassi-wholesale-partners__title {
-  margin: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
-}
-
-.agassi-wholesale-partners__viewport {
-  width: 100%;
-  overflow: hidden;
-  cursor: grab;
-  touch-action: pan-y;
-}
-
-.agassi-wholesale-partners__viewport.is-dragging {
-  cursor: grabbing;
-}
-
-.agassi-wholesale-partners__track {
-  display: flex;
-  align-items: stretch;
-  gap: var(--agassi-wholesale-gap);
-  width: max-content;
-  min-width: 100%;
-  transform: translate3d(0,0,0);
-  will-change: transform;
-}
-
-.agassi-wholesale-partners__card,
-#allrecords .agassi-wholesale-partners__card,
-.t-records .agassi-wholesale-partners__card {
-  position: relative;
-  display: flex;
-  flex: 0 0 calc(
-    (
-      min(1620px, calc(100vw - 2 * var(--agassi-wholesale-frame-gap)))
-      - (var(--agassi-wholesale-columns) - 1) * var(--agassi-wholesale-gap)
-    ) / var(--agassi-wholesale-columns)
-  );
-  align-items: center;
-  justify-content: center;
-  min-width: 0;
-  aspect-ratio: 16 / 9;
-  padding: 24px;
-  overflow: hidden;
-  border: 0;
-  border-radius: var(--agassi-wholesale-radius);
-  background: var(--agassi-wholesale-white);
-  color: inherit;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.agassi-wholesale-partners__card img {
-  display: block;
-  width: 36%;
-  height: 26%;
-  margin: auto;
-  object-fit: contain;
-  object-position: center;
-  pointer-events: none;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-.agassi-wholesale-partners__card img[src=""] {
-  visibility: hidden;
-}
-
-.agassi-wholesale-partners__card:focus-visible {
-  outline: 2px solid var(--agassi-wholesale-crimson);
-  outline-offset: -4px;
-}
-
-.agassi-wholesale-partners__controls {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 32px;
-}
-
-.agassi-wholesale-partners__arrow,
-#allrecords .agassi-wholesale-partners__arrow,
-.t-records .agassi-wholesale-partners__arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: var(--agassi-wholesale-crimson);
-  color: var(--agassi-wholesale-white);
-  cursor: pointer;
-  appearance: none;
-  opacity: 1;
-  transition:
-    background-color 320ms var(--agassi-wholesale-ease),
-    color 320ms var(--agassi-wholesale-ease),
-    opacity 320ms var(--agassi-wholesale-ease);
-}
-
-.agassi-wholesale-partners__arrow-icon {
-  display: block;
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
-
-.agassi-wholesale-partners__arrow:not(:disabled):hover,
-#allrecords .agassi-wholesale-partners__arrow:not(:disabled):hover,
-.t-records .agassi-wholesale-partners__arrow:not(:disabled):hover {
-  background: var(--agassi-wholesale-crimson-dark);
-}
-
-.agassi-wholesale-partners__arrow:focus-visible {
-  outline: 2px solid var(--agassi-wholesale-gold);
-  outline-offset: 4px;
-}
-
-.agassi-wholesale-partners__arrow:disabled,
-#allrecords .agassi-wholesale-partners__arrow:disabled,
-.t-records .agassi-wholesale-partners__arrow:disabled {
-  background: var(--agassi-wholesale-line);
-  cursor: default;
-}
-
-@media (max-width: 1440px) {
-  .agassi-wholesale-partners {
-  }
-
-  .agassi-wholesale-partners__header {
-    max-width: 900px;
-    margin-bottom: 40px;
-  }
-
-}
-
-@media (max-width: 1200px) {
-  .agassi-wholesale-partners {
-    --agassi-wholesale-columns: 3;
-  }
-
-  .agassi-wholesale-partners__header {
-    max-width: 760px;
-    margin-bottom: 36px;
-  }
-
-}
-
-@media (max-width: 960px) {
-  .agassi-wholesale-partners {
-    --agassi-wholesale-columns: 2;
-  }
-
-  .agassi-wholesale-partners__header {
-    max-width: 720px;
-    margin-bottom: 32px;
-  }
-
-  .agassi-wholesale-partners__card img {
-    width: 52%;
-    height: 36%;
-  }
-
-}
-
-@media (max-width: 640px) {
-  .agassi-wholesale-partners {
-    --agassi-wholesale-columns: 1.15;
-  }
-
-  .agassi-wholesale-partners__header {
-    max-width: 520px;
-    margin-bottom: 24px;
-  }
-
-  .agassi-wholesale-partners__card,
-  #allrecords .agassi-wholesale-partners__card,
-  .t-records .agassi-wholesale-partners__card {
-    padding: 16px;
-  }
-
-
-  .agassi-wholesale-partners__card img {
-    width: 40%;
-    height: 28%;
-  }
-
-  .agassi-wholesale-partners__viewport {
-    margin-right: calc(-1 * var(--agassi-wholesale-frame-gap));
-    width: auto;
-  }
-
-
-
-  .agassi-wholesale-partners__arrow-icon {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .agassi-wholesale-partners {
-  }
-
-  .agassi-wholesale-partners__header {
-    margin-bottom: 24px;
-  }
-
-}
-
-@media (max-width: 360px) {
-  .agassi-wholesale-partners {
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .agassi-wholesale-partners__arrow {
-    transition: none;
-  }
-}
-
-/* Отзывы */
-.agassi-wholesale-stories {
-  --ivory: #F4F1EA;
-  --white: #FFFFFF;
-  --crimson: #8C0F14;
-  --gold: var(--agassi-wholesale-gold);
-  --garnet: #1E1E1E;
-  --gap: 16px;
-  --radius: 28px;
-  --frame-gap: 96px;
-  --agassi-wholesale-columns: 3;
-  --ease: cubic-bezier(.22,1,.36,1);
-  width: 100%;
-  overflow: hidden;
-  background: var(--agassi-wholesale-ivory);
-  color: var(--agassi-wholesale-ink);
-  padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-stories__frame {
-  width: min(1620px, calc(100% - 2 * var(--agassi-wholesale-frame-gap)));
-  max-width: 100%;
-  min-width: 0;
-  margin: 0 auto;
-}
-
-.agassi-wholesale-stories__header {
-  max-width: 980px;
-  margin: 0 auto 48px;
-  text-align: center;
-}
-
-.agassi-wholesale-stories__title {
-  margin: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
-}
-
-.agassi-wholesale-stories__lead {
-  max-width: 620px;
-  margin: 20px auto 0;
-  color: var(--agassi-wholesale-muted);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-stories__track {
-  display: flex;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  gap: var(--agassi-wholesale-gap);
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  overscroll-behavior-x: contain;
-  -webkit-overflow-scrolling: touch;
-}
-
-.agassi-wholesale-stories__track::-webkit-scrollbar {
-  display: none;
-}
-
-.agassi-wholesale-stories__card {
-  display: flex;
-  flex: 0 0 calc((100% - (var(--agassi-wholesale-columns) - 1) * var(--agassi-wholesale-gap)) / var(--agassi-wholesale-columns));
-  flex-direction: column;
-  min-width: 0;
-  aspect-ratio: 4 / 3;
-  padding: 36px;
-  border-radius: var(--agassi-wholesale-radius);
-  background: var(--agassi-wholesale-white);
-  color: #1E1E1E;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-
-.agassi-wholesale-stories__meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  color: var(--agassi-wholesale-crimson);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-stories__quote {
-  margin: auto 0;
-  padding: 48px 0;
-  color: #1E1E1E;
-  font-family: var(--t-text-font);
-  font-weight: 400;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h4);
-  line-height: var(--agassi-wholesale-line-h4);
-}
-
-.agassi-wholesale-stories__name {
-  color: #1E1E1E;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-stories__role {
-  margin-top: 8px;
-  color: var(--agassi-wholesale-muted);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-stories__controls {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 28px;
-}
-
-.agassi-wholesale-stories__arrow,
-#allrecords .agassi-wholesale-stories__arrow,
-.t-records .agassi-wholesale-stories__arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 52px;
-  padding: 0;
-  border: 1px solid var(--agassi-wholesale-crimson);
-  border-radius: 50%;
-  background: var(--agassi-wholesale-crimson);
-  color: var(--agassi-wholesale-white);
-  cursor: pointer;
-  appearance: none;
-  opacity: 1;
-  transition:
-    background-color 320ms var(--agassi-wholesale-ease),
-    border-color 320ms var(--agassi-wholesale-ease),
-    color 320ms var(--agassi-wholesale-ease),
-    opacity 320ms var(--agassi-wholesale-ease);
-}
-
-.agassi-wholesale-stories__arrow-icon {
-  display: block;
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
-
-.agassi-wholesale-stories__arrow:not(:disabled):hover,
-#allrecords .agassi-wholesale-stories__arrow:not(:disabled):hover,
-.t-records .agassi-wholesale-stories__arrow:not(:disabled):hover {
-  border-color: var(--agassi-wholesale-crimson);
-  background: var(--agassi-wholesale-crimson);
-  color: var(--agassi-wholesale-white);
-}
-
-.agassi-wholesale-stories__arrow:focus-visible {
-  outline: 2px solid var(--agassi-wholesale-gold);
-  outline-offset: 4px;
-}
-
-.agassi-wholesale-stories__arrow:disabled,
-#allrecords .agassi-wholesale-stories__arrow:disabled,
-.t-records .agassi-wholesale-stories__arrow:disabled {
-  border-color: var(--agassi-wholesale-crimson);
-  background: var(--agassi-wholesale-crimson);
-  color: var(--agassi-wholesale-on-crimson);
-  cursor: default;
-}
-
-@media (max-width: 1440px) {
-  .agassi-wholesale-stories {
-    --frame-gap: 80px;
-  }
-
-  .agassi-wholesale-stories__header {
-    max-width: 900px;
-    margin-bottom: 40px;
-  }
-
-  .agassi-wholesale-stories__card {
-    padding: 32px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .agassi-wholesale-stories {
-    --frame-gap: 32px;
-    --gap: 14px;
-    --agassi-wholesale-columns: 2;
-  }
-
-  .agassi-wholesale-stories__header {
-    max-width: 760px;
-    margin-bottom: 36px;
-  }
-
-  .agassi-wholesale-stories__lead {
-    margin-top: 16px;
-  }
-
-  .agassi-wholesale-stories__card {
-    padding: 32px;
-  }
-
-  .agassi-wholesale-stories__quote {
-    padding: 44px 0;
-  }
-
-}
-
-@media (max-width: 960px) {
-  .agassi-wholesale-stories {
-    --frame-gap: 24px;
-    --radius: 24px;
-  }
-
-  .agassi-wholesale-stories__header {
-    max-width: 720px;
-    margin-bottom: 32px;
-  }
-
-  .agassi-wholesale-stories__lead {
-    margin-top: 16px;
-  }
-
-  .agassi-wholesale-stories__controls {
-    margin-top: 24px;
-  }
-}
-
-@media (max-width: 640px) {
-  .agassi-wholesale-stories {
-    --frame-gap: 16px;
-    --radius: 20px;
-    --agassi-wholesale-columns: 1;
-  }
-
-  .agassi-wholesale-stories__header {
-    max-width: 520px;
-    margin-bottom: 24px;
-  }
-
-  .agassi-wholesale-stories__lead {
-    margin-top: 16px;
-  }
-
-  .agassi-wholesale-stories__card {
-    padding: 24px;
-  }
-
-  .agassi-wholesale-stories__quote {
-    padding: 40px 0;
-  }
-
-  .agassi-wholesale-stories__role {
-    margin-top: 4px;
-  }
-
-  .agassi-wholesale-stories__controls {
-    margin-top: 24px;
-  }
-
-  .agassi-wholesale-stories__arrow,
-  #allrecords .agassi-wholesale-stories__arrow,
-  .t-records .agassi-wholesale-stories__arrow {
-    width: 48px;
-    height: 48px;
-  }
-
-  .agassi-wholesale-stories__arrow-icon {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .agassi-wholesale-stories {
-    --frame-gap: 12px;
-  }
-
-  .agassi-wholesale-stories__header {
-    margin-bottom: 24px;
-  }
-
-  .agassi-wholesale-stories__card {
-    padding: 24px;
-  }
-
-  .agassi-wholesale-stories__quote {
-    padding: 32px 0;
-  }
-}
-
-@media (max-width: 360px) {
-  .agassi-wholesale-stories {
-    --frame-gap: 12px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .agassi-wholesale-stories__track {
-    scroll-behavior: auto;
-  }
-
-  .agassi-wholesale-stories__arrow {
-    transition: none;
-  }
-}
-
-/* Вопросы и ответы */
-.agassi-wholesale-faq {
-  position: relative;
-  display: block;
-  width: 100%;
-  margin: 0;
-  background: var(--agassi-wholesale-ivory);
-  color: var(--agassi-wholesale-ink);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-faq__frame {
-  width: min(var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)));
-  margin: 0 auto;
-}
-
-.agassi-wholesale-faq__header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto 56px;
-  text-align: center;
-}
-
-.agassi-wholesale-faq__title {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-align: center;
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
-}
-
-.agassi-wholesale-faq__lead {
-  max-width: 620px;
-  margin: 20px auto 0;
-  padding: 0;
-  color: var(--agassi-wholesale-muted);
-  text-align: center;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-faq__layout {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--agassi-wholesale-gap);
-  width: 100%;
-  align-items: start;
-}
-
-.agassi-wholesale-faq__visual {
-  position: relative;
-  min-width: 0;
-  height: var(--agassi-wholesale-faq-visual-height, 604px);
-  overflow: hidden;
-  border-radius: var(--agassi-wholesale-radius);
-  background: var(--agassi-wholesale-crimson);
-}
-
-.agassi-wholesale-faq__image {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.agassi-wholesale-faq__list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  min-width: 0;
-  width: 100%;
-  margin: 0;
-}
-
-.agassi-wholesale-faq__icon-source {
-  display: none;
-}
-
-.agassi-wholesale-faq__item {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 32px;
-  background: var(--agassi-wholesale-white);
-}
-
-.agassi-wholesale-faq__head {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 40px;
-  align-items: center;
-  gap: 24px;
-  min-height: 72px;
-  padding: 16px 16px 16px 32px;
-}
-
-.agassi-wholesale-faq__question-text {
-  margin: 0;
-  padding: 0;
-  color: var(--agassi-wholesale-ink);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-h4);
-  font-weight: 500;
-  line-height: var(--agassi-wholesale-line-h4);
-  text-wrap: balance;
-}
-
-.agassi-wholesale-faq__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--agassi-wholesale-crimson);
-  transition: transform var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
-}
-
-.agassi-wholesale-faq__icon-image {
-  display: block;
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
-
-.agassi-wholesale-faq__item.is-open .agassi-wholesale-faq__icon {
-  transform: rotate(90deg);
-}
-
-.agassi-wholesale-faq__question,
-#allrecords .agassi-wholesale-faq__question,
-.t-records .agassi-wholesale-faq__question {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
-.agassi-wholesale-faq__question:focus-visible {
-  outline: 2px solid var(--agassi-wholesale-gold);
-  outline-offset: -4px;
-}
-
-.agassi-wholesale-faq__answer {
-  display: grid;
-  grid-template-rows: 0fr;
-  visibility: hidden;
-  transition: grid-template-rows var(--agassi-wholesale-duration) var(--agassi-wholesale-ease), visibility 0ms linear var(--agassi-wholesale-duration);
-}
-
-.agassi-wholesale-faq__item.is-open .agassi-wholesale-faq__answer {
-  grid-template-rows: 1fr;
-  visibility: visible;
-  transition: grid-template-rows var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
-}
-
-.agassi-wholesale-faq__answer-inner {
-  min-height: 0;
-  overflow: hidden;
-}
-
-.agassi-wholesale-faq__answer p {
-  max-width: 650px;
-  margin: 0;
-  padding: 0 32px 28px;
-  color: var(--agassi-wholesale-muted);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-body);
-  letter-spacing: 0;
-}
-
-@media (max-width: 1440px) {
-.agassi-wholesale-faq__header {
-    margin-bottom: 48px;
-  }
-
-  .agassi-wholesale-faq__title {
-    max-width: 900px;
-  }
-
-
-}
-
-@media (max-width: 1200px) {
-.agassi-wholesale-faq__header {
-    margin-bottom: 40px;
-  }
-
-  .agassi-wholesale-faq__title {
-    max-width: 760px;
-  }
-
-  .agassi-wholesale-faq__lead {
-    margin-top: 16px;
-  }
-
-
-
-}
-
-@media (max-width: 960px) {
-.agassi-wholesale-faq__header {
-    margin-bottom: 36px;
-  }
-
-  .agassi-wholesale-faq__title {
-    max-width: 720px;
-  }
-
-  .agassi-wholesale-faq__lead {
-    margin-top: 16px;
-  }
-
-  .agassi-wholesale-faq__layout {
-    grid-template-columns: 1fr;
-  }
-
-  .agassi-wholesale-faq__visual {
-    height: auto;
-    min-height: 0;
-    aspect-ratio: 16 / 10;
-  }
-
-  .agassi-wholesale-faq__list {
-    gap: 8px;
-  }
-
-
-}
-
-@media (max-width: 640px) {
-  .agassi-wholesale-faq__head {
-    padding: 16px 16px 16px 24px;
-  }
-
-  .agassi-wholesale-faq__answer p {
-    padding: 0 24px 24px;
-  }
-
-.agassi-wholesale-faq__header {
-    margin-bottom: 32px;
-  }
-
-  .agassi-wholesale-faq__title {
-    max-width: 520px;
-  }
-
-  .agassi-wholesale-faq__lead {
-    max-width: 480px;
-    margin-top: 16px;
-  }
-
-  .agassi-wholesale-faq__visual {
-    aspect-ratio: 1 / 1;
-  }
-
-
-
-}
-
-@media (max-width: 360px) {
-.agassi-wholesale-faq__answer p {
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .agassi-wholesale-faq__icon,
-  .agassi-wholesale-faq__answer {
-    transition: none !important;
-  }
-}
-
-/* Контакты */
-.agassi-wholesale-contact {
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-  background: var(--agassi-wholesale-crimson);
-  color: var(--agassi-wholesale-white);
-}
-
-.agassi-wholesale-contact__frame {
-  width: min( var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)) );
-  margin: 0 auto;
-}
-
-.agassi-wholesale-contact__header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.agassi-wholesale-contact__title {
-  max-width: 1000px;
-  margin: 0;
-  padding: 0;
-  color: var(--agassi-wholesale-white);
-  text-align: center;
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
-}
-
-.agassi-wholesale-contact__lead {
-  max-width: 760px;
-  padding: 0;
-  color: var(--agassi-wholesale-on-crimson);
-  text-align: center;
-  margin: 20px auto 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-contact__contacts {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  width: 100%;
-  margin-top: 64px;
-  border-top: 1px solid var(--agassi-wholesale-line-crimson);
-  border-bottom: 1px solid var(--agassi-wholesale-line-crimson);
-}
-
-.agassi-wholesale-contact__contact,
-#allrecords .agassi-wholesale-contact__contact,
-.t-records .agassi-wholesale-contact__contact {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-width: 0;
-  min-height: 192px;
-  padding: 28px 32px 32px;
-  color: var(--agassi-wholesale-white);
-  text-decoration: none;
-}
-
-.agassi-wholesale-contact__contact + .agassi-wholesale-contact__contact {
-  border-left: 1px solid var(--agassi-wholesale-line-crimson);
-}
-
-.agassi-wholesale-contact__number {
-  color: var(--agassi-wholesale-gold);
-  background: var(--agassi-wholesale-gold-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-contact__contact-content {
-  margin-top: 48px;
-}
-
-.agassi-wholesale-contact__contact-label {
-  margin: 0 0 8px;
-  color: var(--agassi-wholesale-on-crimson);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-contact__contact-value {
-  margin: 0;
-  padding: 0;
-  color: var(--agassi-wholesale-white);
-  overflow-wrap: anywhere;
-  font-family: var(--t-text-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h4);
-  line-height: var(--agassi-wholesale-line-h4);
-}
-
-.agassi-wholesale-contact__action {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-top: 40px;
-}
-
-@media (max-width: 1440px) {
-.agassi-wholesale-contact__header {
-    max-width: 900px;
-  }
-
-  .agassi-wholesale-contact__contacts {
-    margin-top: 56px;
-  }
-
-  .agassi-wholesale-contact__contact,
-        #allrecords .agassi-wholesale-contact__contact,
-        .t-records .agassi-wholesale-contact__contact {
-    min-height: 180px;
-    padding: 24px 28px 32px;
-  }
-}
-
-@media (max-width: 1200px) {
-.agassi-wholesale-contact__header {
-    max-width: 760px;
-  }
-
-  .agassi-wholesale-contact__lead {
-    margin: 16px auto 0;
-  }
-
-  .agassi-wholesale-contact__contacts {
-    margin-top: 48px;
-  }
-
-  .agassi-wholesale-contact__contact,
-        #allrecords .agassi-wholesale-contact__contact,
-        .t-records .agassi-wholesale-contact__contact {
-    min-height: 168px;
-    padding: 24px 24px 28px;
-  }
-
-  .agassi-wholesale-contact__contact-content {
-    margin-top: 40px;
-  }
-
-  .agassi-wholesale-contact__action {
-    margin-top: 36px;
-  }
-
-}
-
-@media (max-width: 960px) {
-.agassi-wholesale-contact__header {
-    max-width: 720px;
-  }
-
-  .agassi-wholesale-contact__lead {
-    margin: 16px auto 0;
-  }
-
-  .agassi-wholesale-contact__contacts {
-    grid-template-columns: 1fr;
-    margin-top: 40px;
-  }
-
-  .agassi-wholesale-contact__contact,
-        #allrecords .agassi-wholesale-contact__contact,
-        .t-records .agassi-wholesale-contact__contact {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    min-height: 0;
-    padding: 24px 0;
-  }
-
-  .agassi-wholesale-contact__contact + .agassi-wholesale-contact__contact {
-    border-top: 1px solid var(--agassi-wholesale-line-crimson);
-    border-left: 0;
-  }
-
-  .agassi-wholesale-contact__contact-content {
-    margin-top: 24px;
-  }
-}
-
-@media (max-width: 640px) {
-
-  .agassi-wholesale-contact__lead {
-    margin: 16px auto 0;
-  }
-
-  .agassi-wholesale-contact__contacts {
-    margin-top: 36px;
-  }
-
-  .agassi-wholesale-contact__contact,
-        #allrecords .agassi-wholesale-contact__contact,
-        .t-records .agassi-wholesale-contact__contact {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    padding: 24px 0;
-  }
-
-  .agassi-wholesale-contact__contact-content {
-    margin-top: 24px;
-  }
-
-  .agassi-wholesale-contact__action {
-    margin-top: 28px;
-  }
-
-  .agassi-wholesale-contact__button,
-        #allrecords .agassi-wholesale-contact__button,
-        .t-records .agassi-wholesale-contact__button {
-    width: 100%;
-    min-height: 56px;
-    padding: 16px 16px;
-  }
-}
-
-@media (max-width: 480px) {
-.agassi-wholesale-contact__contact,
-        #allrecords .agassi-wholesale-contact__contact,
-        .t-records .agassi-wholesale-contact__contact {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    padding: 20px 0;
-  }
-
-  .agassi-wholesale-contact__contact-content {
-    margin-top: 24px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .agassi-wholesale-contact__button {
-    transition: none !important;
-  }
-}
-
-.agassi-wholesale-contact__surface {
-  width: 100%;
-}
-
-/* Футер (как agassi-group-footer) */
-.agassi-wholesale-footer {
-  position: relative;
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: var(--agassi-wholesale-section-space) 0 32px;
-  background: var(--agassi-wholesale-crimson);
-  color: var(--agassi-wholesale-white);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-body);
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-footer__frame {
-  width: min(
-    var(--agassi-wholesale-frame-max),
-    calc(100% - 2 * var(--agassi-wholesale-frame-gap))
-  );
-  max-width: 100%;
-  min-width: 0;
-  margin: 0 auto;
-}
-
-.agassi-wholesale-footer__main {
-  display: grid;
-  grid-template-columns: repeat(var(--agassi-wholesale-columns), minmax(0, 1fr));
-  align-items: start;
-  gap: var(--agassi-wholesale-gap);
-  row-gap: 48px;
-  min-width: 0;
-  padding: 0 0 80px;
-}
-
-.agassi-wholesale-footer__brand {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  grid-column: span 3;
-  min-width: 0;
-}
-
-.agassi-wholesale-footer__logo {
-  display: inline-block;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  text-decoration: none !important;
-  line-height: 0;
-}
-
-.agassi-wholesale-footer__logo-image {
-  display: block;
-  width: auto;
-  max-width: 240px;
-  max-height: 80px;
-  margin: 0;
-  padding: 0;
-  object-fit: contain;
-  object-position: left center;
-}
-
-.agassi-wholesale-footer__brand-text {
-  width: 100%;
-  max-width: 420px;
-  margin: 24px 0 0;
-  padding: 0;
-  color: var(--agassi-wholesale-white);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-body);
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-footer__columns {
-  display: grid;
-  grid-column: 4 / -1;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--agassi-wholesale-gap);
-  min-width: 0;
-}
-
-.agassi-wholesale-footer__column {
-  width: 100%;
-  min-width: 0;
-}
-
-.agassi-wholesale-footer__label {
-  margin: 0 0 24px;
-  padding: 0;
-  color: var(--agassi-wholesale-gold);
-  background: var(--agassi-wholesale-gold-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-small);
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-footer__links {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  width: 100%;
-  min-width: 0;
-}
-
-.agassi-wholesale-footer__link {
-  position: relative;
-  display: inline-block;
-  width: fit-content;
-  max-width: 100%;
-  margin: 0;
-  padding: 0 0 4px;
-  color: var(--agassi-wholesale-white) !important;
-  text-decoration: none !important;
-  overflow-wrap: anywhere;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-body);
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-footer__link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
-}
-
-.agassi-wholesale-footer__link:hover::after {
-  transform: scaleX(1);
-}
-
-.agassi-wholesale-footer__bottom {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  min-width: 0;
-  padding: 24px 0 0;
-  border-top: 1px solid var(--agassi-wholesale-line-crimson);
-  color: var(--agassi-wholesale-white);
-  font-size: var(--agassi-wholesale-font-small);
-  line-height: var(--agassi-wholesale-line-small);
-}
-
-.agassi-wholesale-footer__copyright {
-  color: var(--agassi-wholesale-white);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-small);
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-footer__legal {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 24px;
-  min-width: 0;
-}
-
-.agassi-wholesale-footer__legal-link {
-  position: relative;
-  width: fit-content;
-  padding-bottom: 4px;
-  color: var(--agassi-wholesale-white) !important;
-  text-decoration: none !important;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-small);
-  letter-spacing: 0;
-}
-
-.agassi-wholesale-footer a:focus-visible {
-  outline: 2px solid var(--agassi-wholesale-gold);
-  outline-offset: 4px;
-}
-
-@media (max-width: 960px) {
-  .agassi-wholesale-footer__brand,
-  .agassi-wholesale-footer__columns {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (max-width: 640px) {
-  .agassi-wholesale-footer__main {
-    row-gap: 40px;
-    padding-bottom: 48px;
-  }
-
-  .agassi-wholesale-footer__columns {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .agassi-wholesale-footer__label {
-    margin-bottom: 16px;
-  }
-
-  .agassi-wholesale-footer__links {
-    gap: 8px;
-  }
-
-  .agassi-wholesale-footer__bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .agassi-wholesale-footer__legal {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    gap: 8px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .agassi-wholesale-footer__link::after {
-    transition: none;
-  }
-}
+/* Agassi Wholesale (UZ): общий скрипт всех блоков сайта.
+   Каждая часть сама проверяет, есть ли её блок на странице. */
+(function () {
+  'use strict';
+
+  function initViewport() {
+    var section = document.querySelector('.agassi-wholesale-hero');
+    if (!section) return;
+
+    // На опубликованной странице высота задаётся в CSS через svh, скрипт нужен только внутри iframe редактора
+    var framed = false;
+    try { framed = window.parent !== window; } catch (error) { framed = true; }
+    if (!framed) return;
+
+    // В редакторе высота окна читается несколько раз и только растёт: так блок не «прыгает» и не остаётся короче экрана
+    var height = 0;
+
+    function grow() {
+      var value = window.innerHeight;
+      try { value = window.parent.innerHeight || value; } catch (error) {}
+      if (value <= height) return;
+      height = value;
+      section.style.setProperty('--agassi-wholesale-viewport', height + 'px');
+    }
+
+    grow();
+    window.addEventListener('load', grow);
+    window.setTimeout(grow, 400);
+    window.setTimeout(grow, 1200);
+    try { window.parent.addEventListener('resize', grow); } catch (error) {}
+  }
+
+  function init() {
+    initViewport();
+
+
+  (function () {
+    const slot = document.querySelector('.agassi-wholesale-header-slot');
+
+    if (!slot || slot.dataset.agassiWholesaleReady === 'true') return;
+
+    slot.dataset.agassiWholesaleReady = 'true';
+
+    const headers = slot.querySelectorAll('.agassi-wholesale-header');
+    const burger = slot.querySelector('.agassi-wholesale-header__burger');
+    const menu = slot.querySelector('.agassi-wholesale-header__mobile-menu');
+    const closeButton = slot.querySelector('.agassi-wholesale-header__mobile-close');
+    const mobileLogo = slot.querySelector('.agassi-wholesale-header__mobile-logo');
+    const desktopLogos = slot.querySelectorAll('.agassi-wholesale-header__logo');
+    const mobileLinks = slot.querySelectorAll('.agassi-wholesale-header__mobile-nav a[href^="#"]');
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function openMenu() {
+      slot.classList.add('is-menu-open');
+      document.documentElement.classList.add('agassi-wholesale-scroll-locked');
+      document.body.classList.add('agassi-wholesale-scroll-locked');
+
+      menu?.setAttribute('aria-hidden', 'false');
+      burger?.setAttribute('aria-expanded', 'true');
+      burger?.setAttribute('aria-label', 'Менюни ёпиш');
+
+      if (themeColor) {
+        themeColor.content = '#8C0F14';
+      }
+    }
+
+    function closeMenu() {
+      slot.classList.remove('is-menu-open');
+      document.documentElement.classList.remove('agassi-wholesale-scroll-locked');
+      document.body.classList.remove('agassi-wholesale-scroll-locked');
+
+      menu?.setAttribute('aria-hidden', 'true');
+      burger?.setAttribute('aria-expanded', 'false');
+      burger?.setAttribute('aria-label', 'Менюни очиш');
+
+      if (themeColor) {
+        themeColor.content = '#F4F1EA';
+      }
+    }
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: reducedMotion.matches ? 'auto' : 'smooth'
+      });
+    }
+
+    function scrollToSection(hash) {
+      const target = document.querySelector(hash);
+
+      if (!target) return;
+
+      target.scrollIntoView({
+        behavior: reducedMotion.matches ? 'auto' : 'smooth',
+        block: 'start'
+      });
+    }
+
+    burger?.addEventListener('click', function () {
+      if (slot.classList.contains('is-menu-open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    closeButton?.addEventListener('click', closeMenu);
+
+    mobileLogo?.addEventListener('click', function (event) {
+      event.preventDefault();
+      closeMenu();
+      scrollToTop();
+    });
+
+    desktopLogos.forEach(function (logo) {
+      logo.addEventListener('click', function (event) {
+        event.preventDefault();
+        scrollToTop();
+      });
+    });
+
+    mobileLinks.forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        const hash = link.getAttribute('href');
+
+        if (!hash || hash === '#') return;
+
+        event.preventDefault();
+        closeMenu();
+        scrollToSection(hash);
+      });
+    });
+
+    function updateHeaderState() {
+      headers.forEach(function (header) {
+        header.classList.toggle('is-scrolled', window.scrollY > 12);
+      });
+    }
+
+    updateHeaderState();
+
+    window.addEventListener('scroll', updateHeaderState, {
+      passive: true
+    });
+
+    window.addEventListener('resize', function () {
+      if (
+        window.innerWidth > 1200 &&
+        slot.classList.contains('is-menu-open')
+      ) {
+        closeMenu();
+      }
+    });
+  })();
+
+
+
+  (function () {
+    document.querySelectorAll('.agassi-wholesale-statement').forEach(function (section) {
+      if (section.dataset.agassiWholesaleFlowersReady === 'true') return;
+      section.dataset.agassiWholesaleFlowersReady = 'true';
+      var layer = section.querySelector('.agassi-wholesale-statement__flowers');
+      var flowers = Array.prototype.slice.call(section.querySelectorAll('.agassi-wholesale-statement__flower'));
+      if (!layer || !flowers.length) return;
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      var distances = [105, 145, 120, 175, 150, 130];
+      var bounds = [];
+      var frame = 0;
+      var measureNeeded = true;
+      function limits() {
+        var width = window.innerWidth;
+        if (width <= 360) return [6, 6, 6, 22, 18, 18];
+        if (width <= 480) return [8, 8, 8, 26, 20, 20];
+        if (width <= 640) return [8, 8, 8, 34, 28, 28];
+        if (width <= 960) return [10, 10, 10, 54, 42, 40];
+        return distances;
+      }
+      function measure() {
+        flowers.forEach(function (flower, i) {
+          section.style.setProperty('--agassi-wholesale-fall-' + (i + 1), '0px');
+        });
+        var area = layer.getBoundingClientRect();
+        var caps = limits();
+        bounds = flowers.map(function (flower, i) {
+          var rect = flower.getBoundingClientRect();
+          var minimum = Math.max(0, area.top + 6 - rect.top);
+          var maximum = Math.max(minimum, area.bottom - 6 - rect.bottom);
+          return { min: minimum, max: Math.max(minimum, Math.min(caps[i], maximum)) };
+        });
+        measureNeeded = false;
+      }
+      function update() {
+        frame = 0;
+        if (reduceMotion.matches) {
+          flowers.forEach(function (flower, i) {
+            section.style.setProperty('--agassi-wholesale-fall-' + (i + 1), '0px');
+          });
+          return;
+        }
+        if (measureNeeded) measure();
+        var rect = section.getBoundingClientRect();
+        var progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        progress = Math.max(0, Math.min(1, progress));
+        flowers.forEach(function (flower, i) {
+          var limit = bounds[i];
+          var fall = limit.min + progress * (limit.max - limit.min);
+          section.style.setProperty('--agassi-wholesale-fall-' + (i + 1), fall + 'px');
+        });
+      }
+      function schedule() {
+        if (!frame) frame = window.requestAnimationFrame(update);
+      }
+      function invalidate() {
+        measureNeeded = true;
+        schedule();
+      }
+      flowers.forEach(function (flower) {
+        flower.addEventListener('load', invalidate);
+      });
+      window.addEventListener('scroll', schedule, { passive: true });
+      window.addEventListener('resize', invalidate, { passive: true });
+      window.addEventListener('load', invalidate);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(invalidate);
+      if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', invalidate);
+      if (window.ResizeObserver) {
+        var observer = new ResizeObserver(invalidate);
+        observer.observe(layer);
+        flowers.forEach(function (flower) { observer.observe(flower); });
+      }
+      update();
+    });
+  })();
+
+
+
+  (function () {
+    document.querySelectorAll('.agassi-wholesale-partners').forEach(function (section) {
+      if (section.dataset.agassiWholesalePartnersReady) return;
+      section.dataset.agassiWholesalePartnersReady = 'true';
+
+      var viewport = section.querySelector('.agassi-wholesale-partners__viewport');
+      var track = section.querySelector('.agassi-wholesale-partners__track');
+      var prev = section.querySelector('.agassi-wholesale-partners__arrow--prev');
+      var next = section.querySelector('.agassi-wholesale-partners__arrow--next');
+
+      if (!viewport || !track || !prev || !next) return;
+
+      var originalCards = Array.prototype.slice.call(track.children);
+
+      if (!originalCards.length) return;
+
+      originalCards.forEach(function (card) {
+        var clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.setAttribute('tabindex', '-1');
+        track.appendChild(clone);
+      });
+
+      var position = 0;
+      var autoplay = true;
+      var dragging = false;
+      var pointerId = null;
+      var startX = 0;
+      var startPosition = 0;
+      var lastTime = 0;
+      var manualAnimation = null;
+      var dragDistance = 0;
+
+      var reducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+
+      function gap() {
+        return parseFloat(getComputedStyle(track).gap) || 0;
+      }
+
+      function step() {
+        return originalCards[0].getBoundingClientRect().width + gap();
+      }
+
+      function loopWidth() {
+        return step() * originalCards.length;
+      }
+
+      function normalize() {
+        var width = loopWidth();
+
+        if (!width) return;
+
+        while (position >= width) {
+          position -= width;
+        }
+
+        while (position < 0) {
+          position += width;
+        }
+      }
+
+      function render() {
+        normalize();
+
+        track.style.transform =
+          'translate3d(' + (-position) + 'px,0,0)';
+      }
+
+      function stopAutoplay() {
+        autoplay = false;
+      }
+
+      function cancelManualAnimation() {
+        if (manualAnimation !== null) {
+          cancelAnimationFrame(manualAnimation);
+          manualAnimation = null;
+        }
+      }
+
+      function move(direction) {
+        stopAutoplay();
+        cancelManualAnimation();
+
+        var width = loopWidth();
+
+        if (!width) return;
+
+        var from = position;
+        var to = position + step() * direction;
+
+        if (direction < 0 && to < 0) {
+          position += width;
+          from = position;
+          to = position + step() * direction;
+        }
+
+        var started = performance.now();
+        var duration = 520;
+
+        function frame(now) {
+          var progress = Math.min(
+            (now - started) / duration,
+            1
+          );
+
+          var eased =
+            1 - Math.pow(1 - progress, 4);
+
+          position =
+            from +
+            (to - from) * eased;
+
+          render();
+
+          if (progress < 1) {
+            manualAnimation =
+              requestAnimationFrame(frame);
+          } else {
+            manualAnimation = null;
+            normalize();
+            render();
+          }
+        }
+
+        manualAnimation =
+          requestAnimationFrame(frame);
+      }
+
+      prev.addEventListener('click', function () {
+        move(-1);
+      });
+
+      next.addEventListener('click', function () {
+        move(1);
+      });
+
+      viewport.addEventListener('pointerdown', function (event) {
+        if (
+          event.pointerType === 'mouse' &&
+          event.button !== 0
+        ) {
+          return;
+        }
+
+        stopAutoplay();
+        cancelManualAnimation();
+
+        dragging = true;
+        pointerId = event.pointerId;
+        startX = event.clientX;
+        startPosition = position;
+        dragDistance = 0;
+
+        viewport.classList.add('is-dragging');
+
+        try {
+          viewport.setPointerCapture(pointerId);
+        } catch (error) {}
+      });
+
+      viewport.addEventListener('pointermove', function (event) {
+        if (
+          !dragging ||
+          event.pointerId !== pointerId
+        ) {
+          return;
+        }
+
+        dragDistance = Math.abs(event.clientX - startX);
+
+        position =
+          startPosition -
+          (event.clientX - startX);
+
+        render();
+      });
+
+      function endDrag(event) {
+        if (!dragging) return;
+
+        if (
+          event &&
+          pointerId !== null &&
+          event.pointerId !== pointerId
+        ) {
+          return;
+        }
+
+        dragging = false;
+
+        viewport.classList.remove('is-dragging');
+
+        if (pointerId !== null) {
+          try {
+            viewport.releasePointerCapture(pointerId);
+          } catch (error) {}
+        }
+
+        pointerId = null;
+
+        normalize();
+        render();
+      }
+
+      viewport.addEventListener('pointerup', endDrag);
+      viewport.addEventListener('pointercancel', endDrag);
+
+      track.addEventListener('click', function (event) {
+        if (dragDistance > 6) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        dragDistance = 0;
+      });
+
+      viewport.addEventListener('dragstart', function (event) {
+        event.preventDefault();
+      });
+
+      function autoFrame(now) {
+        if (!lastTime) {
+          lastTime = now;
+        }
+
+        var delta = Math.min(
+          now - lastTime,
+          50
+        );
+
+        lastTime = now;
+
+        if (
+          autoplay &&
+          !dragging &&
+          manualAnimation === null &&
+          !reducedMotion
+        ) {
+          position += 28 * delta / 1000;
+          render();
+        }
+
+        requestAnimationFrame(autoFrame);
+      }
+
+      window.addEventListener(
+        'resize',
+        function () {
+          normalize();
+          render();
+        },
+        { passive: true }
+      );
+
+      render();
+      requestAnimationFrame(autoFrame);
+    });
+  })();
+
+
+
+  (function () {
+    document.querySelectorAll('.agassi-wholesale-stories').forEach(function (section) {
+      if (section.dataset.agassiWholesaleStoriesReady) return;
+      section.dataset.agassiWholesaleStoriesReady = 'true';
+
+      var track = section.querySelector('.agassi-wholesale-stories__track');
+      var cards = Array.prototype.slice.call(
+        section.querySelectorAll('.agassi-wholesale-stories__card')
+      );
+      var prev = section.querySelector('.agassi-wholesale-stories__arrow--prev');
+      var next = section.querySelector('.agassi-wholesale-stories__arrow--next');
+
+      if (!track || !cards.length || !prev || !next) return;
+
+      var scrollTimer = null;
+
+      function getCardPosition(index) {
+        var trackRect = track.getBoundingClientRect();
+        var cardRect = cards[index].getBoundingClientRect();
+
+        return track.scrollLeft + cardRect.left - trackRect.left;
+      }
+
+      function getClosestIndex() {
+        var current = track.scrollLeft;
+        var closestIndex = 0;
+        var closestDistance = Infinity;
+
+        cards.forEach(function (card, index) {
+          var position = getCardPosition(index);
+          var distance = Math.abs(position - current);
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+          }
+        });
+
+        return closestIndex;
+      }
+
+      function getLastReachableIndex() {
+        var maxScroll = Math.max(
+          0,
+          track.scrollWidth - track.clientWidth
+        );
+
+        var lastIndex = 0;
+
+        cards.forEach(function (card, index) {
+          if (getCardPosition(index) <= maxScroll + 2) {
+            lastIndex = index;
+          }
+        });
+
+        return lastIndex;
+      }
+
+      function updateButtons() {
+        var maxScroll = Math.max(
+          0,
+          track.scrollWidth - track.clientWidth
+        );
+
+        prev.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft >= maxScroll - 2;
+      }
+
+      function goToCard(index) {
+        var lastIndex = getLastReachableIndex();
+
+        index = Math.max(
+          0,
+          Math.min(lastIndex, index)
+        );
+
+        var maxScroll = Math.max(
+          0,
+          track.scrollWidth - track.clientWidth
+        );
+
+        var target = Math.min(
+          getCardPosition(index),
+          maxScroll
+        );
+
+        track.scrollTo({
+          left: target,
+          behavior: 'smooth'
+        });
+      }
+
+      prev.addEventListener('click', function () {
+        var index = getClosestIndex();
+
+        if (getCardPosition(index) < track.scrollLeft - 2) {
+          goToCard(index);
+        } else {
+          goToCard(index - 1);
+        }
+      });
+
+      next.addEventListener('click', function () {
+        var index = getClosestIndex();
+
+        if (getCardPosition(index) > track.scrollLeft + 2) {
+          goToCard(index);
+        } else {
+          goToCard(index + 1);
+        }
+      });
+
+      track.addEventListener(
+        'scroll',
+        function () {
+          window.clearTimeout(scrollTimer);
+
+          scrollTimer = window.setTimeout(
+            updateButtons,
+            80
+          );
+        },
+        { passive: true }
+      );
+
+      window.addEventListener(
+        'resize',
+        function () {
+          updateButtons();
+        },
+        { passive: true }
+      );
+
+      updateButtons();
+    });
+  })();
+
+
+
+  (function () {
+    var faqBlocks = document.querySelectorAll('.agassi-wholesale-faq');
+
+    faqBlocks.forEach(function (faq) {
+      if (faq.dataset.agassiWholesaleFaqReady === 'true') return;
+
+      faq.dataset.agassiWholesaleFaqReady = 'true';
+
+      var iconSource = faq.querySelector('.agassi-wholesale-faq__icon-source .agassi-wholesale-faq__icon-image');
+
+      if (iconSource) {
+        faq.querySelectorAll('.agassi-wholesale-faq__icon').forEach(function (icon) {
+          if (icon.querySelector('img')) return;
+
+          var image = iconSource.cloneNode(false);
+
+          image.removeAttribute('aria-label');
+          image.setAttribute('alt', '');
+          icon.appendChild(image);
+        });
+      }
+
+      var entries = faq.querySelectorAll('.agassi-wholesale-faq__item');
+      var items = faq.querySelectorAll('.agassi-wholesale-faq__head');
+      var list = faq.querySelector('.agassi-wholesale-faq__list');
+      var resizeTimer;
+
+      function syncVisualHeight() {
+        if (!list || !items.length) return;
+
+        if (window.innerWidth <= 960) {
+          faq.style.removeProperty('--agassi-wholesale-faq-visual-height');
+          return;
+        }
+
+        var totalHeight = 0;
+
+        items.forEach(function (item) {
+          totalHeight += item.offsetHeight;
+        });
+
+        var listStyles = window.getComputedStyle(list);
+        var gap = parseFloat(listStyles.rowGap || listStyles.gap) || 0;
+
+        totalHeight += gap * (items.length - 1);
+
+        faq.style.setProperty(
+          '--agassi-wholesale-faq-visual-height',
+          totalHeight + 'px'
+        );
+      }
+
+      entries.forEach(function (entry) {
+        var button = entry.querySelector('.agassi-wholesale-faq__question');
+
+        if (!button) return;
+
+        button.addEventListener('click', function () {
+          var isOpen = entry.classList.contains('is-open');
+
+          entries.forEach(function (otherEntry) {
+            var otherButton = otherEntry.querySelector('.agassi-wholesale-faq__question');
+
+            otherEntry.classList.remove('is-open');
+
+            if (otherButton) {
+              otherButton.setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          if (!isOpen) {
+            entry.classList.add('is-open');
+            button.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      syncVisualHeight();
+
+      window.addEventListener('load', syncVisualHeight);
+
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(function () {
+          syncVisualHeight();
+        }, 100);
+      });
+    });
+  })();
+
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
