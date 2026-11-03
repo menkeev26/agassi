@@ -177,59 +177,17 @@
         if (width <= 960) return [58, 70, 54, 54, 42];
         return distances;
       }
-      function textBounds() {
-        var parts = section.querySelectorAll('.agassi-wholesale-statement__eyebrow, .agassi-wholesale-statement__title, .agassi-wholesale-statement__text');
-        var gap = 16;
-        var box = null;
-
-        parts.forEach(function (part) {
-          var range = document.createRange();
-          range.selectNodeContents(part);
-          var rect = range.getBoundingClientRect();
-
-          if (!rect.width || !rect.height) return;
-          box = box
-            ? { left: Math.min(box.left, rect.left), right: Math.max(box.right, rect.right), top: Math.min(box.top, rect.top), bottom: Math.max(box.bottom, rect.bottom) }
-            : { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
-        });
-
-        return box && { left: box.left - gap, right: box.right + gap, top: box.top - gap, bottom: box.bottom + gap };
-      }
       function measure() {
         flowers.forEach(function (flower, i) {
           section.style.setProperty('--agassi-wholesale-fall-' + (i + 1), '0px');
         });
         var area = layer.getBoundingClientRect();
         var caps = limits();
-        var text = textBounds();
         bounds = flowers.map(function (flower, i) {
-          flower.style.visibility = '';
           var rect = flower.getBoundingClientRect();
           var minimum = Math.max(0, area.top + 6 - rect.top);
           var maximum = Math.max(minimum, area.bottom - 6 - rect.bottom);
-          var range = { min: minimum, max: Math.max(minimum, Math.min(caps[i], maximum)) };
-
-          // Лепестки не заходят на текст: остаются в стороне, над ним или под ним, иначе скрываются.
-          if (text && rect.right > text.left && rect.left < text.right) {
-            var above = { min: range.min, max: Math.min(range.max, text.top - rect.height - rect.top) };
-            var below = { min: Math.max(range.min, text.bottom - rect.top), max: range.max };
-            var aboveSpan = above.max - above.min;
-            var belowSpan = below.max - below.min;
-            var fitsAbove = above.max >= above.min;
-            var fitsBelow = below.max >= below.min;
-
-            if (rect.bottom + range.max <= text.top || rect.top + range.min >= text.bottom) {
-              // уже вне текста
-            } else if (fitsAbove && (!fitsBelow || aboveSpan >= belowSpan)) {
-              range = above;
-            } else if (fitsBelow) {
-              range = below;
-            } else {
-              flower.style.visibility = 'hidden';
-            }
-          }
-
-          return range;
+          return { min: minimum, max: Math.max(minimum, Math.min(caps[i], maximum)) };
         });
         measureNeeded = false;
       }
