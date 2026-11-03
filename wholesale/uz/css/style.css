@@ -162,7 +162,6 @@ body.agassi-wholesale-scroll-locked {
 
 .agassi-wholesale-header__brand,
 .agassi-wholesale-header__cta-wrap,
-.agassi-wholesale-header__burger-wrap,
 .agassi-wholesale-header__mobile-brand,
 .agassi-wholesale-header__mobile-close-wrap,
 .agassi-wholesale-header__mobile-cta-wrap {
@@ -407,6 +406,10 @@ body.agassi-wholesale-scroll-locked {
   border: 0;
   background: var(--agassi-wholesale-crimson-dark);
   color: var(--agassi-wholesale-white);
+}
+
+.agassi-wholesale-header__burger-wrap {
+  display: none;
 }
 
 .agassi-wholesale-header__burger {
@@ -747,6 +750,14 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-header__actions {
     gap: 12px;
     margin-left: auto;
+  }
+
+  .agassi-wholesale-header__burger-wrap {
+    position: fixed;
+    z-index: 1000;
+    top: 8px;
+    right: calc(var(--agassi-wholesale-frame-gap) + 8px);
+    display: block;
   }
 
   .agassi-wholesale-header__burger {
