@@ -3490,7 +3490,7 @@ body.agassi-wholesale-scroll-locked {
 .agassi-wholesale-faq__list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   min-width: 0;
   width: 100%;
   margin: 0;
@@ -3589,7 +3589,6 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-faq__answer p {
-  max-width: 650px;
   margin: 0;
   padding: 0 32px 28px;
   color: var(--agassi-wholesale-muted);
