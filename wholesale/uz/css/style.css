@@ -3166,7 +3166,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-stories__quote {
-  --agassi-wholesale-quote-lines: 3;
+  --agassi-wholesale-quote-lines: 4;
   position: relative;
   min-height: calc(var(--agassi-wholesale-quote-lines) * var(--agassi-wholesale-line-h4));
   max-height: calc(var(--agassi-wholesale-quote-lines) * var(--agassi-wholesale-line-h4));
