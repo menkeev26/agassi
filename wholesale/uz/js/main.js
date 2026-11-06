@@ -415,134 +415,108 @@
       section.dataset.agassiWholesaleStoriesReady = 'true';
 
       var track = section.querySelector('.agassi-wholesale-stories__track');
-      var cards = Array.prototype.slice.call(
-        section.querySelectorAll('.agassi-wholesale-stories__card')
-      );
       var prev = section.querySelector('.agassi-wholesale-stories__arrow--prev');
       var next = section.querySelector('.agassi-wholesale-stories__arrow--next');
 
-      if (!track || !cards.length || !prev || !next) return;
+      if (!track || !track.firstElementChild || !prev || !next) return;
 
-      var scrollTimer = null;
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      var autoplayDelay = 4000;
+      var index = 0;
+      var timer = 0;
+      var autoplay = 0;
 
-      function getCardPosition(index) {
-        var trackRect = track.getBoundingClientRect();
-        var cardRect = cards[index].getBoundingClientRect();
-
-        return track.scrollLeft + cardRect.left - trackRect.left;
+      function step() {
+        var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+        return track.firstElementChild.getBoundingClientRect().width + gap;
       }
 
-      function getClosestIndex() {
-        var current = track.scrollLeft;
-        var closestIndex = 0;
-        var closestDistance = Infinity;
-
-        cards.forEach(function (card, index) {
-          var position = getCardPosition(index);
-          var distance = Math.abs(position - current);
-
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closestIndex = index;
-          }
-        });
-
-        return closestIndex;
+      function maxScroll() {
+        return Math.max(0, track.scrollWidth - track.clientWidth);
       }
 
-      function getLastReachableIndex() {
-        var maxScroll = Math.max(
-          0,
-          track.scrollWidth - track.clientWidth
-        );
-
-        var lastIndex = 0;
-
-        cards.forEach(function (card, index) {
-          if (getCardPosition(index) <= maxScroll + 2) {
-            lastIndex = index;
-          }
-        });
-
-        return lastIndex;
+      function lastIndex() {
+        return Math.ceil((maxScroll() - 1) / step());
       }
 
       function updateButtons() {
-        var maxScroll = Math.max(
-          0,
-          track.scrollWidth - track.clientWidth
-        );
-
-        prev.disabled = track.scrollLeft <= 2;
-        next.disabled = track.scrollLeft >= maxScroll - 2;
+        prev.disabled = track.scrollLeft <= 1;
+        next.disabled = track.scrollLeft >= maxScroll() - 1;
       }
 
-      function goToCard(index) {
-        var lastIndex = getLastReachableIndex();
-
-        index = Math.max(
-          0,
-          Math.min(lastIndex, index)
-        );
-
-        var maxScroll = Math.max(
-          0,
-          track.scrollWidth - track.clientWidth
-        );
-
-        var target = Math.min(
-          getCardPosition(index),
-          maxScroll
-        );
-
+      function goTo(target) {
+        index = Math.max(0, Math.min(lastIndex(), target));
         track.scrollTo({
-          left: target,
-          behavior: 'smooth'
+          left: Math.min(index * step(), maxScroll()),
+          behavior: reducedMotion.matches ? 'auto' : 'smooth'
         });
       }
 
-      prev.addEventListener('click', function () {
-        var index = getClosestIndex();
+      function stopAutoplay() {
+        window.clearInterval(autoplay);
+        autoplay = 0;
+      }
 
-        if (getCardPosition(index) < track.scrollLeft - 2) {
-          goToCard(index);
-        } else {
-          goToCard(index - 1);
-        }
+      function startAutoplay() {
+        if (reducedMotion.matches || window.self !== window.top) return;
+
+        autoplay = window.setInterval(function () {
+          if (document.hidden) return;
+          goTo(index >= lastIndex() ? 0 : index + 1);
+        }, autoplayDelay);
+      }
+
+      prev.addEventListener('click', function () {
+        stopAutoplay();
+        goTo(index - 1);
       });
 
       next.addEventListener('click', function () {
-        var index = getClosestIndex();
-
-        if (getCardPosition(index) > track.scrollLeft + 2) {
-          goToCard(index);
-        } else {
-          goToCard(index + 1);
-        }
+        stopAutoplay();
+        goTo(index + 1);
       });
 
-      track.addEventListener(
-        'scroll',
-        function () {
-          window.clearTimeout(scrollTimer);
+      track.addEventListener('pointerdown', stopAutoplay, { passive: true });
 
-          scrollTimer = window.setTimeout(
-            updateButtons,
-            80
-          );
-        },
-        { passive: true }
-      );
-
-      window.addEventListener(
-        'resize',
-        function () {
+      track.addEventListener('scroll', function () {
+        window.clearTimeout(timer);
+        timer = window.setTimeout(function () {
+          index = Math.round(track.scrollLeft / step());
           updateButtons();
-        },
-        { passive: true }
-      );
+        }, 100);
+      }, { passive: true });
+
+      window.addEventListener('resize', function () {
+        index = Math.round(track.scrollLeft / step());
+        updateButtons();
+      }, { passive: true });
+
+      // «Ўқиш»: полный текст отзыва раскрывается внутри карточки
+      section.querySelectorAll('.agassi-wholesale-stories__card').forEach(function (card) {
+        var quote = card.querySelector('.agassi-wholesale-stories__quote');
+        var more = card.querySelector('.agassi-wholesale-stories__more');
+
+        if (!quote || !more) return;
+
+        var openLabel = more.textContent.trim();
+        var closeLabel = more.getAttribute('data-close-label') || openLabel;
+
+        if (quote.scrollHeight <= quote.clientHeight + 1) {
+          more.hidden = true;
+        }
+
+        more.addEventListener('click', function () {
+          var open = !card.classList.contains('is-open');
+
+          stopAutoplay();
+          card.classList.toggle('is-open', open);
+          more.setAttribute('aria-expanded', open ? 'true' : 'false');
+          more.textContent = open ? closeLabel : openLabel;
+        });
+      });
 
       updateButtons();
+      startAutoplay();
     });
   })();
 
