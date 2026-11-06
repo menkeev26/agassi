@@ -3144,7 +3144,6 @@ body.agassi-wholesale-scroll-locked {
   flex: 0 0 calc((100% - (var(--agassi-wholesale-columns) - 1) * var(--agassi-wholesale-gap)) / var(--agassi-wholesale-columns));
   flex-direction: column;
   min-width: 0;
-  aspect-ratio: 4 / 3;
   padding: 36px;
   border-radius: var(--agassi-wholesale-radius);
   background: var(--agassi-wholesale-white);
@@ -3166,14 +3165,62 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-stories__quote {
-  margin: auto 0;
-  padding: 48px 0;
+  display: -webkit-box;
+  margin: 32px 0 16px;
+  padding: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
   color: #1E1E1E;
   font-family: var(--t-text-font);
   font-weight: 400;
   letter-spacing: 0;
   font-size: var(--agassi-wholesale-font-h4);
   line-height: var(--agassi-wholesale-line-h4);
+}
+
+.agassi-wholesale-stories__card.is-open .agassi-wholesale-stories__quote {
+  display: block;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+}
+
+.agassi-wholesale-stories__more,
+#allrecords .agassi-wholesale-stories__more,
+.t-records .agassi-wholesale-stories__more {
+  align-self: flex-start;
+  margin: 0 0 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--agassi-wholesale-crimson);
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-wholesale-font-small);
+  font-weight: 500;
+  line-height: var(--agassi-wholesale-line-small);
+  letter-spacing: 0;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  transition: opacity var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
+}
+
+.agassi-wholesale-stories__more:hover {
+  opacity: .72;
+}
+
+.agassi-wholesale-stories__more[hidden] {
+  display: none;
+}
+
+.agassi-wholesale-stories__more:focus-visible {
+  outline: 2px solid var(--agassi-wholesale-crimson);
+  outline-offset: 4px;
+}
+
+.agassi-wholesale-stories__card > div:last-child {
+  margin-top: auto;
 }
 
 .agassi-wholesale-stories__name {
@@ -3289,9 +3336,6 @@ body.agassi-wholesale-scroll-locked {
     padding: 32px;
   }
 
-  .agassi-wholesale-stories__quote {
-    padding: 44px 0;
-  }
 
 }
 
@@ -3335,9 +3379,6 @@ body.agassi-wholesale-scroll-locked {
     padding: 24px;
   }
 
-  .agassi-wholesale-stories__quote {
-    padding: 40px 0;
-  }
 
   .agassi-wholesale-stories__role {
     margin-top: 4px;
@@ -3373,9 +3414,6 @@ body.agassi-wholesale-scroll-locked {
     padding: 24px;
   }
 
-  .agassi-wholesale-stories__quote {
-    padding: 32px 0;
-  }
 }
 
 @media (max-width: 360px) {
