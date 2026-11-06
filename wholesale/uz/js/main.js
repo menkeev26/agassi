@@ -421,10 +421,8 @@
       if (!track || !track.firstElementChild || !prev || !next) return;
 
       var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      var autoplayDelay = 4000;
       var index = 0;
       var timer = 0;
-      var autoplay = 0;
 
       function step() {
         var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
@@ -452,31 +450,13 @@
         });
       }
 
-      function stopAutoplay() {
-        window.clearInterval(autoplay);
-        autoplay = 0;
-      }
-
-      function startAutoplay() {
-        if (reducedMotion.matches || window.self !== window.top) return;
-
-        autoplay = window.setInterval(function () {
-          if (document.hidden) return;
-          goTo(index >= lastIndex() ? 0 : index + 1);
-        }, autoplayDelay);
-      }
-
       prev.addEventListener('click', function () {
-        stopAutoplay();
         goTo(index - 1);
       });
 
       next.addEventListener('click', function () {
-        stopAutoplay();
         goTo(index + 1);
       });
-
-      track.addEventListener('pointerdown', stopAutoplay, { passive: true });
 
       track.addEventListener('scroll', function () {
         window.clearTimeout(timer);
@@ -501,14 +481,24 @@
         var openLabel = more.textContent.trim();
         var closeLabel = more.getAttribute('data-close-label') || openLabel;
 
-        if (quote.scrollHeight <= quote.clientHeight + 1) {
-          more.hidden = true;
+        function measure() {
+          quote.style.setProperty('--agassi-wholesale-quote-height', quote.scrollHeight + 'px');
+          var short = quote.scrollHeight <= quote.clientHeight + 1 && !card.classList.contains('is-open');
+
+          if (!card.classList.contains('is-open')) {
+            card.classList.toggle('is-short', short);
+            more.hidden = short;
+          }
         }
+
+        measure();
+        window.addEventListener('resize', measure, { passive: true });
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
 
         more.addEventListener('click', function () {
           var open = !card.classList.contains('is-open');
 
-          stopAutoplay();
+            if (open) quote.style.setProperty('--agassi-wholesale-quote-height', quote.scrollHeight + 'px');
           card.classList.toggle('is-open', open);
           more.setAttribute('aria-expanded', open ? 'true' : 'false');
           more.textContent = open ? closeLabel : openLabel;
@@ -516,7 +506,6 @@
       });
 
       updateButtons();
-      startAutoplay();
     });
   })();
 
