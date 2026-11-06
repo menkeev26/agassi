@@ -3125,6 +3125,7 @@ body.agassi-wholesale-scroll-locked {
   width: 100%;
   max-width: 100%;
   min-width: 0;
+  align-items: flex-start;
   gap: var(--agassi-wholesale-gap);
   overflow-x: auto;
   overflow-y: hidden;
@@ -3165,25 +3166,35 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-stories__quote {
-  display: -webkit-box;
+  --agassi-wholesale-quote-lines: 3;
+  position: relative;
+  min-height: calc(var(--agassi-wholesale-quote-lines) * var(--agassi-wholesale-line-h4));
+  max-height: calc(var(--agassi-wholesale-quote-lines) * var(--agassi-wholesale-line-h4));
   margin: 32px 0 16px;
   padding: 0;
   overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 32px), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 32px), transparent);
   color: #1E1E1E;
   font-family: var(--t-text-font);
   font-weight: 400;
   letter-spacing: 0;
   font-size: var(--agassi-wholesale-font-h4);
   line-height: var(--agassi-wholesale-line-h4);
+  transition:
+    max-height var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
+    -webkit-mask-size var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
 }
 
 .agassi-wholesale-stories__card.is-open .agassi-wholesale-stories__quote {
-  display: block;
-  -webkit-line-clamp: unset;
-  line-clamp: unset;
+  max-height: var(--agassi-wholesale-quote-height, 600px);
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.agassi-wholesale-stories__card.is-short .agassi-wholesale-stories__quote {
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 .agassi-wholesale-stories__more,
@@ -3295,9 +3306,8 @@ body.agassi-wholesale-scroll-locked {
 .agassi-wholesale-stories__arrow:disabled,
 #allrecords .agassi-wholesale-stories__arrow:disabled,
 .t-records .agassi-wholesale-stories__arrow:disabled {
-  border-color: var(--agassi-wholesale-crimson);
-  background: var(--agassi-wholesale-crimson);
-  color: var(--agassi-wholesale-on-crimson);
+  border-color: var(--agassi-wholesale-line);
+  background: var(--agassi-wholesale-line);
   cursor: default;
 }
 
