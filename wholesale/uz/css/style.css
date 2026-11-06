@@ -1957,7 +1957,7 @@ body.agassi-wholesale-scroll-locked {
   position: absolute;
   z-index: 1;
   inset: 0;
-  background: linear-gradient( 180deg, rgba(140, 15, 20, .64) 0%, rgba(140, 15, 20, .56) 40%, rgba(140, 15, 20, .96) 100% );
+  background: linear-gradient( 180deg, rgba(140, 15, 20, .30) 0%, rgba(140, 15, 20, .18) 34%, rgba(140, 15, 20, .96) 100% );
   pointer-events: none;
 }
 
@@ -2248,7 +2248,7 @@ body.agassi-wholesale-scroll-locked {
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
-  background: var(--agassi-wholesale-sand);
+  background: var(--agassi-wholesale-ivory);
   color: var(--agassi-wholesale-ink);
 }
 
