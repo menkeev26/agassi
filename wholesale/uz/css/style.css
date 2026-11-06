@@ -124,6 +124,29 @@ html {
   padding: 0;
 }
 
+/* Плавное появление блоков при прокрутке (класс ставит main.js) */
+.agassi-wholesale-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 700ms var(--agassi-wholesale-ease),
+    transform 700ms var(--agassi-wholesale-ease);
+  transition-delay: var(--agassi-wholesale-reveal-delay, 0ms);
+}
+
+.agassi-wholesale-reveal.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agassi-wholesale-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* Общая кнопка (как agassi-group-button) */
 .agassi-wholesale-button,
 #allrecords .agassi-wholesale-button,
@@ -2422,18 +2445,6 @@ body.agassi-wholesale-scroll-locked {
 
 .agassi-wholesale-support.is-motion.is-visible .agassi-wholesale-support__visual {
   transition-delay: 0ms, 0ms, 480ms, 480ms;
-}
-
-@media (hover: hover) {
-  .agassi-wholesale-support__item:hover {
-    background: var(--agassi-wholesale-crimson);
-    color: var(--agassi-wholesale-white);
-  }
-
-  .agassi-wholesale-support__item:hover .agassi-wholesale-support__number,
-  .agassi-wholesale-support__item:hover .agassi-wholesale-support__item-text {
-    color: var(--agassi-wholesale-on-crimson);
-  }
 }
 
 @media (max-width: 1440px) {
