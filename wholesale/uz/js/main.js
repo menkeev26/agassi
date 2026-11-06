@@ -237,8 +237,8 @@
 
   (function () {
     document.querySelectorAll('.agassi-wholesale-support').forEach(function (section) {
-      if (section.dataset.agassiWholesaleSupportReady) return;
-      section.dataset.agassiWholesaleSupportReady = 'true';
+      if (section.dataset.agassiWholesaleMotionReady) return;
+      section.dataset.agassiWholesaleMotionReady = 'true';
 
       if (
         window.self !== window.top ||
@@ -260,6 +260,55 @@
       }, { threshold: 0.2 });
 
       observer.observe(section.querySelector('.agassi-wholesale-support__surface') || section);
+    });
+  })();
+
+
+
+  (function () {
+    if (
+      window.self !== window.top ||
+      !('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+
+    var groups = [
+      ['.agassi-wholesale-numbers', ['__header', '__surface']],
+      ['.agassi-wholesale-why', ['__header', '__layout']],
+      ['.agassi-wholesale-support', ['__header']],
+      ['.agassi-wholesale-products', ['__header', '__grid']],
+      ['.agassi-wholesale-partners', ['__header', '__viewport', '__controls']],
+      ['.agassi-wholesale-stories', ['__header', '__track', '__controls']],
+      ['.agassi-wholesale-faq', ['__header', '__layout']],
+      ['.agassi-wholesale-contact', ['__header', '__surface']],
+      ['.agassi-wholesale-footer', ['__main', '__bottom']]
+    ];
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add('is-revealed');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.08 });
+
+    groups.forEach(function (group) {
+      document.querySelectorAll(group[0]).forEach(function (section) {
+        var prefix = group[0].slice(1);
+
+        group[1].forEach(function (suffix, index) {
+          var target = section.querySelector('.' + prefix + suffix);
+
+          if (!target || target.classList.contains('agassi-wholesale-reveal')) return;
+
+          target.classList.add('agassi-wholesale-reveal');
+          target.style.setProperty('--agassi-wholesale-reveal-delay', (index * 120) + 'ms');
+          observer.observe(target);
+        });
+      });
     });
   })();
 
