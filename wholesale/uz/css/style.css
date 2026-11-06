@@ -1,6 +1,3 @@
-/* Agassi Wholesale (UZ): общие стили всех блоков сайта. Все классы начинаются с agassi-wholesale- */
-
-/* Токены */
 :root {
   --agassi-wholesale-ivory: #F4F1EA;
   --agassi-wholesale-white: #FFFFFF;
@@ -14,15 +11,13 @@
   --agassi-wholesale-on-crimson: #DFBCBD;
   --agassi-wholesale-line-crimson: #A1393E;
   --agassi-wholesale-gold-gradient: linear-gradient(90deg, #E8C375 0%, #C6A15B 55%, #E7C274 100%);
-
   --agassi-wholesale-frame-max: 1620px;
   --agassi-wholesale-frame-gap: 96px;
   --agassi-wholesale-section-space: 96px;
   --agassi-wholesale-columns: 12;
   --agassi-wholesale-gap: 16px;
   --agassi-wholesale-radius: 28px;
-  --agassi-wholesale-radius-small: 16px;
-
+  --agassi-wholesale-radius-pill: 1000px;
   --agassi-wholesale-font-text: 16px;
   --agassi-wholesale-line-text: 24px;
   --agassi-wholesale-font-caption: 14px;
@@ -35,9 +30,11 @@
   --agassi-wholesale-line-h4: 28px;
   --agassi-wholesale-font-h1: 64px;
   --agassi-wholesale-line-h1: 68px;
-
   --agassi-wholesale-duration: 400ms;
+  --agassi-wholesale-duration-fast: 240ms;
+  --agassi-wholesale-duration-slow: 700ms;
   --agassi-wholesale-ease: ease-out;
+  --agassi-wholesale-font-menu: 24px;
 }
 
 @media (max-width: 1440px) {
@@ -75,6 +72,12 @@
   }
 }
 
+@media (max-width: 360px) {
+  :root {
+    --agassi-wholesale-font-menu: 22px;
+  }
+}
+
 @media (max-width: 640px) {
   :root {
     --agassi-wholesale-columns: 4;
@@ -93,7 +96,6 @@
   }
 }
 
-/* Типографика: единая шкала уровней. Размер, семейство, начертание и высота строки каждого уровня записаны один раз */
 .agassi-wholesale-hero__title {
   font-family: var(--t-headline-font);
   font-size: var(--agassi-wholesale-font-h1);
@@ -106,7 +108,7 @@
 .agassi-wholesale-numbers__title,
 .agassi-wholesale-numbers__value,
 .agassi-wholesale-why__title,
-.agassi-wholesale-why__feature-number,
+.agassi-wholesale-why__feature-value,
 .agassi-wholesale-support__title,
 .agassi-wholesale-products__title,
 .agassi-wholesale-partners__title,
@@ -133,7 +135,7 @@
 .agassi-wholesale-support__item-title,
 .agassi-wholesale-stories__quote,
 .agassi-wholesale-faq__question-text,
-.agassi-wholesale-contact__contact-value {
+.agassi-wholesale-contact__value {
   font-family: var(--t-text-font);
   font-size: var(--agassi-wholesale-font-h4);
   font-weight: 500;
@@ -144,7 +146,7 @@
 .agassi-wholesale-header-slot,
 .agassi-wholesale-hero,
 .agassi-wholesale-statement,
-.agassi-wholesale-statement__text,
+.agassi-wholesale-statement__lead,
 .agassi-wholesale-numbers,
 .agassi-wholesale-why,
 .agassi-wholesale-why__feature-text,
@@ -175,8 +177,7 @@
 }
 
 .agassi-wholesale-button,
-#allrecords .agassi-wholesale-button,
-.t-records .agassi-wholesale-button,
+:is(#allrecords, .t-records) .agassi-wholesale-button,
 .agassi-wholesale-hero__eyebrow,
 .agassi-wholesale-statement__eyebrow,
 .agassi-wholesale-numbers__eyebrow,
@@ -188,29 +189,24 @@
 .agassi-wholesale-faq__eyebrow,
 .agassi-wholesale-contact__eyebrow,
 .agassi-wholesale-header__nav a,
-#allrecords .agassi-wholesale-header__nav a,
-.t-records .agassi-wholesale-header__nav a,
+:is(#allrecords, .t-records) .agassi-wholesale-header__nav a,
 .agassi-wholesale-header__language-current,
-#allrecords .agassi-wholesale-header__language-current,
-.t-records .agassi-wholesale-header__language-current,
+:is(#allrecords, .t-records) .agassi-wholesale-header__language-current,
 .agassi-wholesale-header__language-option,
-#allrecords .agassi-wholesale-header__language-option,
-.t-records .agassi-wholesale-header__language-option,
+:is(#allrecords, .t-records) .agassi-wholesale-header__language-option,
 .agassi-wholesale-header__mobile-language-button,
-#allrecords .agassi-wholesale-header__mobile-language-button,
-.t-records .agassi-wholesale-header__mobile-language-button,
+:is(#allrecords, .t-records) .agassi-wholesale-header__mobile-language-button,
 .agassi-wholesale-numbers__label,
 .agassi-wholesale-why__benefit-number,
 .agassi-wholesale-support__number,
 .agassi-wholesale-products__count,
 .agassi-wholesale-stories__meta,
 .agassi-wholesale-stories__more,
-#allrecords .agassi-wholesale-stories__more,
-.t-records .agassi-wholesale-stories__more,
+:is(#allrecords, .t-records) .agassi-wholesale-stories__more,
 .agassi-wholesale-stories__name,
 .agassi-wholesale-stories__role,
-.agassi-wholesale-contact__contact-label,
-.agassi-wholesale-footer__label,
+.agassi-wholesale-contact__label,
+.agassi-wholesale-footer__heading,
 .agassi-wholesale-footer__bottom,
 .agassi-wholesale-footer__copyright,
 .agassi-wholesale-footer__legal-link {
@@ -221,8 +217,6 @@
   letter-spacing: 0;
 }
 
-
-/* Выделение текста в цветах сайта */
 ::selection {
   background: var(--agassi-wholesale-crimson);
   color: var(--agassi-wholesale-white);
@@ -237,11 +231,6 @@
   color: var(--agassi-wholesale-crimson);
 }
 
-/* Базовые стили */
-html {
-  scroll-behavior: smooth;
-}
-
 [class*="agassi-wholesale-"],
 [class*="agassi-wholesale-"]::before,
 [class*="agassi-wholesale-"]::after {
@@ -253,13 +242,148 @@ html {
   padding: 0;
 }
 
-/* Плавное появление блоков при прокрутке (класс ставит main.js) */
+.agassi-wholesale-statement,
+.agassi-wholesale-why,
+.agassi-wholesale-products,
+.agassi-wholesale-numbers,
+.agassi-wholesale-support,
+.agassi-wholesale-contact,
+.agassi-wholesale-partners,
+.agassi-wholesale-stories,
+.agassi-wholesale-faq {
+  width: 100%;
+  padding: var(--agassi-wholesale-section-space) 0;
+}
+
+.agassi-wholesale-statement,
+.agassi-wholesale-why,
+.agassi-wholesale-products,
+.agassi-wholesale-support,
+.agassi-wholesale-contact,
+.agassi-wholesale-partners,
+.agassi-wholesale-stories,
+.agassi-wholesale-faq {
+  background: var(--agassi-wholesale-ivory);
+  color: var(--agassi-wholesale-ink);
+}
+
+.agassi-wholesale-statement,
+.agassi-wholesale-why,
+.agassi-wholesale-products,
+.agassi-wholesale-numbers,
+.agassi-wholesale-support,
+.agassi-wholesale-contact,
+.agassi-wholesale-faq {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.agassi-wholesale-statement,
+.agassi-wholesale-why,
+.agassi-wholesale-products,
+.agassi-wholesale-support,
+.agassi-wholesale-contact,
+.agassi-wholesale-partners,
+.agassi-wholesale-stories {
+  overflow: hidden;
+}
+
+.agassi-wholesale-statement,
+.agassi-wholesale-why,
+.agassi-wholesale-products,
+.agassi-wholesale-numbers,
+.agassi-wholesale-faq {
+  position: relative;
+  display: block;
+}
+
+.agassi-wholesale-statement__frame,
+.agassi-wholesale-numbers__frame,
+.agassi-wholesale-why__frame,
+.agassi-wholesale-support__frame,
+.agassi-wholesale-products__frame,
+.agassi-wholesale-partners__frame,
+.agassi-wholesale-stories__frame,
+.agassi-wholesale-faq__frame,
+.agassi-wholesale-contact__frame {
+  width: min(var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)));
+  margin: 0 auto;
+}
+
+.agassi-wholesale-statement__title,
+.agassi-wholesale-why__title,
+.agassi-wholesale-products__title,
+.agassi-wholesale-faq__title,
+.agassi-wholesale-numbers__title,
+.agassi-wholesale-support__title,
+.agassi-wholesale-partners__title,
+.agassi-wholesale-stories__title,
+.agassi-wholesale-contact__title {
+  text-wrap: balance;
+  text-transform: uppercase;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.agassi-wholesale-statement__title,
+.agassi-wholesale-why__title,
+.agassi-wholesale-products__title,
+.agassi-wholesale-faq__title,
+.agassi-wholesale-support__title,
+.agassi-wholesale-partners__title,
+.agassi-wholesale-stories__title,
+.agassi-wholesale-contact__title {
+  color: var(--agassi-wholesale-crimson);
+}
+
+.agassi-wholesale-statement__title,
+.agassi-wholesale-why__title,
+.agassi-wholesale-products__title,
+.agassi-wholesale-faq__title,
+.agassi-wholesale-numbers__title,
+.agassi-wholesale-support__title,
+.agassi-wholesale-contact__title {
+  padding: 0;
+  text-align: center;
+}
+
+.agassi-wholesale-numbers__title,
+.agassi-wholesale-support__title,
+.agassi-wholesale-partners__title,
+.agassi-wholesale-stories__title,
+.agassi-wholesale-contact__title {
+  margin: 0;
+}
+
+.agassi-wholesale-support__lead,
+.agassi-wholesale-products__lead,
+.agassi-wholesale-faq__lead,
+.agassi-wholesale-stories__lead,
+.agassi-wholesale-contact__lead {
+  margin: 20px auto 0;
+  color: var(--agassi-wholesale-muted);
+}
+
+.agassi-wholesale-support__lead,
+.agassi-wholesale-products__lead,
+.agassi-wholesale-faq__lead,
+.agassi-wholesale-contact__lead {
+  text-align: center;
+}
+
+.agassi-wholesale-products__lead,
+.agassi-wholesale-faq__lead,
+.agassi-wholesale-contact__lead {
+  padding: 0;
+}
+
 .agassi-wholesale-reveal {
   opacity: 0;
   transform: translateY(32px);
   transition:
-    opacity 700ms var(--agassi-wholesale-ease),
-    transform 700ms var(--agassi-wholesale-ease);
+    opacity var(--agassi-wholesale-duration-slow) var(--agassi-wholesale-ease),
+    transform var(--agassi-wholesale-duration-slow) var(--agassi-wholesale-ease);
   transition-delay: var(--agassi-wholesale-reveal-delay, 0ms);
 }
 
@@ -268,7 +392,6 @@ html {
   transform: none;
 }
 
-/* Заголовки: размытие и сдвиг (как agassi-group-reveal) */
 .agassi-wholesale-reveal-text {
   opacity: 0;
   filter: blur(12px);
@@ -295,10 +418,8 @@ html {
   }
 }
 
-/* Общая кнопка (как agassi-group-button) */
 .agassi-wholesale-button,
-#allrecords .agassi-wholesale-button,
-.t-records .agassi-wholesale-button {
+:is(#allrecords, .t-records) .agassi-wholesale-button {
   --agassi-wholesale-link-color: var(--agassi-wholesale-white);
   display: inline-flex;
   align-items: center;
@@ -307,7 +428,7 @@ html {
   margin: 0;
   padding: 0 32px;
   border: 1px solid var(--agassi-wholesale-crimson);
-  border-radius: 1000px;
+  border-radius: var(--agassi-wholesale-radius-pill);
   background: var(--agassi-wholesale-crimson);
   color: var(--agassi-wholesale-link-color);
   font-weight: 500;
@@ -322,24 +443,21 @@ html {
 }
 
 .agassi-wholesale-button:hover,
-#allrecords .agassi-wholesale-button:hover,
-.t-records .agassi-wholesale-button:hover {
+:is(#allrecords, .t-records) .agassi-wholesale-button:hover {
   border-color: var(--agassi-wholesale-crimson-dark);
   background: var(--agassi-wholesale-crimson-dark);
   color: var(--agassi-wholesale-link-color);
 }
 
 .agassi-wholesale-button--gold,
-#allrecords .agassi-wholesale-button--gold,
-.t-records .agassi-wholesale-button--gold {
+:is(#allrecords, .t-records) .agassi-wholesale-button--gold {
   --agassi-wholesale-link-color: var(--agassi-wholesale-crimson);
   border-color: var(--agassi-wholesale-gold);
   background: var(--agassi-wholesale-gold-gradient);
 }
 
 .agassi-wholesale-button--gold:hover,
-#allrecords .agassi-wholesale-button--gold:hover,
-.t-records .agassi-wholesale-button--gold:hover {
+:is(#allrecords, .t-records) .agassi-wholesale-button--gold:hover {
   border-color: var(--agassi-wholesale-gold);
   background: var(--agassi-wholesale-gold-gradient);
   filter: brightness(.88);
@@ -350,7 +468,6 @@ html {
   outline-offset: 4px;
 }
 
-/* Надзаголовок (как agassi-group-heading__eyebrow) */
 .agassi-wholesale-hero__eyebrow,
 .agassi-wholesale-statement__eyebrow,
 .agassi-wholesale-numbers__eyebrow,
@@ -365,7 +482,7 @@ html {
   margin: 0 0 16px;
   padding: 5px 16px;
   border: 1px solid color-mix(in srgb, var(--agassi-wholesale-crimson) 32%, transparent);
-  border-radius: 1000px;
+  border-radius: var(--agassi-wholesale-radius-pill);
   color: var(--agassi-wholesale-crimson);
   text-transform: uppercase;
 }
@@ -380,7 +497,6 @@ html {
   -webkit-text-fill-color: transparent;
 }
 
-/* Шапка */
 html {
   scroll-behavior: smooth;
 }
@@ -410,7 +526,6 @@ body.agassi-wholesale-scroll-locked {
 
 .agassi-wholesale-header-slot {
   --agassi-wholesale-header-height: 64px;
-
   position: relative;
   display: block;
   width: 100%;
@@ -436,7 +551,7 @@ body.agassi-wholesale-scroll-locked {
   );
   height: var(--agassi-wholesale-header-height);
   transform: translateX(-50%);
-  border-radius: 999px;
+  border-radius: var(--agassi-wholesale-radius-pill);
   background: var(--agassi-wholesale-ivory);
   color: var(--agassi-wholesale-crimson);
   transition:
@@ -445,7 +560,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-header.is-scrolled {
-  box-shadow: 0 10px 30px rgba(140, 15, 20, .08);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--agassi-wholesale-crimson) 8%, transparent);
 }
 
 .agassi-wholesale-header__frame {
@@ -468,8 +583,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-header__logo,
-#allrecords .agassi-wholesale-header__logo,
-.t-records .agassi-wholesale-header__logo {
+:is(#allrecords, .t-records) .agassi-wholesale-header__logo {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -497,15 +611,14 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-header__nav a,
-#allrecords .agassi-wholesale-header__nav a,
-.t-records .agassi-wholesale-header__nav a {
+:is(#allrecords, .t-records) .agassi-wholesale-header__nav a {
   position: relative;
   display: flex;
   align-items: center;
   margin: 0;
   padding: 0 0 4px;
   border: 0;
-  color: #1E1E1E;
+  color: var(--agassi-wholesale-ink);
   text-decoration: none;
   white-space: nowrap;
   opacity: 1;
@@ -522,18 +635,17 @@ body.agassi-wholesale-scroll-locked {
   bottom: 0;
   width: 100%;
   height: 1px;
-  border-radius: 999px;
-  background: #1E1E1E;
+  border-radius: var(--agassi-wholesale-radius-pill);
+  background: var(--agassi-wholesale-ink);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 480ms linear;
 }
 
 .agassi-wholesale-header__nav a:hover,
-#allrecords .agassi-wholesale-header__nav a:hover,
-.t-records .agassi-wholesale-header__nav a:hover {
+:is(#allrecords, .t-records) .agassi-wholesale-header__nav a:hover {
   border-color: transparent;
-  color: #1E1E1E;
+  color: var(--agassi-wholesale-ink);
   opacity: 1;
 }
 
@@ -568,8 +680,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-header__language-current,
-#allrecords .agassi-wholesale-header__language-current,
-.t-records .agassi-wholesale-header__language-current {
+:is(#allrecords, .t-records) .agassi-wholesale-header__language-current {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -592,8 +703,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-header__language-current:hover,
-#allrecords .agassi-wholesale-header__language-current:hover,
-.t-records .agassi-wholesale-header__language-current:hover {
+:is(#allrecords, .t-records) .agassi-wholesale-header__language-current:hover {
   border: 0 !important;
   background: var(--agassi-wholesale-crimson) !important;
   color: var(--agassi-wholesale-white) !important;
@@ -605,13 +715,12 @@ body.agassi-wholesale-scroll-locked {
   z-index: 1001;
   top: calc(100% + 8px);
   left: 50%;
-  display: flex;
   flex-direction: column;
   width: 64px;
   padding: 6px;
   border-radius: 18px;
   background: var(--agassi-wholesale-white);
-  box-shadow: 0 12px 32px rgba(30, 30, 30, .10);
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--agassi-wholesale-ink) 10%, transparent);
   display: none;
   opacity: 0;
   pointer-events: none;
@@ -629,12 +738,11 @@ body.agassi-wholesale-scroll-locked {
   opacity: 1;
   pointer-events: auto;
   transform: translate(-50%, 0);
-  animation: agassi-wholesale-dropdown-in 240ms var(--agassi-wholesale-ease);
+  animation: agassi-wholesale-dropdown-in var(--agassi-wholesale-duration-fast) var(--agassi-wholesale-ease);
 }
 
 .agassi-wholesale-header__language-option,
-#allrecords .agassi-wholesale-header__language-option,
-.t-records .agassi-wholesale-header__language-option {
+:is(#allrecords, .t-records) .agassi-wholesale-header__language-option {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -645,25 +753,23 @@ body.agassi-wholesale-scroll-locked {
   border: 0;
   border-radius: 12px;
   background: transparent;
-  color: #1E1E1E;
+  color: var(--agassi-wholesale-ink);
   text-decoration: none;
   font-weight: 500;
   transition:
-    background-color 240ms var(--agassi-wholesale-ease),
-    color 240ms var(--agassi-wholesale-ease);
+    background-color var(--agassi-wholesale-duration-fast) var(--agassi-wholesale-ease),
+    color var(--agassi-wholesale-duration-fast) var(--agassi-wholesale-ease);
 }
 
 .agassi-wholesale-header__language-option:hover,
-#allrecords .agassi-wholesale-header__language-option:hover,
-.t-records .agassi-wholesale-header__language-option:hover {
+:is(#allrecords, .t-records) .agassi-wholesale-header__language-option:hover {
   border: 0;
   background: var(--agassi-wholesale-sand);
   color: var(--agassi-wholesale-crimson);
 }
 
 .agassi-wholesale-header__cta,
-#allrecords .agassi-wholesale-header__cta,
-.t-records .agassi-wholesale-header__cta {
+:is(#allrecords, .t-records) .agassi-wholesale-header__cta {
   min-height: 40px;
   padding: 0 20px;
 }
@@ -711,12 +817,12 @@ body.agassi-wholesale-scroll-locked {
   width: 100%;
   min-height: 100%;
   opacity: 0;
-  transition: opacity 280ms var(--agassi-wholesale-ease);
+  transition: opacity var(--agassi-wholesale-duration-fast) var(--agassi-wholesale-ease);
 }
 
 .agassi-wholesale-header-slot.is-menu-open .agassi-wholesale-header__mobile-inner {
   opacity: 1;
-  transition: opacity 420ms var(--agassi-wholesale-ease) 180ms;
+  transition: opacity var(--agassi-wholesale-duration) var(--agassi-wholesale-ease) 180ms;
 }
 
 .agassi-wholesale-header__mobile-top {
@@ -728,8 +834,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-header__mobile-logo,
-#allrecords .agassi-wholesale-header__mobile-logo,
-.t-records .agassi-wholesale-header__mobile-logo {
+:is(#allrecords, .t-records) .agassi-wholesale-header__mobile-logo {
   position: relative;
   display: flex;
   align-items: center;
@@ -788,8 +893,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-header__mobile-nav a,
-#allrecords .agassi-wholesale-header__mobile-nav a,
-.t-records .agassi-wholesale-header__mobile-nav a {
+:is(#allrecords, .t-records) .agassi-wholesale-header__mobile-nav a {
   position: relative;
   display: inline-block;
   margin: 0;
@@ -798,7 +902,7 @@ body.agassi-wholesale-scroll-locked {
   color: var(--agassi-wholesale-white);
   text-decoration: none;
   font-family: var(--t-text-font);
-  font-size: 24px;
+  font-size: var(--agassi-wholesale-font-menu);
   font-weight: 500;
   line-height: 1.3;
   letter-spacing: 0;
@@ -811,7 +915,7 @@ body.agassi-wholesale-scroll-locked {
   bottom: 0;
   width: 100%;
   height: 1px;
-  border-radius: 999px;
+  border-radius: var(--agassi-wholesale-radius-pill);
   background: var(--agassi-wholesale-white);
   transform: scaleX(0);
   transform-origin: left center;
@@ -819,8 +923,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-header__mobile-nav a:hover,
-#allrecords .agassi-wholesale-header__mobile-nav a:hover,
-.t-records .agassi-wholesale-header__mobile-nav a:hover {
+:is(#allrecords, .t-records) .agassi-wholesale-header__mobile-nav a:hover {
   border-color: transparent;
   color: var(--agassi-wholesale-white);
 }
@@ -846,8 +949,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-header__mobile-language-button,
-#allrecords .agassi-wholesale-header__mobile-language-button,
-.t-records .agassi-wholesale-header__mobile-language-button {
+:is(#allrecords, .t-records) .agassi-wholesale-header__mobile-language-button {
   position: relative;
   display: flex;
   align-items: center;
@@ -857,7 +959,7 @@ body.agassi-wholesale-scroll-locked {
   margin: 0;
   padding: 0 24px;
   border: 1px solid var(--agassi-wholesale-on-crimson);
-  border-radius: 999px;
+  border-radius: var(--agassi-wholesale-radius-pill);
   background: transparent;
   color: var(--agassi-wholesale-white);
   text-align: center;
@@ -876,29 +978,25 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-header__mobile-language-button.is-active,
-#allrecords .agassi-wholesale-header__mobile-language-button.is-active,
-.t-records .agassi-wholesale-header__mobile-language-button.is-active {
+:is(#allrecords, .t-records) .agassi-wholesale-header__mobile-language-button.is-active {
   border: 1px solid var(--agassi-wholesale-white);
   background: var(--agassi-wholesale-white);
   color: var(--agassi-wholesale-crimson);
 }
 
 .agassi-wholesale-header__mobile-language-button:hover,
-#allrecords .agassi-wholesale-header__mobile-language-button:hover,
-.t-records .agassi-wholesale-header__mobile-language-button:hover {
+:is(#allrecords, .t-records) .agassi-wholesale-header__mobile-language-button:hover {
   border: 1px solid var(--agassi-wholesale-white);
 }
 
 .agassi-wholesale-header__mobile-language-button.is-active:hover,
-#allrecords .agassi-wholesale-header__mobile-language-button.is-active:hover,
-.t-records .agassi-wholesale-header__mobile-language-button.is-active:hover {
+:is(#allrecords, .t-records) .agassi-wholesale-header__mobile-language-button.is-active:hover {
   background: var(--agassi-wholesale-white);
   color: var(--agassi-wholesale-crimson);
 }
 
 .agassi-wholesale-header__mobile-cta,
-#allrecords .agassi-wholesale-header__mobile-cta,
-.t-records .agassi-wholesale-header__mobile-cta {
+:is(#allrecords, .t-records) .agassi-wholesale-header__mobile-cta {
   width: 100%;
 }
 
@@ -931,11 +1029,9 @@ body.agassi-wholesale-scroll-locked {
 }
 
 @media (max-width: 1440px) {
-.agassi-wholesale-header__frame {
+  .agassi-wholesale-header__frame {
     grid-template-columns: 140px minmax(0, 1fr) auto;
-    gap: 16px;
   }
-
 }
 
 @media (max-width: 1200px) {
@@ -956,22 +1052,16 @@ body.agassi-wholesale-scroll-locked {
     max-height: 68px;
   }
 
-  .agassi-wholesale-header {
-    top: 4px;
-  }
-
   .agassi-wholesale-header__frame {
     display: flex;
     justify-content: space-between;
     padding: 0 8px 0 20px;
-    gap: 16px;
   }
 
   .agassi-wholesale-header__nav,
   .agassi-wholesale-header__language,
   .agassi-wholesale-header__cta,
-  #allrecords .agassi-wholesale-header__cta,
-  .t-records .agassi-wholesale-header__cta {
+  :is(#allrecords, .t-records) .agassi-wholesale-header__cta {
     display: none;
   }
 
@@ -995,13 +1085,10 @@ body.agassi-wholesale-scroll-locked {
 
   .agassi-wholesale-header__burger {
     display: flex;
-    width: 52px;
-    height: 52px;
   }
 
   .agassi-wholesale-header__logo,
-  #allrecords .agassi-wholesale-header__logo,
-  .t-records .agassi-wholesale-header__logo,
+  :is(#allrecords, .t-records) .agassi-wholesale-header__logo,
   .agassi-wholesale-header__logo img {
     max-width: 116px;
   }
@@ -1029,9 +1116,8 @@ body.agassi-wholesale-scroll-locked {
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
     transition:
-      transform 700ms var(--agassi-wholesale-ease),
+      transform var(--agassi-wholesale-duration-slow) var(--agassi-wholesale-ease),
       visibility 0s linear 700ms;
     will-change: transform;
   }
@@ -1041,7 +1127,7 @@ body.agassi-wholesale-scroll-locked {
     visibility: visible;
     pointer-events: auto;
     transition:
-      transform 700ms var(--agassi-wholesale-ease),
+      transform var(--agassi-wholesale-duration-slow) var(--agassi-wholesale-ease),
       visibility 0s linear 0s;
   }
 
@@ -1062,7 +1148,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 @media (max-width: 640px) {
-.agassi-wholesale-header__mobile-inner {
+  .agassi-wholesale-header__mobile-inner {
     padding-top: env(safe-area-inset-top);
     padding-right: calc(var(--agassi-wholesale-frame-gap) + 20px);
     padding-bottom: max(28px, env(safe-area-inset-bottom));
@@ -1081,33 +1167,18 @@ body.agassi-wholesale-scroll-locked {
   }
 
   .agassi-wholesale-header__mobile-nav a,
-  #allrecords .agassi-wholesale-header__mobile-nav a,
-  .t-records .agassi-wholesale-header__mobile-nav a {
-    padding: 4px 0;
-    font-size: 24px;
-    line-height: 1.3;
+  :is(#allrecords, .t-records) .agassi-wholesale-header__mobile-nav a {
+    font-size: var(--agassi-wholesale-font-menu);
   }
 
   .agassi-wholesale-header__mobile-language-button,
-  #allrecords .agassi-wholesale-header__mobile-language-button,
-  .t-records .agassi-wholesale-header__mobile-language-button {
+  :is(#allrecords, .t-records) .agassi-wholesale-header__mobile-language-button {
     min-height: 48px;
-    padding: 0 24px;
-    border-radius: 999px;
   }
-
-  .agassi-wholesale-header__mobile-language-button.is-active,
-  #allrecords .agassi-wholesale-header__mobile-language-button.is-active,
-  .t-records .agassi-wholesale-header__mobile-language-button.is-active {
-    border: 1px solid var(--agassi-wholesale-white);
-    background: var(--agassi-wholesale-white);
-    color: var(--agassi-wholesale-crimson);
-  }
-
 }
 
 @media (max-width: 480px) {
-.agassi-wholesale-header__mobile-inner {
+  .agassi-wholesale-header__mobile-inner {
     padding-top: env(safe-area-inset-top);
     padding-right: calc(var(--agassi-wholesale-frame-gap) + 20px);
     padding-bottom: max(24px, env(safe-area-inset-bottom));
@@ -1125,20 +1196,13 @@ body.agassi-wholesale-scroll-locked {
   }
 
   .agassi-wholesale-header__mobile-nav a,
-  #allrecords .agassi-wholesale-header__mobile-nav a,
-  .t-records .agassi-wholesale-header__mobile-nav a {
-    padding: 4px 0;
-    font-size: 24px;
-    line-height: 1.3;
-  }
-
-  .agassi-wholesale-header__mobile-language {
-    gap: 8px;
+  :is(#allrecords, .t-records) .agassi-wholesale-header__mobile-nav a {
+    font-size: var(--agassi-wholesale-font-menu);
   }
 }
 
 @media (max-width: 360px) {
-.agassi-wholesale-header__mobile-inner {
+  .agassi-wholesale-header__mobile-inner {
     padding-top: env(safe-area-inset-top);
     padding-right: calc(var(--agassi-wholesale-frame-gap) + 20px);
     padding-bottom: max(20px, env(safe-area-inset-bottom));
@@ -1156,9 +1220,8 @@ body.agassi-wholesale-scroll-locked {
   }
 
   .agassi-wholesale-header__mobile-nav a,
-  #allrecords .agassi-wholesale-header__mobile-nav a,
-  .t-records .agassi-wholesale-header__mobile-nav a {
-    font-size: 22px;
+  :is(#allrecords, .t-records) .agassi-wholesale-header__mobile-nav a {
+    font-size: var(--agassi-wholesale-font-menu);
   }
 }
 
@@ -1176,8 +1239,6 @@ body.agassi-wholesale-scroll-locked {
   }
 }
 
-/* Hero */
-/* Hero: две половины на всю ширину и высоту экрана */
 .agassi-wholesale-hero {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1222,8 +1283,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-hero__button,
-#allrecords .agassi-wholesale-hero__button,
-.t-records .agassi-wholesale-hero__button {
+:is(#allrecords, .t-records) .agassi-wholesale-hero__button {
   margin-top: 32px;
 }
 
@@ -1244,46 +1304,87 @@ body.agassi-wholesale-scroll-locked {
 }
 
 @media (max-width: 1440px) {
-  .agassi-wholesale-hero__copy { max-width: 540px; padding: 40px; }
-  .agassi-wholesale-hero__title { max-width: 500px; }
-  .agassi-wholesale-hero__lead { max-width: 410px; }
+  .agassi-wholesale-hero__copy {
+    max-width: 540px;
+    padding: 40px;
+  }
+
+  .agassi-wholesale-hero__title {
+    max-width: 500px;
+  }
+
+  .agassi-wholesale-hero__lead {
+    max-width: 410px;
+  }
 }
 
 @media (max-width: 1200px) {
-  .agassi-wholesale-hero { min-height: max(560px, calc(var(--agassi-wholesale-viewport, 100svh) - 68px)); }
-  .agassi-wholesale-hero__copy { max-width: 480px; padding: 36px; }
-  .agassi-wholesale-hero__title { max-width: 450px; }
-  .agassi-wholesale-hero__lead { max-width: 380px; margin-top: 16px; }
+  .agassi-wholesale-hero {
+    min-height: max(560px, calc(var(--agassi-wholesale-viewport, 100svh) - 68px));
+  }
+
+  .agassi-wholesale-hero__copy {
+    max-width: 480px;
+    padding: 36px;
+  }
+
+  .agassi-wholesale-hero__title {
+    max-width: 450px;
+  }
+
+  .agassi-wholesale-hero__lead {
+    max-width: 380px;
+    margin-top: 16px;
+  }
 }
 
 @media (max-width: 960px) {
-  .agassi-wholesale-hero { grid-template-columns: 1fr; min-height: 0; }
-  .agassi-wholesale-hero__content { padding: 72px 0 64px; }
-  .agassi-wholesale-hero__copy { max-width: 620px; padding: 0 24px; }
-  .agassi-wholesale-hero__title { max-width: 560px; }
-  .agassi-wholesale-hero__lead { max-width: 440px; margin-top: 20px; }
-  .agassi-wholesale-hero__visual { aspect-ratio: 4 / 3; }
+  .agassi-wholesale-hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .agassi-wholesale-hero__content {
+    padding: 72px 0 64px;
+  }
+
+  .agassi-wholesale-hero__copy {
+    max-width: 620px;
+    padding: 0 24px;
+  }
+
+  .agassi-wholesale-hero__title {
+    max-width: 560px;
+  }
+
+  .agassi-wholesale-hero__lead {
+    max-width: 440px;
+    margin-top: 20px;
+  }
+
+  .agassi-wholesale-hero__visual {
+    aspect-ratio: 4 / 3;
+  }
 }
 
 @media (max-width: 640px) {
-  .agassi-wholesale-hero__content { padding: 56px 0 48px; }
-  .agassi-wholesale-hero__copy { max-width: none; padding: 0 16px; }
-  .agassi-wholesale-hero__title { max-width: 470px; }
-  .agassi-wholesale-hero__lead { max-width: 380px; margin-top: 16px; }
-}
+  .agassi-wholesale-hero__content {
+    padding: 56px 0 48px;
+  }
 
-/* Заявление */
-.agassi-wholesale-statement {
-  position: relative;
-  display: block;
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
-  background: var(--agassi-wholesale-ivory);
-  color: var(--agassi-wholesale-ink);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: var(--agassi-wholesale-section-space) 0;
+  .agassi-wholesale-hero__copy {
+    max-width: none;
+    padding: 0 16px;
+  }
+
+  .agassi-wholesale-hero__title {
+    max-width: 470px;
+  }
+
+  .agassi-wholesale-hero__lead {
+    max-width: 380px;
+    margin-top: 16px;
+  }
 }
 
 .agassi-wholesale-statement__frame {
@@ -1292,8 +1393,6 @@ body.agassi-wholesale-scroll-locked {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: min( var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)) );
-  margin: 0 auto;
 }
 
 .agassi-wholesale-statement__content {
@@ -1309,16 +1408,9 @@ body.agassi-wholesale-scroll-locked {
   position: relative;
   max-width: 980px;
   margin: 0 auto;
-  padding: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-align: center;
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
 }
 
-.agassi-wholesale-statement__text {
+.agassi-wholesale-statement__lead {
   max-width: 650px;
   margin: 24px auto 0;
   padding: 0;
@@ -1393,13 +1485,8 @@ body.agassi-wholesale-scroll-locked {
   transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
 }
 
-
-
-
-
-
 @media (max-width: 1440px) {
-.agassi-wholesale-statement__content {
+  .agassi-wholesale-statement__content {
     max-width: 1050px;
   }
 
@@ -1407,61 +1494,49 @@ body.agassi-wholesale-scroll-locked {
     max-width: 900px;
   }
 
-  .agassi-wholesale-statement__text {
+  .agassi-wholesale-statement__lead {
     max-width: 620px;
   }
-
-
-
-
-
 
   .agassi-wholesale-statement__flower--1 {
     top: 10%;
     left: 2%;
     width: 104px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
   }
 
   .agassi-wholesale-statement__flower--2 {
     top: 1%;
     left: 15%;
     width: 60px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
   }
 
   .agassi-wholesale-statement__flower--3 {
     top: 12%;
     right: 9%;
     width: 88px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
   }
 
   .agassi-wholesale-statement__flower--4 {
     top: 44%;
     right: 1%;
     width: 76px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
   }
 
   .agassi-wholesale-statement__flower--5 {
     top: 57%;
     left: 1%;
     width: 50px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
   }
 
   .agassi-wholesale-statement__flower--6 {
     top: 80%;
     right: 16%;
     width: 36px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
   }
-
 }
 
 @media (max-width: 1200px) {
-.agassi-wholesale-statement__content {
+  .agassi-wholesale-statement__content {
     max-width: 900px;
   }
 
@@ -1469,58 +1544,46 @@ body.agassi-wholesale-scroll-locked {
     max-width: 760px;
   }
 
-  .agassi-wholesale-statement__text {
+  .agassi-wholesale-statement__lead {
     max-width: 580px;
     margin-top: 24px;
   }
-
-
-
-
-
 
   .agassi-wholesale-statement__flower--1 {
     top: 10%;
     left: 3%;
     width: 92px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
   }
 
   .agassi-wholesale-statement__flower--2 {
     top: 1%;
     left: 15%;
     width: 54px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
   }
 
   .agassi-wholesale-statement__flower--3 {
     top: 14%;
     right: 8%;
     width: 78px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
   }
 
   .agassi-wholesale-statement__flower--4 {
     top: 45%;
     right: 1%;
     width: 70px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
   }
 
   .agassi-wholesale-statement__flower--5 {
     top: 58%;
     left: 0.5%;
     width: 46px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
   }
 
   .agassi-wholesale-statement__flower--6 {
     top: 80%;
     right: 15%;
     width: 32px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
   }
-
 }
 
 @media (max-width: 1100px) {
@@ -1528,47 +1591,41 @@ body.agassi-wholesale-scroll-locked {
     top: 10%;
     left: 1%;
     width: 92px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
   }
 
   .agassi-wholesale-statement__flower--2 {
     top: 82%;
     left: 40%;
     width: 54px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
   }
 
   .agassi-wholesale-statement__flower--3 {
     top: 14%;
     right: 3%;
     width: 78px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
   }
 
   .agassi-wholesale-statement__flower--4 {
     top: 86%;
     right: 30%;
     width: 56px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
   }
 
   .agassi-wholesale-statement__flower--5 {
     top: 58%;
     left: 2%;
     width: 46px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
   }
 
   .agassi-wholesale-statement__flower--6 {
     top: 87%;
     right: 14%;
     width: 30px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
   }
 }
 
 @media (max-width: 960px) {
-.agassi-wholesale-statement__content {
+  .agassi-wholesale-statement__content {
     max-width: 760px;
   }
 
@@ -1576,224 +1633,174 @@ body.agassi-wholesale-scroll-locked {
     max-width: 720px;
   }
 
-  .agassi-wholesale-statement__text {
+  .agassi-wholesale-statement__lead {
     max-width: 540px;
     margin-top: 24px;
   }
-
-
-
-
-
 
   .agassi-wholesale-statement__flower--1 {
     top: 1%;
     left: 4%;
     width: 56px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
   }
 
   .agassi-wholesale-statement__flower--2 {
     top: 1%;
     left: 42%;
     width: 40px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
   }
 
   .agassi-wholesale-statement__flower--3 {
     top: 1%;
     right: 5%;
     width: 50px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
   }
 
   .agassi-wholesale-statement__flower--4 {
     top: 88%;
     left: 18%;
     width: 46px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
   }
 
   .agassi-wholesale-statement__flower--5 {
     top: 89%;
     right: 20%;
     width: 38px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
   }
 
   .agassi-wholesale-statement__flower--6 {
     top: 89%;
     right: 45%;
     width: 26px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
   }
-
 }
 
 @media (max-width: 640px) {
-
   .agassi-wholesale-statement__title {
     max-width: 520px;
   }
 
-  .agassi-wholesale-statement__text {
+  .agassi-wholesale-statement__lead {
     max-width: 440px;
     margin-top: 16px;
   }
-
-
-
-
-
 
   .agassi-wholesale-statement__flower--1 {
     top: 1%;
     left: 4%;
     width: 44px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
   }
 
   .agassi-wholesale-statement__flower--2 {
     top: 1%;
     left: 42%;
     width: 32px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
   }
 
   .agassi-wholesale-statement__flower--3 {
     top: 1%;
     right: 5%;
     width: 40px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
   }
 
   .agassi-wholesale-statement__flower--4 {
     top: 88%;
     left: 18%;
     width: 38px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
   }
 
   .agassi-wholesale-statement__flower--5 {
     top: 89%;
     right: 20%;
     width: 30px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
   }
 
   .agassi-wholesale-statement__flower--6 {
     top: 89%;
     right: 45%;
     width: 22px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
   }
-
 }
 
 @media (max-width: 480px) {
-.agassi-wholesale-statement__text {
+  .agassi-wholesale-statement__lead {
     max-width: 370px;
     margin-top: 16px;
   }
-
-
-
-
-
 
   .agassi-wholesale-statement__flower--1 {
     top: 1%;
     left: 4%;
     width: 40px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
   }
 
   .agassi-wholesale-statement__flower--2 {
     top: 1%;
     left: 42%;
     width: 30px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
   }
 
   .agassi-wholesale-statement__flower--3 {
     top: 1%;
     right: 5%;
     width: 36px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
   }
 
   .agassi-wholesale-statement__flower--4 {
     top: 88%;
     left: 18%;
     width: 34px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
   }
 
   .agassi-wholesale-statement__flower--5 {
     top: 89%;
     right: 20%;
     width: 28px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
   }
 
   .agassi-wholesale-statement__flower--6 {
     top: 89%;
     right: 45%;
     width: 20px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
   }
-
 }
 
 @media (max-width: 360px) {
-
-
-
-
-
-
   .agassi-wholesale-statement__flower--1 {
     top: 1%;
     left: 4%;
     width: 36px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-1, 0px), 0) rotate(-28deg);
   }
 
   .agassi-wholesale-statement__flower--2 {
     top: 1%;
     left: 42%;
     width: 26px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-2, 0px), 0) rotate(34deg);
   }
 
   .agassi-wholesale-statement__flower--3 {
     top: 1%;
     right: 5%;
     width: 32px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-3, 0px), 0) rotate(17deg);
   }
 
   .agassi-wholesale-statement__flower--4 {
     top: 88%;
     left: 18%;
     width: 30px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-4, 0px), 0) rotate(-32deg);
   }
 
   .agassi-wholesale-statement__flower--5 {
     top: 89%;
     right: 20%;
     width: 24px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-5, 0px), 0) rotate(42deg);
   }
 
   .agassi-wholesale-statement__flower--6 {
     top: 89%;
     right: 45%;
     width: 18px;
-    transform: translate3d(0, var(--agassi-wholesale-fall-6, 0px), 0) rotate(-24deg);
   }
-
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1802,23 +1809,13 @@ body.agassi-wholesale-scroll-locked {
   }
 }
 
-/* Цифры */
 .agassi-wholesale-numbers {
-  position: relative;
-  display: block;
-  width: 100%;
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background: var(--agassi-wholesale-crimson);
   color: var(--agassi-wholesale-white);
-  padding: var(--agassi-wholesale-section-space) 0;
 }
 
 .agassi-wholesale-numbers__frame {
   position: relative;
-  width: min(var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)));
-  margin: 0 auto;
 }
 
 .agassi-wholesale-numbers__header {
@@ -1834,14 +1831,7 @@ body.agassi-wholesale-scroll-locked {
 .agassi-wholesale-numbers__title {
   width: 100%;
   max-width: 1000px;
-  margin: 0;
-  padding: 0;
   color: var(--agassi-wholesale-white);
-  text-align: center;
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
 }
 
 .agassi-wholesale-numbers__grid {
@@ -1893,7 +1883,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 @media (max-width: 1440px) {
-.agassi-wholesale-numbers__header {
+  .agassi-wholesale-numbers__header {
     max-width: 920px;
     margin-bottom: 40px;
   }
@@ -1901,12 +1891,10 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-numbers__title {
     max-width: 920px;
   }
-
-
 }
 
 @media (max-width: 1200px) {
-.agassi-wholesale-numbers__header {
+  .agassi-wholesale-numbers__header {
     max-width: 820px;
     margin-bottom: 28px;
   }
@@ -1914,12 +1902,10 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-numbers__title {
     max-width: 820px;
   }
-
-
 }
 
 @media (max-width: 960px) {
-.agassi-wholesale-numbers__header {
+  .agassi-wholesale-numbers__header {
     max-width: 720px;
     margin-bottom: 24px;
   }
@@ -1932,7 +1918,6 @@ body.agassi-wholesale-scroll-locked {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-
   .agassi-wholesale-numbers__item:not(:first-child) {
     border-left: 0;
   }
@@ -1944,11 +1929,10 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-numbers__item:nth-child(n+3) {
     border-top: 1px solid var(--agassi-wholesale-line-crimson);
   }
-
 }
 
 @media (max-width: 640px) {
-.agassi-wholesale-numbers__header {
+  .agassi-wholesale-numbers__header {
     margin-bottom: 24px;
   }
 
@@ -1960,18 +1944,15 @@ body.agassi-wholesale-scroll-locked {
     max-width: 520px;
   }
 
-
   .agassi-wholesale-numbers__label {
-    max-width: none;
     margin-top: 12px;
   }
 }
 
 @media (max-width: 480px) {
-.agassi-wholesale-numbers__header {
+  .agassi-wholesale-numbers__header {
     margin-bottom: 20px;
   }
-
 
   .agassi-wholesale-numbers__label {
     margin-top: 12px;
@@ -1981,25 +1962,6 @@ body.agassi-wholesale-scroll-locked {
 .agassi-wholesale-numbers__surface {
   position: relative;
   width: 100%;
-}
-
-/* Почему Agassi */
-.agassi-wholesale-why {
-  position: relative;
-  display: block;
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
-  background: var(--agassi-wholesale-ivory);
-  color: var(--agassi-wholesale-ink);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: var(--agassi-wholesale-section-space) 0;
-}
-
-.agassi-wholesale-why__frame {
-  width: min( var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)) );
-  margin: 0 auto;
 }
 
 .agassi-wholesale-why__header {
@@ -2014,13 +1976,6 @@ body.agassi-wholesale-scroll-locked {
 .agassi-wholesale-why__title {
   max-width: 980px;
   margin: 0 auto;
-  padding: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-align: center;
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
 }
 
 .agassi-wholesale-why__layout {
@@ -2046,7 +2001,7 @@ body.agassi-wholesale-scroll-locked {
   position: absolute;
   z-index: 1;
   inset: 0;
-  background: linear-gradient( 180deg, rgba(140, 15, 20, .30) 0%, rgba(140, 15, 20, .18) 34%, rgba(140, 15, 20, .96) 100% );
+  background: linear-gradient( 180deg, color-mix(in srgb, var(--agassi-wholesale-crimson) 30%, transparent) 0%, color-mix(in srgb, var(--agassi-wholesale-crimson) 18%, transparent) 34%, color-mix(in srgb, var(--agassi-wholesale-crimson) 96%, transparent) 100% );
   pointer-events: none;
 }
 
@@ -2057,7 +2012,7 @@ body.agassi-wholesale-scroll-locked {
   max-width: 560px;
 }
 
-.agassi-wholesale-why__feature-number {
+.agassi-wholesale-why__feature-value {
   margin: 0 0 20px;
   padding: 0;
   color: var(--agassi-wholesale-gold);
@@ -2098,7 +2053,7 @@ body.agassi-wholesale-scroll-locked {
   overflow: hidden;
   border-radius: var(--agassi-wholesale-radius);
   background: var(--agassi-wholesale-white);
-  color: #1E1E1E;
+  color: var(--agassi-wholesale-ink);
 }
 
 .agassi-wholesale-why__benefit-number {
@@ -2111,7 +2066,7 @@ body.agassi-wholesale-scroll-locked {
   max-width: 300px;
   margin: 0;
   padding: 0;
-  color: #1E1E1E;
+  color: var(--agassi-wholesale-ink);
 }
 
 .agassi-wholesale-why__benefit-text {
@@ -2122,7 +2077,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 @media (max-width: 1440px) {
-.agassi-wholesale-why__header {
+  .agassi-wholesale-why__header {
     margin-bottom: 40px;
   }
 
@@ -2141,7 +2096,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 @media (max-width: 1200px) {
-.agassi-wholesale-why__header {
+  .agassi-wholesale-why__header {
     margin-bottom: 36px;
   }
 
@@ -2163,7 +2118,7 @@ body.agassi-wholesale-scroll-locked {
     max-width: 620px;
   }
 
-  .agassi-wholesale-why__feature-number {
+  .agassi-wholesale-why__feature-value {
     margin-bottom: 16px;
   }
 
@@ -2194,7 +2149,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 @media (max-width: 960px) {
-.agassi-wholesale-why__header {
+  .agassi-wholesale-why__header {
     margin-bottom: 32px;
   }
 
@@ -2208,14 +2163,13 @@ body.agassi-wholesale-scroll-locked {
     padding: 36px;
   }
 
-  .agassi-wholesale-why__feature-number {
+  .agassi-wholesale-why__feature-value {
     margin-bottom: 16px;
   }
-
 }
 
 @media (max-width: 640px) {
-.agassi-wholesale-why__header {
+  .agassi-wholesale-why__header {
     margin-bottom: 24px;
   }
 
@@ -2229,7 +2183,7 @@ body.agassi-wholesale-scroll-locked {
     padding: 28px;
   }
 
-  .agassi-wholesale-why__feature-number {
+  .agassi-wholesale-why__feature-value {
     margin-bottom: 16px;
   }
 
@@ -2261,7 +2215,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 @media (max-width: 480px) {
-.agassi-wholesale-why__header {
+  .agassi-wholesale-why__header {
     margin-bottom: 24px;
   }
 
@@ -2278,7 +2232,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 @media (max-width: 360px) {
-.agassi-wholesale-why__feature,
+  .agassi-wholesale-why__feature,
   .agassi-wholesale-why__benefit {
     padding-left: 24px;
     padding-right: 24px;
@@ -2295,23 +2249,6 @@ body.agassi-wholesale-scroll-locked {
   object-position: center;
 }
 
-/* Обучение */
-.agassi-wholesale-support {
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: var(--agassi-wholesale-section-space) 0;
-  background: var(--agassi-wholesale-ivory);
-  color: var(--agassi-wholesale-ink);
-}
-
-.agassi-wholesale-support__frame {
-  width: min( var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)) );
-  margin: 0 auto;
-}
-
 .agassi-wholesale-support__header {
   display: flex;
   flex-direction: column;
@@ -2324,21 +2261,10 @@ body.agassi-wholesale-scroll-locked {
 
 .agassi-wholesale-support__title {
   max-width: 1000px;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
-  color: var(--agassi-wholesale-crimson);
 }
 
 .agassi-wholesale-support__lead {
   max-width: 720px;
-  margin: 20px auto 0;
-  text-align: center;
-  color: var(--agassi-wholesale-muted);
 }
 
 .agassi-wholesale-support__surface {
@@ -2390,11 +2316,6 @@ body.agassi-wholesale-scroll-locked {
   border-radius: var(--agassi-wholesale-radius);
   background: var(--agassi-wholesale-white);
   color: var(--agassi-wholesale-ink);
-  transition:
-    background-color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
-    color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
-    opacity 600ms var(--agassi-wholesale-ease),
-    transform 600ms var(--agassi-wholesale-ease);
 }
 
 .agassi-wholesale-support__item-title {
@@ -2420,16 +2341,13 @@ body.agassi-wholesale-scroll-locked {
   transition: color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
 }
 
-/* Динамика: карточки и фото появляются при прокрутке, карточки меняют цвет при наведении */
 .agassi-wholesale-support.is-motion .agassi-wholesale-support__item,
 .agassi-wholesale-support.is-motion .agassi-wholesale-support__visual {
   opacity: 0;
   transform: translateY(32px);
   transition:
-    background-color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
-    color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
-    opacity 700ms var(--agassi-wholesale-ease),
-    transform 700ms var(--agassi-wholesale-ease);
+    opacity var(--agassi-wholesale-duration-slow) var(--agassi-wholesale-ease),
+    transform var(--agassi-wholesale-duration-slow) var(--agassi-wholesale-ease);
 }
 
 .agassi-wholesale-support.is-motion.is-visible .agassi-wholesale-support__item,
@@ -2439,19 +2357,19 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-support.is-motion.is-visible .agassi-wholesale-support__item:nth-child(2) {
-  transition-delay: 0ms, 0ms, 120ms, 120ms;
+  transition-delay: 120ms;
 }
 
 .agassi-wholesale-support.is-motion.is-visible .agassi-wholesale-support__item:nth-child(3) {
-  transition-delay: 0ms, 0ms, 240ms, 240ms;
+  transition-delay: 240ms;
 }
 
 .agassi-wholesale-support.is-motion.is-visible .agassi-wholesale-support__item:nth-child(4) {
-  transition-delay: 0ms, 0ms, 360ms, 360ms;
+  transition-delay: 360ms;
 }
 
 .agassi-wholesale-support.is-motion.is-visible .agassi-wholesale-support__visual {
-  transition-delay: 0ms, 0ms, 480ms, 480ms;
+  transition-delay: 480ms;
 }
 
 @media (max-width: 1440px) {
@@ -2520,27 +2438,10 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-support.is-motion .agassi-wholesale-support__visual {
     opacity: 1;
     transform: none;
-    transition: none;
+    transition:
+      opacity var(--agassi-wholesale-duration-slow) var(--agassi-wholesale-ease),
+      transform var(--agassi-wholesale-duration-slow) var(--agassi-wholesale-ease);
   }
-}
-
-/* Бренды и продукты */
-.agassi-wholesale-products {
-  position: relative;
-  display: block;
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
-  background: var(--agassi-wholesale-ivory);
-  color: var(--agassi-wholesale-ink);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: var(--agassi-wholesale-section-space) 0;
-}
-
-.agassi-wholesale-products__frame {
-  width: min( var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)) );
-  margin: 0 auto;
 }
 
 .agassi-wholesale-products__header {
@@ -2556,21 +2457,10 @@ body.agassi-wholesale-scroll-locked {
 .agassi-wholesale-products__title {
   max-width: 980px;
   margin: 0 auto;
-  padding: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-align: center;
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
 }
 
 .agassi-wholesale-products__lead {
   max-width: 680px;
-  margin: 20px auto 0;
-  padding: 0;
-  color: var(--agassi-wholesale-muted);
-  text-align: center;
 }
 
 .agassi-wholesale-products__grid {
@@ -2605,7 +2495,7 @@ body.agassi-wholesale-scroll-locked {
   position: absolute;
   z-index: 1;
   inset: 0;
-  background: linear-gradient( 180deg, rgba(140, 15, 20, .64) 0%, rgba(140, 15, 20, .56) 40%, rgba(140, 15, 20, .96) 100% );
+  background: linear-gradient( 180deg, color-mix(in srgb, var(--agassi-wholesale-crimson) 64%, transparent) 0%, color-mix(in srgb, var(--agassi-wholesale-crimson) 56%, transparent) 40%, color-mix(in srgb, var(--agassi-wholesale-crimson) 96%, transparent) 100% );
   pointer-events: none;
 }
 
@@ -2656,19 +2546,17 @@ body.agassi-wholesale-scroll-locked {
 }
 
 @media (max-width: 1440px) {
-.agassi-wholesale-products__header {
+  .agassi-wholesale-products__header {
     margin-bottom: 40px;
   }
 
   .agassi-wholesale-products__title {
     max-width: 900px;
   }
-
-
 }
 
 @media (max-width: 1200px) {
-.agassi-wholesale-products__header {
+  .agassi-wholesale-products__header {
     margin-bottom: 36px;
   }
 
@@ -2687,11 +2575,10 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-products__category {
     margin-top: 8px;
   }
-
 }
 
 @media (max-width: 960px) {
-.agassi-wholesale-products__header {
+  .agassi-wholesale-products__header {
     margin-bottom: 32px;
   }
 
@@ -2711,11 +2598,10 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-products__card-content {
     padding: 32px;
   }
-
 }
 
 @media (max-width: 640px) {
-.agassi-wholesale-products__header {
+  .agassi-wholesale-products__header {
     margin-bottom: 24px;
   }
 
@@ -2743,44 +2629,22 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-products__types {
     margin-top: 8px;
   }
-
 }
 
 @media (max-width: 480px) {
-.agassi-wholesale-products__header {
+  .agassi-wholesale-products__header {
     margin-bottom: 24px;
   }
-
 }
 
-/* Партнёры */
 .agassi-wholesale-partners {
   --agassi-wholesale-columns: 4;
-  width: 100%;
-  overflow: hidden;
-  background: var(--agassi-wholesale-ivory);
-  color: var(--agassi-wholesale-ink);
-  padding: var(--agassi-wholesale-section-space) 0;
-}
-
-.agassi-wholesale-partners__frame {
-  width: min(1620px, calc(100% - 2 * var(--agassi-wholesale-frame-gap)));
-  margin: 0 auto;
 }
 
 .agassi-wholesale-partners__header {
   max-width: 980px;
   margin: 0 auto 48px;
   text-align: center;
-}
-
-.agassi-wholesale-partners__title {
-  margin: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
 }
 
 .agassi-wholesale-partners__viewport {
@@ -2803,8 +2667,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-partners__card,
-#allrecords .agassi-wholesale-partners__card,
-.t-records .agassi-wholesale-partners__card {
+:is(#allrecords, .t-records) .agassi-wholesale-partners__card {
   position: relative;
   display: flex;
   flex: 0 0 calc(
@@ -2858,8 +2721,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-partners__arrow,
-#allrecords .agassi-wholesale-partners__arrow,
-.t-records .agassi-wholesale-partners__arrow {
+:is(#allrecords, .t-records) .agassi-wholesale-partners__arrow {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2874,9 +2736,9 @@ body.agassi-wholesale-scroll-locked {
   appearance: none;
   opacity: 1;
   transition:
-    background-color 320ms var(--agassi-wholesale-ease),
-    color 320ms var(--agassi-wholesale-ease),
-    opacity 320ms var(--agassi-wholesale-ease);
+    background-color var(--agassi-wholesale-duration-fast) var(--agassi-wholesale-ease),
+    color var(--agassi-wholesale-duration-fast) var(--agassi-wholesale-ease),
+    opacity var(--agassi-wholesale-duration-fast) var(--agassi-wholesale-ease);
 }
 
 .agassi-wholesale-partners__arrow-icon {
@@ -2887,8 +2749,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-partners__arrow:not(:disabled):hover,
-#allrecords .agassi-wholesale-partners__arrow:not(:disabled):hover,
-.t-records .agassi-wholesale-partners__arrow:not(:disabled):hover {
+:is(#allrecords, .t-records) .agassi-wholesale-partners__arrow:not(:disabled):hover {
   background: var(--agassi-wholesale-crimson-dark);
 }
 
@@ -2898,21 +2759,16 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-partners__arrow:disabled,
-#allrecords .agassi-wholesale-partners__arrow:disabled,
-.t-records .agassi-wholesale-partners__arrow:disabled {
+:is(#allrecords, .t-records) .agassi-wholesale-partners__arrow:disabled {
   background: var(--agassi-wholesale-line);
   cursor: default;
 }
 
 @media (max-width: 1440px) {
-  .agassi-wholesale-partners {
-  }
-
   .agassi-wholesale-partners__header {
     max-width: 900px;
     margin-bottom: 40px;
   }
-
 }
 
 @media (max-width: 1200px) {
@@ -2924,7 +2780,6 @@ body.agassi-wholesale-scroll-locked {
     max-width: 760px;
     margin-bottom: 36px;
   }
-
 }
 
 @media (max-width: 960px) {
@@ -2941,7 +2796,6 @@ body.agassi-wholesale-scroll-locked {
     width: 52%;
     height: 36%;
   }
-
 }
 
 @media (max-width: 640px) {
@@ -2955,11 +2809,9 @@ body.agassi-wholesale-scroll-locked {
   }
 
   .agassi-wholesale-partners__card,
-  #allrecords .agassi-wholesale-partners__card,
-  .t-records .agassi-wholesale-partners__card {
+  :is(#allrecords, .t-records) .agassi-wholesale-partners__card {
     padding: 16px;
   }
-
 
   .agassi-wholesale-partners__card img {
     width: 40%;
@@ -2971,27 +2823,11 @@ body.agassi-wholesale-scroll-locked {
     padding-right: var(--agassi-wholesale-frame-gap);
     width: auto;
   }
-
-
-
-  .agassi-wholesale-partners__arrow-icon {
-    width: 20px;
-    height: 20px;
-  }
 }
 
 @media (max-width: 480px) {
-  .agassi-wholesale-partners {
-  }
-
   .agassi-wholesale-partners__header {
     margin-bottom: 24px;
-  }
-
-}
-
-@media (max-width: 360px) {
-  .agassi-wholesale-partners {
   }
 }
 
@@ -3001,30 +2837,13 @@ body.agassi-wholesale-scroll-locked {
   }
 }
 
-/* Отзывы */
 .agassi-wholesale-stories {
-  --ivory: #F4F1EA;
-  --white: #FFFFFF;
-  --crimson: #8C0F14;
-  --gold: var(--agassi-wholesale-gold);
-  --garnet: #1E1E1E;
-  --gap: 16px;
-  --radius: 28px;
-  --frame-gap: 96px;
   --agassi-wholesale-columns: 3;
-  --ease: cubic-bezier(.22,1,.36,1);
-  width: 100%;
-  overflow: hidden;
-  background: var(--agassi-wholesale-ivory);
-  color: var(--agassi-wholesale-ink);
-  padding: var(--agassi-wholesale-section-space) 0;
 }
 
 .agassi-wholesale-stories__frame {
-  width: min(1620px, calc(100% - 2 * var(--agassi-wholesale-frame-gap)));
   max-width: 100%;
   min-width: 0;
-  margin: 0 auto;
 }
 
 .agassi-wholesale-stories__header {
@@ -3033,19 +2852,8 @@ body.agassi-wholesale-scroll-locked {
   text-align: center;
 }
 
-.agassi-wholesale-stories__title {
-  margin: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
-}
-
 .agassi-wholesale-stories__lead {
   max-width: 620px;
-  margin: 20px auto 0;
-  color: var(--agassi-wholesale-muted);
 }
 
 .agassi-wholesale-stories__track {
@@ -3061,7 +2869,6 @@ body.agassi-wholesale-scroll-locked {
   scroll-behavior: smooth;
   scrollbar-width: none;
   overscroll-behavior-x: contain;
-  -webkit-overflow-scrolling: touch;
 }
 
 .agassi-wholesale-stories__track::-webkit-scrollbar {
@@ -3076,7 +2883,7 @@ body.agassi-wholesale-scroll-locked {
   padding: 36px;
   border-radius: var(--agassi-wholesale-radius);
   background: var(--agassi-wholesale-white);
-  color: #1E1E1E;
+  color: var(--agassi-wholesale-ink);
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
@@ -3098,7 +2905,7 @@ body.agassi-wholesale-scroll-locked {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 32px), transparent);
   mask-image: linear-gradient(to bottom, #000 calc(100% - 32px), transparent);
-  color: #1E1E1E;
+  color: var(--agassi-wholesale-ink);
   font-weight: 400;
   transition:
     max-height var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
@@ -3117,8 +2924,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-stories__more,
-#allrecords .agassi-wholesale-stories__more,
-.t-records .agassi-wholesale-stories__more {
+:is(#allrecords, .t-records) .agassi-wholesale-stories__more {
   align-self: flex-start;
   margin: 0 0 32px;
   padding: 0;
@@ -3150,7 +2956,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-stories__name {
-  color: #1E1E1E;
+  color: var(--agassi-wholesale-ink);
 }
 
 .agassi-wholesale-stories__role {
@@ -3166,8 +2972,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-stories__arrow,
-#allrecords .agassi-wholesale-stories__arrow,
-.t-records .agassi-wholesale-stories__arrow {
+:is(#allrecords, .t-records) .agassi-wholesale-stories__arrow {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3182,10 +2987,10 @@ body.agassi-wholesale-scroll-locked {
   appearance: none;
   opacity: 1;
   transition:
-    background-color 320ms var(--agassi-wholesale-ease),
-    border-color 320ms var(--agassi-wholesale-ease),
-    color 320ms var(--agassi-wholesale-ease),
-    opacity 320ms var(--agassi-wholesale-ease);
+    background-color var(--agassi-wholesale-duration-fast) var(--agassi-wholesale-ease),
+    border-color var(--agassi-wholesale-duration-fast) var(--agassi-wholesale-ease),
+    color var(--agassi-wholesale-duration-fast) var(--agassi-wholesale-ease),
+    opacity var(--agassi-wholesale-duration-fast) var(--agassi-wholesale-ease);
 }
 
 .agassi-wholesale-stories__arrow-icon {
@@ -3196,8 +3001,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-stories__arrow:not(:disabled):hover,
-#allrecords .agassi-wholesale-stories__arrow:not(:disabled):hover,
-.t-records .agassi-wholesale-stories__arrow:not(:disabled):hover {
+:is(#allrecords, .t-records) .agassi-wholesale-stories__arrow:not(:disabled):hover {
   border-color: var(--agassi-wholesale-crimson);
   background: var(--agassi-wholesale-crimson);
   color: var(--agassi-wholesale-white);
@@ -3209,18 +3013,13 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-stories__arrow:disabled,
-#allrecords .agassi-wholesale-stories__arrow:disabled,
-.t-records .agassi-wholesale-stories__arrow:disabled {
+:is(#allrecords, .t-records) .agassi-wholesale-stories__arrow:disabled {
   border-color: var(--agassi-wholesale-line);
   background: var(--agassi-wholesale-line);
   cursor: default;
 }
 
 @media (max-width: 1440px) {
-  .agassi-wholesale-stories {
-    --frame-gap: 80px;
-  }
-
   .agassi-wholesale-stories__header {
     max-width: 900px;
     margin-bottom: 40px;
@@ -3233,8 +3032,6 @@ body.agassi-wholesale-scroll-locked {
 
 @media (max-width: 1200px) {
   .agassi-wholesale-stories {
-    --frame-gap: 32px;
-    --gap: 14px;
     --agassi-wholesale-columns: 2;
   }
 
@@ -3250,16 +3047,9 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-stories__card {
     padding: 32px;
   }
-
-
 }
 
 @media (max-width: 960px) {
-  .agassi-wholesale-stories {
-    --frame-gap: 24px;
-    --radius: 24px;
-  }
-
   .agassi-wholesale-stories__header {
     max-width: 720px;
     margin-bottom: 32px;
@@ -3276,8 +3066,6 @@ body.agassi-wholesale-scroll-locked {
 
 @media (max-width: 640px) {
   .agassi-wholesale-stories {
-    --frame-gap: 16px;
-    --radius: 20px;
     --agassi-wholesale-columns: 1;
   }
 
@@ -3294,7 +3082,6 @@ body.agassi-wholesale-scroll-locked {
     padding: 24px;
   }
 
-
   .agassi-wholesale-stories__role {
     margin-top: 4px;
   }
@@ -3304,36 +3091,19 @@ body.agassi-wholesale-scroll-locked {
   }
 
   .agassi-wholesale-stories__arrow,
-  #allrecords .agassi-wholesale-stories__arrow,
-  .t-records .agassi-wholesale-stories__arrow {
+  :is(#allrecords, .t-records) .agassi-wholesale-stories__arrow {
     width: 48px;
     height: 48px;
-  }
-
-  .agassi-wholesale-stories__arrow-icon {
-    width: 20px;
-    height: 20px;
   }
 }
 
 @media (max-width: 480px) {
-  .agassi-wholesale-stories {
-    --frame-gap: 12px;
-  }
-
   .agassi-wholesale-stories__header {
     margin-bottom: 24px;
   }
 
   .agassi-wholesale-stories__card {
     padding: 24px;
-  }
-
-}
-
-@media (max-width: 360px) {
-  .agassi-wholesale-stories {
-    --frame-gap: 12px;
   }
 }
 
@@ -3345,24 +3115,6 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-stories__arrow {
     transition: none;
   }
-}
-
-/* Вопросы и ответы */
-.agassi-wholesale-faq {
-  position: relative;
-  display: block;
-  width: 100%;
-  margin: 0;
-  background: var(--agassi-wholesale-ivory);
-  color: var(--agassi-wholesale-ink);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: var(--agassi-wholesale-section-space) 0;
-}
-
-.agassi-wholesale-faq__frame {
-  width: min(var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)));
-  margin: 0 auto;
 }
 
 .agassi-wholesale-faq__header {
@@ -3378,21 +3130,10 @@ body.agassi-wholesale-scroll-locked {
 .agassi-wholesale-faq__title {
   max-width: 980px;
   margin: 0 auto;
-  padding: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-align: center;
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
 }
 
 .agassi-wholesale-faq__lead {
   max-width: 620px;
-  margin: 20px auto 0;
-  padding: 0;
-  color: var(--agassi-wholesale-muted);
-  text-align: center;
 }
 
 .agassi-wholesale-faq__layout {
@@ -3483,8 +3224,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-faq__question,
-#allrecords .agassi-wholesale-faq__question,
-.t-records .agassi-wholesale-faq__question {
+:is(#allrecords, .t-records) .agassi-wholesale-faq__question {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -3526,19 +3266,17 @@ body.agassi-wholesale-scroll-locked {
 }
 
 @media (max-width: 1440px) {
-.agassi-wholesale-faq__header {
+  .agassi-wholesale-faq__header {
     margin-bottom: 48px;
   }
 
   .agassi-wholesale-faq__title {
     max-width: 900px;
   }
-
-
 }
 
 @media (max-width: 1200px) {
-.agassi-wholesale-faq__header {
+  .agassi-wholesale-faq__header {
     margin-bottom: 40px;
   }
 
@@ -3549,13 +3287,10 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-faq__lead {
     margin-top: 16px;
   }
-
-
-
 }
 
 @media (max-width: 960px) {
-.agassi-wholesale-faq__header {
+  .agassi-wholesale-faq__header {
     margin-bottom: 36px;
   }
 
@@ -3576,12 +3311,6 @@ body.agassi-wholesale-scroll-locked {
     min-height: 0;
     aspect-ratio: 16 / 10;
   }
-
-  .agassi-wholesale-faq__list {
-    gap: 8px;
-  }
-
-
 }
 
 @media (max-width: 640px) {
@@ -3593,7 +3322,7 @@ body.agassi-wholesale-scroll-locked {
     padding: 0 24px 24px;
   }
 
-.agassi-wholesale-faq__header {
+  .agassi-wholesale-faq__header {
     margin-bottom: 32px;
   }
 
@@ -3609,17 +3338,13 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-faq__visual {
     aspect-ratio: 1 / 1;
   }
-
-
-
 }
 
 @media (max-width: 360px) {
-.agassi-wholesale-faq__answer p {
+  .agassi-wholesale-faq__answer p {
     padding-right: 16px;
     padding-left: 16px;
   }
-
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3627,23 +3352,6 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-faq__answer {
     transition: none !important;
   }
-}
-
-/* Контакты */
-.agassi-wholesale-contact {
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: var(--agassi-wholesale-section-space) 0;
-  background: var(--agassi-wholesale-ivory);
-  color: var(--agassi-wholesale-ink);
-}
-
-.agassi-wholesale-contact__frame {
-  width: min( var(--agassi-wholesale-frame-max), calc(100% - 2 * var(--agassi-wholesale-frame-gap)) );
-  margin: 0 auto;
 }
 
 .agassi-wholesale-contact__header {
@@ -3658,25 +3366,13 @@ body.agassi-wholesale-scroll-locked {
 
 .agassi-wholesale-contact__title {
   max-width: 1000px;
-  margin: 0;
-  padding: 0;
-  color: var(--agassi-wholesale-crimson);
-  text-align: center;
-  text-wrap: balance;
-  text-transform: uppercase;
-  overflow-wrap: normal;
-  word-break: normal;
 }
 
 .agassi-wholesale-contact__lead {
   max-width: 760px;
-  padding: 0;
-  color: var(--agassi-wholesale-muted);
-  text-align: center;
-  margin: 20px auto 0;
 }
 
-.agassi-wholesale-contact__contacts {
+.agassi-wholesale-contact__list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   width: 100%;
@@ -3684,9 +3380,8 @@ body.agassi-wholesale-scroll-locked {
   border-top: 1px solid var(--agassi-wholesale-line);
 }
 
-.agassi-wholesale-contact__contact,
-#allrecords .agassi-wholesale-contact__contact,
-.t-records .agassi-wholesale-contact__contact {
+.agassi-wholesale-contact__item,
+:is(#allrecords, .t-records) .agassi-wholesale-contact__item {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -3700,16 +3395,16 @@ body.agassi-wholesale-scroll-locked {
   text-decoration: none;
 }
 
-.agassi-wholesale-contact__contact + .agassi-wholesale-contact__contact {
+.agassi-wholesale-contact__item + .agassi-wholesale-contact__item {
   border-left: 1px solid var(--agassi-wholesale-line);
 }
 
-.agassi-wholesale-contact__contact-label {
+.agassi-wholesale-contact__label {
   margin: 0 0 8px;
   color: var(--agassi-wholesale-muted);
 }
 
-.agassi-wholesale-contact__contact-value {
+.agassi-wholesale-contact__value {
   margin: 0;
   padding: 0;
   color: var(--agassi-wholesale-ink);
@@ -3724,23 +3419,22 @@ body.agassi-wholesale-scroll-locked {
 }
 
 @media (max-width: 1440px) {
-.agassi-wholesale-contact__header {
+  .agassi-wholesale-contact__header {
     max-width: 900px;
   }
 
-  .agassi-wholesale-contact__contacts {
+  .agassi-wholesale-contact__list {
     margin-top: 56px;
   }
 
-  .agassi-wholesale-contact__contact,
-        #allrecords .agassi-wholesale-contact__contact,
-        .t-records .agassi-wholesale-contact__contact {
+  .agassi-wholesale-contact__item,
+  :is(#allrecords, .t-records) .agassi-wholesale-contact__item {
     min-height: 168px;
   }
 }
 
 @media (max-width: 1200px) {
-.agassi-wholesale-contact__header {
+  .agassi-wholesale-contact__header {
     max-width: 760px;
   }
 
@@ -3748,24 +3442,22 @@ body.agassi-wholesale-scroll-locked {
     margin: 16px auto 0;
   }
 
-  .agassi-wholesale-contact__contacts {
+  .agassi-wholesale-contact__list {
     margin-top: 48px;
   }
 
-  .agassi-wholesale-contact__contact,
-        #allrecords .agassi-wholesale-contact__contact,
-        .t-records .agassi-wholesale-contact__contact {
+  .agassi-wholesale-contact__item,
+  :is(#allrecords, .t-records) .agassi-wholesale-contact__item {
     min-height: 160px;
   }
 
   .agassi-wholesale-contact__action {
     margin-top: 36px;
   }
-
 }
 
 @media (max-width: 960px) {
-.agassi-wholesale-contact__header {
+  .agassi-wholesale-contact__header {
     max-width: 720px;
   }
 
@@ -3773,44 +3465,35 @@ body.agassi-wholesale-scroll-locked {
     margin: 16px auto 0;
   }
 
-  .agassi-wholesale-contact__contacts {
+  .agassi-wholesale-contact__list {
     grid-template-columns: 1fr;
     margin-top: 40px;
   }
 
-  .agassi-wholesale-contact__contact,
-        #allrecords .agassi-wholesale-contact__contact,
-        .t-records .agassi-wholesale-contact__contact {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .agassi-wholesale-contact__item,
+  :is(#allrecords, .t-records) .agassi-wholesale-contact__item {
     gap: 0;
     min-height: 0;
     padding: 24px 16px;
   }
 
-  .agassi-wholesale-contact__contact + .agassi-wholesale-contact__contact {
+  .agassi-wholesale-contact__item + .agassi-wholesale-contact__item {
     border-top: 1px solid var(--agassi-wholesale-line);
     border-left: 0;
   }
 }
 
 @media (max-width: 640px) {
-
   .agassi-wholesale-contact__lead {
     margin: 16px auto 0;
   }
 
-  .agassi-wholesale-contact__contacts {
+  .agassi-wholesale-contact__list {
     margin-top: 36px;
   }
 
-  .agassi-wholesale-contact__contact,
-        #allrecords .agassi-wholesale-contact__contact,
-        .t-records .agassi-wholesale-contact__contact {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .agassi-wholesale-contact__item,
+  :is(#allrecords, .t-records) .agassi-wholesale-contact__item {
     gap: 0;
     padding: 24px 16px;
   }
@@ -3820,8 +3503,7 @@ body.agassi-wholesale-scroll-locked {
   }
 
   .agassi-wholesale-contact__button,
-        #allrecords .agassi-wholesale-contact__button,
-        .t-records .agassi-wholesale-contact__button {
+  :is(#allrecords, .t-records) .agassi-wholesale-contact__button {
     width: 100%;
     min-height: 56px;
     padding: 16px 16px;
@@ -3829,12 +3511,8 @@ body.agassi-wholesale-scroll-locked {
 }
 
 @media (max-width: 480px) {
-.agassi-wholesale-contact__contact,
-        #allrecords .agassi-wholesale-contact__contact,
-        .t-records .agassi-wholesale-contact__contact {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .agassi-wholesale-contact__item,
+  :is(#allrecords, .t-records) .agassi-wholesale-contact__item {
     gap: 0;
     padding: 20px 12px;
   }
@@ -3850,7 +3528,6 @@ body.agassi-wholesale-scroll-locked {
   width: 100%;
 }
 
-/* Футер (как agassi-group-footer) */
 .agassi-wholesale-footer {
   position: relative;
   display: block;
@@ -3933,7 +3610,7 @@ body.agassi-wholesale-scroll-locked {
   min-width: 0;
 }
 
-.agassi-wholesale-footer__label {
+.agassi-wholesale-footer__heading {
   margin: 0 0 24px;
   padding: 0;
   color: var(--agassi-wholesale-gold);
@@ -3988,8 +3665,7 @@ body.agassi-wholesale-scroll-locked {
 }
 
 .agassi-wholesale-footer__social-link,
-#allrecords .agassi-wholesale-footer__social-link,
-.t-records .agassi-wholesale-footer__social-link {
+:is(#allrecords, .t-records) .agassi-wholesale-footer__social-link {
   display: inline-flex;
   width: 40px;
   height: 40px;
@@ -4062,7 +3738,7 @@ body.agassi-wholesale-scroll-locked {
     gap: 40px;
   }
 
-  .agassi-wholesale-footer__label {
+  .agassi-wholesale-footer__heading {
     margin-bottom: 16px;
   }
 
@@ -4077,7 +3753,6 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-footer__bottom {
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
   }
 
   .agassi-wholesale-footer__legal {
