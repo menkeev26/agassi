@@ -275,14 +275,15 @@
     }
 
     var groups = [
-      ['.agassi-wholesale-numbers', ['__header', '__surface']],
-      ['.agassi-wholesale-why', ['__header', '__layout']],
-      ['.agassi-wholesale-support', ['__header']],
-      ['.agassi-wholesale-products', ['__header', '__grid']],
-      ['.agassi-wholesale-partners', ['__header', '__viewport', '__controls']],
-      ['.agassi-wholesale-stories', ['__header', '__track', '__controls']],
-      ['.agassi-wholesale-faq', ['__header', '__layout']],
-      ['.agassi-wholesale-contact', ['__header', '__surface']],
+      ['.agassi-wholesale-statement', []],
+      ['.agassi-wholesale-numbers', ['__surface']],
+      ['.agassi-wholesale-why', ['__layout']],
+      ['.agassi-wholesale-support', []],
+      ['.agassi-wholesale-products', ['__grid']],
+      ['.agassi-wholesale-partners', ['__viewport', '__controls']],
+      ['.agassi-wholesale-stories', ['__track', '__controls']],
+      ['.agassi-wholesale-faq', ['__layout']],
+      ['.agassi-wholesale-contact', ['__surface']],
       ['.agassi-wholesale-footer', ['__main', '__bottom']]
     ];
 
@@ -293,11 +294,17 @@
         entry.target.classList.add('is-revealed');
         observer.unobserve(entry.target);
       });
-    }, { threshold: 0.08 });
+    }, { threshold: 0.2 });
 
     groups.forEach(function (group) {
       document.querySelectorAll(group[0]).forEach(function (section) {
         var prefix = group[0].slice(1);
+        var title = section.querySelector('.' + prefix + '__title');
+
+        if (title && !title.classList.contains('agassi-wholesale-reveal-text')) {
+          title.classList.add('agassi-wholesale-reveal-text');
+          observer.observe(title);
+        }
 
         group[1].forEach(function (suffix, index) {
           var target = section.querySelector('.' + prefix + suffix);
@@ -305,7 +312,7 @@
           if (!target || target.classList.contains('agassi-wholesale-reveal')) return;
 
           target.classList.add('agassi-wholesale-reveal');
-          target.style.setProperty('--agassi-wholesale-reveal-delay', (index * 120) + 'ms');
+          target.style.setProperty('--agassi-wholesale-reveal-delay', ((index + 1) * 120) + 'ms');
           observer.observe(target);
         });
       });
