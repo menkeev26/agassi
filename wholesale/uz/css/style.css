@@ -209,7 +209,6 @@
 .t-records .agassi-wholesale-stories__more,
 .agassi-wholesale-stories__name,
 .agassi-wholesale-stories__role,
-.agassi-wholesale-contact__number,
 .agassi-wholesale-contact__contact-label,
 .agassi-wholesale-footer__label,
 .agassi-wholesale-footer__bottom,
@@ -372,8 +371,7 @@ html {
 }
 
 .agassi-wholesale-hero__eyebrow,
-.agassi-wholesale-numbers__eyebrow,
-.agassi-wholesale-contact__eyebrow {
+.agassi-wholesale-numbers__eyebrow {
   border-color: color-mix(in srgb, var(--agassi-wholesale-gold) 48%, transparent);
   background: var(--agassi-wholesale-gold-gradient);
   -webkit-background-clip: text;
@@ -3639,8 +3637,8 @@ body.agassi-wholesale-scroll-locked {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: var(--agassi-wholesale-section-space) 0;
-  background: var(--agassi-wholesale-crimson);
-  color: var(--agassi-wholesale-white);
+  background: var(--agassi-wholesale-ivory);
+  color: var(--agassi-wholesale-ink);
 }
 
 .agassi-wholesale-contact__frame {
@@ -3662,7 +3660,7 @@ body.agassi-wholesale-scroll-locked {
   max-width: 1000px;
   margin: 0;
   padding: 0;
-  color: var(--agassi-wholesale-white);
+  color: var(--agassi-wholesale-crimson);
   text-align: center;
   text-wrap: balance;
   text-transform: uppercase;
@@ -3673,7 +3671,7 @@ body.agassi-wholesale-scroll-locked {
 .agassi-wholesale-contact__lead {
   max-width: 760px;
   padding: 0;
-  color: var(--agassi-wholesale-on-crimson);
+  color: var(--agassi-wholesale-muted);
   text-align: center;
   margin: 20px auto 0;
 }
@@ -3682,9 +3680,8 @@ body.agassi-wholesale-scroll-locked {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   width: 100%;
-  margin-top: 64px;
-  border-top: 1px solid var(--agassi-wholesale-line-crimson);
-  border-bottom: 1px solid var(--agassi-wholesale-line-crimson);
+  margin-top: 48px;
+  border-top: 1px solid var(--agassi-wholesale-line);
 }
 
 .agassi-wholesale-contact__contact,
@@ -3693,39 +3690,29 @@ body.agassi-wholesale-scroll-locked {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
   min-width: 0;
-  min-height: 192px;
-  padding: 28px 32px 32px;
-  color: var(--agassi-wholesale-white);
+  min-height: 176px;
+  padding: 24px 16px;
+  color: var(--agassi-wholesale-ink);
+  text-align: center;
   text-decoration: none;
 }
 
 .agassi-wholesale-contact__contact + .agassi-wholesale-contact__contact {
-  border-left: 1px solid var(--agassi-wholesale-line-crimson);
-}
-
-.agassi-wholesale-contact__number {
-  color: var(--agassi-wholesale-gold);
-  background: var(--agassi-wholesale-gold-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.agassi-wholesale-contact__contact-content {
-  margin-top: 48px;
+  border-left: 1px solid var(--agassi-wholesale-line);
 }
 
 .agassi-wholesale-contact__contact-label {
   margin: 0 0 8px;
-  color: var(--agassi-wholesale-on-crimson);
+  color: var(--agassi-wholesale-muted);
 }
 
 .agassi-wholesale-contact__contact-value {
   margin: 0;
   padding: 0;
-  color: var(--agassi-wholesale-white);
+  color: var(--agassi-wholesale-ink);
   overflow-wrap: anywhere;
 }
 
@@ -3748,8 +3735,7 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-contact__contact,
         #allrecords .agassi-wholesale-contact__contact,
         .t-records .agassi-wholesale-contact__contact {
-    min-height: 180px;
-    padding: 24px 28px 32px;
+    min-height: 168px;
   }
 }
 
@@ -3769,12 +3755,7 @@ body.agassi-wholesale-scroll-locked {
   .agassi-wholesale-contact__contact,
         #allrecords .agassi-wholesale-contact__contact,
         .t-records .agassi-wholesale-contact__contact {
-    min-height: 168px;
-    padding: 24px 24px 28px;
-  }
-
-  .agassi-wholesale-contact__contact-content {
-    margin-top: 40px;
+    min-height: 160px;
   }
 
   .agassi-wholesale-contact__action {
@@ -3802,19 +3783,15 @@ body.agassi-wholesale-scroll-locked {
         .t-records .agassi-wholesale-contact__contact {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 0;
     min-height: 0;
-    padding: 24px 0;
+    padding: 24px 16px;
   }
 
   .agassi-wholesale-contact__contact + .agassi-wholesale-contact__contact {
-    border-top: 1px solid var(--agassi-wholesale-line-crimson);
+    border-top: 1px solid var(--agassi-wholesale-line);
     border-left: 0;
-  }
-
-  .agassi-wholesale-contact__contact-content {
-    margin-top: 24px;
   }
 }
 
@@ -3833,13 +3810,9 @@ body.agassi-wholesale-scroll-locked {
         .t-records .agassi-wholesale-contact__contact {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 0;
-    padding: 24px 0;
-  }
-
-  .agassi-wholesale-contact__contact-content {
-    margin-top: 24px;
+    padding: 24px 16px;
   }
 
   .agassi-wholesale-contact__action {
@@ -3861,13 +3834,9 @@ body.agassi-wholesale-scroll-locked {
         .t-records .agassi-wholesale-contact__contact {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 0;
-    padding: 20px 0;
-  }
-
-  .agassi-wholesale-contact__contact-content {
-    margin-top: 24px;
+    padding: 20px 12px;
   }
 }
 
