@@ -23,18 +23,18 @@
   --agassi-wholesale-radius: 28px;
   --agassi-wholesale-radius-small: 16px;
 
-  --agassi-wholesale-font-body: 16px;
-  --agassi-wholesale-line-body: 24px;
-  --agassi-wholesale-font-small: 14px;
-  --agassi-wholesale-line-small: 20px;
+  --agassi-wholesale-font-text: 16px;
+  --agassi-wholesale-line-text: 24px;
+  --agassi-wholesale-font-caption: 14px;
+  --agassi-wholesale-line-caption: 20px;
   --agassi-wholesale-font-h2: 56px;
   --agassi-wholesale-line-h2: 60px;
   --agassi-wholesale-font-h3: 36px;
   --agassi-wholesale-line-h3: 48px;
   --agassi-wholesale-font-h4: 20px;
   --agassi-wholesale-line-h4: 28px;
-  --agassi-wholesale-font-display: 64px;
-  --agassi-wholesale-line-display: 68px;
+  --agassi-wholesale-font-h1: 64px;
+  --agassi-wholesale-line-h1: 68px;
 
   --agassi-wholesale-duration: 400ms;
   --agassi-wholesale-ease: ease-out;
@@ -55,8 +55,8 @@
     --agassi-wholesale-line-h2: 56px;
     --agassi-wholesale-font-h3: 36px;
     --agassi-wholesale-line-h3: 44px;
-    --agassi-wholesale-font-display: 56px;
-    --agassi-wholesale-line-display: 64px;
+    --agassi-wholesale-font-h1: 56px;
+    --agassi-wholesale-line-h1: 64px;
   }
 }
 
@@ -70,8 +70,8 @@
     --agassi-wholesale-line-h2: 48px;
     --agassi-wholesale-font-h3: 32px;
     --agassi-wholesale-line-h3: 40px;
-    --agassi-wholesale-font-display: 48px;
-    --agassi-wholesale-line-display: 56px;
+    --agassi-wholesale-font-h1: 48px;
+    --agassi-wholesale-line-h1: 56px;
   }
 }
 
@@ -88,10 +88,140 @@
     --agassi-wholesale-line-h3: 36px;
     --agassi-wholesale-font-h4: 18px;
     --agassi-wholesale-line-h4: 26px;
-    --agassi-wholesale-font-display: 40px;
-    --agassi-wholesale-line-display: 48px;
+    --agassi-wholesale-font-h1: 40px;
+    --agassi-wholesale-line-h1: 48px;
   }
 }
+
+/* Типографика: единая шкала уровней. Размер, семейство, начертание и высота строки каждого уровня записаны один раз */
+.agassi-wholesale-hero__title {
+  font-family: var(--t-headline-font);
+  font-size: var(--agassi-wholesale-font-h1);
+  font-weight: 500;
+  line-height: var(--agassi-wholesale-line-h1);
+  letter-spacing: 0;
+}
+
+.agassi-wholesale-statement__title,
+.agassi-wholesale-numbers__title,
+.agassi-wholesale-numbers__value,
+.agassi-wholesale-why__title,
+.agassi-wholesale-why__feature-number,
+.agassi-wholesale-support__title,
+.agassi-wholesale-products__title,
+.agassi-wholesale-partners__title,
+.agassi-wholesale-stories__title,
+.agassi-wholesale-faq__title,
+.agassi-wholesale-contact__title {
+  font-family: var(--t-headline-font);
+  font-size: var(--agassi-wholesale-font-h2);
+  font-weight: 500;
+  line-height: var(--agassi-wholesale-line-h2);
+  letter-spacing: 0;
+}
+
+.agassi-wholesale-why__feature-title,
+.agassi-wholesale-products__brand {
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-wholesale-font-h3);
+  font-weight: 500;
+  line-height: var(--agassi-wholesale-line-h3);
+  letter-spacing: 0;
+}
+
+.agassi-wholesale-why__benefit-title,
+.agassi-wholesale-support__item-title,
+.agassi-wholesale-stories__quote,
+.agassi-wholesale-faq__question-text,
+.agassi-wholesale-contact__contact-value {
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-wholesale-font-h4);
+  font-weight: 500;
+  line-height: var(--agassi-wholesale-line-h4);
+  letter-spacing: 0;
+}
+
+.agassi-wholesale-header-slot,
+.agassi-wholesale-hero,
+.agassi-wholesale-statement,
+.agassi-wholesale-statement__text,
+.agassi-wholesale-numbers,
+.agassi-wholesale-why,
+.agassi-wholesale-why__feature-text,
+.agassi-wholesale-why__benefit-text,
+.agassi-wholesale-support,
+.agassi-wholesale-support__lead,
+.agassi-wholesale-support__item-text,
+.agassi-wholesale-products,
+.agassi-wholesale-products__lead,
+.agassi-wholesale-products__category,
+.agassi-wholesale-products__types,
+.agassi-wholesale-partners,
+.agassi-wholesale-stories,
+.agassi-wholesale-stories__lead,
+.agassi-wholesale-faq,
+.agassi-wholesale-faq__lead,
+.agassi-wholesale-faq__answer p,
+.agassi-wholesale-contact,
+.agassi-wholesale-contact__lead,
+.agassi-wholesale-footer,
+.agassi-wholesale-footer__brand-text,
+.agassi-wholesale-footer__link {
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-wholesale-font-text);
+  font-weight: 400;
+  line-height: var(--agassi-wholesale-line-text);
+  letter-spacing: 0;
+}
+
+.agassi-wholesale-button,
+#allrecords .agassi-wholesale-button,
+.t-records .agassi-wholesale-button,
+.agassi-wholesale-hero__eyebrow,
+.agassi-wholesale-statement__eyebrow,
+.agassi-wholesale-numbers__eyebrow,
+.agassi-wholesale-why__eyebrow,
+.agassi-wholesale-support__eyebrow,
+.agassi-wholesale-products__eyebrow,
+.agassi-wholesale-partners__eyebrow,
+.agassi-wholesale-stories__eyebrow,
+.agassi-wholesale-faq__eyebrow,
+.agassi-wholesale-contact__eyebrow,
+.agassi-wholesale-header__nav a,
+#allrecords .agassi-wholesale-header__nav a,
+.t-records .agassi-wholesale-header__nav a,
+.agassi-wholesale-header__language-current,
+#allrecords .agassi-wholesale-header__language-current,
+.t-records .agassi-wholesale-header__language-current,
+.agassi-wholesale-header__language-option,
+#allrecords .agassi-wholesale-header__language-option,
+.t-records .agassi-wholesale-header__language-option,
+.agassi-wholesale-header__mobile-language-button,
+#allrecords .agassi-wholesale-header__mobile-language-button,
+.t-records .agassi-wholesale-header__mobile-language-button,
+.agassi-wholesale-numbers__label,
+.agassi-wholesale-why__benefit-number,
+.agassi-wholesale-support__number,
+.agassi-wholesale-products__count,
+.agassi-wholesale-stories__meta,
+.agassi-wholesale-stories__more,
+#allrecords .agassi-wholesale-stories__more,
+.t-records .agassi-wholesale-stories__more,
+.agassi-wholesale-stories__name,
+.agassi-wholesale-stories__role,
+.agassi-wholesale-contact__number,
+.agassi-wholesale-contact__contact-label,
+.agassi-wholesale-footer__label,
+.agassi-wholesale-footer__bottom,
+.agassi-wholesale-footer__copyright,
+.agassi-wholesale-footer__legal-link {
+  font-family: var(--t-text-font);
+  font-size: var(--agassi-wholesale-font-caption);
+  font-weight: 400;
+  line-height: var(--agassi-wholesale-line-caption);
+  letter-spacing: 0;
+}
+
 
 /* Выделение текста в цветах сайта */
 ::selection {
@@ -181,10 +311,7 @@ html {
   border-radius: 1000px;
   background: var(--agassi-wholesale-crimson);
   color: var(--agassi-wholesale-link-color);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
   font-weight: 500;
-  line-height: var(--agassi-wholesale-line-small);
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
@@ -241,11 +368,6 @@ html {
   border: 1px solid color-mix(in srgb, var(--agassi-wholesale-crimson) 32%, transparent);
   border-radius: 1000px;
   color: var(--agassi-wholesale-crimson);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-small);
-  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -303,11 +425,6 @@ body.agassi-wholesale-scroll-locked {
   background: var(--agassi-wholesale-ivory);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-header {
@@ -397,11 +514,7 @@ body.agassi-wholesale-scroll-locked {
   transition:
     opacity var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
     color var(--agassi-wholesale-duration) var(--agassi-wholesale-duration);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
   font-weight: 500;
-  line-height: var(--agassi-wholesale-line-small);
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-header__nav a::after {
@@ -476,11 +589,8 @@ body.agassi-wholesale-scroll-locked {
   color: var(--agassi-wholesale-white) !important;
   text-decoration: none !important;
   cursor: pointer;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
   font-weight: 500;
   line-height: 1;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-header__language-current:hover,
@@ -539,11 +649,7 @@ body.agassi-wholesale-scroll-locked {
   background: transparent;
   color: #1E1E1E;
   text-decoration: none;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
   font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: 0;
   transition:
     background-color 240ms var(--agassi-wholesale-ease),
     color 240ms var(--agassi-wholesale-ease);
@@ -764,11 +870,7 @@ body.agassi-wholesale-scroll-locked {
     border-color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
     background var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
     color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
   font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-header__mobile-language-button::after {
@@ -1086,10 +1188,6 @@ body.agassi-wholesale-scroll-locked {
   margin: 0;
   background: var(--agassi-wholesale-crimson);
   color: var(--agassi-wholesale-white);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -1115,12 +1213,8 @@ body.agassi-wholesale-scroll-locked {
   max-width: 540px;
   margin: 0;
   color: var(--agassi-wholesale-white);
-  font-family: var(--t-headline-font);
-  font-weight: 500;
   text-transform: uppercase;
   text-wrap: balance;
-  font-size: var(--agassi-wholesale-font-display);
-  line-height: var(--agassi-wholesale-line-display);
 }
 
 .agassi-wholesale-hero__lead {
@@ -1192,11 +1286,6 @@ body.agassi-wholesale-scroll-locked {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-statement__frame {
@@ -1229,11 +1318,6 @@ body.agassi-wholesale-scroll-locked {
   text-transform: uppercase;
   overflow-wrap: normal;
   word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-statement__text {
@@ -1242,11 +1326,6 @@ body.agassi-wholesale-scroll-locked {
   padding: 0;
   color: var(--agassi-wholesale-muted);
   text-align: center;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-statement__flowers {
@@ -1733,11 +1812,6 @@ body.agassi-wholesale-scroll-locked {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
   background: var(--agassi-wholesale-crimson);
   color: var(--agassi-wholesale-white);
   padding: var(--agassi-wholesale-section-space) 0;
@@ -1770,11 +1844,6 @@ body.agassi-wholesale-scroll-locked {
   text-transform: uppercase;
   overflow-wrap: normal;
   word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-numbers__grid {
@@ -1814,10 +1883,6 @@ body.agassi-wholesale-scroll-locked {
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   font-family: var(--t-text-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-display);
-  line-height: var(--agassi-wholesale-line-display);
 }
 
 .agassi-wholesale-numbers__label {
@@ -1827,11 +1892,6 @@ body.agassi-wholesale-scroll-locked {
   padding: 0;
   color: var(--agassi-wholesale-on-crimson);
   text-align: center;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-small);
-  letter-spacing: 0;
 }
 
 @media (max-width: 1440px) {
@@ -1937,11 +1997,6 @@ body.agassi-wholesale-scroll-locked {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-why__frame {
@@ -1968,11 +2023,6 @@ body.agassi-wholesale-scroll-locked {
   text-transform: uppercase;
   overflow-wrap: normal;
   word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-why__layout {
@@ -2018,10 +2068,6 @@ body.agassi-wholesale-scroll-locked {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: var(--t-text-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-display);
-  line-height: var(--agassi-wholesale-line-display);
 }
 
 .agassi-wholesale-why__feature-title {
@@ -2029,11 +2075,6 @@ body.agassi-wholesale-scroll-locked {
   margin: 0;
   padding: 0;
   color: var(--agassi-wholesale-white);
-  font-family: var(--t-text-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h3);
-  line-height: var(--agassi-wholesale-line-h3);
 }
 
 .agassi-wholesale-why__feature-text {
@@ -2041,11 +2082,6 @@ body.agassi-wholesale-scroll-locked {
   margin: 8px 0 0;
   padding: 0;
   color: var(--agassi-wholesale-on-crimson);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-why__benefits {
@@ -2071,11 +2107,6 @@ body.agassi-wholesale-scroll-locked {
   margin: 0 0 auto;
   padding: 0 0 28px;
   color: var(--agassi-wholesale-crimson);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-why__benefit-title {
@@ -2083,11 +2114,6 @@ body.agassi-wholesale-scroll-locked {
   margin: 0;
   padding: 0;
   color: #1E1E1E;
-  font-family: var(--t-text-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h4);
-  line-height: var(--agassi-wholesale-line-h4);
 }
 
 .agassi-wholesale-why__benefit-text {
@@ -2095,11 +2121,6 @@ body.agassi-wholesale-scroll-locked {
   margin: 8px 0 0;
   padding: 0;
   color: var(--agassi-wholesale-muted);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 @media (max-width: 1440px) {
@@ -2284,11 +2305,6 @@ body.agassi-wholesale-scroll-locked {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
   background: var(--agassi-wholesale-ivory);
   color: var(--agassi-wholesale-ink);
 }
@@ -2317,23 +2333,13 @@ body.agassi-wholesale-scroll-locked {
   text-transform: uppercase;
   overflow-wrap: normal;
   word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
   color: var(--agassi-wholesale-crimson);
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-support__lead {
   max-width: 720px;
   margin: 20px auto 0;
   text-align: center;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
   color: var(--agassi-wholesale-muted);
 }
 
@@ -2398,22 +2404,12 @@ body.agassi-wholesale-scroll-locked {
   margin: 0;
   padding: 0;
   color: inherit;
-  font-family: var(--t-text-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h4);
-  line-height: var(--agassi-wholesale-line-h4);
 }
 
 .agassi-wholesale-support__number {
   display: block;
   margin: 0 0 auto;
   padding: 0 0 28px;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
   color: var(--agassi-wholesale-crimson);
   transition: color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
 }
@@ -2422,11 +2418,6 @@ body.agassi-wholesale-scroll-locked {
   max-width: 330px;
   margin: 8px 0 0;
   padding: 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
   color: var(--agassi-wholesale-muted);
   transition: color var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
 }
@@ -2547,11 +2538,6 @@ body.agassi-wholesale-scroll-locked {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-products__frame {
@@ -2579,11 +2565,6 @@ body.agassi-wholesale-scroll-locked {
   text-transform: uppercase;
   overflow-wrap: normal;
   word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-products__lead {
@@ -2592,11 +2573,6 @@ body.agassi-wholesale-scroll-locked {
   padding: 0;
   color: var(--agassi-wholesale-muted);
   text-align: center;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-products__grid {
@@ -2655,11 +2631,6 @@ body.agassi-wholesale-scroll-locked {
 
 .agassi-wholesale-products__count {
   color: var(--agassi-wholesale-white);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-products__card-bottom {
@@ -2671,22 +2642,12 @@ body.agassi-wholesale-scroll-locked {
   margin: 0;
   padding: 0;
   color: var(--agassi-wholesale-white);
-  font-family: var(--t-text-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h3);
-  line-height: var(--agassi-wholesale-line-h3);
 }
 
 .agassi-wholesale-products__category {
   margin: 12px 0 0;
   padding: 0;
   color: var(--agassi-wholesale-sand);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-products__types {
@@ -2694,11 +2655,6 @@ body.agassi-wholesale-scroll-locked {
   margin: 8px 0 0;
   padding: 0;
   color: var(--agassi-wholesale-sand);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 @media (max-width: 1440px) {
@@ -2807,11 +2763,6 @@ body.agassi-wholesale-scroll-locked {
   background: var(--agassi-wholesale-ivory);
   color: var(--agassi-wholesale-ink);
   padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-partners__frame {
@@ -2832,11 +2783,6 @@ body.agassi-wholesale-scroll-locked {
   text-transform: uppercase;
   overflow-wrap: normal;
   word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-partners__viewport {
@@ -3074,11 +3020,6 @@ body.agassi-wholesale-scroll-locked {
   background: var(--agassi-wholesale-ivory);
   color: var(--agassi-wholesale-ink);
   padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-stories__frame {
@@ -3101,22 +3042,12 @@ body.agassi-wholesale-scroll-locked {
   text-transform: uppercase;
   overflow-wrap: normal;
   word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-stories__lead {
   max-width: 620px;
   margin: 20px auto 0;
   color: var(--agassi-wholesale-muted);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-stories__track {
@@ -3157,11 +3088,6 @@ body.agassi-wholesale-scroll-locked {
   justify-content: space-between;
   gap: 24px;
   color: var(--agassi-wholesale-crimson);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-stories__quote {
@@ -3175,11 +3101,7 @@ body.agassi-wholesale-scroll-locked {
   -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 32px), transparent);
   mask-image: linear-gradient(to bottom, #000 calc(100% - 32px), transparent);
   color: #1E1E1E;
-  font-family: var(--t-text-font);
   font-weight: 400;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h4);
-  line-height: var(--agassi-wholesale-line-h4);
   transition:
     max-height var(--agassi-wholesale-duration) var(--agassi-wholesale-ease),
     -webkit-mask-size var(--agassi-wholesale-duration) var(--agassi-wholesale-ease);
@@ -3205,11 +3127,7 @@ body.agassi-wholesale-scroll-locked {
   border: 0;
   background: none;
   color: var(--agassi-wholesale-crimson);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
   font-weight: 500;
-  line-height: var(--agassi-wholesale-line-small);
-  letter-spacing: 0;
   text-decoration: underline;
   text-underline-offset: 4px;
   cursor: pointer;
@@ -3235,21 +3153,11 @@ body.agassi-wholesale-scroll-locked {
 
 .agassi-wholesale-stories__name {
   color: #1E1E1E;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-stories__role {
   margin-top: 8px;
   color: var(--agassi-wholesale-muted);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-stories__controls {
@@ -3452,11 +3360,6 @@ body.agassi-wholesale-scroll-locked {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-faq__frame {
@@ -3484,11 +3387,6 @@ body.agassi-wholesale-scroll-locked {
   text-transform: uppercase;
   overflow-wrap: normal;
   word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-faq__lead {
@@ -3497,11 +3395,6 @@ body.agassi-wholesale-scroll-locked {
   padding: 0;
   color: var(--agassi-wholesale-muted);
   text-align: center;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-faq__layout {
@@ -3566,10 +3459,6 @@ body.agassi-wholesale-scroll-locked {
   margin: 0;
   padding: 0;
   color: var(--agassi-wholesale-ink);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-h4);
-  font-weight: 500;
-  line-height: var(--agassi-wholesale-line-h4);
   text-wrap: balance;
 }
 
@@ -3636,11 +3525,6 @@ body.agassi-wholesale-scroll-locked {
   margin: 0;
   padding: 0 32px 28px;
   color: var(--agassi-wholesale-muted);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-body);
-  letter-spacing: 0;
 }
 
 @media (max-width: 1440px) {
@@ -3755,11 +3639,6 @@ body.agassi-wholesale-scroll-locked {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: var(--agassi-wholesale-section-space) 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
   background: var(--agassi-wholesale-crimson);
   color: var(--agassi-wholesale-white);
 }
@@ -3789,11 +3668,6 @@ body.agassi-wholesale-scroll-locked {
   text-transform: uppercase;
   overflow-wrap: normal;
   word-break: normal;
-  font-family: var(--t-headline-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h2);
-  line-height: var(--agassi-wholesale-line-h2);
 }
 
 .agassi-wholesale-contact__lead {
@@ -3802,11 +3676,6 @@ body.agassi-wholesale-scroll-locked {
   color: var(--agassi-wholesale-on-crimson);
   text-align: center;
   margin: 20px auto 0;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-contact__contacts {
@@ -3842,11 +3711,6 @@ body.agassi-wholesale-scroll-locked {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-contact__contact-content {
@@ -3856,11 +3720,6 @@ body.agassi-wholesale-scroll-locked {
 .agassi-wholesale-contact__contact-label {
   margin: 0 0 8px;
   color: var(--agassi-wholesale-on-crimson);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-contact__contact-value {
@@ -3868,11 +3727,6 @@ body.agassi-wholesale-scroll-locked {
   padding: 0;
   color: var(--agassi-wholesale-white);
   overflow-wrap: anywhere;
-  font-family: var(--t-text-font);
-  font-weight: 500;
-  letter-spacing: 0;
-  font-size: var(--agassi-wholesale-font-h4);
-  line-height: var(--agassi-wholesale-line-h4);
 }
 
 .agassi-wholesale-contact__action {
@@ -4039,11 +3893,6 @@ body.agassi-wholesale-scroll-locked {
   color: var(--agassi-wholesale-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-body);
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-footer__frame {
@@ -4100,11 +3949,6 @@ body.agassi-wholesale-scroll-locked {
   margin: 24px 0 0;
   padding: 0;
   color: var(--agassi-wholesale-white);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-body);
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-footer__columns {
@@ -4128,11 +3972,6 @@ body.agassi-wholesale-scroll-locked {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-small);
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-footer__links {
@@ -4154,11 +3993,6 @@ body.agassi-wholesale-scroll-locked {
   color: var(--agassi-wholesale-white) !important;
   text-decoration: none !important;
   overflow-wrap: anywhere;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-body);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-body);
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-footer__link::after {
@@ -4214,17 +4048,10 @@ body.agassi-wholesale-scroll-locked {
   padding: 24px 0 0;
   border-top: 1px solid var(--agassi-wholesale-line-crimson);
   color: var(--agassi-wholesale-white);
-  font-size: var(--agassi-wholesale-font-small);
-  line-height: var(--agassi-wholesale-line-small);
 }
 
 .agassi-wholesale-footer__copyright {
   color: var(--agassi-wholesale-white);
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-small);
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-footer__legal {
@@ -4241,11 +4068,6 @@ body.agassi-wholesale-scroll-locked {
   padding-bottom: 4px;
   color: var(--agassi-wholesale-white) !important;
   text-decoration: none !important;
-  font-family: var(--t-text-font);
-  font-size: var(--agassi-wholesale-font-small);
-  font-weight: 400;
-  line-height: var(--agassi-wholesale-line-small);
-  letter-spacing: 0;
 }
 
 .agassi-wholesale-footer a:focus-visible {
